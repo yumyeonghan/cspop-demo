@@ -4,6 +4,9 @@ import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.submitform.SubmitForm;
 import kyonggi.cspop.domain.users.enums.Classification;
 import kyonggi.cspop.domain.users.enums.Sex;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
@@ -11,6 +14,8 @@ import java.time.LocalDate;
 
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(name = "submit_form_id_unique",columnNames = "submitForm_id")})
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Users extends BaseEntity {
 
     @Id
