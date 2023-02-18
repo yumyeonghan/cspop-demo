@@ -2,13 +2,12 @@ package kyonggi.cspop.domain.uploadfile;
 
 import kyonggi.cspop.domain.board.NoticeBoard;
 import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 
 @Entity
-@Getter @Setter
+@Getter
 public class NoticeBoardUploadFile {
 
     @Id
@@ -23,4 +22,8 @@ public class NoticeBoardUploadFile {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "noticeBoard_id", foreignKey = @ForeignKey(name = "fk_notice_board_upload_file_to_notice_board"))
     private NoticeBoard noticeBoard;
+
+    public void designateNoticeBoard(NoticeBoard noticeBoard) {
+        this.noticeBoard = noticeBoard;
+    }
 }

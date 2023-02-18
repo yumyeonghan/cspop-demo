@@ -1,4 +1,5 @@
 package kyonggi.cspop.domain.entity;
+
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.Column;

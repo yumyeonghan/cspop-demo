@@ -2,14 +2,12 @@ package kyonggi.cspop.domain.otherqualifications;
 
 import kyonggi.cspop.domain.submitform.SubmitForm;
 import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-@Setter
 public class OtherQualifications {
 
     @Id
@@ -23,4 +21,7 @@ public class OtherQualifications {
     @JoinColumn(name =  "submitForm_id", foreignKey = @ForeignKey(name = "fk_other_qualifications_to_submit_form"))
     private SubmitForm submitForm;
 
+    public void designateSubmitForm(SubmitForm submitForm) {
+        this.submitForm = submitForm;
+    }
 }

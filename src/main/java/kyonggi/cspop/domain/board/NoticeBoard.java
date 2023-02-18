@@ -44,7 +44,6 @@ public class NoticeBoard extends BaseEntity {
     // 양방향 연관관계 편의 메소드
     public void addUploadFile(NoticeBoardUploadFile uploadFile) {
         uploadFiles.add(uploadFile);
-        uploadFile.setNoticeBoard(this);
+        uploadFile.designateNoticeBoard(this);
     }
-
 }

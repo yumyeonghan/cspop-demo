@@ -2,14 +2,12 @@ package kyonggi.cspop.domain.uploadfile;
 
 import kyonggi.cspop.domain.submitform.SubmitForm;
 import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-@Setter
 public class SubmitFormUploadFile {
 
     @Id
@@ -24,4 +22,8 @@ public class SubmitFormUploadFile {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "submitForm_id", foreignKey = @ForeignKey(name = "fk_submit_form_upload_file_to_notice_board"))
     private SubmitForm submitForm;
+
+    public void designateSubmitForm(SubmitForm submitForm) {
+        this.submitForm = submitForm;
+    }
 }

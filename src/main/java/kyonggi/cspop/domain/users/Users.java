@@ -1,7 +1,5 @@
 package kyonggi.cspop.domain.users;
 
-
-
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.submitform.SubmitForm;
 import kyonggi.cspop.domain.users.enums.Classification;
@@ -63,7 +61,6 @@ public class Users extends BaseEntity {
     // 양방향 연관관계 편의 메소드
     public void addSubmitForms(SubmitForm submitForm) {
         this.submitForm = submitForm;
-        submitForm.setUsers(this);
+        submitForm.designateUsers(this);
     }
-
 }

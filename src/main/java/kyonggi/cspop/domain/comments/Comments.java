@@ -19,6 +19,4 @@ public class Comments extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "noticeBoard_id", foreignKey = @ForeignKey(name = "fk_comments_to_notice_board"))
     private NoticeBoard noticeBoard;
-
-
 }

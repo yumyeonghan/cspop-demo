@@ -1,6 +1,5 @@
 package kyonggi.cspop.domain.schedule;
 
-
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.schedule.enums.ScheduleState;
 import kyonggi.cspop.domain.schedule.enums.Step;
@@ -28,5 +27,4 @@ public class Schedules extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private ScheduleState scheduleState;
-
 }

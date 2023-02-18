@@ -33,5 +33,4 @@ public class ScheduleBoard extends BaseEntity {
 
     @Comment("기타자격 본문")
     private String otherQualificationsText;
-
 }

@@ -31,5 +31,4 @@ public class ExcelBoard extends BaseEntity {
     private String otherQualifications;
     @Comment("캡스톤 이수")
     private String capstoneCompletion;
-
 }

@@ -23,5 +23,4 @@ public class Admins extends BaseEntity {
     @Comment("관리자 비밀번호")
     @Column(nullable = false)
     private String adminPassword;
-
 }
