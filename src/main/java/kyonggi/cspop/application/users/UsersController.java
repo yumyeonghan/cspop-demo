@@ -9,7 +9,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotBlank;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,8 +21,14 @@ public class UsersController {
     private final UsersService usersService;
 
     @PostMapping("/user")
-    public String saveUser(@Validated @RequestBody UsersDto usersDto) {
+    public String signUp(@Validated @RequestBody UsersDto usersDto) {
         usersService.saveUser(usersDto.toEntity());
         return "redirect:/home";
+    }
+
+    @PostMapping("/user/duplicate-check")
+    public ResponseEntity<Void> duplicateCheckInSignUp (@NotBlank @RequestBody Map<String, String> studentId) {
+        usersService.checkDuplicateStudentNumber(studentId.get("studentId"));
+        return ResponseEntity.noContent().build();
     }
 }
