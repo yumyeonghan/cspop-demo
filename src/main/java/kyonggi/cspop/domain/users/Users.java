@@ -63,6 +63,24 @@ public class Users extends BaseEntity {
     @JoinColumn(name = "submitForm_id", foreignKey = @ForeignKey(name = "fk_users_to_submit_form"))
     private SubmitForm submitForm;
 
+    //==생성 메소드==//
+    public static Users createUser(String studentId, String studentPassword, String studentName, Sex sex, LocalDate birth, String email,
+                                   String phoneNumber, Classification classification, String department) {
+
+        Users user = new Users();
+        user.studentId = studentId;
+        user.studentPassword = studentPassword;
+        user.studentName = studentName;
+        user.sex = sex;
+        user.birth = birth;
+        user.email = email;
+        user.phoneNumber = phoneNumber;
+        user.classification = classification;
+        user.department = department;
+
+        return user;
+    }
+
     // 양방향 연관관계 편의 메소드
     public void addSubmitForms(SubmitForm submitForm) {
         this.submitForm = submitForm;
