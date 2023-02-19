@@ -9,4 +9,11 @@ public enum Sex {
     Sex(String sexToString) {
         SexToString = sexToString;
     }
+
+    public static Sex toSex(String sex) {
+        if (sex.equals("남자")) {
+            return MALE;
+        }
+        return FEMALE;
+    }
 }

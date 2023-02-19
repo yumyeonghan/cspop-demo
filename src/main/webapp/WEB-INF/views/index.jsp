@@ -6,6 +6,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>${name}</h1>
+<h1>테스트 메인페이지</h1>
 </body>
 </html>

@@ -18,9 +18,6 @@ public class BaseEntity {
     @Comment("수정일")
     private LocalDateTime lastModifiedDate;
 
-    @Comment("수정자")
-    private String modifier;
-
     @PrePersist
     public void prePersist() {
         LocalDateTime now = LocalDateTime.now();
