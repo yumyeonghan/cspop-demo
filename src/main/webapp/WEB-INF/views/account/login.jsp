@@ -63,7 +63,7 @@
                                 <span class="text-muted font-14 mb-0">
                                     <a href="/api/signup">회원가입</a>
                                 </span>
-                            <span> / </span>
+                            <span>&nbsp;</span>
                             <span class="font-14 mb-0">
                                     <a href="#">비밀번호 찾기</a>
                                 </span>
