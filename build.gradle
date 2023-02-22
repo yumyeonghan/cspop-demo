@@ -1,0 +1,44 @@
+plugins {
+	id 'java'
+	id 'war'
+	id 'org.springframework.boot' version '2.7.8'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'kyonggi'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	annotationProcessor 'org.projectlombok:lombok'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// JSP 설정
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	implementation 'javax.servlet:jstl:1.2'
+
+	//엑셀 파일 업로드 의존성 추가 순서대로 .xls, .xlsx 확장자
+	implementation group: 'org.apache.poi', name: 'poi', version: '5.2.2'
+	implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.2'
+	implementation group: 'commons-io', name: 'commons-io', version: '2.7'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
