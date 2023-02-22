@@ -87,8 +87,6 @@ public class ExcelController{
 
     /**
      * 엑셀 파일 download method
-     * @param response
-     * @return
      */
     @RequestMapping(value = "/excelDown.do",method = RequestMethod.POST)
     public String ExcelDown(HttpServletResponse response) {

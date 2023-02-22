@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * 엑셀 다온르드 서비스 구현
+ * 엑셀 다운르드 서비스 구현
  */
 public class ExcelServiceImpl extends ExcelService{
 

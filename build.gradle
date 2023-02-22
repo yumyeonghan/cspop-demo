@@ -33,7 +33,7 @@ dependencies {
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'javax.servlet:jstl:1.2'
 
-	//엑셀 파일 업로드 의존성 추가 순서대로 .xls, .xlsx 확장자
+	//엑셀 파일 업로드 의존성 추가 순서대로 .xls, .xlsx
 	implementation group: 'org.apache.poi', name: 'poi', version: '5.2.2'
 	implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.2'
 	implementation group: 'commons-io', name: 'commons-io', version: '2.7'

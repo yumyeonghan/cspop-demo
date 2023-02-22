@@ -13,8 +13,7 @@ import javax.persistence.Id;
 
 @NoArgsConstructor
 @Entity
-@Getter
-@Setter
+@Getter @Setter
 public class ExcelBoard extends BaseEntity {
 
     @Id

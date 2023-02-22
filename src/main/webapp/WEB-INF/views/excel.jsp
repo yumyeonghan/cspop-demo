@@ -8,16 +8,16 @@
 <body>
 <form action="excel.read" method="post" enctype="multipart/form-data">
     <fieldset>
-        <legend>파일 업로드</legend>
-        <h5>파일 찾기: <input type="file" name="file"></h5>
-        <h5>파일 업로드: <input type="submit" value="제출" /></h5>
+        <legend>엑셀 업로드</legend>
+        <h5>엑셀 찾기: <input type="file" name="file"></h5>
+        <h5>엑셀 업로드: <input type="submit" value="업로드" /></h5>
     </fieldset>
 </form>
 
 
 <form action="excelDown.do" method="post">
     <fieldset>
-        <legend>파일 다운로드</legend>
+        <legend>엑셀 다운로드</legend>
         <input type="submit" id="excelDown" value="다운로드"/>
     </fieldset>
 </form>

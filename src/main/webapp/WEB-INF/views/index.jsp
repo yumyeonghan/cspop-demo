@@ -7,6 +7,6 @@
 </head>
 <body>
 <h1>테스트 메인페이지</h1>
-<a href="excel">excel page</a>
+<a href="excel">excel Page</a>
 </body>
 </html>
