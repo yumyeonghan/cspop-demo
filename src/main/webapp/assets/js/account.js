@@ -8,16 +8,17 @@ $(function () {
 // 회원가입 함수
 function signUp() {
     let userData = {
-        id: $(`#id`).val(),
-        password: $(`#password`).val(),
-        password2: $(`#password2`).val(),
-        name: $(`#name`).val(),
-        gender: $(`#gender`).val(),
+        studentId: $(`#id`).val(),
+        studentPassword: $(`#password`).val(),
+        studentName: $(`#name`).val(),
+        sex: $(`#gender`).val(),
+        birth: "1999-10-13",
         email: $(`#email`).val(),
-        phone: $(`#phone`).val(),
-        major: $(`#major`).val()
+        phoneNumber: $(`#phone`).val(),
+        department: $(`#major`).val()
     }
-    if (userData.password !== userData.password2) {
+
+    if (userData.password !== $(`#password2`).val()) {
         alert("비밀번호가 다릅니다.")
     } else {
         $.ajax({
