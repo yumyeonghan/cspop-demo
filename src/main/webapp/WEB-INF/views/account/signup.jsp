@@ -41,7 +41,7 @@
             <div class="col-md-8 col-lg-7 col-xl-6 offset-md-2 offset-lg-2 offset-xl-3 space-top-3 space-lg-0">
                 <!-- Form -->
                 <div class="bg-white p-4 p-xl-6 p-xxl-8 p-lg-4 rounded-3 border">
-                    <form>
+                    <form id="form">
                         <h1 class="mb-2 text-center h3 ">Register</h1>
 
                         <!-- <div class="mb-3">
@@ -110,7 +110,7 @@
                         <br>
 
                         <div class="d-grid">
-                            <button class="btn btn-primary" type="submit">
+                            <button class="btn btn-primary" type="submit" onclick="signUp()">
                                 회원가입
                             </button>
                         </div>
@@ -130,7 +130,61 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <%--account js include--%>
-<script src="../../../assets/js/account.js"></script>
+<%--<script src="../../../assets/js/account.js"></script>--%>
+<script>
+
+    // 학과 선택 함수
+    $(function () {
+        let major = $(`#major`);
+        let majorText = `<option> 학부생 </option>`;
+        major.append(majorText);
+    })
+
+    // 회원가입 함수
+    function signUp() {
+        let userData = {
+            studentId: $(`#id`).val(),
+            studentPassword: $(`#password`).val(),
+            studentName: $(`#name`).val(),
+            sex: $(`#gender`).val(),
+            birth: "1999-10-13",
+            email: $(`#email`).val(),
+            phoneNumber: $(`#phone`).val(),
+            department: "학부생"
+        }
+        $.ajax({
+            url: "/api/user",
+            type: "post",
+            data: JSON.stringify(userData),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function () {
+                alert("signup test success");
+            }
+        })
+
+        // if (userData.password !== $(`#password2`).val()) {
+        //     alert("비밀번호가 다릅니다.")
+        // } else {
+        //
+        // }
+    }
+
+    //아이디 중복 확인 함수
+    function checkId() {
+        // api/user/duplicate-check
+        let checkId = $(`#id`).val();
+        $.ajax({
+            url: "/api/user/duplicate-check",
+            type: "post",
+            data: checkId,
+            success: function (data) {
+                data ? alert("success") : alert("fail");
+            }
+        })
+    }
+</script>
+
 
 <!-- Libs JS -->
 <script src="../../../assets/libs/jquery/dist/jquery.min.js"></script>
