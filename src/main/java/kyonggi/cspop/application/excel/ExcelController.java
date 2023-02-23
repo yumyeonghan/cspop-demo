@@ -2,23 +2,27 @@ package kyonggi.cspop.application.excel;
 
 import kyonggi.cspop.domain.board.ExcelBoard;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -30,8 +34,11 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class ExcelController{
 
-    @Resource(name="excelService")
-    private final ExcelService excelService;
+    @Autowired
+    private ExcelRepository repository;
+
+    Logger logger = LoggerFactory.getLogger(ExcelController.class);
+
 
     //엑셀 업로드 화면(임시)
     @GetMapping("/excel")
@@ -39,8 +46,15 @@ public class ExcelController{
         return "excel";
     }
 
+    /**
+     * excel file upload method
+     * @param file
+     * @param model
+     * @return
+     * @throws IOException
+     */
     //업로드한 엑셀 저장
-    @RequestMapping(value = "/excel.read", method = RequestMethod.POST)
+    @PostMapping("/excel.read")
     public String upload(@RequestParam("file") MultipartFile file, Model model) throws IOException {
         List<ExcelBoard> dataList = new ArrayList<>();
 
@@ -82,16 +96,91 @@ public class ExcelController{
         }
         model.addAttribute("dataL", dataList);
 
-        return "excelList";
+        return "excel";
     }
 
     /**
-     * 엑셀 파일 download method
+     * Excel file download method
+     * --> upload db 저장 구현 미완성으로 임시로 db 값 삽입 후 실행
+     * @param response
+     * @return
      */
-    @RequestMapping(value = "/excelDown.do",method = RequestMethod.POST)
-    public String ExcelDown(HttpServletResponse response) {
-        excelService.getExcelDown(response);
+    @SneakyThrows
+    @GetMapping( "/excel.download")
+    public ResponseEntity<InputStreamResource> downloadExcel(HttpServletResponse response) {
+        try (Workbook workbook = new XSSFWorkbook()){
+            //Excel Down 시작
 
-        return "excel";
+            //시트생성
+            Sheet sheet = workbook.createSheet("졸업 대상자 조회");
+
+            //행 번호
+            int rowNo = 0;
+
+            // 테이블 헤더용 스타일
+            CellStyle headStyle = workbook.createCellStyle();
+            headStyle.setFillForegroundColor(HSSFColor.HSSFColorPredefined.LIGHT_ORANGE.getIndex());
+            headStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            Font font = workbook.createFont();
+            font.setColor(HSSFColor.HSSFColorPredefined.WHITE.getIndex());
+            font.setFontHeightInPoints((short) 13);
+            headStyle.setFont(font);
+
+            //헤더 생성
+            Row headerRow = sheet.createRow(rowNo++);
+            headerRow.createCell(0).setCellValue("학번");
+            headerRow.createCell(1).setCellValue("이름");
+            headerRow.createCell(2).setCellValue("지도교수");
+            headerRow.createCell(3).setCellValue("졸업날짜");
+            headerRow.createCell(4).setCellValue("단계");
+            headerRow.createCell(5).setCellValue("상태");
+            headerRow.createCell(6).setCellValue("기타 자격");
+            headerRow.createCell(7).setCellValue("캡스톤 이수");
+
+            for (int i = 0; i <= 7; i++) {
+                headerRow.getCell(i).setCellStyle(headStyle);
+            }
+
+            List<ExcelBoard> dataList = repository.findAll();
+            // Body
+            for (ExcelBoard excelBoard : dataList) {
+                Row row = sheet.createRow(rowNo++);
+                row.createCell(0).setCellValue(excelBoard.getStudentId());
+                row.createCell(1).setCellValue(excelBoard.getStudentName());
+                row.createCell(2).setCellValue(excelBoard.getProfessorName());
+                row.createCell(3).setCellValue(excelBoard.getGraduationDate());
+                row.createCell(4).setCellValue(excelBoard.getStep());
+                row.createCell(5).setCellValue(excelBoard.getState());
+                row.createCell(6).setCellValue(excelBoard.getOtherQualifications());
+                row.createCell(7).setCellValue(excelBoard.getCapstoneCompletion());
+            }
+
+            sheet.setColumnWidth(0, 3000);
+            sheet.setColumnWidth(1, 3000);
+            sheet.setColumnWidth(2, 3000);
+            sheet.setColumnWidth(3, 4000);
+            sheet.setColumnWidth(4, 3000);
+            sheet.setColumnWidth(5, 3000);
+            sheet.setColumnWidth(6, 4000);
+            sheet.setColumnWidth(7, 4000);
+
+            // 컨텐츠 타입과 파일명 지정
+            File tmpFile = File.createTempFile("TMP~", ".xlsx");
+            try (OutputStream fos = new FileOutputStream(tmpFile);) {
+                workbook.write(fos);
+            }
+            InputStream res = new FileInputStream(tmpFile) {
+                @Override
+                public void close() throws IOException {
+                    super.close();
+                }
+            };
+
+            return ResponseEntity.ok() //
+                    .contentLength(tmpFile.length()) //
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM) //
+                    .header("Content-Disposition", "attachment;filename=대상자 관리.xlsx") //
+                    .body(new InputStreamResource(res));
+        }
     }
 }
