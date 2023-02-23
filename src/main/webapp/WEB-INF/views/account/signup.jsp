@@ -74,21 +74,21 @@
                             <label for="name" class="form-label">이름<span class="text-danger">*</span></label>
                             <input type="text" id="name" class="form-control" placeholder="이름을 입력해주세요" required="">
                         </div>
-<%--                        <div class="md-3">--%>
-<%--                            <label for="gender" class="form-label">성별</label>--%>
-<%--                            <div id="gender">--%>
-<%--                                <div class="form-check">--%>
-<%--                                    <input id="male" name="gender" type="radio" class="form-check-input" value="남"--%>
-<%--                                           checked required>--%>
-<%--                                    <label class="form-check-label" for="male">남</label>--%>
-<%--                                </div>--%>
-<%--                                <div class="form-check">--%>
-<%--                                    <input id="female" name="gender" type="radio" class="form-check-input" value="여"--%>
-<%--                                           required>--%>
-<%--                                    <label class="form-check-label" for="female">여</label>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
+                        <div class="md-3">
+                            <label for="gender" class="form-label">성별</label>
+                            <div id="gender">
+                                <div class="form-check">
+                                    <input id="male" name="gender" type="radio" class="form-check-input" value="남"
+                                           checked required>
+                                    <label class="form-check-label" for="male">남</label>
+                                </div>
+                                <div class="form-check">
+                                    <input id="female" name="gender" type="radio" class="form-check-input" value="여"
+                                           required>
+                                    <label class="form-check-label" for="female">여</label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="md-3">
                             <label for="email" class="form-label">E-mail</label><span id="warningEmail"></span>
                             <div class="input-group">
@@ -110,7 +110,7 @@
                         <br>
 
                         <div class="d-grid">
-                            <button class="btn btn-primary" type="submit" onclick="signUp()" >
+                            <button class="btn btn-primary" type="submit" onclick="signUp()" id="submit-button" >
                                 회원가입
                             </button>
                         </div>
