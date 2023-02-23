@@ -33,13 +33,20 @@ function signUp() {
 //아이디 중복 확인 함수
 function checkId() {
     // api/user/duplicate-check
-    let checkId = $(`#id`).val();
+    let userId ={
+        studentId: $(`#id`).val()
+    }
     $.ajax({
-        url: "api/user/duplicate-check",
+        url: "/api/user/duplicate-check",
         type: "post",
-        data: checkId,
+        data: JSON.stringify(userId),
+        contentType: "application/json; charset=utf-8",
+        dataTypes:"json",
         success: function (data) {
-            data ? console.log("success") : console.log("fail");
+            alert("사용 가능한 아이디 입니다");
+        },error:function (data){
+            console.log(data.responseJSON)
+            alert(data.responseJSON.errorMessage)
         }
     })
 }
