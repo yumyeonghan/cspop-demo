@@ -32,7 +32,7 @@ function signUp() {
         studentPassword: $(`#password`).val(),
         studentName: $(`#name`).val(),
         sex: $(`#gender`).val(),
-        birth: "0000-00-00",
+        birth: "2023-09-01",
         email: $(`#email`).val(),
         phoneNumber: $(`#phone`).val(),
         classification: "학부생",
