@@ -7,11 +7,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/home")
+@RequestMapping("/api")
 public class HomeController {
 
-    @GetMapping
+    @GetMapping("/home")
     public String home() {
         return "index";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "account/login";
+    }
+
+    @GetMapping("/signup")
+    public String signup() {
+        return "account/signup";
     }
 }

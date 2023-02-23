@@ -81,6 +81,11 @@ public class Users extends BaseEntity {
         return user;
     }
 
+    // 비밀번호 암호화
+    public void encryptPassword(String encryptPassword) {
+        this.studentPassword = encryptPassword;
+    }
+
     // 양방향 연관관계 편의 메소드
     public void addSubmitForms(SubmitForm submitForm) {
         this.submitForm = submitForm;
