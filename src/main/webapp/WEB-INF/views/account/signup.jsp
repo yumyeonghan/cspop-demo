@@ -150,17 +150,14 @@
             birth: "1999-10-13",
             email: $(`#email`).val(),
             phoneNumber: $(`#phone`).val(),
-            department: "학부생"
+            classification: "학부생",
+            department: "컴퓨터공학부"
         }
         $.ajax({
             url: "/api/user",
             type: "post",
             data: JSON.stringify(userData),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function () {
-                alert("signup test success");
-            }
+            contentType: "application/json; charset=utf-8"
         })
 
         // if (userData.password !== $(`#password2`).val()) {
@@ -204,4 +201,3 @@
 </body>
 
 </html>
-`

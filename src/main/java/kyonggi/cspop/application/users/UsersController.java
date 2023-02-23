@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.constraints.NotBlank;
+import java.net.URI;
 import java.util.Map;
 
 @Controller
@@ -21,9 +22,9 @@ public class UsersController {
     private final UsersService usersService;
 
     @PostMapping("/user")
-    public String signUp(@Validated @RequestBody UsersDto usersDto) {
+    public ResponseEntity<Void> signUp(@Validated @RequestBody UsersDto usersDto) {
         usersService.saveUser(usersDto.toEntity());
-        return "redirect:/home";
+        return ResponseEntity.created(URI.create("/")).build();
     }
 
     @PostMapping("/user/duplicate-check")
