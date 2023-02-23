@@ -6,15 +6,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
 import java.net.URI;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class UsersController {
@@ -22,9 +20,9 @@ public class UsersController {
     private final UsersService usersService;
 
     @PostMapping("/user")
-    public ResponseEntity<Void> signUp(@Validated @RequestBody UsersDto usersDto) {
+    public String signUp(@Validated @RequestBody UsersDto usersDto) {
         usersService.saveUser(usersDto.toEntity());
-        return ResponseEntity.created(URI.create("/")).build();
+        return "/api/home";
     }
 
     @PostMapping("/user/duplicate-check")

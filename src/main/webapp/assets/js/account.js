@@ -1,7 +1,8 @@
+
 // 학과 선택 함수
 $(function () {
     let major = $(`#major`);
-    let majorText = `<option> 컴퓨터공학부 </option>`;
+    let majorText = `<option> 학부생 </option>`;
     major.append(majorText);
 })
 
@@ -11,25 +12,22 @@ function signUp() {
         studentId: $(`#id`).val(),
         studentPassword: $(`#password`).val(),
         studentName: $(`#name`).val(),
-        sex: $(`#gender`).val(),
+        sex: "female",
         birth: "1999-10-13",
         email: $(`#email`).val(),
         phoneNumber: $(`#phone`).val(),
-        department: $(`#major`).val()
+        classification: "학부생",
+        department: "컴퓨터공학부"
     }
-
-    if (userData.password !== $(`#password2`).val()) {
-        alert("비밀번호가 다릅니다.")
-    } else {
-        $.ajax({
-            url: "api/user",
-            type: "post",
-            data: userData,
-            success: function (){
-                alert("signup test success");
-            }
-        })
-    }
+    $.ajax({
+        url: "/api/user",
+        type: "post",
+        data: JSON.stringify(userData),
+        contentType: "application/json; charset=utf-8",
+        success: function (url){
+            window.location.replace(url);
+        }
+    })
 }
 
 //아이디 중복 확인 함수

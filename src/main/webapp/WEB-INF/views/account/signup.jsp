@@ -41,7 +41,7 @@
             <div class="col-md-8 col-lg-7 col-xl-6 offset-md-2 offset-lg-2 offset-xl-3 space-top-3 space-lg-0">
                 <!-- Form -->
                 <div class="bg-white p-4 p-xl-6 p-xxl-8 p-lg-4 rounded-3 border">
-                    <form id="form">
+<%--                    <form id="form" action="/api/home" method="get">--%>
                         <h1 class="mb-2 text-center h3 ">Register</h1>
 
                         <!-- <div class="mb-3">
@@ -74,21 +74,21 @@
                             <label for="name" class="form-label">이름<span class="text-danger">*</span></label>
                             <input type="text" id="name" class="form-control" placeholder="이름을 입력해주세요" required="">
                         </div>
-                        <div class="md-3">
-                            <label for="gender" class="form-label">성별</label>
-                            <div id="gender">
-                                <div class="form-check">
-                                    <input id="male" name="gender" type="radio" class="form-check-input" value="남"
-                                           checked required>
-                                    <label class="form-check-label" for="male">남</label>
-                                </div>
-                                <div class="form-check">
-                                    <input id="female" name="gender" type="radio" class="form-check-input" value="여"
-                                           required>
-                                    <label class="form-check-label" for="female">여</label>
-                                </div>
-                            </div>
-                        </div>
+<%--                        <div class="md-3">--%>
+<%--                            <label for="gender" class="form-label">성별</label>--%>
+<%--                            <div id="gender">--%>
+<%--                                <div class="form-check">--%>
+<%--                                    <input id="male" name="gender" type="radio" class="form-check-input" value="남"--%>
+<%--                                           checked required>--%>
+<%--                                    <label class="form-check-label" for="male">남</label>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-check">--%>
+<%--                                    <input id="female" name="gender" type="radio" class="form-check-input" value="여"--%>
+<%--                                           required>--%>
+<%--                                    <label class="form-check-label" for="female">여</label>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
                         <div class="md-3">
                             <label for="email" class="form-label">E-mail</label><span id="warningEmail"></span>
                             <div class="input-group">
@@ -110,14 +110,14 @@
                         <br>
 
                         <div class="d-grid">
-                            <button class="btn btn-primary" type="submit" onclick="signUp()">
+                            <button class="btn btn-primary" type="submit" onclick="signUp()" >
                                 회원가입
                             </button>
                         </div>
                         <p class="mt-3 mb-0 text-muted font-14">
                             이미 회원입니까?<a href="/api/login">Login</a>
                         </p>
-                    </form>
+<%--                    </form>--%>
                 </div>
                 <!-- End Form -->
             </div>
@@ -130,58 +130,7 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <%--account js include--%>
-<%--<script src="../../../assets/js/account.js"></script>--%>
-<script>
-
-    // 학과 선택 함수
-    $(function () {
-        let major = $(`#major`);
-        let majorText = `<option> 학부생 </option>`;
-        major.append(majorText);
-    })
-
-    // 회원가입 함수
-    function signUp() {
-        let userData = {
-            studentId: $(`#id`).val(),
-            studentPassword: $(`#password`).val(),
-            studentName: $(`#name`).val(),
-            sex: $(`#gender`).val(),
-            birth: "1999-10-13",
-            email: $(`#email`).val(),
-            phoneNumber: $(`#phone`).val(),
-            classification: "학부생",
-            department: "컴퓨터공학부"
-        }
-        $.ajax({
-            url: "/api/user",
-            type: "post",
-            data: JSON.stringify(userData),
-            contentType: "application/json; charset=utf-8"
-        })
-
-        // if (userData.password !== $(`#password2`).val()) {
-        //     alert("비밀번호가 다릅니다.")
-        // } else {
-        //
-        // }
-    }
-
-    //아이디 중복 확인 함수
-    function checkId() {
-        // api/user/duplicate-check
-        let checkId = $(`#id`).val();
-        $.ajax({
-            url: "/api/user/duplicate-check",
-            type: "post",
-            data: checkId,
-            success: function (data) {
-                data ? alert("success") : alert("fail");
-            }
-        })
-    }
-</script>
-
+<script src="../../../assets/js/account.js"></script>
 
 <!-- Libs JS -->
 <script src="../../../assets/libs/jquery/dist/jquery.min.js"></script>
