@@ -1,5 +1,8 @@
 package kyonggi.cspop.domain.users.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum Classification {
 
     UNDERGRADUATE_STUDENT("학부생"), POSTGRADUATE_STUDENT("대학원생"), PROFESSOR("교수"), DOUBLE_MAJOR("복수전공");

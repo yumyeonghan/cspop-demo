@@ -1,5 +1,6 @@
 package kyonggi.cspop.application;
 
+import kyonggi.cspop.application.login.LoginController;
 import kyonggi.cspop.application.users.UsersController;
 import kyonggi.cspop.exception.CsPopException;
 import kyonggi.cspop.exception.ErrorResponse;
@@ -7,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice(assignableTypes = {
-        UsersController.class
+        UsersController.class, LoginController.class
 })
 public class ExceptionHandler {
 
