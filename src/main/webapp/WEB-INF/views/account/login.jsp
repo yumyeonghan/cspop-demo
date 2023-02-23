@@ -42,33 +42,33 @@
             <div class="col-md-8 col-lg-7 col-xl-6 offset-md-2 offset-lg-2 offset-xl-3 space-top-3 space-lg-0">
                 <!-- Form -->
                 <div class="bg-white p-4 p-xl-6 p-xxl-8 p-lg-4 rounded-3 border">
-                    <form>
-                        <h1 class="mb-1 text-center h3">LOGIN</h1>
-                        <div class="mb-3">
-                            <label for="text" class="form-label">ID<span class="text-danger">*</span> </label>
-                            <input type="text" id="text" class="form-control " placeholder="ID" required="">
-                        </div>
-                        <div class="mb-3 mb-4">
-                            <label for="password" class="form-label">Password<span
-                                    class="text-danger">*</span></label>
-                            <input type="password" id="password" class="form-control" placeholder="Password"
-                                   required="">
-                        </div>
-                        <div class="d-grid">
-                            <button class="btn btn-primary" type="submit">
-                                LOGIN
-                            </button>
-                        </div>
-                        <div class="d-xxl-flex justify-content-between mt-4 ">
-                                <span class="text-muted font-14 mb-0">
-                                    <a href="/api/signup">회원가입</a>
-                                </span>
-                            <span>&nbsp;</span>
-                            <span class="font-14 mb-0">
-                                    <a href="#">비밀번호 찾기</a>
-                                </span>
-                        </div>
-                    </form>
+
+                    <h1 class="mb-1 text-center h3">LOGIN</h1>
+                    <div class="mb-3">
+                        <label for="id" class="form-label">ID<span class="text-danger">*</span> </label>
+                        <input type="text" id="id" class="form-control " placeholder="ID" required="">
+                    </div>
+                    <div class="mb-3 mb-4">
+                        <label for="password" class="form-label">Password<span
+                                class="text-danger">*</span></label>
+                        <input type="password" id="password" class="form-control" placeholder="Password"
+                               required="">
+                    </div>
+                    <div class="d-grid">
+                        <button class="btn btn-primary" type="submit" onclick="login()">
+                            LOGIN
+                        </button>
+                    </div>
+                    <div class="d-xxl-flex justify-content-between mt-4 ">
+                        <span class="text-muted font-14 mb-0">
+                            <a href="/api/signup">회원가입</a>
+                        </span>
+                        <span>&nbsp;</span>
+                        <span class="font-14 mb-0">
+                            <a href="#">비밀번호 찾기</a>
+                        </span>
+                    </div>
+
                 </div>
                 <!-- End Form -->
             </div>
@@ -97,6 +97,10 @@
 
 <!-- Theme JS -->
 <script src="../../../assets/js/theme.min.js"></script>
+<%--login JS--%>
+<script src="../../../assets/js/login.js"></script>
+
+
 </body>
 
 </html>
