@@ -31,4 +31,9 @@ public class UsersController {
         usersService.checkDuplicateStudentNumber(studentId.get("studentId"));
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/user/login")
+    public ResponseEntity<Void> login () {
+        return ResponseEntity.noContent().build();
+    }
 }
