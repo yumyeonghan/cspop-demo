@@ -207,3 +207,13 @@ CREATE TABLE schedule_board (
                                 PRIMARY KEY (`id`))
     ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- alter table excel_board
+-- -----------------------------------------------------
+alter table excel_board
+    modify id bigint auto_increment;
+
+alter table excel_board
+    auto_increment = 1;
+
