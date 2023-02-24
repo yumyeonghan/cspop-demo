@@ -1,3 +1,5 @@
+<%@ page import="kyonggi.cspop.domain.login.dto.UserSessionDto" %>
+<%--추가된 항목--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -30,24 +32,31 @@
         }
     </style>
 </head>
-
+<%
+    session = request.getSession(false);
+    UserSessionDto cspop = (UserSessionDto) session.getAttribute("CSPOP");
+    String userId = "NotLogin";
+    String userName = "NotLogin";
+    if (cspop != null) {
+        userId = cspop.getStudentId();
+        userName = cspop.getStudentName();
+    }
+%>
 <body>
 
 <div class="header fixed-top border-3 border-top border-primary">
-<!-- navigation start -->
+    <!-- navigation start -->
     <div class="container">
         <nav class="navbar navbar-default">
             <a class="navbar-brand" href="/home">
                 <img src="../../assets/images/fitness/cspop_logo.png" alt="" width="100em">
             </a>
-            <a href="/api/login">
-                <button class="btn btn-primary btn-sm float-right">Login</button>
-            </a>
-
+            <div id="userCheck"></div>
         </nav>
     </div>
 </div>
 <!-- navigation close -->
+
 
 <div class="bg-dark right-slant-shape pt-lg-16 py-12 pb-lg-0 ">
     <div class="container">
@@ -130,14 +139,21 @@
 <a
         href="https://kr.freepik.com/free-vector/cloud-robotics-abstract-concept-illustration_12291072.htm#query=chatbot&position=4&from_view=keyword&track=sph">작가
     vectorjuice</a> 출처 Freepik
+<!--  Jquery 가져오기 -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
+<script>
+    let userId = "<%=userId%>";
+    let userName = "<%=userName%>";
+</script>
+<script src="../../assets/js/login.js"></script>
 <!-- Libs JS -->
 <script src="../../assets/libs/jquery/dist/jquery.min.js"></script>
 <script src="../../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../../assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="../../assets/libs/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
 <script src="../../assets/libs/prismjs/prism.js"></script>
-
 <script src="../../assets/libs/litepicker/dist/litepicker.js"></script>
 <script src="../../assets/libs/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
 <script src="../../assets/libs/inputmask/dist/jquery.inputmask.min.js"></script>
