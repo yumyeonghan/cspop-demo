@@ -38,13 +38,34 @@ public class ExcelController{
     private ExcelRepository repository;
 
     //엑셀 업로드 화면(임시)
+    /**
+     * @param model
+     * @return
+     */
     @GetMapping("/excel")
-    public String excel() {
+    public String excel(Model model) {
+        List<ExcelBoard> dataList = repository.findAll();
+
+        /**
+         * 업로드 전 기존 데이터 출력
+         */
+        for (ExcelBoard excelBoard : dataList) {
+            excelBoard.getId();
+            excelBoard.getStudentId();
+            excelBoard.getStudentName();
+            excelBoard.getProfessorName();
+            excelBoard.getStep();
+            excelBoard.getState();
+            excelBoard.getOtherQualifications();
+            excelBoard.getCapstoneCompletion();
+        }
+
+        model.addAttribute("dataL", dataList);
         return "excel";
     }
 
     /**
-     * excel file upload method
+     * Excel file upload method
      * @param file
      * @param model
      * @return
@@ -64,9 +85,8 @@ public class ExcelController{
         /**
          * 확장자에 맞지 않는 파일 + null값 입력 시 오류 페이지 이동
          */
-        if (!Objects.equals(extension, "xlsx") &&
-                !Objects.equals(extension, "xls")) {
-            throw new IOException("엑셀파일만 업로드 해주세요!");
+        if (!extension.equals("xlsx") && !extension.equals("xls")) {
+            throw new IOException("엑셀파일만 업로드 해주세요.");
         }
 
         Workbook workbook = null;
@@ -96,16 +116,15 @@ public class ExcelController{
             data.setCapstoneCompletion(row.getCell(7).getStringCellValue());
             dataList.add(data);
         }
-        //db 레포에 dataList 값 저장 + id 값 auto increment=1 지정
-        repository.saveAll(dataList);
+        //db 레포에 dataList 값 저장
         model.addAttribute("dataL", dataList);
+        repository.saveAll(dataList);
 
         return "excel";
     }
 
     /**
      * Excel file download method
-     * --> upload db 저장 구현 미완성으로 임시로 db 값 삽입 후 실행
      * @param response
      * @return
      */
@@ -180,7 +199,7 @@ public class ExcelController{
              * 컨텐츠 타입과 파일명(확장자) 지정
              */
             File tmpFile = File.createTempFile("TMP~", ".xlsx");
-            try (OutputStream fos = new FileOutputStream(tmpFile);) {
+            try (OutputStream fos = new FileOutputStream(tmpFile)) {
                 workbook.write(fos);
             }
             InputStream res = new FileInputStream(tmpFile) {
@@ -197,7 +216,7 @@ public class ExcelController{
             return ResponseEntity.ok() //
                     .contentLength(tmpFile.length()) //
                     .contentType(MediaType.APPLICATION_OCTET_STREAM) //
-                    .header("Content-Disposition", "attachment;filename=graduation-target.xlsx") //
+                    .header("Content-Disposition", "attachment;filename=graduation.xlsx") //
                     .body(new InputStreamResource(res));
         }
     }
