@@ -10,7 +10,7 @@ function login(){
         contentType: "application/json; charset=utf-8",
         dataTypes: "json",
         success:function (url){
-            alert("login success")
+            alert("로그인 성공")
             window.location.replace(url);
         },error:function (error){
             alert(error.responseJSON.errorMessage);
