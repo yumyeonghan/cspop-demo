@@ -22,16 +22,16 @@
 <table class="table table-striped">
     <thead class="thead-dark">
     <tr>
+        <!--엔티티 속성에 맞게 컬럼 설정 추후 데이터 값 변경-->
         <th scope="col">#</th>
         <th scope="col">학번</th>
         <th scope="col">학생 이름</th>
         <th scope="col">교수 이름</th>
-        <th scope="col">캡스톤 이수</th>
+        <th scope="col">학생 졸업날짜</th>
         <th scope="col">단계</th>
         <th scope="col">상태</th>
         <th scope="col">기타 자격</th>
-        <!--현재 엑셀 속성:지연 횟수 ->학생 졸업 날짜로 속성 변경 예정-->
-        <th scope="col">지연 횟수</th>
+        <th scope="col">캡스톤 이수</th>
     </tr>
     </thead>
     <tbody>

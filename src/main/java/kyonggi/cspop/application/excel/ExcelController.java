@@ -8,13 +8,12 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,13 +31,11 @@ import java.util.Objects;
  */
 @Controller
 @RequiredArgsConstructor
+@Transactional
 public class ExcelController{
 
     @Autowired
     private ExcelRepository repository;
-
-    Logger logger = LoggerFactory.getLogger(ExcelController.class);
-
 
     //엑셀 업로드 화면(임시)
     @GetMapping("/excel")
@@ -53,15 +50,20 @@ public class ExcelController{
      * @return
      * @throws IOException
      */
-    //업로드한 엑셀 저장
     @PostMapping("/excel.read")
     public String upload(@RequestParam("file") MultipartFile file, Model model) throws IOException {
+        //저장된 속성 값 미리 삭제
+        repository.deleteAllInBatch();
+
         List<ExcelBoard> dataList = new ArrayList<>();
 
         //파일 확장자명->엑셀 파일 확장자인지 확인
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
 
         //그외 확장자는 예외 던짐
+        /**
+         * 확장자에 맞지 않는 파일 + null값 입력 시 오류 페이지 이동
+         */
         if (!Objects.equals(extension, "xlsx") &&
                 !Objects.equals(extension, "xls")) {
             throw new IOException("엑셀파일만 업로드 해주세요!");
@@ -94,6 +96,8 @@ public class ExcelController{
             data.setCapstoneCompletion(row.getCell(7).getStringCellValue());
             dataList.add(data);
         }
+        //db 레포에 dataList 값 저장 + id 값 auto increment=1 지정
+        repository.saveAll(dataList);
         model.addAttribute("dataL", dataList);
 
         return "excel";
@@ -108,15 +112,18 @@ public class ExcelController{
     @SneakyThrows
     @GetMapping( "/excel.download")
     public ResponseEntity<InputStreamResource> downloadExcel(HttpServletResponse response) {
-        try (Workbook workbook = new XSSFWorkbook()){
-            //Excel Down 시작
 
+        //Excel Down 시작
+        try (Workbook workbook = new XSSFWorkbook()){
             //시트생성
             Sheet sheet = workbook.createSheet("졸업 대상자 조회");
 
             //행 번호
             int rowNo = 0;
 
+            /**
+             * 엑셀 디자인
+             */
             // 테이블 헤더용 스타일
             CellStyle headStyle = workbook.createCellStyle();
             headStyle.setFillForegroundColor(HSSFColor.HSSFColorPredefined.LIGHT_ORANGE.getIndex());
@@ -129,9 +136,9 @@ public class ExcelController{
             //헤더 생성
             Row headerRow = sheet.createRow(rowNo++);
             headerRow.createCell(0).setCellValue("학번");
-            headerRow.createCell(1).setCellValue("이름");
-            headerRow.createCell(2).setCellValue("지도교수");
-            headerRow.createCell(3).setCellValue("졸업날짜");
+            headerRow.createCell(1).setCellValue("학생 이름");
+            headerRow.createCell(2).setCellValue("교수 이름");
+            headerRow.createCell(3).setCellValue("졸업 날짜");
             headerRow.createCell(4).setCellValue("단계");
             headerRow.createCell(5).setCellValue("상태");
             headerRow.createCell(6).setCellValue("기타 자격");
@@ -141,8 +148,10 @@ public class ExcelController{
                 headerRow.getCell(i).setCellStyle(headStyle);
             }
 
+            /**
+             * 엑셀 내 db 데이터 조회
+             */
             List<ExcelBoard> dataList = repository.findAll();
-            // Body
             for (ExcelBoard excelBoard : dataList) {
                 Row row = sheet.createRow(rowNo++);
                 row.createCell(0).setCellValue(excelBoard.getStudentId());
@@ -155,16 +164,21 @@ public class ExcelController{
                 row.createCell(7).setCellValue(excelBoard.getCapstoneCompletion());
             }
 
+            /**
+             * 엑셀 컬럼 사이즈 설정
+             */
             sheet.setColumnWidth(0, 3000);
             sheet.setColumnWidth(1, 3000);
             sheet.setColumnWidth(2, 3000);
-            sheet.setColumnWidth(3, 4000);
+            sheet.setColumnWidth(3, 3000);
             sheet.setColumnWidth(4, 3000);
             sheet.setColumnWidth(5, 3000);
-            sheet.setColumnWidth(6, 4000);
-            sheet.setColumnWidth(7, 4000);
+            sheet.setColumnWidth(6, 3000);
+            sheet.setColumnWidth(7, 3500);
 
-            // 컨텐츠 타입과 파일명 지정
+            /**
+             * 컨텐츠 타입과 파일명(확장자) 지정
+             */
             File tmpFile = File.createTempFile("TMP~", ".xlsx");
             try (OutputStream fos = new FileOutputStream(tmpFile);) {
                 workbook.write(fos);
@@ -176,10 +190,14 @@ public class ExcelController{
                 }
             };
 
+            /**
+             * file 이름 영어로 설정 필요! ex) attachment;filename=abc.xlsx
+             */
+
             return ResponseEntity.ok() //
                     .contentLength(tmpFile.length()) //
                     .contentType(MediaType.APPLICATION_OCTET_STREAM) //
-                    .header("Content-Disposition", "attachment;filename=대상자 관리.xlsx") //
+                    .header("Content-Disposition", "attachment;filename=graduation-target.xlsx") //
                     .body(new InputStreamResource(res));
         }
     }
