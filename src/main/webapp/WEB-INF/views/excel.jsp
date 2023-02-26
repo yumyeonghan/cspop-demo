@@ -1,8 +1,6 @@
-<%@ page import="org.springframework.orm.jpa.JpaTransactionManager" %>
-<%@ page import="java.sql.*" %>
-<%@ page import="javax.sql.DataSource" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page errorPage="error.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>

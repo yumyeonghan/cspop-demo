@@ -85,41 +85,46 @@ public class ExcelController{
         /**
          * 확장자에 맞지 않는 파일 + null값 입력 시 오류 페이지 이동
          */
-        if (!extension.equals("xlsx") && !extension.equals("xls")) {
-            throw new IOException("엑셀파일만 업로드 해주세요.");
+        try {
+            if (!extension.equals("xlsx") && !extension.equals("xls")) {
+                throw new IOException("엑셀파일만 업로드 해주세요.");
+            }
+        }catch (IOException e) {
+            System.out.println(e.getClass().getName());
         }
+        finally {
 
-        Workbook workbook = null;
+            Workbook workbook = null;
 
-        if (extension.equals("xlsx")) {
-            workbook = new XSSFWorkbook(file.getInputStream());
-        } else if (extension.equals("xls")) {
-            workbook = new HSSFWorkbook(file.getInputStream());
+            if (extension.equals("xlsx")) {
+                workbook = new XSSFWorkbook(file.getInputStream());
+            } else if (extension.equals("xls")) {
+                workbook = new HSSFWorkbook(file.getInputStream());
+            }
+
+            Sheet worksheet = Objects.requireNonNull(workbook).getSheetAt(0);
+
+            //ExcelBoard 객체 리스트 형태로 저장
+            for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
+
+                Row row = worksheet.getRow(i);
+
+                ExcelBoard data = new ExcelBoard();
+
+                data.setStudentId(row.getCell(0).getStringCellValue());
+                data.setStudentName(row.getCell(1).getStringCellValue());
+                data.setProfessorName(row.getCell(2).getStringCellValue());
+                data.setGraduationDate(row.getCell(3).getStringCellValue());
+                data.setStep(row.getCell(4).getStringCellValue());
+                data.setState(row.getCell(5).getStringCellValue());
+                data.setOtherQualifications(row.getCell(6).getStringCellValue());
+                data.setCapstoneCompletion(row.getCell(7).getStringCellValue());
+                dataList.add(data);
+            }
+            //db 레포에 dataList 값 저장
+            model.addAttribute("dataL", dataList);
+            repository.saveAll(dataList);
         }
-
-        Sheet worksheet = Objects.requireNonNull(workbook).getSheetAt(0);
-
-        //ExcelBoard 객체 리스트 형태로 저장
-        for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
-
-            Row row = worksheet.getRow(i);
-
-            ExcelBoard data = new ExcelBoard();
-
-            data.setStudentId(row.getCell(0).getStringCellValue());
-            data.setStudentName(row.getCell(1).getStringCellValue());
-            data.setProfessorName(row.getCell(2).getStringCellValue());
-            data.setGraduationDate(row.getCell(3).getStringCellValue());
-            data.setStep(row.getCell(4).getStringCellValue());
-            data.setState(row.getCell(5).getStringCellValue());
-            data.setOtherQualifications(row.getCell(6).getStringCellValue());
-            data.setCapstoneCompletion(row.getCell(7).getStringCellValue());
-            dataList.add(data);
-        }
-        //db 레포에 dataList 값 저장
-        model.addAttribute("dataL", dataList);
-        repository.saveAll(dataList);
-
         return "excel";
     }
 
