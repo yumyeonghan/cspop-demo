@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>CSPOP</title>
     <!-- Required meta tags -->
@@ -19,7 +18,6 @@
     <link rel="stylesheet" href="../../../assets/libs/litepicker/dist/css/litepicker.css">
     <link rel="stylesheet" href="../../../assets/libs/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../../../assets/libs/magnific-popup/dist/magnific-popup.css">
-
     <!-- 부트스트랩 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -37,7 +35,7 @@
         }
     </style>
 </head>
-
+<%@include file="../common/sessionController.jsp"%>
 <body>
 <!-- header -->
 <div class="header fixed-top border-3 border-top border-primary border-sm">
@@ -99,7 +97,7 @@
                         </a>
                     </li>
                 </ul>
-                <a href="/api/login" class="btn btn-primary btn-sm ">Login</a>
+                <div id="userCheck"></div>
             </div>
         </nav>
     </div>
@@ -186,23 +184,8 @@
         </div>
     </div>
 </section>
-
-<!-- Libs JS -->
-<script src="../../../assets/libs/jquery/dist/jquery.min.js"></script>
-<script src="../../../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../../../assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="../../../assets/libs/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
-<script src="../../../assets/libs/prismjs/prism.js"></script>
-<script src="../../../assets/libs/leaflet/dist/leaflet.js"></script>
-<script src="../../../assets/libs/litepicker/dist/litepicker.js"></script>
-<script src="../../../assets/libs/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
-<script src="../../../assets/libs/inputmask/dist/jquery.inputmask.min.js"></script>
-
-<!-- clipboard -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>
-
-<!-- Theme JS -->
-<script src="../../../assets/js/theme.min.js"></script>
+<%@include file="../common/commonJS.jsp" %>
+<script src="../../../assets/js/login.js"></script>
 <!--  Jquery 가져오기 -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -214,7 +197,7 @@
 <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
 
 <script>
-    $(function () {
+    $(() => {
         let $table = $("#table");
         // 테이블 표현할 데이터 표현
         let data = [
