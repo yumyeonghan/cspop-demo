@@ -13,3 +13,5 @@
 
 <!-- Theme JS -->
 <script src="../../../assets/js/theme.min.js"></script>
+<%--User login Check--%>
+<script src="../../assets/js/userCheck.js"></script>

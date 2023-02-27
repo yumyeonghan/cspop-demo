@@ -19,16 +19,6 @@ function login() {
 
     })
 }
-/*
-* index.jsp 에서 사용
-* */
-$(function userCheck() {
-    let userCheckButton = $(`#userCheck`)
-    let button = userId === "NotLogin"
-        ? `<a href="/api/login"><button class="btn btn-primary btn-sm float-right">Login</button></a>`
-        : `<button class="btn btn-primary btn-sm float-right" onclick="logout()">Logout</button>`;
-    userCheckButton.append(button);
-})
 
 function logout() {
     $.ajax({
