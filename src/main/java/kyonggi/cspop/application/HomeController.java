@@ -24,4 +24,9 @@ public class HomeController {
     public String signup() {
         return "account/signup";
     }
+
+    @GetMapping("/graduation/notice")
+    public String notice() {
+        return "graduation/notice";
+    }
 }
