@@ -20,14 +20,3 @@ function login() {
     })
 }
 
-function logout() {
-    $.ajax({
-        url: "/api/logout",
-        type: "POST",
-        success: (url) => {
-            alert("로그아웃 되었습니다")
-            window.location.replace(url)
-        }, error: (error) => alert(error.responseJSON.errorMessage)
-    })
-}
-

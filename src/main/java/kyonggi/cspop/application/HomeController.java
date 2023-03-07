@@ -3,30 +3,31 @@ package kyonggi.cspop.application;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/api")
 public class HomeController {
 
-    @GetMapping("/home")
+    @GetMapping("api/home")
     public String home() {
         return "index";
     }
 
-    @GetMapping("/login")
+    @GetMapping("api/login")
     public String login() {
         return "account/login";
     }
 
-    @GetMapping("/signup")
+    @GetMapping("api/signup")
     public String signup() {
         return "account/signup";
     }
 
-    @GetMapping("/graduation/notice")
+    @GetMapping("api/graduation/notice")
     public String notice() {
         return "graduation/notice";
     }
+
+    @GetMapping("api/excel")
+    public String excel() {return "excel/excelIndex";}
 }

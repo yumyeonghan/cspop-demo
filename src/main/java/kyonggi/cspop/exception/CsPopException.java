@@ -3,7 +3,7 @@ package kyonggi.cspop.exception;
 import lombok.Getter;
 
 @Getter
-public class CsPopException extends RuntimeException{
+public class CsPopException extends RuntimeException {
 
     private CsPopErrorCode csPopErrorCode;
 

@@ -8,3 +8,14 @@ $(function userCheck() {
         : `<button class="btn btn-primary btn-sm float-right" onclick="logout()">Logout</button>`;
     userCheckButton.append(button);
 })
+
+function logout() {
+    $.ajax({
+        url: "/api/logout",
+        type: "POST",
+        success: (url) => {
+            alert("로그아웃 되었습니다")
+            window.location.replace(url)
+        }, error: (error) => alert(error.responseJSON.errorMessage)
+    })
+}
