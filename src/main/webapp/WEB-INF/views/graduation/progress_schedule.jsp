@@ -111,9 +111,9 @@
                                         </c:forEach>
                                     </table>
                                 </div>
-                                <form action="progress_schedule.modify" method="get">
-                                    <input style="float: right" type="submit" id="?" value="수정"/>
-                                </form>
+                                <button type="submit" onclick="location.href='modify_schedule'"
+                                        style="float: right">수정</button>
+
                             </div>
                         </div>
 
@@ -121,23 +121,23 @@
                         <hr><br>
                         <c:forEach var="data" items="${dataL2}">
                             <h4 class="alert-light-info">신청접수</h4>
-                            <p>${data.receivedText}</p>
+                            <p class="bi-text-indent-left">${data.receivedText}</p>
                             <br><br>
                             <h4 class="alert-light-info">제안서</h4>
-                            <p>${data.proposalText}</p>
+                            <p class="bi-text-indent-left">${data.proposalText}</p>
                             <br><br>
                             <h4 class="alert-light-info">중간보고서</h4>
-                            <p>${data.interimReportText}</p><br><br>
+                            <p class="bi-text-indent-left">${data.interimReportText}</p><br><br>
                             <h4 class="alert-light-info">최종보고서</h4>
-                            <p>${data.finalReportText}</p><br><br>
+                            <p class="bi-text-indent-left">${data.finalReportText}</p><br><br>
                             <h4 class="alert-light-info">최종통과</h4>
-                            <p>${data.finalPassText}</p><br><br>
+                            <p class="bi-text-indent-left">${data.finalPassText}</p><br><br>
                             <h4 class="alert-light-info">기타자격</h4>
-                            <p>${data.otherQualificationsText}</p>
+                            <p class="bi-text-indent-left">${data.otherQualificationsText}</p>
                             <br><br>
                         </c:forEach>
-                        <form action="progress_schedule.modify2" method="get">
-                            <input style="float: right" type="submit" id="#" value="수정"/>
+                        <form action="progress_schedule.modify2" method="post">
+                            <input style="float: right" type="submit"  value="수정"/>
                         </form>
                     </div>
                 </div>
