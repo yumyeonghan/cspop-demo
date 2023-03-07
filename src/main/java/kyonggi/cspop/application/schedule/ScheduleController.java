@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -68,6 +69,35 @@ public class ScheduleController {
         return "graduation/progress_schedule";
     }
 
+    /**
+     * 진행 일정 수정 view
+     * @param model
+     * @return
+     */
+    @GetMapping("/graduation/modify_schedule")
+    public String View(Model model){
+
+        /**
+         * step-> select box 구현 로직
+         */
+        List<Schedules> list=scheduleRepository.findAll();
+        for (Schedules schedules:list){
+            schedules.getId();
+            schedules.getStep();
+            schedules.getStartDate();
+            schedules.getEndDate();
+            schedules.getScheduleState();
+        }
+        model.addAttribute("step", list);
+
+        /**
+         * step에 해당하는 startDate와 endDate를 담아 불러옴
+         */
+        var a = new ArrayList<Schedules>();
+
+
+        return "graduation/modify_schedule";
+    }
     /**
      * 진행 일정 수정 method
      * @param model

@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum ScheduleState {
 
-    PROCEEDING("진행중"), END("마감");
+    WAITING("대기"),PROCEEDING("진행중"), END("마감");
 
     private String ScheduleStateToString;
 
