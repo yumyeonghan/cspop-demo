@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +36,7 @@
         }
     </style>
 </head>
+<%@include file="../common/sessionController.jsp"%>
 <body>
 <%@include file="../common/header.jsp"%>
 <section class="page-start">
@@ -78,8 +80,8 @@
                     <div class="card">
                         <div class="card-body p-4 p-lg-7">
                             <div>
-                                <div class="table">
-                                    <table id="table" class="table mb-0">
+                                <div class="card table-responsive">
+                                    <table id="table" class="table mb-0" border-color="black">
                                         <thead class="table-dark">
                                         <tr style="text-align: center">
                                             <th data-field="step">
@@ -96,22 +98,47 @@
                                             </th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-
-                                        </tbody>
+                                        <c:forEach var="data" items="${dataL}">
+                                            <tbody>
+                                            <!--enum type stepToString-->
+                                            <tr style="text-align: center">
+                                                <td>${data.step.stepToString}</td>
+                                                <td>${data.startDate}</td>
+                                                <td>${data.endDate}</td>
+                                                <td>${data.scheduleState.scheduleStateToString}</td>
+                                            </tr>
+                                            </tbody>
+                                        </c:forEach>
                                     </table>
-                                    <!--양식 조정 중-->
-                                    <form action="excel.download" method="get">
-                                        <input type="submit" id="?" value="수정"/>
-                                    </form>
-
-
-                                    <form action="excel.download" method="get">
-                                        <input type="submit" id="#" value="수정"/>
-                                    </form>
                                 </div>
+                                <form action="progress_schedule.modify" method="get">
+                                    <input style="float: right" type="submit" id="?" value="수정"/>
+                                </form>
                             </div>
                         </div>
+
+                        <!--상세 내용 양식 조정 중-->
+                        <hr><br>
+                        <c:forEach var="data" items="${dataL2}">
+                            <h4 class="alert-light-info">신청접수</h4>
+                            <p>${data.receivedText}</p>
+                            <br><br>
+                            <h4 class="alert-light-info">제안서</h4>
+                            <p>${data.proposalText}</p>
+                            <br><br>
+                            <h4 class="alert-light-info">중간보고서</h4>
+                            <p>${data.interimReportText}</p><br><br>
+                            <h4 class="alert-light-info">최종보고서</h4>
+                            <p>${data.finalReportText}</p><br><br>
+                            <h4 class="alert-light-info">최종통과</h4>
+                            <p>${data.finalPassText}</p><br><br>
+                            <h4 class="alert-light-info">기타자격</h4>
+                            <p>${data.otherQualificationsText}</p>
+                            <br><br>
+                        </c:forEach>
+                        <form action="progress_schedule.modify2" method="get">
+                            <input style="float: right" type="submit" id="#" value="수정"/>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -121,4 +148,5 @@
 <%@include file="../common/commonJS.jsp" %>
 </body>
 </html>
+
 

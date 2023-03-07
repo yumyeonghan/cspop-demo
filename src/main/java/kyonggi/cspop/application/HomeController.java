@@ -31,7 +31,7 @@ public class HomeController {
     @GetMapping("api/excel")
     public String excel() {return "excel/excelIndex";}
 
-    @GetMapping("/graduation/progress_schedule")
+    //@GetMapping("/graduation/progress_schedule")
     public String schedule(){
         return "graduation/progress_schedule";
     }
