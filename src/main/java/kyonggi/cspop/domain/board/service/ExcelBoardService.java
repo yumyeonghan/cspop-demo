@@ -24,5 +24,4 @@ public class ExcelBoardService {
         excelBoardRepository.deleteAllInBatch();
         excelBoardRepository.saveAll(dataList);
     }
-
 }
