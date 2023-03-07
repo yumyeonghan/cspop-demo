@@ -20,9 +20,9 @@ public class ExcelBoardService {
     }
 
     @Transactional
-    public void deleteExcelListAndUploadExcelList() {
+    public void deleteExcelListAndUploadExcelList(List<ExcelBoard> dataList) {
         excelBoardRepository.deleteAllInBatch();
-
+        excelBoardRepository.saveAll(dataList);
     }
 
 }

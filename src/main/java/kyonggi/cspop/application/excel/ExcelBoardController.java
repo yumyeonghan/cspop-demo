@@ -3,6 +3,8 @@ package kyonggi.cspop.application.excel;
 import kyonggi.cspop.domain.board.ExcelBoard;
 import kyonggi.cspop.domain.board.repository.ExcelBoardRepository;
 import kyonggi.cspop.domain.board.service.ExcelBoardService;
+import kyonggi.cspop.exception.CsPopErrorCode;
+import kyonggi.cspop.exception.CsPopException;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FilenameUtils;
@@ -10,12 +12,10 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,88 +33,37 @@ import java.util.Objects;
  */
 @Controller
 @RequiredArgsConstructor
-public class ExcelController{
+public class ExcelBoardController {
 
-    private final ExcelBoardRepository excelBoardRepository;
     private final ExcelBoardService excelBoardService;
-    //엑셀 업로드 화면(임시)
-    /**
-     * @param model
-     * @return
-     */
+
     @GetMapping("/excel")
     public String excel(Model model) {
-        List<ExcelBoard> dataList = excelBoardRepository.findAll();
+        List<ExcelBoard> dataList = excelBoardService.findExcelList();
         model.addAttribute("dataL", dataList);
         return "excel";
     }
 
-    /**
-     * Excel file upload method
-     * @param file
-     * @param model
-     * @return
-     * @throws IOException
-     */
     @PostMapping("/excel.read")
     public String upload(@RequestParam("file") MultipartFile file, Model model) throws IOException {
-        //저장된 속성 값 미리 삭제
-        excelBoardRepository.deleteAllInBatch();
 
-        List<ExcelBoard> dataList = new ArrayList<>();
-
-        //파일 확장자명->엑셀 파일 확장자인지 확인
+        //액셀 파일인지 검사
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+        checkUploadFileExtension(extension);
+        //업로드 된 Excel 파일의 데이터를 ExcelBoard 객체 리스트 형태로 저장 (액셀 파일의 문자만 받고, 숫자는 못받는 버그 수정해야함)
+        Sheet worksheet = getWorksheet(file, extension);
+        List<ExcelBoard> dataList = getExcelBoardList(worksheet);
 
-        //그외 확장자는 예외 던짐
-        /**
-         * 확장자에 맞지 않는 파일 + null값 입력 시 오류 페이지 이동
-         */
-        try {
-            if (!extension.equals("xlsx") && !extension.equals("xls")) {
-                throw new IOException("엑셀파일만 업로드 해주세요.");
-            }
-        }catch (IOException e) {
-            System.out.println(e.getClass().getName());
-        }
-        finally {
-
-            Workbook workbook = null;
-
-            if (extension.equals("xlsx")) {
-                workbook = new XSSFWorkbook(file.getInputStream());
-            } else if (extension.equals("xls")) {
-                workbook = new HSSFWorkbook(file.getInputStream());
-            }
-
-            Sheet worksheet = Objects.requireNonNull(workbook).getSheetAt(0);
-
-            //ExcelBoard 객체 리스트 형태로 저장
-            for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
-
-                Row row = worksheet.getRow(i);
-
-                ExcelBoard data = ExcelBoard.createExcelBoard(row);
-                dataList.add(data);
-            }
-            //db 레포에 dataList 값 저장
-            model.addAttribute("dataL", dataList);
-            excelBoardRepository.saveAll(dataList);
-        }
+        model.addAttribute("dataL", dataList);
         return "excel";
     }
 
-    /**
-     * Excel file download method
-     * @param response
-     * @return
-     */
     @SneakyThrows
-    @GetMapping( "/excel.download")
+    @GetMapping("/excel.download")
     public ResponseEntity<InputStreamResource> downloadExcel(HttpServletResponse response) {
 
         //Excel Down 시작
-        try (Workbook workbook = new XSSFWorkbook()){
+        try (Workbook workbook = new XSSFWorkbook()) {
             //시트생성
             Sheet sheet = workbook.createSheet("졸업 대상자 조회");
 
@@ -151,7 +100,7 @@ public class ExcelController{
             /**
              * 엑셀 내 db 데이터 조회
              */
-            List<ExcelBoard> dataList = excelBoardRepository.findAll();
+            List<ExcelBoard> dataList = excelBoardService.findExcelList();
             for (ExcelBoard excelBoard : dataList) {
                 Row row = sheet.createRow(rowNo++);
                 row.createCell(0).setCellValue(excelBoard.getStudentId());
@@ -199,6 +148,39 @@ public class ExcelController{
                     .contentType(MediaType.APPLICATION_OCTET_STREAM) //
                     .header("Content-Disposition", "attachment;filename=graduation.xlsx") //
                     .body(new InputStreamResource(res));
+        }
+    }
+
+    private static List<ExcelBoard> getExcelBoardList(Sheet worksheet) {
+        List<ExcelBoard> dataList = new ArrayList<>();
+        for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
+            Row row = worksheet.getRow(i);
+            ExcelBoard data = ExcelBoard.createExcelBoard(row);
+            dataList.add(data);
+        }
+        return dataList;
+    }
+
+    private static Sheet getWorksheet(MultipartFile file, String extension) throws IOException {
+        Workbook workbook = getWorkbook(file, extension);
+        Sheet worksheet = Objects.requireNonNull(workbook).getSheetAt(0);
+        return worksheet;
+    }
+
+    private static Workbook getWorkbook(MultipartFile file, String extension) throws IOException {
+        Workbook workbook = null;
+
+        if (extension.equals("xlsx")) {
+            workbook = new XSSFWorkbook(file.getInputStream());
+        } else if (extension.equals("xls")) {
+            workbook = new HSSFWorkbook(file.getInputStream());
+        }
+        return workbook;
+    }
+
+    private static void checkUploadFileExtension(String extension) {
+        if (!extension.equals("xlsx") && !extension.equals("xls")) {
+            throw new CsPopException(CsPopErrorCode.INVAILD_UPLOAD_FILE_EXTENSION);
         }
     }
 }
