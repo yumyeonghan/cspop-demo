@@ -1,6 +1,8 @@
 package kyonggi.cspop.application.excel;
 
 import kyonggi.cspop.domain.board.ExcelBoard;
+import kyonggi.cspop.domain.board.repository.ExcelBoardRepository;
+import kyonggi.cspop.domain.board.service.ExcelBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FilenameUtils;
@@ -31,12 +33,10 @@ import java.util.Objects;
  */
 @Controller
 @RequiredArgsConstructor
-@Transactional
 public class ExcelController{
 
-    @Autowired
-    private ExcelRepository repository;
-
+    private final ExcelBoardRepository excelBoardRepository;
+    private final ExcelBoardService excelBoardService;
     //엑셀 업로드 화면(임시)
     /**
      * @param model
@@ -44,22 +44,7 @@ public class ExcelController{
      */
     @GetMapping("/excel")
     public String excel(Model model) {
-        List<ExcelBoard> dataList = repository.findAll();
-
-        /**
-         * 업로드 전 기존 데이터 출력
-         */
-        for (ExcelBoard excelBoard : dataList) {
-            excelBoard.getId();
-            excelBoard.getStudentId();
-            excelBoard.getStudentName();
-            excelBoard.getProfessorName();
-            excelBoard.getStep();
-            excelBoard.getState();
-            excelBoard.getOtherQualifications();
-            excelBoard.getCapstoneCompletion();
-        }
-
+        List<ExcelBoard> dataList = excelBoardRepository.findAll();
         model.addAttribute("dataL", dataList);
         return "excel";
     }
@@ -74,7 +59,7 @@ public class ExcelController{
     @PostMapping("/excel.read")
     public String upload(@RequestParam("file") MultipartFile file, Model model) throws IOException {
         //저장된 속성 값 미리 삭제
-        repository.deleteAllInBatch();
+        excelBoardRepository.deleteAllInBatch();
 
         List<ExcelBoard> dataList = new ArrayList<>();
 
@@ -109,21 +94,12 @@ public class ExcelController{
 
                 Row row = worksheet.getRow(i);
 
-                ExcelBoard data = new ExcelBoard();
-
-                data.setStudentId(row.getCell(0).getStringCellValue());
-                data.setStudentName(row.getCell(1).getStringCellValue());
-                data.setProfessorName(row.getCell(2).getStringCellValue());
-                data.setGraduationDate(row.getCell(3).getStringCellValue());
-                data.setStep(row.getCell(4).getStringCellValue());
-                data.setState(row.getCell(5).getStringCellValue());
-                data.setOtherQualifications(row.getCell(6).getStringCellValue());
-                data.setCapstoneCompletion(row.getCell(7).getStringCellValue());
+                ExcelBoard data = ExcelBoard.createExcelBoard(row);
                 dataList.add(data);
             }
             //db 레포에 dataList 값 저장
             model.addAttribute("dataL", dataList);
-            repository.saveAll(dataList);
+            excelBoardRepository.saveAll(dataList);
         }
         return "excel";
     }
@@ -175,7 +151,7 @@ public class ExcelController{
             /**
              * 엑셀 내 db 데이터 조회
              */
-            List<ExcelBoard> dataList = repository.findAll();
+            List<ExcelBoard> dataList = excelBoardRepository.findAll();
             for (ExcelBoard excelBoard : dataList) {
                 Row row = sheet.createRow(rowNo++);
                 row.createCell(0).setCellValue(excelBoard.getStudentId());
