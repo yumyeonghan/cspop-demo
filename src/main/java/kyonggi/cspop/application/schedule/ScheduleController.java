@@ -1,122 +1,69 @@
 package kyonggi.cspop.application.schedule;
 
 import kyonggi.cspop.domain.board.ScheduleBoard;
-import kyonggi.cspop.domain.board.repository.ScheduleBoardRepository;
-import kyonggi.cspop.domain.board.repository.ScheduleRepository;
+import kyonggi.cspop.domain.board.service.ScheduleBoardService;
 import kyonggi.cspop.domain.schedule.Schedules;
+import kyonggi.cspop.domain.schedule.dto.ScheduleDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 진행 일정 테이블 + 게시판 컨트롤러
  */
 @Controller
-@RequiredArgsConstructor
 @Transactional
-@RequestMapping("/api")
+@RequiredArgsConstructor
+@RequestMapping("/api/graduation")
 public class ScheduleController {
 
-    @Autowired
-    private final ScheduleRepository scheduleRepository;
-    @Autowired
-    private final ScheduleBoardRepository scheduleBoardRepository;
+    private final ScheduleBoardService scheduleBoardService;
 
     /**
      * 초기 진행 일정 및 세부 내용 뷰
      * @param model
      * @return
      */
-    @GetMapping("/graduation/progress_schedule")
+    @GetMapping("/progress_schedule")
     public String Schedule(Model model){
 
-        /**
-         * 테이블 데이터 출력
-         */
-        List<Schedules> dataList=scheduleRepository.findAll();
-
-        for (Schedules schedules:dataList){
-            schedules.getStep();
-            schedules.getStartDate();
-            schedules.getEndDate();
-            schedules.getScheduleState();
-        }
+        //테이블 데이터 출력
+        List<Schedules> dataList = scheduleBoardService.findScheduleList();
         model.addAttribute("dataL", dataList);
 
-        /**
-         * 각 테이블 컬럼에 해당하는 세부 내용 출력
-         */
-        List<ScheduleBoard> dataList2=scheduleBoardRepository.findAll();
-
-        for (ScheduleBoard scheduleBoard:dataList2){
-            scheduleBoard.getReceivedText();
-            scheduleBoard.getProposalText();
-            scheduleBoard.getInterimReportText();
-            scheduleBoard.getFinalReportText();
-            scheduleBoard.getFinalPassText();
-            scheduleBoard.getOtherQualificationsText();
-        }
+        //각 테이블 컬럼에 해당하는 세부 내용 출력
+        List<ScheduleBoard> dataList2 = scheduleBoardService.findScheduleBoardList();
         model.addAttribute("dataL2", dataList2);
 
         return "graduation/progress_schedule";
     }
 
-    /**
-     * 진행 일정 수정 view
-     * @param model
-     * @return
-     */
-    @GetMapping("/graduation/modify_schedule")
-    public String View(Model model){
-
-        /**
-         * step-> select box 구현 로직
-         */
-        List<Schedules> list=scheduleRepository.findAll();
-        for (Schedules schedules:list){
-            schedules.getId();
-            schedules.getStep();
-            schedules.getStartDate();
-            schedules.getEndDate();
-            schedules.getScheduleState();
-        }
-        model.addAttribute("step", list);
-
-        /**
-         * step에 해당하는 startDate와 endDate를 담아 불러옴
-         */
-        var a = new ArrayList<Schedules>();
-
-
+    //진행 일정 수정 view - id에 일치하는 data 출력
+    @GetMapping("/modify_schedule/{id}")
+    public String mod(@PathVariable Long id, Model model){
+        Schedules schedules = scheduleBoardService.findById(id);
+        scheduleBoardService.save(schedules);
+        model.addAttribute("data",schedules);
         return "graduation/modify_schedule";
     }
-    /**
-     * 진행 일정 수정 method
-     * @param model
-     * @return
-     */
-    @PostMapping("/graduation/progress_schedule.modify")
-    public String Modify(Model model){
 
-        return "graduation/progress_schedule";
+    @PostMapping("/modify_schedule/{id}")
+    public String postMod(@PathVariable Long id, ScheduleDto scheduleDto) {
+
+        //데이터 수정(update)
+        scheduleBoardService.update(id, scheduleDto);
+        return "redirect:../progress_schedule";
     }
 
-    /**
-     * 세부 내용 수정 method
-     * @param model
-     * @return
-     */
-    @PostMapping("/graduation/progress_schedule.modify2")
+
+    //세부 내용 수정 method
+    @PostMapping("/progress_schedule.modify2")
     public String Modify_Content(Model model){
 
-        return "graduation/progress_schedule";
+        return "redirect:progress_schedule";
     }
 }
