@@ -131,11 +131,11 @@
                             <p class="bi-text-indent-left">${data.finalPassText}</p><br><br>
                             <h4 class="alert-light-info">기타자격</h4>
                             <p class="bi-text-indent-left">${data.otherQualificationsText}</p>
-                            <br><br>
+                            <br>
+                            <button style="width: 80px; height: 30px;" type="submit"
+                                    onclick="location.href='schedule_board/${data.id}'">수정</button>
+                            <br>
                         </c:forEach>
-                        <form action="progress_schedule.modify2" method="post">
-                            <input style="float: right" type="submit"  value="수정"/>
-                        </form>
                     </div>
                 </div>
             </div>

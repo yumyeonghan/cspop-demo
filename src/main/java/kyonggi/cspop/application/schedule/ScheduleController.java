@@ -3,6 +3,7 @@ package kyonggi.cspop.application.schedule;
 import kyonggi.cspop.domain.board.ScheduleBoard;
 import kyonggi.cspop.domain.board.service.ScheduleBoardService;
 import kyonggi.cspop.domain.schedule.Schedules;
+import kyonggi.cspop.domain.schedule.dto.ScheduleBoardDto;
 import kyonggi.cspop.domain.schedule.dto.ScheduleDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -59,11 +60,22 @@ public class ScheduleController {
         return "redirect:../progress_schedule";
     }
 
+    //세부 내용 수정 view
+    @GetMapping("/schedule_board/{id}")
+    public String mod2(@PathVariable Long id, Model model) {
+        ScheduleBoard scheduleBoard = scheduleBoardService.findById_board(id);
+        scheduleBoardService.save_board(scheduleBoard);
+        model.addAttribute("data", scheduleBoard);
+
+        return "graduation/schedule_board";
+    }
 
     //세부 내용 수정 method
-    @PostMapping("/progress_schedule.modify2")
-    public String Modify_Content(Model model){
+    @PostMapping("/schedule_board/{id}")
+    public String Modify_Content(@PathVariable Long id, ScheduleBoardDto scheduleBoardDto){
 
-        return "redirect:progress_schedule";
+        //데이터 수정(update)
+        scheduleBoardService.update_board(id, scheduleBoardDto);
+        return "redirect:../progress_schedule";
     }
 }

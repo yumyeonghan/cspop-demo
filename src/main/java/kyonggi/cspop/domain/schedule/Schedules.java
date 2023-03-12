@@ -7,10 +7,8 @@ import kyonggi.cspop.domain.schedule.enums.ScheduleState;
 import kyonggi.cspop.domain.schedule.enums.Step;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
