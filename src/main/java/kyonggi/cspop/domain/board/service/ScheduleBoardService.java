@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ScheduleBoardService {
     private final ScheduleRepository scheduleRepository;
@@ -29,6 +29,7 @@ public class ScheduleBoardService {
         return scheduleRepository.findById(id).get();
     }
 
+    @Transactional
     public void save(Schedules schedules) {
         scheduleRepository.save(schedules);
     }
@@ -50,7 +51,9 @@ public class ScheduleBoardService {
         return scheduleBoardRepository.findById(id).get();
     }
 
+    @Transactional
     public void save_board(ScheduleBoard scheduleBoard) {
+
         scheduleBoardRepository.save(scheduleBoard);
     }
 
