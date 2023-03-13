@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS schedules;
 DROP TABLE IF EXISTS excel_board;
 DROP TABLE IF EXISTS guidance_board;
 DROP TABLE IF EXISTS schedule_board;
+SET FOREIGN_KEY_CHECKS = 0;
 
 -- -----------------------------------------------------
 -- Table `test`.`admins`
@@ -209,7 +210,7 @@ CREATE TABLE schedule_board (
 DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
--- alter table excel_board
+-- alter table
 -- -----------------------------------------------------
 alter table excel_board
     modify id bigint auto_increment;
@@ -217,3 +218,8 @@ alter table excel_board
 alter table excel_board
     auto_increment = 1;
 
+alter table admins
+    modify id bigint auto_increment;
+
+alter table admins
+    auto_increment = 1;
