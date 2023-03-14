@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
@@ -23,21 +20,27 @@ public class ScheduleBoard extends BaseEntity {
     private Long id;
 
     @Comment("신청접수 본문")
+    @Column(nullable = false)
     private String receivedText;
 
     @Comment("제안서 본문")
+    @Column(nullable = false)
     private String proposalText;
 
     @Comment("중간보고서 본문")
+    @Column(nullable = false)
     private String interimReportText;
 
     @Comment("최종보고서 본문")
+    @Column(nullable = false)
     private String finalReportText;
 
     @Comment("최종통과 본문")
+    @Column(nullable = false)
     private String finalPassText;
 
     @Comment("기타자격 본문")
+    @Column(nullable = false)
     private String otherQualificationsText;
 
     public void updateInfo(ScheduleBoardDto scheduleBoardDto) {

@@ -11,7 +11,6 @@ import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -30,18 +29,13 @@ public class Schedules extends BaseEntity {
     private Step step;
 
     @Comment("시작 일정")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @NotNull
     private LocalDate startDate;
 
     @Comment("종료 일정")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @NotNull
     private LocalDate endDate;
 
     @Enumerated(EnumType.STRING)
     //추후 수정 로직 제안
-    @Column(updatable = false)
     private ScheduleState scheduleState;
 
     public void  updateInfo(ScheduleDto scheduleDto) {
