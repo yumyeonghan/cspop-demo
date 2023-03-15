@@ -127,6 +127,15 @@
                         <!-- 페이징 영역 시작 -->
                         <div class="text-xs-center">
                             <ul class="pagination justify-content-center">
+                                <!-- 이전 -->
+                                <c:choose>
+                                    <c:when test="${allNoticeBoard.first}"></c:when>
+                                    <c:otherwise>
+                                        <li class="page-item"><a class="page-link" href="/notice/find?page=0&size=10">처음</a></li>
+                                        <li class="page-item"><a class="page-link" href="/notice/find?page=${allNoticeBoard.number-1}&size=10">이전</a></li>
+                                    </c:otherwise>
+                                </c:choose>
+
                                 <!-- 페이지 그룹 -->
                                 <c:forEach begin="${startBlockPage}" end="${endBlockPage}" var="i">
                                     <c:choose>
@@ -139,6 +148,15 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </c:forEach>
+
+                                <!-- 다음 -->
+                                <c:choose>
+                                    <c:when test="${ulist.last}"></c:when>
+                                    <c:otherwise>
+                                        <li class="page-item "><a class="page-link" href="/notice/find?page=${allNoticeBoard.number+1}&size=10">다음</a></li>
+                                        <li class="page-item "><a class="page-link" href="/notice/find?page=${allNoticeBoard.totalPages-1}&size=10">마지막</a></li>
+                                    </c:otherwise>
+                                </c:choose>
                             </ul>
                         </div>
                         <!-- 페이징 영역 끝 -->
