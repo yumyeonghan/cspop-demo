@@ -102,9 +102,9 @@
                                                 <!-- boolean 값인 fixed가 true일 경우 가장 상단에 고정시키는 로직 추가해주세용 -->
                                                 <td>${noticeBoard.id}</td>
                                                 <td><a href="/admin/view/아직 안만듬">${noticeBoard.title}</a></td>
-                                                <td>아직 안만듬</td>
+                                                <td>${noticeBoard.writer}</td>
                                                 <td>${noticeBoard.createdDate}</td>
-                                                <td>동적 처리</td>
+                                                <td>${noticeBoard.views}</td>
                                             </tr>
                                         </c:forEach>
                                         </thead>

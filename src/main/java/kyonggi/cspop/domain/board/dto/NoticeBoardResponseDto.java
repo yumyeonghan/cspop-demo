@@ -20,7 +20,7 @@ public class NoticeBoardResponseDto {
         this.title = noticeBoard.getTitle();
         this.fixed = noticeBoard.isFixed();
         this.views = noticeBoard.getViews();
-        //this.writer = noticeBoard.getAdmins().getAdminName(); 보류
+        this.writer = noticeBoard.getAdmins().getAdminName();
         this.createdDate = LocalDate.from(noticeBoard.getCreatedDate());
     }
 }

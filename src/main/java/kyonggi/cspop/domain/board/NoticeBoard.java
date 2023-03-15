@@ -46,12 +46,6 @@ public class NoticeBoard extends BaseEntity {
     @OneToMany(mappedBy = "noticeBoard", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<NoticeBoardUploadFile> uploadFiles = new ArrayList<>();
 
-    // 양방향 연관관계 편의 메소드
-    public void addUploadFile(NoticeBoardUploadFile uploadFile) {
-        uploadFiles.add(uploadFile);
-        uploadFile.designateNoticeBoard(this);
-    }
-
     public static NoticeBoard createNoticeBoard(String title, String text, boolean fixed, Integer views, Admins admins, List<NoticeBoardUploadFile> uploadFiles) {
         NoticeBoard noticeBoard = new NoticeBoard();
         noticeBoard.title = title;

@@ -22,9 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -69,7 +67,6 @@ public class noticeBoardController {
         Admins findAdmin = adminsRepository.findByAdminId(adminSession.getStudentId()).get();
 
         List<NoticeBoardUploadFile> storeFiles = fileStore.storeFiles(noticeBoardRequestDto.getFiles());
-        log.info(noticeBoardRequestDto.getText());
 
         //데이터베이스에 저장
         NoticeBoard noticeBoard = NoticeBoard.createNoticeBoard(
@@ -79,6 +76,7 @@ public class noticeBoardController {
                 0,
                 findAdmin,
                 storeFiles);
+        storeFiles.stream().forEach(e -> e.designateNoticeBoard(noticeBoard));
         noticeBoardService.saveNoticeBoard(noticeBoard);
 
         return "redirect:/notice/find?page=0&size=10";

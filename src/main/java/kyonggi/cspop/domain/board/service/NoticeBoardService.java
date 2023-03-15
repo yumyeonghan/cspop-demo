@@ -3,7 +3,6 @@ package kyonggi.cspop.domain.board.service;
 import kyonggi.cspop.domain.board.NoticeBoard;
 import kyonggi.cspop.domain.board.dto.NoticeBoardResponseDto;
 import kyonggi.cspop.domain.board.repository.NoticeBoardRepository;
-import kyonggi.cspop.domain.users.Users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
