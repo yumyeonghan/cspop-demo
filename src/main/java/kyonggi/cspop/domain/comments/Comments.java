@@ -2,11 +2,14 @@ package kyonggi.cspop.domain.comments;
 
 import kyonggi.cspop.domain.board.NoticeBoard;
 import kyonggi.cspop.domain.entity.BaseEntity;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comments extends BaseEntity {
 
     @Id

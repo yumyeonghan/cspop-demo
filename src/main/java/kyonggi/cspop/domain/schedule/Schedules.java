@@ -3,12 +3,15 @@ package kyonggi.cspop.domain.schedule;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.schedule.enums.ScheduleState;
 import kyonggi.cspop.domain.schedule.enums.Step;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Schedules extends BaseEntity {
 
     @Id

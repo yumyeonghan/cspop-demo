@@ -4,6 +4,9 @@ import kyonggi.cspop.domain.admins.Admins;
 import kyonggi.cspop.domain.comments.Comments;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.uploadfile.NoticeBoardUploadFile;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
@@ -11,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class NoticeBoard extends BaseEntity {
 
     @Id

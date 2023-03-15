@@ -1,13 +1,16 @@
 package kyonggi.cspop.domain.admins;
 
 import kyonggi.cspop.domain.entity.BaseEntity;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Admins extends BaseEntity {
 
     @Id

@@ -1,13 +1,16 @@
 package kyonggi.cspop.domain.uploadfile;
 
 import kyonggi.cspop.domain.board.NoticeBoard;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class NoticeBoardUploadFile {
 
     @Id
