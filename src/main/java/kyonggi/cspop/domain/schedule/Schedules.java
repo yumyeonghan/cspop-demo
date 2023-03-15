@@ -1,8 +1,7 @@
 package kyonggi.cspop.domain.schedule;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import kyonggi.cspop.domain.entity.BaseEntity;
-import kyonggi.cspop.domain.schedule.dto.ScheduleDto;
+import kyonggi.cspop.application.schedule.dto.ScheduleDto;
 import kyonggi.cspop.domain.schedule.enums.ScheduleState;
 import kyonggi.cspop.domain.schedule.enums.Step;
 import lombok.Getter;
@@ -35,7 +34,6 @@ public class Schedules extends BaseEntity {
     private LocalDate endDate;
 
     @Enumerated(EnumType.STRING)
-    //추후 수정 로직 제안
     private ScheduleState scheduleState;
 
     public void  updateInfo(ScheduleDto scheduleDto) {

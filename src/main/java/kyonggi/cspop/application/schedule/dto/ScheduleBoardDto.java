@@ -1,4 +1,4 @@
-package kyonggi.cspop.domain.schedule.dto;
+package kyonggi.cspop.application.schedule.dto;
 
 import lombok.Getter;
 
