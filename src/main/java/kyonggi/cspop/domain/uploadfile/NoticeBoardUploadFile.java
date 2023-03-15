@@ -29,4 +29,9 @@ public class NoticeBoardUploadFile {
     public void designateNoticeBoard(NoticeBoard noticeBoard) {
         this.noticeBoard = noticeBoard;
     }
+
+    public NoticeBoardUploadFile(String uploadFileName, String storeFileName) {
+        this.uploadFileName = uploadFileName;
+        this.storeFileName = storeFileName;
+    }
 }

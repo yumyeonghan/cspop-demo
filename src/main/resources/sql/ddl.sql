@@ -223,3 +223,15 @@ alter table admins
 
 alter table admins
     auto_increment = 1;
+
+alter table notice_board
+    modify id bigint auto_increment;
+
+alter table notice_board
+    auto_increment = 1;
+
+alter table notice_board_upload_file
+    modify id bigint auto_increment;
+
+alter table notice_board_upload_file
+    auto_increment = 1;

@@ -7,8 +7,8 @@
 <div class="container">
     <form method="post" enctype="multipart/form-data">
         <ul>
-            <li>제목 <input type="title" name="테스트 공지사항"></li>
-            <li>본문 <input type="text" name="테스트 공지사항 입니다~~~~~~"></li>
+            <li>제목 <input type="text" name="title"></li>
+            <li>본문 <input type="text" name="text"></li>
 
 
         </ul>

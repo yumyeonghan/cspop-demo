@@ -11,10 +11,6 @@ public class NoticeBoardRequestDto {
 
     private String title;
     private String text;
-    private List<String> uploadFileName;
-    private MultipartFile[] files;
-
-    public NoticeBoard toEntity() {
-        return NoticeBoard.createNoticeBoard();
-    }
+    // private MultipartFile file;
+    private List<MultipartFile> files;
 }

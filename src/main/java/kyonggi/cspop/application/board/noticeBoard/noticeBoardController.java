@@ -2,9 +2,14 @@ package kyonggi.cspop.application.board.noticeBoard;
 
 import kyonggi.cspop.application.SessionFactory;
 import kyonggi.cspop.application.board.noticeBoard.dto.NoticeBoardRequestDto;
+import kyonggi.cspop.config.FileStore;
+import kyonggi.cspop.domain.admins.Admins;
+import kyonggi.cspop.domain.admins.repository.AdminsRepository;
+import kyonggi.cspop.domain.board.NoticeBoard;
 import kyonggi.cspop.domain.board.dto.NoticeBoardResponseDto;
 import kyonggi.cspop.domain.board.service.NoticeBoardService;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;
+import kyonggi.cspop.domain.uploadfile.NoticeBoardUploadFile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,6 +36,8 @@ public class noticeBoardController {
     private String fileDir;
 
     private final NoticeBoardService noticeBoardService;
+    private final AdminsRepository adminsRepository;
+    private final FileStore fileStore;
 
     /**
      * page = 누를 페이지 번호 (1~n)
@@ -56,18 +64,23 @@ public class noticeBoardController {
 
     //url 호출전 반드시 관리자로 로그인 한 상태에서 해야 세션에서 값을 가져와 DB에 저장하므로 주의해주세요
     @PostMapping("api/notice/form")
-    public String saveNoticeBoard (HttpServletRequest request, @ModelAttribute NoticeBoardRequestDto noticeBoardRequestDto)  {
+    public String saveNoticeBoard (HttpServletRequest request, @ModelAttribute NoticeBoardRequestDto noticeBoardRequestDto) throws IOException {
         UserSessionDto adminSession = (UserSessionDto) request.getSession().getAttribute(SessionFactory.CSPOP_SESSION_KEY);
+        Admins findAdmin = adminsRepository.findByAdminId(adminSession.getStudentId()).get();
 
-        if (noticeBoardRequestDto.getFiles() != null) {
-            Arrays.stream(noticeBoardRequestDto.getFiles()).forEach(e-> {
-                try {
-                    e.transferTo(new File(fileDir + e.getOriginalFilename()));
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            });
-        }
+        List<NoticeBoardUploadFile> storeFiles = fileStore.storeFiles(noticeBoardRequestDto.getFiles());
+        log.info(noticeBoardRequestDto.getText());
+
+        //데이터베이스에 저장
+        NoticeBoard noticeBoard = NoticeBoard.createNoticeBoard(
+                noticeBoardRequestDto.getTitle(),
+                noticeBoardRequestDto.getText(),
+                false,
+                0,
+                findAdmin,
+                storeFiles);
+        noticeBoardService.saveNoticeBoard(noticeBoard);
+
         return "redirect:/notice/find?page=0&size=10";
     }
 }
