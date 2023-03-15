@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,11 +109,39 @@
                                                 <div class="th-inner sortable both">조회수</div>
                                             </th>
                                         </tr>
+                                        <c:forEach items="${allNoticeBoard.content}" var="noticeBoard">
+                                            <tr>
+                                                <!-- boolean 값인 fixed가 true일 경우 가장 상단에 고정시키는 로직 추가해주세용 -->
+                                                <td>${noticeBoard.id}</td>
+                                                <td><a href="/admin/view/아직 안만듬">${noticeBoard.title}</a></td>
+                                                <td>아직 안만듬</td>
+                                                <td>${noticeBoard.createdDate}</td>
+                                                <td>동적 처리</td>
+                                            </tr>
+                                        </c:forEach>
                                         </thead>
                                     </table>
                                 </div>
                             </div>
                         </div>
+                        <!-- 페이징 영역 시작 -->
+                        <div class="text-xs-center">
+                            <ul class="pagination justify-content-center">
+                                <!-- 페이지 그룹 -->
+                                <c:forEach begin="${startBlockPage}" end="${endBlockPage}" var="i">
+                                    <c:choose>
+                                        <c:when test="${allNoticeBoard.pageable.pageNumber+1 == i}">
+                                            <!-- 1페이지라면 왼쪽에 이전 보이게, 10페이지, 20페이지 30페이지 마다 오른쪽에 이후 보이게 해주세용~ -->
+                                            <li class="page-item disabled"><a class="page-link" href="/notice/find?page=${i-1}&size=10">${i}</a></li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li class="page-item"><a class="page-link" href="/notice/find?page=${i-1}&size=10">${i}</a></li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                        <!-- 페이징 영역 끝 -->
                     </div>
                 </div>
             </div>
@@ -131,50 +160,5 @@
 <!-- bootstrap table 가져오기  -->
 <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
 
-<script>
-    $(() => {
-        let $table = $("#table");
-        // 테이블 표현할 데이터 표현
-        let data = [
-            {
-                "board_id": "1",
-                "title": "test1",
-                "writer_id": "admin",
-                "writed_date": "2023-02-18",
-                "views": "1"
-            },
-            {
-                "board_id": "2",
-                "title": "test2",
-                "writer_id": "admin2",
-                "writed_date": "2023-01-11",
-                "views": "120"
-            },
-            {
-                "board_id": "3",
-                "title": "test3",
-                "writer_id": "admin3",
-                "writed_date": "2023-03-01",
-                "views": "203"
-            },
-            {
-                "board_id": "4",
-                "title": "test4",
-                "writer_id": "admin4",
-                "writed_date": "2023-04-16",
-                "views": "999"
-            },
-            {
-                "board_id": "5",
-                "title": "test5",
-                "writer_id": "admin5",
-                "writed_date": "2023-05-12",
-                "views": "0"
-            }
-        ];
-        $table.bootstrapTable({data: data})
-    });
-</script>
 </body>
-
 </html>
