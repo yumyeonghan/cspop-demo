@@ -22,7 +22,7 @@
                 </button>
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="/api/graduation/notice" data-bs-toggle="dropdown" aria-haspopup="true"
+                        <a class="nav-link" href="/notice/find?page=0&size=10" data-bs-toggle="dropdown" aria-haspopup="true"
                            aria-expanded="false" data-bs-display="static">
                             공지사항
                         </a>
