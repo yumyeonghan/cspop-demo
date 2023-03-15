@@ -143,6 +143,7 @@
                         </div>
                         <!-- 페이징 영역 끝 -->
                     </div>
+                    <a href="/api/notice/form"><button class="btn btn-primary btn-sm float-right">글쓰기</button></a>
                 </div>
             </div>
         </div>
