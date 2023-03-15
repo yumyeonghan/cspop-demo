@@ -51,4 +51,9 @@ public class NoticeBoard extends BaseEntity {
         uploadFiles.add(uploadFile);
         uploadFile.designateNoticeBoard(this);
     }
+
+    public static NoticeBoard createNoticeBoard() {
+        NoticeBoard noticeBoard = new NoticeBoard();
+        return noticeBoard;
+    }
 }

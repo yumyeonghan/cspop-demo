@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class NoticeBoardDto {
+public class NoticeBoardResponseDto {
 
     private Long id;
     private String title;
@@ -15,7 +15,7 @@ public class NoticeBoardDto {
     private String writer;
     private LocalDateTime createdDate;
 
-    public NoticeBoardDto(NoticeBoard noticeBoard) {
+    public NoticeBoardResponseDto(NoticeBoard noticeBoard) {
         this.id = noticeBoard.getId();
         this.title = noticeBoard.getTitle();
         this.fixed = noticeBoard.isFixed();
