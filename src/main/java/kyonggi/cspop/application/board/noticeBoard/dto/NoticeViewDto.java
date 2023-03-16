@@ -1,6 +1,7 @@
 package kyonggi.cspop.application.board.noticeBoard.dto;
 
 import kyonggi.cspop.domain.board.NoticeBoard;
+import kyonggi.cspop.domain.uploadfile.NoticeBoardUploadFile;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -17,7 +18,12 @@ public class NoticeViewDto {
     List<String> files;
 
     public NoticeViewDto(NoticeBoard noticeBoard) {
-        List<String> files = noticeBoard.getUploadFiles().stream().map(e -> e.getUploadFileName()).collect(Collectors.toList());
+
+        List<NoticeBoardUploadFile> uploadFiles = noticeBoard.getUploadFiles();
+        List<String> files = null;
+        if (uploadFiles.size() != 0) {
+            files = uploadFiles.stream().map(e -> e.getUploadFileName()).collect(Collectors.toList());
+        }
         this.title = noticeBoard.getTitle();
         this.text = noticeBoard.getText();
         this.views = noticeBoard.getViews();

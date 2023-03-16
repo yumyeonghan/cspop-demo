@@ -34,14 +34,22 @@ public class NoticeBoardService {
 
     public NoticeBoard findNoticeBoard(Long id) {
         NoticeBoard noticeBoard = noticeBoardRepository.findById(id).get();
-        noticeBoard.getUploadFiles().get(0); //배치 사이즈 만큼 호출, LazyInitializationException 해결
+        initNoticeBoard(noticeBoard);
         return noticeBoard;
     }
 
     public NoticeBoard findDetailNoticeBoard(Long id) {
         NoticeBoard noticeBoard = noticeBoardRepository.findById(id).get();
         noticeBoard.updateViews();
-        noticeBoard.getUploadFiles().get(0);
+        initNoticeBoard(noticeBoard);
         return noticeBoard;
+    }
+
+
+    private static void initNoticeBoard(NoticeBoard noticeBoard) {
+        List<NoticeBoardUploadFile> uploadFiles = noticeBoard.getUploadFiles();
+        if (uploadFiles.size() != 0) {
+            noticeBoard.getUploadFiles().get(0);
+        }
     }
 }
