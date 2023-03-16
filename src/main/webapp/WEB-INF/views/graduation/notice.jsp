@@ -99,8 +99,12 @@
                                         </tr>
                                         <c:forEach items="${allNoticeBoard.content}" var="noticeBoard">
                                             <tr>
-                                                <!-- boolean 값인 fixed가 true일 경우 가장 상단에 고정시키는 로직 추가해주세용 -->
-                                                <td>${noticeBoard.id}</td>
+                                                <c:if test="${noticeBoard.fixed eq true}">
+                                                <td>고정</td>
+                                                </c:if>
+                                                <c:if test="${noticeBoard.fixed ne true}">
+                                                    <td>${noticeBoard.id}</td>
+                                                </c:if>
                                                 <td><a href="/admin/view/아직 안만듬">${noticeBoard.title}</a></td>
                                                 <td>${noticeBoard.writer}</td>
                                                 <td>${noticeBoard.createdDate}</td>

@@ -22,7 +22,7 @@ public class NoticeBoardService {
     private final NoticeBoardRepository noticeBoardRepository;
 
     public Page<NoticeBoardResponseDto> findAllNoticeBoard(Pageable pageable) {
-        return noticeBoardRepository.findAllByOrderByIdDesc(pageable).map(e-> new NoticeBoardResponseDto(e));
+        return noticeBoardRepository.findAllByOrderByFixedDescIdDesc(pageable).map(e-> new NoticeBoardResponseDto(e));
     }
 
     @Transactional

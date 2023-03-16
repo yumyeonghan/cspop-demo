@@ -7,3 +7,11 @@ INSERT INTO schedules VALUES (1,'2023-03-14 13:52:38.000000','2023-03-14 13:52:4
 
 --notice_board 데이터
 INSERT INTO `CSPOP`.`notice_board` (`id`, `created_date`, `last_modified_date`, `fixed`, `text`, `title`, `views`, `admins_id`) VALUES ('1', '1999-10-13', '1999-10-13', 1, 'text1', 'text1', 1, '1');
+INSERT INTO `CSPOP`.`notice_board` (`id`, `created_date`, `last_modified_date`, `fixed`, `text`, `title`, `views`, `admins_id`) VALUES ('2', '1999-10-13', '1999-10-13', 0, 'text1', 'text1', 1, '1');
+INSERT INTO `CSPOP`.`notice_board` (`id`, `created_date`, `last_modified_date`, `fixed`, `text`, `title`, `views`, `admins_id`) VALUES ('3', '1999-10-13', '1999-10-13', 0, 'text1', 'text1', 1, '1');
+INSERT INTO `CSPOP`.`notice_board` (`id`, `created_date`, `last_modified_date`, `fixed`, `text`, `title`, `views`, `admins_id`) VALUES ('4', '1999-10-13', '1999-10-13', 1, 'text1', 'text1', 1, '1');
+INSERT INTO `CSPOP`.`notice_board` (`id`, `created_date`, `last_modified_date`, `fixed`, `text`, `title`, `views`, `admins_id`) VALUES ('5', '1999-10-13', '1999-10-13', 0, 'text1', 'text1', 1, '1');
+INSERT INTO `CSPOP`.`notice_board` (`id`, `created_date`, `last_modified_date`, `fixed`, `text`, `title`, `views`, `admins_id`) VALUES ('6', '1999-10-13', '1999-10-13', 0, 'text1', 'text1', 1, '1');
+INSERT INTO `CSPOP`.`notice_board` (`id`, `created_date`, `last_modified_date`, `fixed`, `text`, `title`, `views`, `admins_id`) VALUES ('7', '1999-10-13', '1999-10-13', 0, 'text1', 'text1', 1, '1');
+INSERT INTO `CSPOP`.`notice_board` (`id`, `created_date`, `last_modified_date`, `fixed`, `text`, `title`, `views`, `admins_id`) VALUES ('8', '1999-10-13', '1999-10-13', 1, 'text1', 'text1', 1, '1');
+INSERT INTO `CSPOP`.`notice_board` (`id`, `created_date`, `last_modified_date`, `fixed`, `text`, `title`, `views`, `admins_id`) VALUES ('9', '1999-10-13', '1999-10-13', 1, 'text1', 'text1', 1, '1');
