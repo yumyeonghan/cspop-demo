@@ -56,4 +56,12 @@ public class NoticeBoard extends BaseEntity {
         noticeBoard.uploadFiles = uploadFiles;
         return noticeBoard;
     }
+
+    public void updateFixed(boolean fixed) {
+        this.fixed = fixed;
+    }
+
+    public void updateViews() {
+        this.views += 1;
+    }
 }

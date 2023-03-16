@@ -2,6 +2,7 @@ package kyonggi.cspop.application.board.noticeBoard;
 
 import kyonggi.cspop.application.SessionFactory;
 import kyonggi.cspop.application.board.noticeBoard.dto.NoticeBoardRequestDto;
+import kyonggi.cspop.application.board.noticeBoard.dto.NoticeViewDto;
 import kyonggi.cspop.config.FileStore;
 import kyonggi.cspop.domain.admins.Admins;
 import kyonggi.cspop.domain.admins.repository.AdminsRepository;
@@ -29,6 +30,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -103,5 +105,13 @@ public class noticeBoardController {
             }
         }
         return ResponseEntity.noContent().build();
+    }
+
+    @ResponseBody
+    @GetMapping("/notice/view/detail/{noticeBoardId}")
+    public ResponseEntity<NoticeViewDto> viewDetail(@PathVariable Long noticeBoardId) {
+        //자세히 보기 누르면 view + 1 돼야함.
+        NoticeBoard detailNoticeBoard = noticeBoardService.findDetailNoticeBoard(noticeBoardId);
+        return ResponseEntity.ok().body(new NoticeViewDto(detailNoticeBoard));
     }
 }

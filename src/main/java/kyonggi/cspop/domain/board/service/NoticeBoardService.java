@@ -37,4 +37,11 @@ public class NoticeBoardService {
         noticeBoard.getUploadFiles().get(0); //배치 사이즈 만큼 호출, LazyInitializationException 해결
         return noticeBoard;
     }
+
+    public NoticeBoard findDetailNoticeBoard(Long id) {
+        NoticeBoard noticeBoard = noticeBoardRepository.findById(id).get();
+        noticeBoard.updateViews();
+        noticeBoard.getUploadFiles().get(0);
+        return noticeBoard;
+    }
 }
