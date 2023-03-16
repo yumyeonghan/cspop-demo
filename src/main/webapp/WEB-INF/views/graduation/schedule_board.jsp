@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <html>
 <head>
     <!--css 폴더 이동-->
@@ -14,33 +15,23 @@
         #check-btn1 { display: none; }
         #check-btn1:checked ~ .form-control1 { display: block; }
         .form-control1 { display: none; }
-    </style>
 
-    <style>
         #check-btn2 { display: none; }
         #check-btn2:checked ~ .form-control2 { display: block; }
         .form-control2 { display: none; }
-    </style>
 
-    <style>
         #check-btn3 { display: none; }
         #check-btn3:checked ~ .form-control3 { display: block; }
         .form-control3 { display: none; }
-    </style>
 
-    <style>
         #check-btn4 { display: none; }
         #check-btn4:checked ~ .form-control4 { display: block; }
         .form-control4 { display: none; }
-    </style>
 
-    <style>
         #check-btn5 { display: none; }
         #check-btn5:checked ~ .form-control5 { display: block; }
         .form-control5 { display: none; }
-    </style>
 
-    <style>
         #check-btn6 { display: none; }
         #check-btn6:checked ~ .form-control6 { display: block; }
         .form-control6 { display: none; }
@@ -51,31 +42,62 @@
 <body>
 <h3>진행일정 게시판 수정-text를 누르시면 수정하실 수 있습니다.</h3><hr>
 <form action="../schedule_board/${data.id}" method="post">
-
     <label>
         <input id="check-btn1" type="checkbox"/>
         <label for="check-btn1">신청접수</label>
         <textarea class="form-control1" name="receivedText" style="resize: none" cols="90" rows="3">${data.receivedText}</textarea>
-
+        <spring:hasBindErrors name="scheduleBoardDto">
+            <c:if test="${errors.hasFieldErrors('receivedText') }">
+                <span style="color: red">${errors.getFieldError( 'receivedText' ).defaultMessage }</span>
+            </c:if>
+        </spring:hasBindErrors>
+        <br>
         <input id="check-btn2" type="checkbox"/>
         <label for="check-btn2">제안서</label>
         <textarea class="form-control2" name="proposalText" style="resize: none" cols="90" rows="3">${data.proposalText}</textarea>
+        <spring:hasBindErrors name="scheduleBoardDto">
+            <c:if test="${errors.hasFieldErrors('proposalText') }">
+                <span style="color: red">${errors.getFieldError( 'proposalText' ).defaultMessage }</span>
+            </c:if>
+        </spring:hasBindErrors>
 
+        <br>
         <input id="check-btn3" type="checkbox"/>
         <label for="check-btn3">중간보고서</label>
         <textarea class="form-control3" name="interimReportText" style="resize: none" cols="90" rows="3">${data.interimReportText}</textarea>
+        <spring:hasBindErrors name="scheduleBoardDto">
+            <c:if test="${errors.hasFieldErrors('interimReportText') }">
+                <span style="color: red">${errors.getFieldError( 'interimReportText' ).defaultMessage }</span>
+            </c:if>
+        </spring:hasBindErrors>
 
+        <br>
         <input id="check-btn4" type="checkbox"/>
         <label for="check-btn4">최종보고서</label>
         <textarea class="form-control4" name="finalReportText" style="resize: none" cols="90" rows="3">${data.finalReportText}</textarea>
-
+        <spring:hasBindErrors name="scheduleBoardDto">
+            <c:if test="${errors.hasFieldErrors('finalReportText') }">
+                <span style="color: red">${errors.getFieldError( 'finalReportText' ).defaultMessage }</span>
+            </c:if>
+        </spring:hasBindErrors>
+        <br>
         <input id="check-btn5" type="checkbox"/>
         <label for="check-btn5">최종통과</label>
         <textarea class="form-control5" name="finalPassText" style="resize: none" cols="90" rows="4">${data.finalPassText}</textarea>
-
+        <spring:hasBindErrors name="scheduleBoardDto">
+            <c:if test="${errors.hasFieldErrors('finalPassText') }">
+                <span style="color: red">${errors.getFieldError( 'finalPassText' ).defaultMessage }</span>
+            </c:if>
+        </spring:hasBindErrors>
+        <br>
         <input id="check-btn6" type="checkbox"/>
         <label for="check-btn6">기타자격</label>
         <textarea class="form-control6" name="otherQualificationsText" style="resize: none" cols="90" rows="3">${data.otherQualificationsText}</textarea>
+        <spring:hasBindErrors name="scheduleBoardDto">
+            <c:if test="${errors.hasFieldErrors('otherQualificationsText') }">
+                <span style="color: red">${errors.getFieldError( 'otherQualificationsText' ).defaultMessage }</span>
+            </c:if>
+        </spring:hasBindErrors>
     </label>
     <br>
     <input style="float: start" type="submit" value="수정"/>

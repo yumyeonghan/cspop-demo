@@ -6,19 +6,22 @@ import kyonggi.cspop.domain.schedule.Schedules;
 import kyonggi.cspop.application.schedule.dto.ScheduleBoardDto;
 import kyonggi.cspop.application.schedule.dto.ScheduleDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 진행 일정 테이블 + 게시판 컨트롤러
  */
 @Controller
-@Transactional
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/api/graduation")
 public class ScheduleController {
 
@@ -63,19 +66,33 @@ public class ScheduleController {
     //세부 내용 수정 view
     @GetMapping("/schedule_board/{id}")
     public String mod2(@PathVariable Long id, Model model) {
-        ScheduleBoard scheduleBoard = scheduleBoardService.findById_board(id);
-        scheduleBoardService.save_board(scheduleBoard);
-        model.addAttribute("data", scheduleBoard);
-
+        save(id, model);
         return "graduation/schedule_board";
     }
 
     //세부 내용 수정 method
     @PostMapping("/schedule_board/{id}")
-    public String Modify_Content(@PathVariable Long id, ScheduleBoardDto scheduleBoardDto){
+    public String Modify_Content(@PathVariable Long id,
+                                 @Validated @ModelAttribute ScheduleBoardDto scheduleBoardDto,
+                                 BindingResult result,Model model) {
 
+        if (result.hasErrors()) {
+
+            //예외가 발생한 필드를 출력
+            log.info("result.getFieldError={}",result.getFieldError());
+
+            save(id, model);
+
+            return "graduation/schedule_board";
+        }
         //데이터 수정(update)
         scheduleBoardService.update_board(id, scheduleBoardDto);
         return "redirect:../progress_schedule";
+    }
+
+    public void save(@PathVariable Long id, Model model) {
+        ScheduleBoard scheduleBoard = scheduleBoardService.findById_board(id);
+        scheduleBoardService.save_board(scheduleBoard);
+        model.addAttribute("data", scheduleBoard);
     }
 }

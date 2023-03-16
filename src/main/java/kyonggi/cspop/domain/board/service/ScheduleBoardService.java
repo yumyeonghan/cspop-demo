@@ -36,10 +36,8 @@ public class ScheduleBoardService {
 
     @Transactional
     public void update(Long id, ScheduleDto scheduleDto) {
-
         Schedules schedules = findById(id);
         schedules.updateInfo(scheduleDto);
-        save(schedules);
     }
 
     //ScheduleBoard 로직
@@ -53,7 +51,6 @@ public class ScheduleBoardService {
 
     @Transactional
     public void save_board(ScheduleBoard scheduleBoard) {
-
         scheduleBoardRepository.save(scheduleBoard);
     }
 
@@ -61,6 +58,5 @@ public class ScheduleBoardService {
     public void update_board(Long id, ScheduleBoardDto scheduleBoardDto) {
         ScheduleBoard scheduleBoard = findById_board(id);
         scheduleBoard.updateInfo(scheduleBoardDto);
-        save_board(scheduleBoard);
     }
 }
