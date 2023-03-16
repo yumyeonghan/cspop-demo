@@ -27,5 +27,5 @@ public class HomeController {
     public String excel() {return "excel/excelIndex";}
 
     @GetMapping("api/notice/form")
-    public String noticeForm() {return "notice/noticeForm";}
+    public String noticeForm() {return "graduation/noticeForm";}
 }
