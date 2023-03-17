@@ -1,6 +1,7 @@
 package kyonggi.cspop.config;
 
 import kyonggi.cspop.domain.uploadfile.NoticeBoardUploadFile;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
+@Slf4j
 public class FileStore {
 
     @Value("${file.dir}")
@@ -35,11 +37,22 @@ public class FileStore {
         if (multipartFile.isEmpty()) {
             return null;
         }
-
-        String originalFilename = multipartFile.getOriginalFilename();
+        String originalFilename = urlEncodingFileName(multipartFile);
         String storeFileName = createStoreFileName(originalFilename);
         multipartFile.transferTo(new File(getFullPath(storeFileName)));
         return new NoticeBoardUploadFile(originalFilename, storeFileName);
+    }
+
+    //이거 정규식으로 한번에 처리해야 하지만 일단은 이렇게 함
+    private static String urlEncodingFileName(MultipartFile multipartFile) {
+        String originalFilename = multipartFile.getOriginalFilename()
+                .replace(" ", "_")
+                .replace("?", "_")
+                .replace("!", "_")
+                .replace("[", "_")
+                .replace("]", "_")
+                .replace("@", "_");
+        return originalFilename;
     }
 
     private String createStoreFileName(String originalFilename) {

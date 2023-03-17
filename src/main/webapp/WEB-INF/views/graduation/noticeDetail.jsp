@@ -36,9 +36,9 @@
         }
     </style>
 </head>
-<%@include file="../common/sessionController.jsp"%>
+<%@include file="../common/sessionController.jsp" %>
 <body>
-<%@include file="../common/header.jsp"%>
+<%@include file="../common/header.jsp" %>
 <section class="page-start">
     <!-- pageheader section -->
     <div class="bg-shape bg-secondary">
@@ -89,13 +89,14 @@
                             <div>
                                 <%--여기에 텍스트 들어감--%>
                                 <div>제목 : ${detailView.title}</div>
-                                    <div>본문 : ${detailView.text}</div>
-                                    <div> 조회수: ${detailView.views}</div>
-                                    <div>작성날짜: ${detailView.createdDate}</div>
-                                    <div>파일:
-                                        <c:forEach items="${detailView.files}" var="file">${file}</c:forEach></div>
+                                <div>본문 : ${detailView.text}</div>
+                                <div> 조회수: ${detailView.views}</div>
+                                <div>작성날짜: ${detailView.createdDate}</div>
+                                <div>첨부파일:
+                                    <c:forEach items="${detailView.files}" var="file"><a
+                                            href="/attach/${detailView.id}/${file}"><${file}></a></c:forEach></div>
 
-</div>
+                            </div>
                         </div>
                     </div>
                 </div>
