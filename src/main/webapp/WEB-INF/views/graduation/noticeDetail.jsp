@@ -96,7 +96,7 @@
                                     <c:forEach items="${detailView.files}" var="file"><a href="/attach/${detailView.id}/${file}"><${file}></a></c:forEach></div>
                             </div>
                             <div style="text-align: right;">
-                                <a href="/api/graduation/modifyForm" class="btn btn-primary text-white">수정</a>
+                                <a href="/api/graduation/modifyForm/${detailView.id}" class="btn btn-primary text-white">수정</a>
                                 <button id="deleteNotice" class="btn btn-danger">삭제</button>
                                 <button id="fixNotice" class="btn btn-success">고정</button>
                             </div>
@@ -123,7 +123,7 @@
                     alert(res.responseJSON.errorMessage);
                 }
             })
-        });드
+        });
     })
 
     $(()=>{

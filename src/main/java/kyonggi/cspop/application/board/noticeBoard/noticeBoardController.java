@@ -114,4 +114,13 @@ public class noticeBoardController {
         model.addAttribute("detailView", new NoticeViewDto(detailNoticeBoard));
         return "graduation/noticeDetail";
     }
+
+
+    @GetMapping("api/graduation/modifyForm/{noticeBoardId}")
+    public String noticeModify(@PathVariable Long noticeBoardId, Model model) {
+
+        NoticeBoard findNoticeBoard = noticeBoardService.findNoticeBoard(noticeBoardId);
+        model.addAttribute("detailView", new NoticeViewDto(findNoticeBoard));
+        return "graduation/noticeModifyForm";
+    }
 }
