@@ -96,21 +96,26 @@
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <div class="card-text">${detailView.text}</div>
-                                        <small>첨부파일:</small>
-                                        <ul class="list-unstyled mb-0">
-                                            <c:forEach items="${detailView.files}" var="file">
-                                                <li><a href="/attach/${detailView.id}/${file}">${file}</a></li>
-                                            </c:forEach>
-                                        </ul>
+
                                     </div>
-                                    <div style="text-align: right;">
-                                        <a href="/api/graduation/modifyForm/${detailView.id}" class="btn btn-primary text-white">수정</a>
-                                        <button id="deleteNotice" class="btn btn-danger">삭제</button>
-                                        <button id="fixNotice" class="btn btn-success">고정</button>
-                                    </div>
+
+                                </div>
+                                <div class="row mt-2">
+                                    <small>첨부파일:</small>
+                                    <ul class="list-unstyled mb-0">
+                                        <c:forEach items="${detailView.files}" var="file">
+                                            <li><a href="/attach/${detailView.id}/${file}">${file}</a></li>
+                                        </c:forEach>
+                                    </ul>
                                 </div>
                             </div>
+                            <div style="text-align: right; margin-top: 5px">
+                                <a href="/api/graduation/modifyForm/${detailView.id}" class="btn btn-primary text-white">수정</a>
+                                <button id="deleteNotice" class="btn btn-danger">삭제</button>
+                                <button id="fixNotice" class="btn btn-success">고정</button>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
