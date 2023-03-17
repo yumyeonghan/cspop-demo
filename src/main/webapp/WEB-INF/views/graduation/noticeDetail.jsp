@@ -103,12 +103,6 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
-                            <div style="text-align: right;">
-                                <a href="/api/graduation/modifyForm/${detailView.id}" class="btn btn-primary text-white">수정</a>
-                                <button id="deleteNotice" class="btn btn-danger">삭제</button>
-                                <button id="fixNotice" class="btn btn-success">고정</button>
-                            </div>
                         </div>
 
                     </div>
@@ -121,7 +115,7 @@
 <script src="../../../assets/js/detailPage.js"></script>
 <script>
     $(()=>{
-        $('#fixNotice').on('click', () => {
+        $('#fixNotice').on('click', () => { // 글을 고정하는 기능
             $.ajax({
                 url: "뭐라뭐라 요청",
                 type: "post",
@@ -136,7 +130,7 @@
     })
 
     $(()=>{
-        $('#deleteNotice').on('click', ()=> {
+        $('#deleteNotice').on('click', ()=> { // 글을 삭제하는 기능
             $.ajax({
                 url: "뭐라뭐라 요청",
                 type: "post",
