@@ -83,27 +83,14 @@
                 <div class="offset-lg-1 col-lg-10 col-md-12 col-12">
                     <div class="card">
                         <div class="card-body p-4 p-lg-7">
-<%--                            <form method="post" enctype="multipart/form-data">--%>
-<%--                                <label for="title">제목</label>--%>
-<%--                                <input type="text" id="title" name="title">--%>
-
-<%--                                <label for="text">본문</label>--%>
-<%--                                <textarea id="text" name="text" cols="30" rows="10"></textarea>--%>
-
-<%--                                <h5>파일 여러개 올릴꺼면 한번에 여러개 선택해주세요</h5>--%>
-<%--                                <input type="file" name="files" placeholder="파일 선택" multiple/><br/>--%>
-
-<%--                                <input type="submit" value="등록">--%>
-<%--                            </form>--%>
-                                <form id="myForm" method="post" enctype="multipart/form-data">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="post_title" name="title" placeholder="제목 :">
-                                        <textarea id="editor" name="text"></textarea>
-                                        <input id="inputFile" type="file" name="files" multiple>
-                                        <button type="submit" class="btn btn-default">쓰기</button>
-                                    </div>
-                                </form>
-
+                            <form id="myForm" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="post_title" name="title" placeholder="제목 :">
+                                    <textarea id="editor" name="text"></textarea>
+                                    <input id="inputFile" type="file" name="files" multiple>
+                                    <button type="submit" class="btn btn-default">쓰기</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
