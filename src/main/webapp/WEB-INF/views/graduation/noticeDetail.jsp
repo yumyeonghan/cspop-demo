@@ -93,19 +93,16 @@
                                 <div> 조회수: ${detailView.views}</div>
                                 <div>작성날짜: ${detailView.createdDate}</div>
                                 <div>첨부파일:
-                                    <c:forEach items="${detailView.files}" var="file"><a
-                                            href="/attach/${detailView.id}/${file}"><${file}></a></c:forEach></div>
+                                    <c:forEach items="${detailView.files}" var="file"><a href="/attach/${detailView.id}/${file}"><${file}></a></c:forEach></div>
 
                             </div>
+                            <div style="text-align: right;">
+                                <a href="/api/graduation/modifyForm" class="btn btn-primary text-white">수정</a>
+                                <button id="deleteNotice" class="btn btn-danger">삭제</button>
+                                <button id="fixNotice" class="btn btn-success">고정</button>
+                            </div>
                         </div>
-                        <div>
-                            <button>수정</button>
-                            <br>
-                            <button id="deleteNotice">삭제</button>
-                            <br>
-                            <button id="fixNotice">고정</button>
 
-                        </div>
                     </div>
                 </div>
             </div>

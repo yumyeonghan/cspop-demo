@@ -30,4 +30,7 @@ public class HomeController {
     public String noticeForm() {return "graduation/noticeForm";}
     @GetMapping("api/graduation/detail")
     public String noticeDetail() {return "graduation/noticeDetail";}
+
+    @GetMapping("api/graduation/modifyForm")
+    public String noticeModify() {return "graduation/noticeModifyForm";}
 }
