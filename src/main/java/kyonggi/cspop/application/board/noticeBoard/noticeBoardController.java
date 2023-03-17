@@ -68,7 +68,7 @@ public class noticeBoardController {
     }
 
     //url 호출전 반드시 관리자로 로그인 한 상태에서 해야 세션에서 값을 가져와 DB에 저장하므로 주의해주세요
-    @PostMapping("api/notice/form")
+    @PostMapping("api/graduation/form")
     public String saveNoticeBoard(HttpServletRequest request, @ModelAttribute NoticeBoardRequestDto noticeBoardRequestDto) throws IOException {
         UserSessionDto adminSession = (UserSessionDto) request.getSession().getAttribute(SessionFactory.CSPOP_SESSION_KEY);
         Admins findAdmin = adminsRepository.findByAdminId(adminSession.getStudentId()).get();
