@@ -86,14 +86,23 @@
                 <div class="offset-lg-1 col-lg-10 col-md-12 col-12">
                     <div class="card">
                         <div class="card-body p-4 p-lg-7">
-                            <div>
-                                <%--여기에 텍스트 들어감--%>
-                                <div>제목 : ${detailView.title}</div>
-                                <div>본문 : ${detailView.text}</div>
-                                <div> 조회수: ${detailView.views}</div>
-                                <div>작성날짜: ${detailView.createdDate}</div>
-                                <div>첨부파일:
-                                    <c:forEach items="${detailView.files}" var="file"><a href="/attach/${detailView.id}/${file}"><${file}></a></c:forEach></div>
+                            <h3 class="card-title">${detailView.title}</h3>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-6"><small>조회수: ${detailView.views}</small></div>
+                                    <div class="col-6"><small>작성날짜: ${detailView.createdDate}</small></div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-12">
+                                        <p class="card-text">${detailView.text}</p>
+                                        <small>첨부파일:</small>
+                                        <ul class="list-unstyled mb-0">
+                                            <c:forEach items="${detailView.files}" var="file">
+                                                <li><a href="/attach/${detailView.id}/${file}">${file}</a></li>
+                                            </c:forEach>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                             <div style="text-align: right;">
                                 <a href="/api/graduation/modifyForm/${detailView.id}" class="btn btn-primary text-white">수정</a>
