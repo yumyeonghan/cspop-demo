@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
-                                <h1 class="h2 text-white mb-2">${detailView.id}</h1>
+                                <h1 class="h2 text-white mb-2">${detailView.title}</h1>
                                 <p class="text-white-50 lead">
                                     공지사항 세부
                                 </p>
@@ -94,7 +94,6 @@
                                 <div>작성날짜: ${detailView.createdDate}</div>
                                 <div>첨부파일:
                                     <c:forEach items="${detailView.files}" var="file"><a href="/attach/${detailView.id}/${file}"><${file}></a></c:forEach></div>
-
                             </div>
                             <div style="text-align: right;">
                                 <a href="/api/graduation/modifyForm" class="btn btn-primary text-white">수정</a>
@@ -113,7 +112,7 @@
 <script src="../../../assets/js/detailPage.js"></script>
 <script>
     $(()=>{
-        $('#fixNotice').on('click', function(event) {
+        $('#fixNotice').on('click', () => {
             $.ajax({
                 url: "뭐라뭐라 요청",
                 type: "post",
@@ -128,7 +127,7 @@
     })
 
     $(()=>{
-        $('#deleteNotice').on('click', function(event) {
+        $('#deleteNotice').on('click', ()=> {
             $.ajax({
                 url: "뭐라뭐라 요청",
                 type: "post",

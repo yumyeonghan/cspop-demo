@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
-                                <h1 class="h2 text-white mb-2">공지사항</h1>
+                                <h1 class="h2 text-white mb-2">${detailView.title}</h1>
                                 <p class="text-white-50 lead">
                                     글 수정하기
                                 </p>
@@ -83,10 +83,10 @@
                 <div class="offset-lg-1 col-lg-10 col-md-12 col-12">
                     <div class="card">
                         <div class="card-body p-4 p-lg-7">
-                            <form id="myForm" method="post" enctype="multipart/form-data">
+                            <form id="myForm" method="post" enctype="multipart/form-data" onsubmit="alert('수정 완료');">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="post_title" name="title" placeholder="제목 :">
-                                    <textarea id="editor" name="text">${}</textarea>
+                                    <input type="text" class="form-control" id="post_title" name="title" value="${detailView.title}" placeholder="제목 : ">
+                                    <textarea id="editor" name="text">${detailView.text}</textarea>
                                     <%--저기에 텍스트 들어가면 됨--%>
                                     <input id="inputFile" type="file" name="files" multiple>
                                     <button type="submit" class="btn btn-default">수정</button>
