@@ -107,11 +107,11 @@ public class noticeBoardController {
         return ResponseEntity.noContent().build();
     }
 
-    @ResponseBody
     @GetMapping("/notice/view/detail/{noticeBoardId}")
-    public ResponseEntity<NoticeViewDto> viewDetail(@PathVariable Long noticeBoardId) {
+    public String viewDetail(@PathVariable Long noticeBoardId, Model model) {
         //자세히 보기 누르면 view + 1 돼야함.
         NoticeBoard detailNoticeBoard = noticeBoardService.findDetailNoticeBoard(noticeBoardId);
-        return ResponseEntity.ok().body(new NoticeViewDto(detailNoticeBoard));
+        model.addAttribute("detailView", new NoticeViewDto(detailNoticeBoard));
+        return "graduation/noticeDetail";
     }
 }

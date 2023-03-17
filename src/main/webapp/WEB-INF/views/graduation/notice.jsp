@@ -105,7 +105,7 @@
                                                 <c:if test="${noticeBoard.fixed ne true}">
                                                     <td>${noticeBoard.id}</td>
                                                 </c:if>
-                                                <td><ul>${noticeBoard.title}</ul></td>
+                                                <td><a href = "/notice/view/detail/${noticeBoard.id}">${noticeBoard.title}</a></td>
                                                 <td>${noticeBoard.writer}</td>
                                                 <td>${noticeBoard.createdDate}</td>
                                                 <td>${noticeBoard.views}</td>

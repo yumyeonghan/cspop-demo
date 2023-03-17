@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
-                                <h1 class="h2 text-white mb-2">1번 글</h1>
+                                <h1 class="h2 text-white mb-2">${detailView.id}</h1>
                                 <p class="text-white-50 lead">
                                     공지사항 세부
                                 </p>
@@ -88,7 +88,14 @@
                         <div class="card-body p-4 p-lg-7">
                             <div>
                                 <%--여기에 텍스트 들어감--%>
-                            </div>
+                                <div>제목 : ${detailView.title}</div>
+                                    <div>본문 : ${detailView.text}</div>
+                                    <div> 조회수: ${detailView.views}</div>
+                                    <div>작성날짜: ${detailView.createdDate}</div>
+                                    <div>파일:
+                                        <c:forEach items="${detailView.files}" var="file">${file}</c:forEach></div>
+
+</div>
                         </div>
                     </div>
                 </div>

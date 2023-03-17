@@ -38,6 +38,7 @@ public class NoticeBoardService {
         return noticeBoard;
     }
 
+    @Transactional
     public NoticeBoard findDetailNoticeBoard(Long id) {
         NoticeBoard noticeBoard = noticeBoardRepository.findById(id).get();
         noticeBoard.updateViews();
