@@ -103,6 +103,11 @@
                                             </c:forEach>
                                         </ul>
                                     </div>
+                                    <div style="text-align: right;">
+                                        <a href="/api/graduation/modifyForm/${detailView.id}" class="btn btn-primary text-white">수정</a>
+                                        <button id="deleteNotice" class="btn btn-danger">삭제</button>
+                                        <button id="fixNotice" class="btn btn-success">고정</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
