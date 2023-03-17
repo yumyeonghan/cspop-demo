@@ -70,8 +70,9 @@ public class noticeBoardController {
 
     //url 호출전 반드시 관리자로 로그인 한 상태에서 해야 세션에서 값을 가져와 DB에 저장하므로 주의해주세요
     @PostMapping("api/graduation/form")
-    public String saveNoticeBoard(HttpServletRequest request, @Validated @ModelAttribute NoticeBoardRequestDto noticeBoardRequestDto, BindingResult bindingResult) throws IOException {
+    public String saveNoticeBoard(HttpServletRequest request, @Validated @ModelAttribute NoticeBoardRequestDto noticeBoardRequestDto, BindingResult bindingResult, Model model) throws IOException {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("data", noticeBoardRequestDto.getText() != null ? noticeBoardRequestDto.getText() : "");
             return "graduation/noticeForm";
         }
 

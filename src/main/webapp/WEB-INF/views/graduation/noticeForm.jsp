@@ -97,7 +97,7 @@
                                             <span style="color: red">${errors.getFieldError( 'text' ).defaultMessage }</span>
                                         </c:if>
                                     </spring:hasBindErrors>
-                                    <textarea id="editor" name="text"></textarea>
+                                    <textarea id="editor" name="text">${data}</textarea>
                                     <input id="inputFile" type="file" name="files" multiple>
                                     <button type="submit" class="btn btn-default">쓰기</button>
                                 </div>
