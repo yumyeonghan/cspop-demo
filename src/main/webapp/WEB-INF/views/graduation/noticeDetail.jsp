@@ -98,6 +98,14 @@
 
                             </div>
                         </div>
+                        <div>
+                            <button>수정</button>
+                            <br>
+                            <button id="deleteNotice">삭제</button>
+                            <br>
+                            <button id="fixNotice">고정</button>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -106,5 +114,38 @@
 </section>
 <%@include file="../common/commonJS.jsp" %>
 <script src="../../../assets/js/detailPage.js"></script>
+<script>
+    $(()=>{
+        $('#fixNotice').on('click', function(event) {
+            $.ajax({
+                url: "뭐라뭐라 요청",
+                type: "post",
+                success: () => {
+                    alert("고정 완료");
+                    window.location.reload();
+                }, error: (res) => {
+                    alert(res.responseJSON.errorMessage);
+                }
+            })
+        });드
+    })
+
+    $(()=>{
+        $('#deleteNotice').on('click', function(event) {
+            $.ajax({
+                url: "뭐라뭐라 요청",
+                type: "post",
+                success: () => {
+                    alert("삭제 완료");
+                    window.location.replace("/notice/find?page=0&size=10");
+                }, error: (res) => {
+                    alert(res.responseJSON.errorMessage);
+                }
+            })
+        });
+    })
+
+
+</script>
 </body>
 </html>
