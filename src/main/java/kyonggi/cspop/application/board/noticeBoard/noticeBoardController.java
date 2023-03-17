@@ -30,7 +30,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -116,11 +115,18 @@ public class noticeBoardController {
     }
 
 
+    //공지사항 수정
     @GetMapping("api/graduation/modifyForm/{noticeBoardId}")
-    public String noticeModify(@PathVariable Long noticeBoardId, Model model) {
-
+    public String noticeModifyForm(@PathVariable Long noticeBoardId, Model model) {
         NoticeBoard findNoticeBoard = noticeBoardService.findNoticeBoard(noticeBoardId);
         model.addAttribute("detailView", new NoticeViewDto(findNoticeBoard));
         return "graduation/noticeModifyForm";
+    }
+
+    @PostMapping("api/graduation/modifyForm/{noticeBoardId}")
+    public String noticeModify(@PathVariable Long noticeBoardId, @ModelAttribute NoticeBoardRequestDto noticeBoardRequestDto) throws IOException {
+        List<NoticeBoardUploadFile> storeFiles = fileStore.storeFiles(noticeBoardRequestDto.getFiles());
+        noticeBoardService.updateNoticeBoard(noticeBoardId, noticeBoardRequestDto, storeFiles);
+        return "redirect:/notice/find?page=0&size=10";
     }
 }

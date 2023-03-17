@@ -64,4 +64,19 @@ public class NoticeBoard extends BaseEntity {
     public void updateViews() {
         this.views += 1;
     }
+
+    public void updateTitle(String title) {
+        this.title = title;
+    }
+
+    public void updateText(String text) {
+        this.text = text;
+    }
+
+    public void updateUploadFiles(List<NoticeBoardUploadFile> uploadFiles) {
+
+        this.uploadFiles.clear();
+        this.uploadFiles.addAll(uploadFiles);
+        uploadFiles.stream().forEach(e -> e.designateNoticeBoard(this));
+    }
 }

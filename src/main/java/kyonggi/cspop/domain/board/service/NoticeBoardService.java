@@ -1,5 +1,6 @@
 package kyonggi.cspop.domain.board.service;
 
+import kyonggi.cspop.application.board.noticeBoard.dto.NoticeBoardRequestDto;
 import kyonggi.cspop.domain.board.NoticeBoard;
 import kyonggi.cspop.domain.board.dto.NoticeBoardResponseDto;
 import kyonggi.cspop.domain.board.repository.NoticeBoardRepository;
@@ -46,11 +47,21 @@ public class NoticeBoardService {
         return noticeBoard;
     }
 
-
     private static void initNoticeBoard(NoticeBoard noticeBoard) {
         List<NoticeBoardUploadFile> uploadFiles = noticeBoard.getUploadFiles();
         if (uploadFiles.size() != 0) {
             noticeBoard.getUploadFiles().get(0);
+        }
+    }
+
+    @Transactional
+    public void updateNoticeBoard(Long id, NoticeBoardRequestDto noticeBoardRequestDto, List<NoticeBoardUploadFile> storeFiles) {
+        NoticeBoard noticeBoard = noticeBoardRepository.findById(id).get();
+        noticeBoard.updateTitle(noticeBoardRequestDto.getTitle());
+        noticeBoard.updateText(noticeBoard.getText());
+
+        if (noticeBoardRequestDto.getFiles() != null) {
+            noticeBoard.updateUploadFiles(storeFiles);
         }
     }
 }

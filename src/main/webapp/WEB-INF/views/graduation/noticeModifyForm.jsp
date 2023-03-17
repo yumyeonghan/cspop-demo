@@ -83,7 +83,7 @@
                 <div class="offset-lg-1 col-lg-10 col-md-12 col-12">
                     <div class="card">
                         <div class="card-body p-4 p-lg-7">
-                            <form id="myForm" method="post" enctype="multipart/form-data" onsubmit="alert('수정 완료');">
+                            <form id="myForm" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="post_title" name="title" value="${detailView.title}" placeholder="제목 : ">
                                     <textarea id="editor" name="text">${detailView.text}</textarea>
