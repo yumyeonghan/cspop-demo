@@ -98,14 +98,14 @@
                                             <th>조회수</th>
                                         </tr>
                                         <c:forEach items="${allNoticeBoard.content}" var="noticeBoard">
-                                            <tr>
+                                            <tr data-id=${noticeBoard.id}>
                                                 <c:if test="${noticeBoard.fixed eq true}">
                                                 <td>고정</td>
                                                 </c:if>
                                                 <c:if test="${noticeBoard.fixed ne true}">
                                                     <td>${noticeBoard.id}</td>
                                                 </c:if>
-                                                <td><a href="/admin/view/아직 안만듬">${noticeBoard.title}</a></td>
+                                                <td><ul>${noticeBoard.title}</ul></td>
                                                 <td>${noticeBoard.writer}</td>
                                                 <td>${noticeBoard.createdDate}</td>
                                                 <td>${noticeBoard.views}</td>
@@ -161,5 +161,8 @@
     </div>
 </section>
 <%@include file="../common/commonJS.jsp" %>
+<script src="../../../assets/js/detailPage.js">
+
+</script>
 </body>
 </html>
