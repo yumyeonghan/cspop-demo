@@ -128,8 +128,9 @@
     $(()=>{
         $('#fixNotice').on('click', () => { // 글을 고정하는 기능
             $.ajax({
-                url: "뭐라뭐라 요청",
+                url: "/api/notice/fix",
                 type: "post",
+                data: "게시판 번호 JSON 형태, 숫자 타입로 보내줘",
                 success: () => {
                     alert("고정 완료");
                     window.location.reload();
@@ -143,8 +144,9 @@
     $(()=>{
         $('#deleteNotice').on('click', ()=> { // 글을 삭제하는 기능
             $.ajax({
-                url: "뭐라뭐라 요청",
+                url: "/api/notice/delete",
                 type: "post",
+                data: "게시판 번호 JSON 형태, 숫자 타입으로 보내줘",
                 success: () => {
                     alert("삭제 완료");
                     window.location.replace("/notice/find?page=0&size=10");

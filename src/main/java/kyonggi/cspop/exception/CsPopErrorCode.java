@@ -11,7 +11,10 @@ public enum CsPopErrorCode {
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자 정보가 존재하지 않습니다."),
     WRONG_PASSWORD(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다."),
     //ExcelBoard
-    INVALILD_UPLOAD_FILE_EXTENSION(HttpStatus.NOT_ACCEPTABLE, "엑셀파일을 업로드 해주세요.");
+    INVALILD_UPLOAD_FILE_EXTENSION(HttpStatus.NOT_ACCEPTABLE, "엑셀파일을 업로드 해주세요."),
+
+    //NoticeBoard
+    NOTICE_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND, "게신판이 이미 삭제 되었습니다.");
 
     private HttpStatus httpStatus;
     private String errorMessage;

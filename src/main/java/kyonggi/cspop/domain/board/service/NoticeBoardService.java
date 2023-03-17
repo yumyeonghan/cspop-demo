@@ -5,6 +5,8 @@ import kyonggi.cspop.domain.board.NoticeBoard;
 import kyonggi.cspop.domain.board.dto.NoticeBoardResponseDto;
 import kyonggi.cspop.domain.board.repository.NoticeBoardRepository;
 import kyonggi.cspop.domain.uploadfile.NoticeBoardUploadFile;
+import kyonggi.cspop.exception.CsPopErrorCode;
+import kyonggi.cspop.exception.CsPopException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -62,6 +65,24 @@ public class NoticeBoardService {
 
         if (noticeBoardRequestDto.getFiles() != null) {
             noticeBoard.updateUploadFiles(storeFiles);
+        }
+    }
+
+    @Transactional
+    public void fixNoticeBoard(Long id) {
+        NoticeBoard noticeBoard = noticeBoardRepository.findById(id).get();
+        noticeBoard.updateFixed(true);
+    }
+
+    @Transactional
+    public void deleteNoticeBoard(Long id) {
+        findValidation(id);
+        noticeBoardRepository.deleteById(id);
+    }
+
+    private void findValidation(Long id) {
+        if (noticeBoardRepository.existsById(id)) {
+            throw new CsPopException(CsPopErrorCode.NOTICE_BOARD_NOT_FOUND);
         }
     }
 }

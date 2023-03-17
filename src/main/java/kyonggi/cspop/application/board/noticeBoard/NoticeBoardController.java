@@ -2,6 +2,7 @@ package kyonggi.cspop.application.board.noticeBoard;
 
 import kyonggi.cspop.application.SessionFactory;
 import kyonggi.cspop.application.board.noticeBoard.dto.NoticeBoardRequestDto;
+import kyonggi.cspop.application.board.noticeBoard.dto.NoticeNumberJsonRequest;
 import kyonggi.cspop.application.board.noticeBoard.dto.NoticeViewDto;
 import kyonggi.cspop.config.FileStore;
 import kyonggi.cspop.domain.admins.Admins;
@@ -36,7 +37,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-public class noticeBoardController {
+public class NoticeBoardController {
 
     @Value("${file.dir}")
     private String fileDir;
@@ -135,5 +136,17 @@ public class noticeBoardController {
         List<NoticeBoardUploadFile> storeFiles = fileStore.storeFiles(noticeBoardRequestDto.getFiles());
         noticeBoardService.updateNoticeBoard(noticeBoardId, noticeBoardRequestDto, storeFiles);
         return "redirect:/notice/find?page=0&size=10";
+    }
+
+    @PostMapping("api/notice/fix")
+    public ResponseEntity<Void> fixNotice(@RequestBody NoticeNumberJsonRequest noticeNumberJsonRequest) {
+        noticeBoardService.fixNoticeBoard(noticeNumberJsonRequest.getNoticeBoardId());
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("api/notice/delete")
+    public ResponseEntity<Void> deleteNotice(@RequestBody NoticeNumberJsonRequest noticeNumberJsonRequest) {
+        noticeBoardService.deleteNoticeBoard(noticeNumberJsonRequest.getNoticeBoardId());
+        return ResponseEntity.noContent().build();
     }
 }
