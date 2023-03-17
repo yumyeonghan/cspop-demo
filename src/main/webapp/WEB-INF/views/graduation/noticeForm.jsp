@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,7 +86,17 @@
                         <div class="card-body p-4 p-lg-7">
                             <form id="myForm" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
+                                    <spring:hasBindErrors name="noticeBoardRequestDto">
+                                        <c:if test="${errors.hasFieldErrors('title') }">
+                                            <span style="color: red">${errors.getFieldError( 'title' ).defaultMessage }</span>
+                                        </c:if>
+                                    </spring:hasBindErrors>
                                     <input type="text" class="form-control" id="post_title" name="title" placeholder="제목 :">
+                                    <spring:hasBindErrors name="noticeBoardRequestDto">
+                                        <c:if test="${errors.hasFieldErrors('text') }">
+                                            <span style="color: red">${errors.getFieldError( 'text' ).defaultMessage }</span>
+                                        </c:if>
+                                    </spring:hasBindErrors>
                                     <textarea id="editor" name="text"></textarea>
                                     <input id="inputFile" type="file" name="files" multiple>
                                     <button type="submit" class="btn btn-default">쓰기</button>
