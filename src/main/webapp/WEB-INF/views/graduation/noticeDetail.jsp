@@ -89,12 +89,13 @@
                             <h3 class="card-title">${detailView.title}</h3>
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-6"><small>조회수: ${detailView.views}</small></div>
-                                    <div class="col-6"><small>작성날짜: ${detailView.createdDate}</small></div>
+                                    <div class="col-7"></div>
+                                    <div class="col-2 text-end"><small>조회수: ${detailView.views}</small></div>
+                                    <div class="col-3 text-end"><small>작성날짜: ${detailView.createdDate}</small></div>
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-12">
-                                        <p class="card-text">${detailView.text}</p>
+                                        <div class="card-text">${detailView.text}</div>
                                         <small>첨부파일:</small>
                                         <ul class="list-unstyled mb-0">
                                             <c:forEach items="${detailView.files}" var="file">
