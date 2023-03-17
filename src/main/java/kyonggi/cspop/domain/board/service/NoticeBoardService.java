@@ -61,7 +61,7 @@ public class NoticeBoardService {
     public void updateNoticeBoard(Long id, NoticeBoardRequestDto noticeBoardRequestDto, List<NoticeBoardUploadFile> storeFiles) {
         NoticeBoard noticeBoard = noticeBoardRepository.findById(id).get();
         noticeBoard.updateTitle(noticeBoardRequestDto.getTitle());
-        noticeBoard.updateText(noticeBoard.getText());
+        noticeBoard.updateText(noticeBoardRequestDto.getText());
 
         if (noticeBoardRequestDto.getFiles() != null) {
             noticeBoard.updateUploadFiles(storeFiles);

@@ -46,11 +46,6 @@ public class NoticeBoardController {
     private final AdminsRepository adminsRepository;
     private final FileStore fileStore;
 
-    /**
-     * page = 누를 페이지 번호 (1~n)
-     * size = 한 페이지에 가져올 리스트 수 (10개 고정)
-     * 요청 예시) Get 방식, /notice?page=0&size=10 요청
-     */
     @GetMapping("/notice/find")
     public String findAllNoticeBoard(Pageable pageable, Model model) {
         Page<NoticeBoardResponseDto> allNoticeBoard = noticeBoardService.findAllNoticeBoard(pageable);
@@ -69,7 +64,6 @@ public class NoticeBoardController {
         return "graduation/notice";
     }
 
-    //url 호출전 반드시 관리자로 로그인 한 상태에서 해야 세션에서 값을 가져와 DB에 저장하므로 주의해주세요
     @PostMapping("api/graduation/form")
     public String saveNoticeBoard(HttpServletRequest request, @Validated @ModelAttribute NoticeBoardRequestDto noticeBoardRequestDto, BindingResult bindingResult, Model model) throws IOException {
         if (bindingResult.hasErrors()) {
@@ -122,8 +116,6 @@ public class NoticeBoardController {
         return "graduation/noticeDetail";
     }
 
-
-    //공지사항 수정
     @GetMapping("api/graduation/modifyForm/{noticeBoardId}")
     public String noticeModifyForm(@PathVariable Long noticeBoardId, Model model) {
         NoticeBoard findNoticeBoard = noticeBoardService.findNoticeBoard(noticeBoardId);
@@ -132,7 +124,10 @@ public class NoticeBoardController {
     }
 
     @PostMapping("api/graduation/modifyForm/{noticeBoardId}")
-    public String noticeModify(@PathVariable Long noticeBoardId, @ModelAttribute NoticeBoardRequestDto noticeBoardRequestDto) throws IOException {
+    public String noticeModify(@PathVariable Long noticeBoardId, @Validated @ModelAttribute NoticeBoardRequestDto noticeBoardRequestDto, BindingResult bindingResult, Model model) throws IOException {
+        if (bindingResult.hasErrors()) {
+            return "graduation/noticeModifyForm";
+        }
         List<NoticeBoardUploadFile> storeFiles = fileStore.storeFiles(noticeBoardRequestDto.getFiles());
         noticeBoardService.updateNoticeBoard(noticeBoardId, noticeBoardRequestDto, storeFiles);
         return "redirect:/notice/find?page=0&size=10";

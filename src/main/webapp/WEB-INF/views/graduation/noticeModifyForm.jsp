@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,9 +39,9 @@
 
 </head>
 
-<%@include file="../common/sessionController.jsp"%>
+<%@include file="../common/sessionController.jsp" %>
 <body>
-<%@include file="../common/header.jsp"%>
+<%@include file="../common/header.jsp" %>
 <section class="page-start">
     <!-- pageheader section -->
     <div class="bg-shape bg-secondary">
@@ -85,10 +86,21 @@
                         <div class="card-body p-4 p-lg-7">
                             <form id="myForm" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="post_title" name="title" value="${detailView.title}" placeholder="제목 : ">
+                                    <spring:hasBindErrors name="noticeBoardRequestDto">
+                                        <c:if test="${errors.hasFieldErrors('title')}">
+                                            <span style="color: red">${errors.getFieldError( 'title' ).defaultMessage }</span>
+                                        </c:if>
+                                    </spring:hasBindErrors>
+                                    <input type="text" class="form-control" id="post_title" name="title"
+                                           value="${detailView.title}" placeholder="제목 : ">
+                                    <spring:hasBindErrors name="noticeBoardRequestDto">
+                                        <c:if test="${errors.hasFieldErrors('text')}">
+                                            <span style="color: red">${errors.getFieldError( 'text' ).defaultMessage }</span>
+                                        </c:if>
+                                    </spring:hasBindErrors>
                                     <textarea id="editor" name="text">${detailView.text}</textarea>
                                     <%--저기에 텍스트 들어가면 됨--%>
-                                    <input id="inputFile" type="file" name="files" multiple>
+                                    <input id="inputFil정e" type="file" name="files" multiple>
                                     <button type="submit" class="btn btn-default">수정</button>
                                 </div>
                             </form>
@@ -103,7 +115,7 @@
 <script src="../../../assets/js/ckeditor/ckeditor.js"></script>
 <script>
     <%--    api/notice/form--%>
-    CKEDITOR.replace('editor',{
+    CKEDITOR.replace('editor', {
         height: 500,
         allowedContent: true, // 허용되는 컨텐츠 설정
     })
