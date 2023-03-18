@@ -81,7 +81,7 @@ public class NoticeBoardService {
     }
 
     private void findValidation(Long id) {
-        if (noticeBoardRepository.existsById(id)) {
+        if (!noticeBoardRepository.existsById(id)) {
             throw new CsPopException(CsPopErrorCode.NOTICE_BOARD_NOT_FOUND);
         }
     }
