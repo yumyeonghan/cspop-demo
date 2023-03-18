@@ -1,6 +1,8 @@
 package kyonggi.cspop.domain.board;
 
 import kyonggi.cspop.domain.entity.BaseEntity;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class GuidanceBoard extends BaseEntity {
 
     @Id

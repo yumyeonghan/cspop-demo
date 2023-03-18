@@ -1,13 +1,16 @@
 package kyonggi.cspop.domain.uploadfile;
 
 import kyonggi.cspop.domain.submitform.SubmitForm;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SubmitFormUploadFile {
 
     @Id

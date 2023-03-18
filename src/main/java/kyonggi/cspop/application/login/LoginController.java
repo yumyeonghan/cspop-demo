@@ -22,13 +22,18 @@ import static kyonggi.cspop.application.SessionFactory.CSPOP_SESSION_KEY;
 @RequestMapping(("/api"))
 @Slf4j
 public class LoginController {
+
     private final LoginService loginService;
 
     @PostMapping("/login/auth")
     public String login(@Validated @RequestBody LoginDto loginDto, HttpServletRequest request) {
-        UserSessionDto userSession = loginService.login(loginDto.getStudentId(), loginDto.getStudentPassword());
-        HttpSession session = request.getSession();
-        session.setAttribute(CSPOP_SESSION_KEY, userSession);
+        UserSessionDto adminSession = loginService.loginAsAdmin(loginDto.getLoginId(), loginDto.getLoginPassword());
+        if (!adminIsNull(adminSession)) {
+            createAdminSession(request, adminSession);
+        } else {
+            UserSessionDto userSession = loginService.login(loginDto.getLoginId(), loginDto.getLoginPassword());
+            createUserSession(request, userSession);
+        }
         return "/api/home";
     }
 
@@ -36,10 +41,23 @@ public class LoginController {
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
 
-        if(Objects.nonNull(session)) {
+        if (Objects.nonNull(session)) {
             session.invalidate();
         }
 
         return "/api/home";
+    }
+
+    private static void createUserSession(HttpServletRequest request, UserSessionDto userSession) {
+        HttpSession session = request.getSession();
+        session.setAttribute(CSPOP_SESSION_KEY, userSession);
+    }
+
+    private static boolean adminIsNull(UserSessionDto adminSession) {
+        return adminSession.getStudentId().equals("null");
+    }
+
+    private static void createAdminSession(HttpServletRequest request, UserSessionDto adminSession) {
+        createUserSession(request, adminSession);
     }
 }

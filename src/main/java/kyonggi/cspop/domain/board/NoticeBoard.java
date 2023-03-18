@@ -4,6 +4,9 @@ import kyonggi.cspop.domain.admins.Admins;
 import kyonggi.cspop.domain.comments.Comments;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.uploadfile.NoticeBoardUploadFile;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
@@ -11,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class NoticeBoard extends BaseEntity {
 
     @Id
@@ -41,9 +46,37 @@ public class NoticeBoard extends BaseEntity {
     @OneToMany(mappedBy = "noticeBoard", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<NoticeBoardUploadFile> uploadFiles = new ArrayList<>();
 
-    // 양방향 연관관계 편의 메소드
-    public void addUploadFile(NoticeBoardUploadFile uploadFile) {
-        uploadFiles.add(uploadFile);
-        uploadFile.designateNoticeBoard(this);
+    public static NoticeBoard createNoticeBoard(String title, String text, boolean fixed, Integer views, Admins admins, List<NoticeBoardUploadFile> uploadFiles) {
+        NoticeBoard noticeBoard = new NoticeBoard();
+        noticeBoard.title = title;
+        noticeBoard.text = text;
+        noticeBoard.fixed = fixed;
+        noticeBoard.views = views;
+        noticeBoard.admins = admins;
+        noticeBoard.uploadFiles = uploadFiles;
+        return noticeBoard;
+    }
+
+    public void updateFixed(boolean fixed) {
+        this.fixed = fixed;
+    }
+
+    public void updateViews() {
+        this.views += 1;
+    }
+
+    public void updateTitle(String title) {
+        this.title = title;
+    }
+
+    public void updateText(String text) {
+        this.text = text;
+    }
+
+    public void updateUploadFiles(List<NoticeBoardUploadFile> uploadFiles) {
+
+        this.uploadFiles.clear();
+        this.uploadFiles.addAll(uploadFiles);
+        uploadFiles.stream().forEach(e -> e.designateNoticeBoard(this));
     }
 }

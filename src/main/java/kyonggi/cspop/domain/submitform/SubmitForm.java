@@ -4,7 +4,9 @@ import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.otherqualifications.OtherQualifications;
 import kyonggi.cspop.domain.uploadfile.SubmitFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
@@ -14,6 +16,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SubmitForm extends BaseEntity {
 
     @Id
