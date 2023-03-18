@@ -4,7 +4,7 @@
     <!-- navigation start -->
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-default">
-            <a class="navbar-brand" href="api/home">
+            <a class="navbar-brand" href="/api/home">
                 <img src="../../../assets/images/fitness/cspop_logo.png" alt="" width="100em">
             </a>
             <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
