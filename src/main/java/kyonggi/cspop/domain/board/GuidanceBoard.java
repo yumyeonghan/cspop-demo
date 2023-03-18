@@ -1,5 +1,6 @@
 package kyonggi.cspop.domain.board;
 
+import kyonggi.cspop.application.guide.dto.GuidanceBoardDto;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -20,4 +21,8 @@ public class GuidanceBoard extends BaseEntity {
 
     @Comment("안내 및 내규 본문")
     private String text;
+
+    public void updateGuidance(GuidanceBoardDto guidanceBoardDto) {
+        this.text = text;
+    }
 }
