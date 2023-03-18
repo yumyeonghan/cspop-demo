@@ -30,7 +30,7 @@ public class GuidanceController {
     @GetMapping("/modify_guide/{id}")
     public String updateGuideForm(@PathVariable Long id, Model model) {
         save(id, model);
-        return "graduation/modify_guide";
+        return "graduation/guidanceModify";
     }
 
     @PostMapping("/modify_guide/{id}")
@@ -41,16 +41,15 @@ public class GuidanceController {
         if (result.hasErrors()) {
 
             save(id, model);
-            return "graduation/modify_guide";
+            return "graduation/guidanceModify";
         }
         //데이터 수정(update)
-        guidanceBoardService.update(id, guidanceBoardDto);
+        guidanceBoardService.updateGuidance(id, guidanceBoardDto);
         return "redirect:../guide";
     }
 
     public void save(@PathVariable Long id, Model model) {
-        GuidanceBoard guidanceBoard = guidanceBoardService.findById(id);
-        guidanceBoardService.save(guidanceBoard);
+        GuidanceBoard guidanceBoard = guidanceBoardService.findGuidanceId(id);
         model.addAttribute("data", guidanceBoard);
     }
 }

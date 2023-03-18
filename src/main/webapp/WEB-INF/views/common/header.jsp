@@ -27,7 +27,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/api/graduation/announcement" aria-haspopup="true" aria-expanded="false" data-bs-display="static">
+                        <a class="nav-link" href="/api/graduation/guide" aria-haspopup="true" aria-expanded="false" data-bs-display="static">
                             안내 및 내규
                         </a>
                     </li>

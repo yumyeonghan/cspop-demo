@@ -21,18 +21,13 @@ public class GuidanceBoardService {
         return guidanceBoardRepository.findAll();
     }
 
-    public GuidanceBoard findById(Long id){
+    public GuidanceBoard findGuidanceId(Long id){
         return guidanceBoardRepository.findById(id).get();
     }
 
     @Transactional
-    public void save(GuidanceBoard guidanceBoard) {
-        guidanceBoardRepository.save(guidanceBoard);
-    }
-
-    @Transactional
-    public void update(Long id, GuidanceBoardDto guidanceBoardDto) {
-        GuidanceBoard guidanceBoard = findById(id);
+    public void updateGuidance(Long id, GuidanceBoardDto guidanceBoardDto) {
+        GuidanceBoard guidanceBoard = findGuidanceId(id);
         guidanceBoard.updateGuidance(guidanceBoardDto);
     }
 }
