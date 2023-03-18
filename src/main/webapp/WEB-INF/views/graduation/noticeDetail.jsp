@@ -109,13 +109,17 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div style="text-align: right; margin-top: 5px">
-                                <a href="/api/graduation/modifyForm/${detailView.id}" class="btn btn-primary text-white">수정</a>
-                                <button id="deleteNotice" class="btn btn-danger">삭제</button>
-                                <button id="fixNotice" class="btn btn-success">고정</button>
-                            </div>
+                            <%--버튼 Start--%>
+                                <div style="text-align: left; float: left; margin-top: 5px">
+                                    <a href="/notice/find?page=0&size=10" class="btn btn-primary text-white">목록</a>
+                                </div>
+                                <div style="text-align: right; float: right; margin-top: 5px">
+                                    <a href="/api/graduation/modifyForm/${detailView.id}" class="btn btn-primary text-white">수정</a>
+                                    <button id="fixNotice" class="btn btn-success">고정</button>
+                                    <button id="deleteNotice" class="btn btn-danger">삭제</button>
+                                </div>
+                            <%--버튼 End--%>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -125,12 +129,18 @@
 <%@include file="../common/commonJS.jsp" %>
 <script src="../../../assets/js/detailPage.js"></script>
 <script>
+    var noticeId ={
+      "noticeBoardId" : ${detailView.id}
+    }
+
     $(()=>{
         $('#fixNotice').on('click', () => { // 글을 고정하는 기능
+            console.log(typeof noticeId)
             $.ajax({
                 url: "/api/notice/fix",
                 type: "post",
-                data: "게시판 번호 JSON 형태, 숫자 타입로 보내줘",
+                data: JSON.stringify(noticeId),
+                contentType: "application/json; charset=utf-8",
                 success: () => {
                     alert("고정 완료");
                     window.location.reload();
@@ -146,7 +156,8 @@
             $.ajax({
                 url: "/api/notice/delete",
                 type: "post",
-                data: "게시판 번호 JSON 형태, 숫자 타입으로 보내줘",
+                data: JSON.stringify(noticeId),
+                contentType: "application/json; charset=utf-8",
                 success: () => {
                     alert("삭제 완료");
                     window.location.replace("/notice/find?page=0&size=10");
