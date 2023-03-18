@@ -89,8 +89,8 @@
                             <div>
                                 <div class="card table-responsive">
                                     <table id="table" class="table mb-0" border-color="black">
-                                        <thead class="table-dark">
-                                        <tr>
+                                        <thead class="table-light">
+                                        <tr class="text-center">
                                             <th>번호</th>
                                             <th>제목</th>
                                             <th>글쓴이</th>
@@ -98,15 +98,15 @@
                                             <th>조회수</th>
                                         </tr>
                                         <c:forEach items="${allNoticeBoard.content}" var="noticeBoard">
-                                            <tr data-id=${noticeBoard.id}>
+                                            <tr class="text-center" data-id=${noticeBoard.id}>
                                                 <c:if test="${noticeBoard.fixed eq true}">
-                                                <td>고정</td>
+                                                <td class="text-danger">[공지]</td>
                                                 </c:if>
                                                 <c:if test="${noticeBoard.fixed ne true}">
                                                     <td>${noticeBoard.id}</td>
                                                 </c:if>
-                                                <td><a href = "/notice/view/detail/${noticeBoard.id}">${noticeBoard.title}</a></td>
-                                                <td>${noticeBoard.writer}</td>
+                                                <td><a href = "/notice/view/detail/${noticeBoard.id}" class="text-black">${noticeBoard.title}</a></td>
+                                                <td>관리자</td>
                                                 <td>${noticeBoard.createdDate}</td>
                                                 <td>${noticeBoard.views}</td>
                                             </tr>
