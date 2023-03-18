@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/api/graduation/announcement" aria-haspopup="true" aria-expanded="false" data-bs-display="static">
+                        <a class="nav-link" href="/api/graduation/schedule" aria-haspopup="true" aria-expanded="false" data-bs-display="static">
                             진행일정
                         </a>
                     </li>
