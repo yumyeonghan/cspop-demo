@@ -41,11 +41,11 @@
 <%@include file="../common/sessionController.jsp"%>
 <body>
 <h3>진행일정 게시판 수정-text를 누르시면 수정하실 수 있습니다.</h3><hr>
-<form action="../schedule_board/${data.id}" method="post">
+<form action="../scheduleBoardModify/${data.id}" method="post">
     <label>
         <input id="check-btn1" type="checkbox"/>
         <label for="check-btn1">신청접수</label>
-        <textarea class="form-control1" name="receivedText" style="resize: none" cols="90" rows="3">${data.receivedText}</textarea>
+        <textarea class="form-control1" name="receivedText" placeholder="반드시 입력을 해주세요." style="resize: none" cols="90" rows="3">${data.receivedText}</textarea>
         <spring:hasBindErrors name="scheduleBoardDto">
             <c:if test="${errors.hasFieldErrors('receivedText') }">
                 <span style="color: red">${errors.getFieldError( 'receivedText' ).defaultMessage }</span>
@@ -54,7 +54,7 @@
         <br>
         <input id="check-btn2" type="checkbox"/>
         <label for="check-btn2">제안서</label>
-        <textarea class="form-control2" name="proposalText" style="resize: none" cols="90" rows="3">${data.proposalText}</textarea>
+        <textarea class="form-control2" name="proposalText" placeholder="반드시 입력을 해주세요." style="resize: none" cols="90" rows="3">${data.proposalText}</textarea>
         <spring:hasBindErrors name="scheduleBoardDto">
             <c:if test="${errors.hasFieldErrors('proposalText') }">
                 <span style="color: red">${errors.getFieldError( 'proposalText' ).defaultMessage }</span>
@@ -64,7 +64,7 @@
         <br>
         <input id="check-btn3" type="checkbox"/>
         <label for="check-btn3">중간보고서</label>
-        <textarea class="form-control3" name="interimReportText" style="resize: none" cols="90" rows="3">${data.interimReportText}</textarea>
+        <textarea class="form-control3" name="interimReportText" placeholder="반드시 입력을 해주세요." style="resize: none" cols="90" rows="3">${data.interimReportText}</textarea>
         <spring:hasBindErrors name="scheduleBoardDto">
             <c:if test="${errors.hasFieldErrors('interimReportText') }">
                 <span style="color: red">${errors.getFieldError( 'interimReportText' ).defaultMessage }</span>
@@ -74,7 +74,7 @@
         <br>
         <input id="check-btn4" type="checkbox"/>
         <label for="check-btn4">최종보고서</label>
-        <textarea class="form-control4" name="finalReportText" style="resize: none" cols="90" rows="3">${data.finalReportText}</textarea>
+        <textarea class="form-control4" name="finalReportText" placeholder="반드시 입력을 해주세요." style="resize: none" cols="90" rows="3">${data.finalReportText}</textarea>
         <spring:hasBindErrors name="scheduleBoardDto">
             <c:if test="${errors.hasFieldErrors('finalReportText') }">
                 <span style="color: red">${errors.getFieldError( 'finalReportText' ).defaultMessage }</span>
@@ -83,7 +83,7 @@
         <br>
         <input id="check-btn5" type="checkbox"/>
         <label for="check-btn5">최종통과</label>
-        <textarea class="form-control5" name="finalPassText" style="resize: none" cols="90" rows="4">${data.finalPassText}</textarea>
+        <textarea class="form-control5" name="finalPassText" placeholder="반드시 입력을 해주세요." style="resize: none" cols="90" rows="4">${data.finalPassText}</textarea>
         <spring:hasBindErrors name="scheduleBoardDto">
             <c:if test="${errors.hasFieldErrors('finalPassText') }">
                 <span style="color: red">${errors.getFieldError( 'finalPassText' ).defaultMessage }</span>
@@ -92,7 +92,7 @@
         <br>
         <input id="check-btn6" type="checkbox"/>
         <label for="check-btn6">기타자격</label>
-        <textarea class="form-control6" name="otherQualificationsText" style="resize: none" cols="90" rows="3">${data.otherQualificationsText}</textarea>
+        <textarea class="form-control6" name="otherQualificationsText" placeholder="반드시 입력을 해주세요." style="resize: none" cols="90" rows="3">${data.otherQualificationsText}</textarea>
         <spring:hasBindErrors name="scheduleBoardDto">
             <c:if test="${errors.hasFieldErrors('otherQualificationsText') }">
                 <span style="color: red">${errors.getFieldError( 'otherQualificationsText' ).defaultMessage }</span>
@@ -105,7 +105,7 @@
 </form>
 
 <!--취소 버튼- 이전 화면으로 이동-->
-<form action="../progress_schedule" method="get">
+<form action="../schedule" method="get">
     <input style="float: left" type="submit" value="뒤로"/>
 </form>
 </body>

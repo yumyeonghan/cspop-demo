@@ -102,7 +102,7 @@
                                             <tbody>
                                             <!--enum type stepToString-->
                                             <tr style="text-align: center">
-                                                <td><a href="modify_schedule/${data.id}">${data.step.stepToString}</a></td>
+                                                <td><a href="scheduleModify/${data.id}">${data.step.stepToString}</a></td>
                                                 <td>${data.startDate}</td>
                                                 <td>${data.endDate}</td>
                                                 <td>${data.scheduleState.scheduleStateToString}</td>
@@ -133,7 +133,7 @@
                             <p class="bi-text-indent-left">${data.otherQualificationsText}</p>
                             <br>
                             <button style="width: 80px; height: 30px;" type="submit"
-                                    onclick="location.href='schedule_board/${data.id}'">수정</button>
+                                    onclick="location.href='scheduleBoardModify/${data.id}'">수정</button>
                             <br>
                         </c:forEach>
                     </div>

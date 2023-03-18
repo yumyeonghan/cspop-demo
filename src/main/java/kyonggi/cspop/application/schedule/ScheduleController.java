@@ -14,11 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
-/**
- * 진행 일정 테이블 + 게시판 컨트롤러
- */
 @Controller
 @RequiredArgsConstructor
 @Slf4j
@@ -27,13 +23,9 @@ public class ScheduleController {
 
     private final ScheduleBoardService scheduleBoardService;
 
-    /**
-     * 초기 진행 일정 및 세부 내용 뷰
-     * @param model
-     * @return
-     */
-    @GetMapping("/progress_schedule")
-    public String Schedule(Model model){
+    //초기 진행 일정 및 세부 내용 뷰
+    @GetMapping("/schedule")
+    public String showSchedule(Model model) {
 
         //테이블 데이터 출력
         List<Schedules> dataList = scheduleBoardService.findScheduleList();
@@ -47,32 +39,32 @@ public class ScheduleController {
     }
 
     //진행 일정 수정 view - id에 일치하는 data 출력
-    @GetMapping("/modify_schedule/{id}")
-    public String mod(@PathVariable Long id, Model model){
-        Schedules schedules = scheduleBoardService.findById(id);
-        scheduleBoardService.save(schedules);
+    @GetMapping("/scheduleModify/{id}")
+    public String scheduleModifyForm(@PathVariable Long id, Model model){
+        Schedules schedules = scheduleBoardService.findByScheduleId(id);
+        scheduleBoardService.saveSchedules(schedules);
         model.addAttribute("data",schedules);
-        return "graduation/modify_schedule";
+        return "graduation/scheduleModify";
     }
 
-    @PostMapping("/modify_schedule/{id}")
-    public String postMod(@PathVariable Long id, ScheduleDto scheduleDto) {
+    @PostMapping("/scheduleModify/{id}")
+    public String scheduleModify(@PathVariable Long id, ScheduleDto scheduleDto) {
 
         //데이터 수정(update)
-        scheduleBoardService.update(id, scheduleDto);
-        return "redirect:../progress_schedule";
+        scheduleBoardService.updateSchedules(id, scheduleDto);
+        return "redirect:../schedule";
     }
 
     //세부 내용 수정 view
-    @GetMapping("/schedule_board/{id}")
-    public String mod2(@PathVariable Long id, Model model) {
-        save(id, model);
-        return "graduation/schedule_board";
+    @GetMapping("/scheduleBoardModify/{id}")
+    public String scheduleBoardModifyForm(@PathVariable Long id, Model model) {
+        saveScheduleBoardData(id, model);
+        return "graduation/scheduleBoardModify";
     }
 
     //세부 내용 수정 method
-    @PostMapping("/schedule_board/{id}")
-    public String Modify_Content(@PathVariable Long id,
+    @PostMapping("/scheduleBoardModify/{id}")
+    public String scheduleBoardModify(@PathVariable Long id,
                                  @Validated @ModelAttribute ScheduleBoardDto scheduleBoardDto,
                                  BindingResult result,Model model) {
 
@@ -80,19 +72,17 @@ public class ScheduleController {
 
             //예외가 발생한 필드를 출력
             log.info("result.getFieldError={}",result.getFieldError());
-
-            save(id, model);
-
-            return "graduation/schedule_board";
+            saveScheduleBoardData(id, model);
+            return "graduation/scheduleBoardModify";
         }
         //데이터 수정(update)
-        scheduleBoardService.update_board(id, scheduleBoardDto);
-        return "redirect:../progress_schedule";
+        scheduleBoardService.updateScheduleBoard(id, scheduleBoardDto);
+        return "redirect:../schedule";
     }
 
-    public void save(@PathVariable Long id, Model model) {
-        ScheduleBoard scheduleBoard = scheduleBoardService.findById_board(id);
-        scheduleBoardService.save_board(scheduleBoard);
+    public void saveScheduleBoardData(@PathVariable Long id, Model model) {
+        ScheduleBoard scheduleBoard = scheduleBoardService.findByScheduleBoardId(id);
+        scheduleBoardService.saveScheduleBoard(scheduleBoard);
         model.addAttribute("data", scheduleBoard);
     }
 }

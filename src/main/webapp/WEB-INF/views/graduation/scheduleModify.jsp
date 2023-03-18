@@ -24,7 +24,7 @@
 <!--선택된 step value를 바탕으로 시작 일정&종료 일정 출력-->
 
 <!--수정 버튼- 변경된 값을 db에 저장& view에 출력 input에 해당하는 name parameter 값 일치 필요!-->
-<form action="../modify_schedule/${data.id}" method="post">
+<form action="../scheduleModify/${data.id}" method="post">
 
     <p>변경할 일정: <input type="text" class="form-control" disabled value="${data.step.stepToString}" style="width: 150px;"></p>
     <p>시작일정: <input type="date" name="startDate" class="form-control" value="${data.startDate}" style="width: 150px;" required/> </p>
@@ -37,7 +37,7 @@
 </form>
 
 <!--취소 버튼- 이전 화면으로 이동-->
-<form action="../progress_schedule" method="get">
+<form action="../schedule" method="get">
     <input style="float: left" type="submit" value="뒤로"/>
 </form>
 </body>

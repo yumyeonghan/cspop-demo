@@ -25,18 +25,18 @@ public class ScheduleBoardService {
         return scheduleRepository.findAll();
     }
 
-    public Schedules findById(Long id){
+    public Schedules findByScheduleId(Long id){
         return scheduleRepository.findById(id).get();
     }
 
     @Transactional
-    public void save(Schedules schedules) {
+    public void saveSchedules(Schedules schedules) {
         scheduleRepository.save(schedules);
     }
 
     @Transactional
-    public void update(Long id, ScheduleDto scheduleDto) {
-        Schedules schedules = findById(id);
+    public void updateSchedules(Long id, ScheduleDto scheduleDto) {
+        Schedules schedules = findByScheduleId(id);
         schedules.updateInfo(scheduleDto);
     }
 
@@ -45,18 +45,18 @@ public class ScheduleBoardService {
         return scheduleBoardRepository.findAll();
     }
 
-    public ScheduleBoard findById_board(Long id) {
+    public ScheduleBoard findByScheduleBoardId(Long id) {
         return scheduleBoardRepository.findById(id).get();
     }
 
     @Transactional
-    public void save_board(ScheduleBoard scheduleBoard) {
+    public void saveScheduleBoard(ScheduleBoard scheduleBoard) {
         scheduleBoardRepository.save(scheduleBoard);
     }
 
     @Transactional
-    public void update_board(Long id, ScheduleBoardDto scheduleBoardDto) {
-        ScheduleBoard scheduleBoard = findById_board(id);
+    public void updateScheduleBoard(Long id, ScheduleBoardDto scheduleBoardDto) {
+        ScheduleBoard scheduleBoard = findByScheduleBoardId(id);
         scheduleBoard.updateInfo(scheduleBoardDto);
     }
 }
