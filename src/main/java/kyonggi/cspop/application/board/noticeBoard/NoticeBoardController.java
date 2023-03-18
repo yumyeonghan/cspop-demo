@@ -135,7 +135,7 @@ public class NoticeBoardController {
 
     @PostMapping("api/notice/fix")
     public ResponseEntity<Void> fixNotice(@RequestBody NoticeNumberJsonRequest noticeNumberJsonRequest) {
-        noticeBoardService.fixNoticeBoard(noticeNumberJsonRequest.getNoticeBoardId());
+        noticeBoardService.fixAndClearNoticeBoard(noticeNumberJsonRequest.getNoticeBoardId());
         return ResponseEntity.noContent().build();
     }
 

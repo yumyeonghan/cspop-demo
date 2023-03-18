@@ -17,6 +17,7 @@ public class NoticeViewDto {
     Integer views;
     LocalDate createdDate;
     List<String> files;
+    boolean fixed;
 
     public NoticeViewDto(NoticeBoard noticeBoard) {
 
@@ -31,5 +32,6 @@ public class NoticeViewDto {
         this.views = noticeBoard.getViews();
         this.createdDate = LocalDate.from(noticeBoard.getCreatedDate());
         this.files = files;
+        this.fixed = noticeBoard.isFixed();
     }
 }

@@ -115,7 +115,12 @@
                                 </div>
                                 <div style="text-align: right; float: right; margin-top: 5px">
                                     <a href="/api/graduation/modifyForm/${detailView.id}" class="btn btn-primary text-white">수정</a>
-                                    <button id="fixNotice" class="btn btn-success">고정</button>
+                                    <c:if test="${detailView.fixed eq true}">
+                                        <button id="fixNotice" class="btn btn-success">해제</button>
+                                    </c:if>
+                                    <c:if test="${detailView.fixed ne true}">
+                                        <button id="fixNotice" class="btn btn-success">고정</button>
+                                    </c:if>
                                     <button id="deleteNotice" class="btn btn-danger">삭제</button>
                                 </div>
                             <%--버튼 End--%>
@@ -134,7 +139,7 @@
     }
 
     $(()=>{
-        $('#fixNotice').on('click', () => { // 글을 고정하는 기능
+        $('#fixNotice').on('click', () => { // 글을 고정,해제하는 기능
             console.log(typeof noticeId)
             $.ajax({
                 url: "/api/notice/fix",
@@ -142,7 +147,7 @@
                 data: JSON.stringify(noticeId),
                 contentType: "application/json; charset=utf-8",
                 success: () => {
-                    alert("고정 완료");
+                    alert("설정 완료");
                     window.location.reload();
                 }, error: (res) => {
                     alert(res.responseJSON.errorMessage);

@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -69,9 +68,14 @@ public class NoticeBoardService {
     }
 
     @Transactional
-    public void fixNoticeBoard(Long id) {
+    public void fixAndClearNoticeBoard(Long id) {
         NoticeBoard noticeBoard = noticeBoardRepository.findById(id).get();
-        noticeBoard.updateFixed(true);
+        if (noticeBoard.isFixed()) {
+            noticeBoard.updateFixed(false);
+        }
+        else {
+            noticeBoard.updateFixed(true);
+        }
     }
 
     @Transactional
