@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 public class HomeController {
 
-    @GetMapping("/home")
+    @GetMapping("api/home")
     public String home() {
         return "index";
     }
