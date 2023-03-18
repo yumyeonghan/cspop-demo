@@ -14,7 +14,6 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @DynamicUpdate
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
