@@ -58,7 +58,7 @@
                         <br>
                         졸업시스템
                     </p>
-                    <a href="/api/graduation/notice" class="btn btn-primary me-3">Start Graduation</a>
+                    <a href="/notice/find?page=0&size=10" class="btn btn-primary me-3">Start Graduation</a>
                     </a>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import kyonggi.cspop.application.schedule.dto.ScheduleDto;
 import kyonggi.cspop.domain.schedule.enums.ScheduleState;
 import kyonggi.cspop.domain.schedule.enums.Step;
 import lombok.Getter;
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicUpdate;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @DynamicUpdate
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Schedules extends BaseEntity {
 
     @Id

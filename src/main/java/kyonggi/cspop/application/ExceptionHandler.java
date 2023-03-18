@@ -1,5 +1,6 @@
 package kyonggi.cspop.application;
 
+import kyonggi.cspop.application.board.noticeBoard.NoticeBoardController;
 import kyonggi.cspop.application.excel.ExcelBoardController;
 import kyonggi.cspop.application.users.UsersController;
 import kyonggi.cspop.exception.CsPopException;
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice(assignableTypes = {
         UsersController.class,
-        ExcelBoardController.class
+        ExcelBoardController.class,
+        NoticeBoardController.class
 })
 public class ExceptionHandler {
 

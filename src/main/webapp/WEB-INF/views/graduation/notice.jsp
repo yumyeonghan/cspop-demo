@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,8 +71,7 @@
                                         <span class="position-absolute ps-3 pt-1 mt-1">
                                             <i class="fe fe-search"></i>
                                         </span>
-                                    <input type="search" class="form-control ps-6 mb-2 border-0"
-                                           placeholder="search"/>
+                                    <input type="search" class="form-control ps-6 mb-2 border-0" placeholder="search"/>
                                 </form>
                             </div>
                         </div>
@@ -80,7 +80,6 @@
             </div>
         </div>
     </div>
-
     <div class="pb-10 mt-n10">
         <div class="container">
             <div class="row">
@@ -90,91 +89,80 @@
                             <div>
                                 <div class="card table-responsive">
                                     <table id="table" class="table mb-0" border-color="black">
-                                        <thead class="table-dark">
-                                        <tr>
-                                            <th data-field="board_id">
-                                                <div class="th-inner sortable both">번호</div>
-                                            </th>
-                                            <th data-field="title">
-                                                <div class="th-inner sortable both">제목</div>
-                                            </th>
-                                            <th data-field="writer_id">
-                                                <div class="th-inner sortable both">글쓴이</div>
-                                            </th>
-                                            <th data-field="writed_date">
-                                                <div class="th-inner sortable both">작성일</div>
-                                            </th>
-                                            <th data-field="views">
-                                                <div class="th-inner sortable both">조회수</div>
-                                            </th>
+                                        <thead class="table-light">
+                                        <tr class="text-center">
+                                            <th>번호</th>
+                                            <th>제목</th>
+                                            <th>글쓴이</th>
+                                            <th>작성일</th>
+                                            <th>조회수</th>
                                         </tr>
+                                        <c:forEach items="${allNoticeBoard.content}" var="noticeBoard">
+                                            <tr class="text-center" data-id=${noticeBoard.id}>
+                                                <c:if test="${noticeBoard.fixed eq true}">
+                                                <td class="text-danger">[공지]</td>
+                                                </c:if>
+                                                <c:if test="${noticeBoard.fixed ne true}">
+                                                    <td>${noticeBoard.id}</td>
+                                                </c:if>
+                                                <td><a href = "/notice/view/detail/${noticeBoard.id}" class="text-black">${noticeBoard.title}</a></td>
+                                                <td>관리자</td>
+                                                <td>${noticeBoard.createdDate}</td>
+                                                <td>${noticeBoard.views}</td>
+                                            </tr>
+                                        </c:forEach>
                                         </thead>
                                     </table>
                                 </div>
                             </div>
                         </div>
+                        <!-- 페이징 영역 시작 -->
+                        <div class="text-xs-center">
+                            <ul class="pagination justify-content-center">
+                                <!-- 이전 -->
+                                <c:choose>
+                                    <c:when test="${allNoticeBoard.first}"></c:when>
+                                    <c:otherwise>
+                                        <li class="page-item"><a class="page-link" href="/notice/find?page=0&size=10">처음</a></li>
+                                        <li class="page-item"><a class="page-link" href="/notice/find?page=${allNoticeBoard.number-1}&size=10">이전</a>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
+
+                                <!-- 페이지 그룹 -->
+                                <c:forEach begin="${startBlockPage}" end="${endBlockPage}" var="i">
+                                    <c:choose>
+                                        <c:when test="${allNoticeBoard.pageable.pageNumber+1 == i}">
+                                            <li class="page-item disabled"><a class="page-link" href="/notice/find?page=${i-1}&size=10">${i}</a>
+                                            </li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li class="page-item"><a class="page-link" href="/notice/find?page=${i-1}&size=10">${i}</a>
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                                <!-- 다음 -->
+                                <c:choose>
+                                    <c:when test="${ulist.last}"></c:when>
+                                    <c:otherwise>
+                                        <li class="page-item "><a class="page-link" href="/notice/find?page=${allNoticeBoard.number+1}&size=10">다음</a></li>
+                                        <li class="page-item "><a class="page-link" href="/notice/find?page=${allNoticeBoard.totalPages-1}&size=10">마지막</a></li>
+                                    </c:otherwise>
+                                </c:choose>
+                            </ul>
+                        </div>
+                        <!-- 페이징 영역 끝 -->
                     </div>
+                    <a href="/api/graduation/form"><button class="btn btn-primary btn-sm float-right">글쓰기</button></a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 <%@include file="../common/commonJS.jsp" %>
+<script src="../../../assets/js/detailPage.js">
 
-<!--  Jquery 가져오기 -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<!-- bootstrap 가져오기 -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-<!-- bootstrap table 가져오기  -->
-<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
-
-<script>
-    $(() => {
-        let $table = $("#table");
-        // 테이블 표현할 데이터 표현
-        let data = [
-            {
-                "board_id": "1",
-                "title": "test1",
-                "writer_id": "admin",
-                "writed_date": "2023-02-18",
-                "views": "1"
-            },
-            {
-                "board_id": "2",
-                "title": "test2",
-                "writer_id": "admin2",
-                "writed_date": "2023-01-11",
-                "views": "120"
-            },
-            {
-                "board_id": "3",
-                "title": "test3",
-                "writer_id": "admin3",
-                "writed_date": "2023-03-01",
-                "views": "203"
-            },
-            {
-                "board_id": "4",
-                "title": "test4",
-                "writer_id": "admin4",
-                "writed_date": "2023-04-16",
-                "views": "999"
-            },
-            {
-                "board_id": "5",
-                "title": "test5",
-                "writer_id": "admin5",
-                "writed_date": "2023-05-12",
-                "views": "0"
-            }
-        ];
-        $table.bootstrapTable({data: data})
-    });
 </script>
 </body>
-
 </html>

@@ -1,6 +1,8 @@
 package kyonggi.cspop.domain.login;
 
 import kyonggi.cspop.application.util.crypto.PasswordEncoder;
+import kyonggi.cspop.domain.admins.Admins;
+import kyonggi.cspop.domain.admins.repository.AdminsRepository;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.repository.UsersRepository;
@@ -10,14 +12,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class LoginService {
     private final PasswordEncoder passwordEncoder;
     private final UsersRepository usersRepository;
+    private final AdminsRepository adminsRepository;
 
-    //로그인
+    //사용자 로그인
     public UserSessionDto login(String loginId, String loginPassword) {
         Users findUser = usersRepository.findByStudentId(loginId)
                 .orElseThrow(() -> new CsPopException(CsPopErrorCode.USER_NOT_FOUND));
@@ -29,5 +34,21 @@ public class LoginService {
         if (!passwordEncoder.isMatch(loginPassword, findUser.getStudentPassword())) {
             throw new CsPopException(CsPopErrorCode.WRONG_PASSWORD);
         }
+    }
+
+    //관리자 로그인
+    public UserSessionDto loginAsAdmin(String loginId, String loginPassword){
+        Optional<Admins> findAdmin = adminsRepository.findByAdminId(loginId);
+        if (findAdmin.isPresent()) {
+            if (isCorrectAdminPassword(loginPassword, findAdmin)) return new UserSessionDto(findAdmin.get());
+        }
+        return new UserSessionDto(); //필드 값이 모두 "null"인 기본 생성자
+    }
+
+    private boolean isCorrectAdminPassword(String loginPassword, Optional<Admins> findAdmin) {
+        if(!passwordEncoder.isMatch(loginPassword, findAdmin.get().getAdminPassword())) {
+            return false;
+        }
+        return true;
     }
 }

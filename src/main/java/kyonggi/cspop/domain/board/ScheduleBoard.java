@@ -3,6 +3,7 @@ package kyonggi.cspop.domain.board;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.application.schedule.dto.ScheduleBoardDto;
 import lombok.Getter;
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicUpdate;
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @DynamicUpdate
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ScheduleBoard extends BaseEntity {
 
     @Id

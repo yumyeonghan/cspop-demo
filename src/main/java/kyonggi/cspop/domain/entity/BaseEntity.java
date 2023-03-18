@@ -1,5 +1,6 @@
 package kyonggi.cspop.domain.entity;
 
+import lombok.Getter;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.PreUpdate;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
+@Getter
 public class BaseEntity {
 
     @Column(updatable = false)

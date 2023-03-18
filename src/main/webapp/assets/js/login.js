@@ -3,8 +3,8 @@
 * */
 function login() {
     let account = {
-        studentId: $(`#id`).val(),
-        studentPassword: $(`#password`).val()
+        loginId: $(`#id`).val(),
+        loginPassword: $(`#password`).val()
     }
     $.ajax({
         url: "/api/login/auth",

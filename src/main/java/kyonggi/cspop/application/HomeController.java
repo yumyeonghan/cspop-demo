@@ -23,12 +23,11 @@ public class HomeController {
         return "account/signup";
     }
 
-    @GetMapping("api/graduation/notice")
-    public String notice() {
-        return "graduation/notice";
-    }
-
     @GetMapping("api/excel")
     public String excel() {return "excel/excelIndex";}
-
+    
+    @GetMapping("api/graduation/form")
+    public String noticeForm() {return "graduation/noticeForm";}
+    @GetMapping("api/graduation/detail")
+    public String noticeDetail() {return "graduation/noticeDetail";}
 }

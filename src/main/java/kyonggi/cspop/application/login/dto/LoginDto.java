@@ -7,8 +7,8 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class LoginDto {
     @NotBlank(message = "아이디는 필수입니다")
-    private String studentId;
+    private String loginId;
 
     @NotBlank(message = "비밀번호는 필수입니다")
-    private String studentPassword;
+    private String loginPassword;
 }
