@@ -3,6 +3,7 @@ package kyonggi.cspop.domain.board;
 import kyonggi.cspop.application.guide.dto.GuidanceBoardDto;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class GuidanceBoard extends BaseEntity {
 
@@ -23,6 +25,7 @@ public class GuidanceBoard extends BaseEntity {
     private String text;
 
     public void updateGuidance(GuidanceBoardDto guidanceBoardDto) {
-        this.text = text;
+
+        this.text = guidanceBoardDto.getText();
     }
 }
