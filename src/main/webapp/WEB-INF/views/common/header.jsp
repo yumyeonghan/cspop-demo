@@ -4,7 +4,7 @@
     <!-- navigation start -->
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-default">
-            <a class="navbar-brand" href="/home">
+            <a class="navbar-brand" href="/">
                 <img src="../../../assets/images/fitness/cspop_logo.png" alt="" width="100em">
             </a>
             <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
@@ -33,7 +33,7 @@
                         </a>
                     </li>
                     <li class="nav-item dropdown ">
-                        <a class="nav-link dropdown-toggle" href="/api/graduation/progress_schedule"
+                        <a class="nav-link dropdown-toggle" href="/api/graduation/schedule"
                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            data-bs-display="static">
                             진행일정
