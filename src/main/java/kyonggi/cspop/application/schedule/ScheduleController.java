@@ -58,7 +58,8 @@ public class ScheduleController {
     //세부 내용 수정 view
     @GetMapping("/scheduleBoardModify/{id}")
     public String scheduleBoardModifyForm(@PathVariable Long id, Model model) {
-        saveScheduleBoardData(id, model);
+        ScheduleBoard scheduleBoard = scheduleBoardService.findByScheduleBoardId(id);
+        model.addAttribute("data", scheduleBoard);
         return "graduation/scheduleBoardModify";
     }
 
@@ -72,17 +73,13 @@ public class ScheduleController {
 
             //예외가 발생한 필드를 출력
             log.info("result.getFieldError={}",result.getFieldError());
-            saveScheduleBoardData(id, model);
+            ScheduleBoard scheduleBoard = scheduleBoardService.findByScheduleBoardId(id);
+            model.addAttribute("data", scheduleBoard);
+
             return "graduation/scheduleBoardModify";
         }
         //데이터 수정(update)
         scheduleBoardService.updateScheduleBoard(id, scheduleBoardDto);
         return "redirect:../schedule";
-    }
-
-    public void saveScheduleBoardData(@PathVariable Long id, Model model) {
-        ScheduleBoard scheduleBoard = scheduleBoardService.findByScheduleBoardId(id);
-        scheduleBoardService.saveScheduleBoard(scheduleBoard);
-        model.addAttribute("data", scheduleBoard);
     }
 }

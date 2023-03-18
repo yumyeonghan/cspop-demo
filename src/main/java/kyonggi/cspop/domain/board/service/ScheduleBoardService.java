@@ -50,11 +50,6 @@ public class ScheduleBoardService {
     }
 
     @Transactional
-    public void saveScheduleBoard(ScheduleBoard scheduleBoard) {
-        scheduleBoardRepository.save(scheduleBoard);
-    }
-
-    @Transactional
     public void updateScheduleBoard(Long id, ScheduleBoardDto scheduleBoardDto) {
         ScheduleBoard scheduleBoard = findByScheduleBoardId(id);
         scheduleBoard.updateInfo(scheduleBoardDto);
