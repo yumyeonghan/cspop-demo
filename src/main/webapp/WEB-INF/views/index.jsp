@@ -35,7 +35,7 @@
     <!-- navigation start -->
     <div class="container">
         <nav class="navbar navbar-default">
-            <a class="navbar-brand" href="/home">
+            <a class="navbar-brand" href="/">
                 <img src="../../assets/images/fitness/cspop_logo.png" alt="" width="100em">
             </a>
             <div id="userCheck"></div>
