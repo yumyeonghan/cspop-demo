@@ -1,6 +1,6 @@
 package kyonggi.cspop.domain.board.service;
 
-import kyonggi.cspop.application.guide.dto.GuidanceBoardDto;
+import kyonggi.cspop.application.guide.dto.GuidanceBoardRequestDto;
 import kyonggi.cspop.domain.board.GuidanceBoard;
 import kyonggi.cspop.domain.board.repository.GuidanceBoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +26,8 @@ public class GuidanceBoardService {
     }
 
     @Transactional
-    public void updateGuidance(Long id, GuidanceBoardDto guidanceBoardDto) {
-        GuidanceBoard guidanceBoard = findGuidanceId(id);
-        guidanceBoard.updateGuidance(guidanceBoardDto);
+    public void updateGuidanceBoard(Long id, GuidanceBoardRequestDto guidanceBoardRequestDto) {
+        GuidanceBoard guidanceBoard = guidanceBoardRepository.findById(id).get();
+        guidanceBoard.updateGuidance(guidanceBoardRequestDto.getText());
     }
 }
