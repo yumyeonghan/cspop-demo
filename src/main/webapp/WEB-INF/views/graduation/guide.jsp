@@ -85,7 +85,7 @@
                                         <p class="bi-text-indent-left"> ${data.text}</p>
 
                                         <button style="width: 80px; height: 30px;" type="submit"
-                                                onclick="location.href='modify_guide/${data.id}'">수정
+                                                onclick="location.href='modifyGuide/${data.id}'">수정
                                         </button>
                                     </c:forEach>
                                 </div>

@@ -1,6 +1,7 @@
 package kyonggi.cspop.application.guide;
 
-import kyonggi.cspop.application.guide.dto.GuidanceBoardDto;
+import kyonggi.cspop.application.guide.dto.GuidanceBoardRequestDto;
+import kyonggi.cspop.application.guide.dto.GuidanceViewDto;
 import kyonggi.cspop.domain.board.GuidanceBoard;
 import kyonggi.cspop.domain.board.service.GuidanceBoardService;
 import lombok.RequiredArgsConstructor;
@@ -27,29 +28,24 @@ public class GuidanceController {
         return "graduation/guide";
     }
 
-    @GetMapping("/modify_guide/{id}")
-    public String updateGuideForm(@PathVariable Long id, Model model) {
-        save(id, model);
+    @GetMapping("/modifyGuide/{guidanceBoardId}")
+    public String guideModifyForm(@PathVariable Long guidanceBoardId, Model model) {
+
+        GuidanceBoard guidanceBoard = guidanceBoardService.findGuidanceId(guidanceBoardId);
+        model.addAttribute("data", new GuidanceViewDto(guidanceBoard));
+
         return "graduation/guidanceModify";
     }
 
-    @PostMapping("/modify_guide/{id}")
-    public String updateGuide(@PathVariable Long id,
-                                 @Validated @ModelAttribute GuidanceBoardDto guidanceBoardDto,
-                                 BindingResult result, Model model) {
+    @PostMapping("/modifyGuide/{guidanceBoardId}")
+    public String guideModify(@PathVariable Long guidanceBoardId, @Validated @ModelAttribute GuidanceBoardRequestDto guidanceBoardRequestDto, BindingResult result) {
 
         if (result.hasErrors()) {
-
-            save(id, model);
             return "graduation/guidanceModify";
         }
-        //데이터 수정(update)
-        guidanceBoardService.updateGuidance(id, guidanceBoardDto);
-        return "redirect:../guide";
-    }
 
-    public void save(@PathVariable Long id, Model model) {
-        GuidanceBoard guidanceBoard = guidanceBoardService.findGuidanceId(id);
-        model.addAttribute("data", guidanceBoard);
+        //데이터 수정(update)
+        guidanceBoardService.updateGuidanceBoard(guidanceBoardId, guidanceBoardRequestDto);
+        return "redirect:../guide";
     }
 }
