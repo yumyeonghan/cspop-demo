@@ -55,21 +55,14 @@
                         </div>
                         <br>
                         <div class="mb-3 ">
-                            <label for="password" class="form-label">비밀번호<span class="text-danger">*</span></label>
+                            <label for="password" class="form-label">비밀번호</span></label>
                             <input type="password" id="password" class="form-control" placeholder="8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요." required="">
-                        </div>
-                        <br>
-                        <div class="mb-3 ">
-                            <label for="password" class="form-label">비밀번호 확인<span
-                                    class="text-danger">*</span></label>
-                            <input type="password" id="password2" class="form-control" placeholder="비밀번호를 확인해주세요."
-                                   required="">
                         </div>
                         <br>
 
                         <div class="d-grid">
                             <button class="btn btn-primary" type="submit" onclick="signUp()" id="submit-button" >
-                                비밀번호 변경
+                                로그인
                             </button>
                         </div>
   <%--                    </form>--%>
