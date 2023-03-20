@@ -24,7 +24,7 @@
 
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="C:\Users\USER\Desktop\capstone\assets\css\theme.min.css">
+    <link rel="stylesheet" href="../assets/css/theme.min.css">
 </head>
 
 <body class="bg-light">
