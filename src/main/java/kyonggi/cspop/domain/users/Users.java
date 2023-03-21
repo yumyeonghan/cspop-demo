@@ -59,13 +59,18 @@ public class Users extends BaseEntity {
     @Column(nullable = false)
     private String department;
 
+    @Comment("비밀번호 질문")
+    @Column(nullable = false)
+    private String answerPw;
+
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "submitForm_id", foreignKey = @ForeignKey(name = "fk_users_to_submit_form"))
     private SubmitForm submitForm;
 
     //==생성 메소드==//
     public static Users createUser(String studentId, String studentPassword, String studentName, Sex sex, LocalDate birth, String email,
-                                   String phoneNumber, Classification classification, String department) {
+                                   String phoneNumber, Classification classification, String department,String answerPw) {
 
         Users user = new Users();
         user.studentId = studentId;
@@ -77,6 +82,7 @@ public class Users extends BaseEntity {
         user.phoneNumber = phoneNumber;
         user.classification = classification;
         user.department = department;
+        user.answerPw = answerPw;
 
         return user;
     }

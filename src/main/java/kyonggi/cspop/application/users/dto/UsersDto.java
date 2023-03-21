@@ -41,6 +41,9 @@ public class UsersDto {
     @NotBlank(message = "학과 입력은 필수입니다")
     private String department;
 
+    @NotBlank(message = "비밀번호 찾기 질문 입력은 필수입니다")
+    private String answerPw;
+
     public Users toEntity() {
         return Users.createUser(studentId,
                 studentPassword,
@@ -50,6 +53,7 @@ public class UsersDto {
                 email,
                 phoneNumber,
                 Classification.toClassification(classification),
-                department);
+                department,
+                answerPw);
     }
 }
