@@ -5,10 +5,7 @@ import kyonggi.cspop.domain.users.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Map;
@@ -27,8 +24,21 @@ public class UsersController {
     }
 
     @PostMapping("/user/duplicate-check")
-    public ResponseEntity<Void> duplicateCheckInSignUp (@NotBlank @RequestBody Map<String, String> studentId) {
+    public ResponseEntity<Void> duplicateCheckInSignUp(@NotBlank @RequestBody Map<String, String> studentId) {
         usersService.checkDuplicateStudentNumber(studentId.get("studentId"));
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/passwordQuestion")
+    public ResponseEntity<Void> checkUserId(@NotBlank @RequestBody Map<String, String> studentId) {
+        usersService.checkExistStudentNumber(studentId.get("studentId"));
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/editPassword")
+    public String changePassword(@Validated @RequestBody UsersDto usersDto) {
+
+
+        return "/api/home";
     }
 }

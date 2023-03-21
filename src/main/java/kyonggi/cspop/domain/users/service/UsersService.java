@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -49,9 +48,16 @@ public class UsersService implements UserDetailsService {
         return null;
     }
 
-    public boolean checkPasswordQuestion(String studentId) {
-        Optional<Users> user = usersRepository.findByStudentId(studentId);
+    /**
+     * 비밀번호 변경 시 사용 메서드
+     * @param studentId
+     */
 
-        return user.isPresent();
+    //없는 아이디면 예외를 던짐
+    public void checkExistStudentNumber(String studentId) {
+        if (!usersRepository.existsByStudentId(studentId)) {
+            throw new CsPopException(CsPopErrorCode.USER_NOT_FOUND);
+        }
+        log.info("존재하는 아이디 입니다! ={}", studentId);
     }
 }
