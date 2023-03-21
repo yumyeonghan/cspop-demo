@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>CSPOP : 비밀번호 변경</title>
+    <title>CSPOP : 비밀번호 찾기</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,6 +18,11 @@
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="../assets/css/theme.min.css">
+    <style>
+        body{
+            width:110%; 
+        }
+    </style>
 </head>
 
 <body class="bg-light">
@@ -34,8 +39,8 @@
             <div class="col-md-8 col-lg-7 col-xl-6 offset-md-2 offset-lg-2 offset-xl-3 space-top-3 space-lg-0">
                 <!-- Form -->
                 <div class="bg-white p-4 p-xl-6 p-xxl-8 p-lg-4 rounded-3 border">
-<!--<%--                    <form id="form" action="/api/home" method="get">--%>-->
-                        <h1 class="mb-2 text-center h3 ">비밀번호 변경</h1>
+<%--                    <form id="form" action="/api/home" method="get">--%>
+                        <h1 class="mb-2 text-center h3 ">비밀번호 찾기</h1>
                         <br>
                         <div class="mb-3">
                             <div class="">
@@ -75,7 +80,15 @@
                                 비밀번호 변경
                             </button>
                         </div>
- <!-- <%--                    </form>--%>-->
+                        <div class="d-xxl-flex justify-content-between mt-4 ">
+                            <span class="text-muted font-14 mb-0">
+                                <a href="/api/signup">회원가입</a>
+                            <span>&nbsp;</span>
+                            <span class="font-14 mb-0">
+                                <a href="/api/login">로그인</a>
+                            </span>
+                        </div>
+ <%--                    </form>--%>
                 </div>
                 <!-- End Form -->
             </div>
