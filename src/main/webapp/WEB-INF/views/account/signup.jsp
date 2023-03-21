@@ -141,7 +141,7 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <%--account js include--%>
-<script src="../../../assets/js/signup.js"></script>
+<script src="../../../assets/js/signUp.js"></script>
 <%@include file="../common/commonJS.jsp"%>
 </body>
 
