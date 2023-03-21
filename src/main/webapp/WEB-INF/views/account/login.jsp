@@ -66,7 +66,7 @@
                         <br>
 
                         <div class="d-grid">
-                            <button class="btn btn-primary" type="submit" onclick="signUp()" id="submit-button" >
+                            <button class="btn btn-primary" type="submit" onclick="login()" id="submit-button" >
                                 로그인
                             </button>
                         </div>

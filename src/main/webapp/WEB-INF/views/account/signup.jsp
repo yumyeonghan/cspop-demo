@@ -72,7 +72,7 @@
                         <div class="mb-3 ">
                             <label for="password" class="form-label">비밀번호 확인<span
                                     class="text-danger">*</span></label>
-                            <input type="password" id="password2" class="form-control" placeholder="비밀번호를 확인해주세요."
+                            <input type="password" id="confirmPassword" class="form-control" placeholder="비밀번호를 확인해주세요."
                                    required="">
                         </div>
                         <div class="mb-3">
@@ -126,7 +126,7 @@
                         </div>
                         <br>
                         <div class="d-grid">
-                            <button class="btn btn-primary" type="submit" onclick="signUp()" id="submit-button" >
+                            <button class="btn btn-primary" type="submit" onclick="signUp(event)" id="submit-button" >
                                 회원가입
                             </button>
                         </div>
