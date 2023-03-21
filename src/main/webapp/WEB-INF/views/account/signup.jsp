@@ -29,7 +29,7 @@
         body{
             width:110%;
         }
-    </style>
+    </style> 
 </head>
 
 <body class="bg-light">
