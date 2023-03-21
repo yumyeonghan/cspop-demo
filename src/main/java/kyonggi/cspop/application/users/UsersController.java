@@ -36,8 +36,9 @@ public class UsersController {
     }
 
     @PostMapping("/editPassword")
-    public String changePassword(@Validated @RequestBody UsersDto usersDto) {
+    public String updatePassword(@Validated @RequestBody Map<String, String> answerPw) {
 
+        usersService.checkExistPasswordAnswer(answerPw.get("answerPw"));
 
         return "/api/home";
     }

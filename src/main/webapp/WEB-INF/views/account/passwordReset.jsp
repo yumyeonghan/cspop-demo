@@ -54,8 +54,8 @@
                         </div>
                         <div class="mb-3">
                             <div class="">
-                                <label for="answerPw" class="form-label">비밀번호 찾기 질문</label><br>
-                                <div id="questionPw" class="alert alert-info"></div>
+                                <label for="questionPw" class="form-label">비밀번호 찾기 질문</label><br>
+                                <select class="form-select" id="questionPw" required></select>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="answerPw" placeholder="답을 입력해 주세요."
                                            value="" required maxlength="9">

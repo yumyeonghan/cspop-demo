@@ -3,6 +3,16 @@ function checkPw(pw1, pw2) {
     return pw1 !== pw2 ? 1 : 0;
 }
 
+$(() => {
+    let questionPw = $(`#questionPw`);
+    let questions = `<option> 기억에 남는 추억의 장소는? </option>`;
+    questions += `<option> 자신의 보물 제1호는? </option>`;
+    questions += `<option> 자신이 가장 존경하는 인물은? </option>`;
+    questions += `<option> 내가 좋아하는 캐릭터는? </option>`;
+    questions += `<option> 자신의 인생 좌우명은? </option>`;
+    questionPw.append(questions);
+})
+
 // 아이디 유효성 검사 함수
 function validateId() {
     // 아이디 입력이 비어있는 경우
@@ -56,7 +66,8 @@ function getPasswordQuestion(target) {
     // $('#id').attr('disabled', true);
     // $(target).attr("disabled", true);
     let userData = {
-        studentId: $(`#id`).val()
+        studentId: $(`#id`).val(),
+        questionPw: $('#questionPw').val()
     }
     $.ajax({
         url: "/api/passwordQuestion",
@@ -69,7 +80,7 @@ function getPasswordQuestion(target) {
             $('#id').attr('disabled', true);
             $(target).attr("disabled", true);
             // 요소에 질문 표시
-            $(`#questionPw`).text(data.questionPw);
+            //$(`#questionPw`).text(data.questionPw);
         },
         error: (error) => alert(error.responseJSON.errorMessage)
 

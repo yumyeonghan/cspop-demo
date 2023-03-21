@@ -1,5 +1,8 @@
 package kyonggi.cspop.domain.users.service;
 
+import kyonggi.cspop.application.users.dto.UserPasswordRequestDto;
+import kyonggi.cspop.application.users.dto.UsersDto;
+import kyonggi.cspop.application.util.crypto.BCryptoPasswordEncoder;
 import kyonggi.cspop.application.util.crypto.PasswordEncoder;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.repository.UsersRepository;
@@ -12,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 
 @Service
@@ -53,11 +58,29 @@ public class UsersService implements UserDetailsService {
      * @param studentId
      */
 
-    //없는 아이디면 예외를 던짐
+    //없는 학번이면 예외를 던짐
     public void checkExistStudentNumber(String studentId) {
         if (!usersRepository.existsByStudentId(studentId)) {
             throw new CsPopException(CsPopErrorCode.USER_NOT_FOUND);
         }
-        log.info("존재하는 아이디 입니다! ={}", studentId);
+        log.info("존재하는 아이디 = {}", studentId);
+    }
+
+    //저장되어있는 비밀번호 대답이 아니면 예외를 던짐
+    public void checkExistPasswordAnswer(String answerPw){
+        if (!usersRepository.existsUsersByAnswerPw(answerPw)){
+            throw new CsPopException(CsPopErrorCode.USER_NOT_FOUND);
+        }
+        log.info("비밀번호 답 = {}", answerPw);
+    }
+
+
+    //비밀번호 재설정
+    @Transactional
+    public void updatePassword(Long id,UserPasswordRequestDto userPasswordRequestDto) {
+        Users users=usersRepository.findById(id).get();
+        BCryptoPasswordEncoder encoder = new BCryptoPasswordEncoder();
+        String securePw = encoder.encryptPassword(userPasswordRequestDto.getStudentPassword());
+        users.updatePassword(securePw);
     }
 }

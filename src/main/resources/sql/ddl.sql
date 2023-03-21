@@ -108,7 +108,7 @@ CREATE TABLE users (
                        `student_id` VARCHAR(255) NOT NULL COMMENT '학번',
                        `student_name` VARCHAR(255) NOT NULL COMMENT '학생 이름',
                        `student_password` VARCHAR(255) NOT NULL COMMENT '학생 비밀번호',
-                       `answer_Pw` VARCHAR(255) NOT NULL COMMENT '학생 비밀번호 대답',
+                       `answer_Pw` VARCHAR(255) NOT NULL COMMENT '비밀번호 대답',
                        `submit_form_id` BIGINT NULL DEFAULT NULL,
                        PRIMARY KEY (`id`),
                        UNIQUE INDEX `submit_form_id_unique` (`submit_form_id` ASC) VISIBLE,
