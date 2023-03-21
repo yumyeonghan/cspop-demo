@@ -25,6 +25,11 @@
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="../assets/css/theme.min.css">
+    <style>
+        body{
+            width:110%; 
+        }
+    </style>
 </head>
 
 <body class="bg-light">
