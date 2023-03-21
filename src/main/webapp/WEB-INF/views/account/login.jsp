@@ -60,7 +60,7 @@
                         </div>
                         <br>
                         <div class="mb-3 ">
-                            <label for="password" class="form-label">비밀번호</span></label>
+                            <label for="password" class="form-label">비밀번호</label>
                             <input type="password" id="password" class="form-control" placeholder="8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요." required="">
                         </div>
                         <br>
@@ -73,9 +73,10 @@
                         <div class="d-xxl-flex justify-content-between mt-4 ">
                             <span class="text-muted font-14 mb-0">
                                 <a href="/api/signup">회원가입</a>
+                            </span>
                             <span>&nbsp;</span>
                             <span class="font-14 mb-0">
-                                <a href="#">비밀번호 찾기</a>
+                                <a href="/api/passwordReset">비밀번호 찾기</a>
                             </span>
                         </div>
   <%--                    </form>--%>
