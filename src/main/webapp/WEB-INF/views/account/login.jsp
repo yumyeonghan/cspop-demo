@@ -10,7 +10,7 @@
 <html lang="en">
 
 <head>
-    <title>CSPOP : 비밀번호 변경</title>
+    <title>CSPOP : 로그인</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -64,6 +64,14 @@
                             <button class="btn btn-primary" type="submit" onclick="signUp()" id="submit-button" >
                                 로그인
                             </button>
+                        </div>
+                        <div class="d-xxl-flex justify-content-between mt-4 ">
+                            <span class="text-muted font-14 mb-0">
+                                <a href="/api/signup">회원가입</a>
+                            <span>&nbsp;</span>
+                            <span class="font-14 mb-0">
+                                <a href="#">비밀번호 찾기</a>
+                            </span>
                         </div>
   <%--                    </form>--%>
                 </div>

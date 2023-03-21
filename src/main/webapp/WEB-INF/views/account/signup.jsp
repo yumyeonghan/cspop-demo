@@ -25,15 +25,20 @@
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="../assets/css/theme.min.css">
+    <style>
+        body{
+            width:110%;
+        }
+    </style> 
 </head>
 
 <body class="bg-light">
 <!-- content section -->
 
-<div class="d-flex align-items-center position-relative vh-100">
+<div class="d-flex align-items-center position-relative vh-50">
 
 
-    <div class="col-lg-5 col-xl-4 d-none d-lg-flex border-top border-primary border-4 align-items-center vh-100 px-0"
+    <div class="col-lg-5 col-xl-4 d-none d-lg-flex border-top border-primary border-4 align-items-center vh-50 px-0"
          style="background-image: url(../assets/images/register-img.jpg); background-position:13% 50%;">
     </div>
     <div class="container">
@@ -141,7 +146,7 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <%--account js include--%>
-<script src="../../../assets/js/signup.js"></script>
+<script src="../../../assets/js/signUp.js"></script>
 <%@include file="../common/commonJS.jsp"%>
 </body>
 
