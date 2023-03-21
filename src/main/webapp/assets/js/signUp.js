@@ -142,7 +142,7 @@ function signUp(event) {
 
     $.ajax({
         type: "post",
-        url: "/api/user/signup", //url작성 부탁드릴게요!
+        url: "/api/user", //url작성 부탁드릴게요!
         data: JSON.stringify(userData),
         contentType: "application/json; charset=utf-8",
         success: function (url) {

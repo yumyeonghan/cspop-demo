@@ -25,6 +25,11 @@
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="../assets/css/theme.min.css">
+    <style>
+        body{
+            width:110%; 
+        }
+    </style>
 </head>
 
 <body class="bg-light">
@@ -61,7 +66,7 @@
                         <br>
 
                         <div class="d-grid">
-                            <button class="btn btn-primary" type="submit" onclick="signUp()" id="submit-button" >
+                            <button class="btn btn-primary" type="submit" onclick="login()" id="submit-button" >
                                 로그인
                             </button>
                         </div>
