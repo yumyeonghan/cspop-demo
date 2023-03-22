@@ -66,8 +66,7 @@ function getPasswordQuestion(target) {
     // $('#id').attr('disabled', true);
     // $(target).attr("disabled", true);
     let userData = {
-        studentId: $(`#id`).val(),
-        questionPw: $('#questionPw').val()
+        studentId: $(`#id`).val()
     }
     $.ajax({
         url: "/api/passwordQuestion",
@@ -111,7 +110,7 @@ function resetPassword() {
     }
 
     $.ajax({
-        url: `/api/editPassword?studentid=${studentId}`,
+        url: `/api/editPassword/${studentId}`,
         type: "post",
         data: JSON.stringify(editData),
         contentType: "application/json; charset=utf-8",

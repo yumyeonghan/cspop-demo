@@ -71,11 +71,13 @@ public class UsersService implements UserDetailsService {
         log.info("비밀번호 답 = {}", answerPw);
     }
 
-
     //비밀번호 재설정
     @Transactional
-    public void updatePassword(Long id,UserPasswordRequestDto userPasswordRequestDto) {
-        Users users=usersRepository.findById(id).get();
+    public void updatePassword(String studentId, UserPasswordRequestDto userPasswordRequestDto) {
+
+        Users users = usersRepository.findByStudentId(studentId).get();
+
+        //비밀번호 암호화
         BCryptoPasswordEncoder encoder = new BCryptoPasswordEncoder();
         String securePw = encoder.encryptPassword(userPasswordRequestDto.getStudentPassword());
         users.updatePassword(securePw);

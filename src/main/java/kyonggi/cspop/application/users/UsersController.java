@@ -1,5 +1,6 @@
 package kyonggi.cspop.application.users;
 
+import kyonggi.cspop.application.users.dto.UserPasswordRequestDto;
 import kyonggi.cspop.application.users.dto.UsersDto;
 import kyonggi.cspop.domain.users.service.UsersService;
 import lombok.RequiredArgsConstructor;
@@ -31,15 +32,19 @@ public class UsersController {
 
     @PostMapping("/passwordQuestion")
     public ResponseEntity<Void> checkUserId(@NotBlank @RequestBody Map<String, String> studentId) {
+
         usersService.checkExistStudentNumber(studentId.get("studentId"));
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/editPassword")
-    public String updatePassword(@Validated @RequestBody Map<String, String> answerPw) {
+    @PostMapping("/editPassword/{studentId}")
+    public String updatePassword(@PathVariable String studentId, @NotBlank @RequestBody UserPasswordRequestDto userPasswordRequestDto) {
 
-        usersService.checkExistPasswordAnswer(answerPw.get("answerPw"));
+        //answer 체크
+        //usersService.checkExistPasswordAnswer(answerPw.get("answerPw"));
 
+        //비밀번호 변경
+        usersService.updatePassword(studentId, userPasswordRequestDto);
         return "/api/home";
     }
 }

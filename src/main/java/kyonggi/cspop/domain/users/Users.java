@@ -8,6 +8,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -24,7 +25,7 @@ public class Users extends BaseEntity {
 
     //===========회원 가입============//
     @Comment("학번")
-    @Column(nullable = false)
+    @Column(nullable = false,updatable = false)
     private String studentId;
 
     @Comment("학생 비밀번호")
@@ -32,37 +33,38 @@ public class Users extends BaseEntity {
     private String studentPassword;
 
     @Comment("학생 이름")
-    @Column(nullable = false)
+    @Column(nullable = false,updatable = false)
     private String studentName;
 
     @Comment("성별")
+    @Column(nullable = false,updatable = false)
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
     @Comment("생일")
-    @Column(nullable = false)
+    @Column(nullable = false,updatable = false)
     private LocalDate birth;
 
     @Comment("이메일")
-    @Column(nullable = false)
+    @Column(nullable = false,updatable = false)
     private String email;
 
     @Comment("전화번호")
-    @Column(nullable = false)
+    @Column(nullable = false,updatable = false)
     private String phoneNumber;
 
     @Comment("신분")
+    @Column(nullable = false,updatable = false)
     @Enumerated(EnumType.STRING)
     private Classification classification;
 
     @Comment("소속학과")
-    @Column(nullable = false)
+    @Column(nullable = false,updatable = false)
     private String department;
 
-    @Comment("비밀번호 질문")
-    @Column(nullable = false)
+    @Comment("비밀번호 대답")
+    @Column(nullable = false,updatable = false)
     private String answerPw;
-
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "submitForm_id", foreignKey = @ForeignKey(name = "fk_users_to_submit_form"))
@@ -85,6 +87,9 @@ public class Users extends BaseEntity {
         user.answerPw = answerPw;
 
         return user;
+    }
+    public void updatePassword(String studentPassword) {
+        this.studentPassword = studentPassword;
     }
 
     // 비밀번호 암호화
