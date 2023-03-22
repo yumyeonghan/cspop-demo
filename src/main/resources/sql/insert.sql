@@ -15,3 +15,6 @@ INSERT INTO `CSPOP`.`notice_board` (`id`, `created_date`, `last_modified_date`, 
 INSERT INTO `CSPOP`.`notice_board` (`id`, `created_date`, `last_modified_date`, `fixed`, `text`, `title`, `views`, `admins_id`) VALUES ('7', '1999-10-13', '1999-10-13', 0, 'text1', 'text1', 1, '1');
 INSERT INTO `CSPOP`.`notice_board` (`id`, `created_date`, `last_modified_date`, `fixed`, `text`, `title`, `views`, `admins_id`) VALUES ('8', '1999-10-13', '1999-10-13', 1, 'text1', 'text1', 1, '1');
 INSERT INTO `CSPOP`.`notice_board` (`id`, `created_date`, `last_modified_date`, `fixed`, `text`, `title`, `views`, `admins_id`) VALUES ('9', '1999-10-13', '1999-10-13', 1, 'text1', 'text1', 1, '1');
+
+
+INSERT INTO `CSPOP`.`guidance_board`(`id`, `created_date`, `last_modified_date`, `text`) VALUES(1,NOW(),NOW(),'안녕하세요');

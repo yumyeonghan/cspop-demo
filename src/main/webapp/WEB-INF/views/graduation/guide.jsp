@@ -81,13 +81,10 @@
                         <div class="card-body p-4 p-lg-7">
                             <div>
                                 <div class="card table-responsive">
-                                    <c:forEach var="data" items="${dataL}">
                                         <p class="bi-text-indent-left"> ${data.text}</p>
-
                                         <button style="width: 80px; height: 30px;" type="submit"
                                                 onclick="location.href='modifyGuide/${data.id}'">수정
                                         </button>
-                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
