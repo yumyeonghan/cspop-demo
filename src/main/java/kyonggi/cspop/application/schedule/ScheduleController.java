@@ -1,6 +1,7 @@
 package kyonggi.cspop.application.schedule;
 
 import kyonggi.cspop.application.schedule.dto.*;
+import kyonggi.cspop.application.schedule.dto.scheduleBoarad.*;
 import kyonggi.cspop.domain.board.ScheduleBoard;
 import kyonggi.cspop.domain.board.service.ScheduleBoardService;
 import kyonggi.cspop.domain.schedule.Schedules;
@@ -47,14 +48,6 @@ public class ScheduleController {
         return "graduation/scheduleModify";
     }
 
-    @PostMapping("/scheduleModify/{id}")
-    public String scheduleModify(@PathVariable Long id, ScheduleDto scheduleDto) {
-
-        //데이터 수정(update)
-        scheduleBoardService.updateSchedules(id, scheduleDto);
-        return "redirect:../schedule";
-    }
-
     //세부 내용 수정 view
     @GetMapping("/scheduleBoardModify/{id}")
     public String scheduleBoardModifyForm(@PathVariable Long id, Model model) {
@@ -83,7 +76,7 @@ public class ScheduleController {
         return "redirect:../schedule";
     }
 
-    //AJAX 통신용 API
+    //AJAX 통신용 API 진행일정 텍스트
     @PostMapping("/scheduleBoard/modify/receivedText")
     public ResponseEntity<Void> modifyReceivedText(@RequestBody ReceivedText receivedText) {
         scheduleBoardService.updateReceivedText(receivedText.getReceivedText());
@@ -91,32 +84,39 @@ public class ScheduleController {
     }
 
     @PostMapping("/scheduleBoard/modify/proposalText")
-    public ResponseEntity<Void> modifyReceivedText(@RequestBody ProposalText proposalText) {
+    public ResponseEntity<Void> modifyProposalText(@RequestBody ProposalText proposalText) {
         scheduleBoardService.updateProposalText(proposalText.getProposalText());
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/scheduleBoard/modify/interimReportText")
-    public ResponseEntity<Void> modifyReceivedText(@RequestBody InterimReportText interimReportText) {
+    public ResponseEntity<Void> modifyInterimReportText(@RequestBody InterimReportText interimReportText) {
         scheduleBoardService.updateInterimReportText(interimReportText.getInterimReportText());
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/scheduleBoard/modify/finalReportText")
-    public ResponseEntity<Void> modifyReceivedText(@RequestBody FinalReportText finalReportText) {
+    public ResponseEntity<Void> modifyFinalReportText(@RequestBody FinalReportText finalReportText) {
         scheduleBoardService.updateFinalReportText(finalReportText.getFinalReportText());
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/scheduleBoard/modify/finalPassText")
-    public ResponseEntity<Void> modifyReceivedText(@RequestBody FinalPassText finalPassText) {
+    public ResponseEntity<Void> modifyFinalPassText(@RequestBody FinalPassText finalPassText) {
         scheduleBoardService.updateFinalPassText(finalPassText.getFinalPassText());
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/scheduleBoard/modify/otherQualificationsText")
-    public ResponseEntity<Void> modifyReceivedText(@RequestBody OtherQualificationsText otherQualificationsText) {
+    public ResponseEntity<Void> modifyOtherQualificationsText(@RequestBody OtherQualificationsText otherQualificationsText) {
         scheduleBoardService.updateOtherQualificationsText(otherQualificationsText.getOtherQualificationsText());
+        return ResponseEntity.noContent().build();
+    }
+
+    //AJAX 통신용 API 진행일정 테이블
+    @PostMapping("/schedule/modify/{id}")
+    public ResponseEntity<Void> scheduleModify(@PathVariable Long id, @RequestBody ScheduleDto scheduleDto) {
+        scheduleBoardService.updateSchedules(id, scheduleDto);
         return ResponseEntity.noContent().build();
     }
 }

@@ -40,6 +40,19 @@ public class Schedules extends BaseEntity {
     public void  updateInfo(ScheduleDto scheduleDto) {
         this.startDate = scheduleDto.getStartDate();
         this.endDate = scheduleDto.getEndDate();
-        this.scheduleState = scheduleDto.getState();
+        LocalDate now = LocalDate.now();
+
+        ScheduleState state;
+        if (now.isAfter(endDate)) {
+            state = ScheduleState.valueOf("END");
+        }
+        else if (now.isBefore(startDate)){
+            state = ScheduleState.valueOf("WAIT");
+        }
+        else{
+            state = ScheduleState.valueOf("PROCEEDING");
+        }
+
+        this.scheduleState = state;
     }
 }

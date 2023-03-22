@@ -1,4 +1,4 @@
-package kyonggi.cspop.application.schedule.dto;
+package kyonggi.cspop.application.schedule.dto.scheduleBoarad;
 
 import lombok.Data;
 
