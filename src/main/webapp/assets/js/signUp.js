@@ -44,11 +44,6 @@ function validateId() {
         alert('아이디가 형식에 맞지 않습니다.');
         return false;
     }
-    //아이디 중복확인
-    if (isCheckedId === 0 || isChangedId === 1) {
-        alert("아이디 중복 확인을 해주세요");
-        return false;
-    }
 
     return true;
 }
@@ -112,6 +107,11 @@ function validateUserInfo() {
 // 회원가입 함수
 function signUp(event) {
     event.preventDefault();
+    //아이디 중복확인
+    if (isCheckedId === 0 || isChangedId === 1) {
+        alert("아이디 중복 확인을 해주세요");
+        return false;
+    }
     // 아이디 유효성 검사
     if (validateId() === false) {
         return;
@@ -153,6 +153,10 @@ function signUp(event) {
 
 //아이디 중복 확인 함수 ---> 따로 통신해야함
 function checkId() {
+    // 아이디 유효성 검사
+    if (validateId() === false) {
+        return;
+    }
     // api/user/duplicate-check
     const studentId = $(`#id`).val();
     let userData = {
