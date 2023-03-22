@@ -1,12 +1,12 @@
 package kyonggi.cspop.application.schedule;
 
+import kyonggi.cspop.application.schedule.dto.*;
 import kyonggi.cspop.domain.board.ScheduleBoard;
 import kyonggi.cspop.domain.board.service.ScheduleBoardService;
 import kyonggi.cspop.domain.schedule.Schedules;
-import kyonggi.cspop.application.schedule.dto.ScheduleBoardDto;
-import kyonggi.cspop.application.schedule.dto.ScheduleDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -81,5 +81,42 @@ public class ScheduleController {
         //데이터 수정(update)
         scheduleBoardService.updateScheduleBoard(id, scheduleBoardDto);
         return "redirect:../schedule";
+    }
+
+    //AJAX 통신용 API
+    @PostMapping("/scheduleBoard/modify/receivedText")
+    public ResponseEntity<Void> modifyReceivedText(@RequestBody ReceivedText receivedText) {
+        scheduleBoardService.updateReceivedText(receivedText.getReceivedText());
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/scheduleBoard/modify/proposalText")
+    public ResponseEntity<Void> modifyReceivedText(@RequestBody ProposalText proposalText) {
+        scheduleBoardService.updateProposalText(proposalText.getProposalText());
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/scheduleBoard/modify/interimReportText")
+    public ResponseEntity<Void> modifyReceivedText(@RequestBody InterimReportText interimReportText) {
+        scheduleBoardService.updateInterimReportText(interimReportText.getInterimReportText());
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/scheduleBoard/modify/finalReportText")
+    public ResponseEntity<Void> modifyReceivedText(@RequestBody FinalReportText finalReportText) {
+        scheduleBoardService.updateFinalReportText(finalReportText.getFinalReportText());
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/scheduleBoard/modify/finalPassText")
+    public ResponseEntity<Void> modifyReceivedText(@RequestBody FinalPassText finalPassText) {
+        scheduleBoardService.updateFinalPassText(finalPassText.getFinalPassText());
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/scheduleBoard/modify/otherQualificationsText")
+    public ResponseEntity<Void> modifyReceivedText(@RequestBody OtherQualificationsText otherQualificationsText) {
+        scheduleBoardService.updateOtherQualificationsText(otherQualificationsText.getOtherQualificationsText());
+        return ResponseEntity.noContent().build();
     }
 }

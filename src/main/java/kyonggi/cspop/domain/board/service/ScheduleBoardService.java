@@ -17,7 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ScheduleBoardService {
     private final ScheduleRepository scheduleRepository;
-
     private final ScheduleBoardRepository scheduleBoardRepository;
 
     //Schedules 로직
@@ -25,7 +24,7 @@ public class ScheduleBoardService {
         return scheduleRepository.findAll();
     }
 
-    public Schedules findByScheduleId(Long id){
+    public Schedules findByScheduleId(Long id) {
         return scheduleRepository.findById(id).get();
     }
 
@@ -41,7 +40,7 @@ public class ScheduleBoardService {
     }
 
     //ScheduleBoard 로직
-    public List<ScheduleBoard> findScheduleBoardList(){
+    public List<ScheduleBoard> findScheduleBoardList() {
         return scheduleBoardRepository.findAll();
     }
 
@@ -53,5 +52,36 @@ public class ScheduleBoardService {
     public void updateScheduleBoard(Long id, ScheduleBoardDto scheduleBoardDto) {
         ScheduleBoard scheduleBoard = findByScheduleBoardId(id);
         scheduleBoard.updateInfo(scheduleBoardDto);
+    }
+
+    //AJAX 통신용 API Service logic
+    @Transactional
+    public void updateReceivedText(String receivedText) {
+        scheduleBoardRepository.findById(1l).get().updateReceivedText(receivedText);
+    }
+
+    @Transactional
+    public void updateProposalText(String proposalText) {
+        scheduleBoardRepository.findById(1l).get().updateProposalText(proposalText);
+    }
+
+    @Transactional
+    public void updateInterimReportText(String interimReportText) {
+        scheduleBoardRepository.findById(1l).get().updateInterimReportText(interimReportText);
+    }
+
+    @Transactional
+    public void updateFinalReportText(String finalReportText) {
+        scheduleBoardRepository.findById(1l).get().updateFinalReportText(finalReportText);
+    }
+
+    @Transactional
+    public void updateFinalPassText(String finalPassText) {
+        scheduleBoardRepository.findById(1l).get().updateFinalPassText(finalPassText);
+    }
+
+    @Transactional
+    public void updateOtherQualificationsText(String otherQualificationsText) {
+        scheduleBoardRepository.findById(1l).get().updateOtherQualificationsText(otherQualificationsText);
     }
 }
