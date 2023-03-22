@@ -212,11 +212,11 @@
         height: 200,
     })
 
-    let selectValue = $('#selectValue').val()
+
     // let legacyText = ${dataL2[0].receivedText};
     // 삭제하지 마세요
 
-    function dateSubmit(){
+    function dateSubmit(){ // tableId값을 통해 어떤 row값이 수정되는지 체크하여 업데이트함
         let tableId = $(`#tableId`).val()
         let startDate = $(`#start-date`).val()
         let endDate = $(`#end-date`).val()
@@ -237,8 +237,9 @@
     }
 
     function textSubmit(){
+        let selectValue = $('#selectValue').val()
         let modifyText = CKEDITOR.instances.editor.getData();
-        if (modifyText.length !== 0){
+        if (modifyText.length !== 0){ // 변경된 텍스트의 길이가 0일경우에는 ajax가 일어나지 않음.
             const data = {
                 receivedText: modifyText,
                 proposalText: modifyText,
