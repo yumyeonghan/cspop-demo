@@ -26,10 +26,20 @@
     <!-- Theme CSS -->
     <link rel="stylesheet" href="../../../assets/css/theme.min.css">
     <style>
-        body{
-            width:110%;
+        body {
+            width: 100%;
         }
-    </style> 
+    
+        /* Default styles for larger screens */
+        input::placeholder {
+            font-size: 12.5px;
+        }
+        
+        .form-label {
+            font-size: .975rem;
+            font-weight: 750;
+        }
+    </style>
 </head>
 
 <body class="bg-light">
@@ -38,12 +48,12 @@
 <div class="d-flex align-items-center position-relative vh-50">
 
 
-    <div class="col-lg-5 col-xl-4 d-none d-lg-flex border-top border-primary border-4 align-items-center vh-50 px-0"
+    <!-- <div class="col-lg-5 col-xl-4 d-none d-lg-flex border-top border-primary border-4 align-items-center vh-50 px-0"
          style="background-image: url(../assets/images/register-img.jpg); background-position:13% 50%;">
-    </div>
-    <div class="container">
-        <div class="row g-0">
-            <div class="col-md-8 col-lg-7 col-xl-6 offset-md-2 offset-lg-2 offset-xl-3 space-top-3 space-lg-0">
+    </div> -->
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="row">
+            <!-- <div class="col-md-8 col-lg-7 col-xl-6 offset-md-2 offset-lg-2 offset-xl-3 space-top-3 space-lg-0"> -->
                 <!-- Form -->
                 <div class="bg-white p-4 p-xl-6 p-xxl-8 p-lg-4 rounded-3 border">
 <%--                    <form id="form" action="/api/home" method="get">--%>
@@ -136,7 +146,7 @@
 <%--                    </form>--%>
                 </div>
                 <!-- End Form -->
-            </div>
+            <!-- </div> -->
         </div>
     </div>
 
