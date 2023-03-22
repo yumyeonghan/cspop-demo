@@ -119,19 +119,22 @@
                         <hr><br>
                         <c:forEach var="data" items="${dataL2}">
                             <h4 class="alert-light-info">신청접수</h4>
-                            <p class="bi-text-indent-left">${data.receivedText}</p>
-                            <br><br>
+                            <p>${data.receivedText}</p>
+                            <br>
                             <h4 class="alert-light-info">제안서</h4>
-                            <p class="bi-text-indent-left">${data.proposalText}</p>
-                            <br><br>
+                            <p>${data.proposalText}</p>
+                            <br>
                             <h4 class="alert-light-info">중간보고서</h4>
-                            <p class="bi-text-indent-left">${data.interimReportText}</p><br><br>
+                            <p>${data.interimReportText}</p>
+                            <br>
                             <h4 class="alert-light-info">최종보고서</h4>
-                            <p class="bi-text-indent-left">${data.finalReportText}</p><br><br>
+                            <p>${data.finalReportText}</p>
+                            <br>
                             <h4 class="alert-light-info">최종통과</h4>
-                            <p class="bi-text-indent-left">${data.finalPassText}</p><br><br>
+                            <p>${data.finalPassText}</p>
+                            <br>
                             <h4 class="alert-light-info">기타자격</h4>
-                            <p class="bi-text-indent-left">${data.otherQualificationsText}</p>
+                            <p>${data.otherQualificationsText}</p>
                             <br>
 <%--                            <button style="width: 80px; height: 30px;" type="submit" onclick="location.href='scheduleBoardModify/${data.id}'">수정</button>--%>
                             <br>
@@ -139,7 +142,7 @@
                     </div>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        Launch static backdrop modal
+                        수정
                     </button>
                     <!-- Modal -->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
