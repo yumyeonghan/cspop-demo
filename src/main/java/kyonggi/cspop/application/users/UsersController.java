@@ -30,6 +30,7 @@ public class UsersController {
         return ResponseEntity.noContent().build();
     }
 
+    //학번 유무 체크
     @PostMapping("/passwordQuestion")
     public ResponseEntity<Void> checkUserId(@NotBlank @RequestBody Map<String, String> studentId) {
 
@@ -37,11 +38,18 @@ public class UsersController {
         return ResponseEntity.noContent().build();
     }
 
+    //비밀번호 답 체크
+    @PostMapping("/answerPassword")
+    public ResponseEntity<Void> checkAnswerPw(@NotBlank @RequestBody Map<String, String> answerPw) {
+        //answer 체크
+        usersService.checkExistPasswordAnswer(answerPw.get("answerPw"));
+
+        return ResponseEntity.noContent().build();
+    }
+
+    //학번에 따른 비밀번호 수정
     @PostMapping("/editPassword/{studentId}")
     public String updatePassword(@PathVariable String studentId, @NotBlank @RequestBody UserPasswordRequestDto userPasswordRequestDto) {
-
-        //answer 체크
-        //usersService.checkExistPasswordAnswer(answerPw.get("answerPw"));
 
         //비밀번호 변경
         usersService.updatePassword(studentId, userPasswordRequestDto);
