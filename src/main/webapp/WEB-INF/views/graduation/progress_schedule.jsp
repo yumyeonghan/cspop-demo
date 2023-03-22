@@ -99,7 +99,7 @@
                                             </th>
                                         </tr>
                                         </thead>
-                                        <c:forEach var="data" items="${dataL}">
+                                        <c:forEach var="data" items="${schedules}">
                                             <tbody>
                                             <!--enum type stepToString-->
                                             <tr style="text-align: center">
@@ -117,7 +117,7 @@
 
                         <!--상세 내용 양식 조정 중-->
                         <hr><br>
-                        <c:forEach var="data" items="${dataL2}">
+                        <c:forEach var="data" items="${schedulesTextList}">
                             <h4 class="alert-light-info">신청접수</h4>
                             <p>${data.receivedText}</p>
                             <br>

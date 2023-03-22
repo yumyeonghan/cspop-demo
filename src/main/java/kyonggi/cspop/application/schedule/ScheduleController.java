@@ -29,12 +29,12 @@ public class ScheduleController {
     public String showSchedule(Model model) {
 
         //테이블 데이터 출력
-        List<Schedules> dataList = scheduleBoardService.findScheduleList();
-        model.addAttribute("dataL", dataList);
+        List<Schedules> schedules = scheduleBoardService.findScheduleList();
+        model.addAttribute("schedules", schedules);
 
         //각 테이블 컬럼에 해당하는 세부 내용 출력
-        List<ScheduleBoard> dataList2 = scheduleBoardService.findScheduleBoardList();
-        model.addAttribute("dataL2", dataList2);
+        List<ScheduleBoard> schedulesTextList = scheduleBoardService.findScheduleBoardList();
+        model.addAttribute("schedulesTextList", schedulesTextList);
 
         return "graduation/progress_schedule";
     }
