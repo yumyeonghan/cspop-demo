@@ -130,7 +130,7 @@ function signUp(event) {
         studentPassword: $(`#password`).val(),
         confirmPassword: $(`#confirmPassword`).val(),//비밀번호 확인
         studentName: $(`#name`).val(),
-        sex: $(`#gender`).val(),
+        sex: $('input[name="gender"]:checked').val(),
         birth: "2023-09-01",
         email: $(`#email`).val(),
         phoneNumber: $(`#phone`).val(),
