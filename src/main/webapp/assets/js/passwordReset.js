@@ -104,14 +104,14 @@ function resetPassword() {
         return;
     }
 
+    const studentId = $(`#id`).val();
     let editData = {
-        studentId: $(`#id`).val(),
         studentPassword: $(`#password`).val(),
         answerPw: $(`#answerPw`).val(),
     }
 
     $.ajax({
-        url: "/api/editPassword",
+        url: `/api/editPassword?studentid=${studentId}`,
         type: "post",
         data: JSON.stringify(editData),
         contentType: "application/json; charset=utf-8",
