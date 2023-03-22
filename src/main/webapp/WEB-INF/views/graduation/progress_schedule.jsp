@@ -40,6 +40,7 @@
 <%@include file="../common/sessionController.jsp"%>
 <body>
 <%@include file="../common/header.jsp"%>
+
 <section class="page-start">
     <!-- pageheader section -->
     <div class="bg-shape bg-secondary">
@@ -113,6 +114,37 @@
                                     </table>
                                 </div>
                             </div>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modifyTable">
+                                수정
+                            </button>
+                            <div class="modal fade" id="modifyTable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <select id="tableId">
+                                                <option value="1">신청접수</option>
+                                                <option value="2">제안서</option>
+                                                <option value="3">중간보고서</option>
+                                                <option value="4">최종보고서</option>
+                                                <option value="5">최종통과</option>
+                                                <option value="6">기타자격</option>
+                                            </select>
+                                        </div>
+                                        <div class="modal-body">
+                                            <label for="start-date">시작일:</label>
+                                            <input type="date" id="start-date" name="startDate">
+
+                                            <label for="end-date">종료일:</label>
+                                            <input type="date" id="end-date" name="endDate">
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                            <button type="button" class="btn btn-primary" onclick="dateSubmit()">수정</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!--상세 내용 양식 조정 중-->
@@ -159,11 +191,11 @@
                                     </select>
                                 </div>
                                 <div class="modal-body">
-                                    <textarea id="editor" name="editor" cols="30" rows="10"></textarea> 동적으로 들어가야 됨
+                                    <textarea id="editor" name="editor" cols="30" rows="10"></textarea>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                    <button type="button" class="btn btn-primary" onclick="submit()">수정</button>
+                                    <button type="button" class="btn btn-primary" onclick="textSubmit()">수정</button>
                                 </div>
                             </div>
                         </div>
@@ -175,23 +207,25 @@
 </section>
 <%@include file="../common/commonJS.jsp" %>
 <script>
+
     CKEDITOR.replace('editor',{
         height: 200,
     })
-    function submit(){
-        let selectValue = $('#selectValue').val()
-        let modifyText = CKEDITOR.instances.editor.getData();
 
+    let selectValue = $('#selectValue').val()
+    // let legacyText = ${dataL2[0].receivedText};
+    // 삭제하지 마세요
+
+    function dateSubmit(){
+        let tableId = $(`#tableId`).val()
+        let startDate = $(`#start-date`).val()
+        let endDate = $(`#end-date`).val()
         const data = {
-            receivedText: modifyText,
-            proposalText: modifyText,
-            interimReportText: modifyText,
-            finalReportText: modifyText,
-            finalPassText: modifyText,
-            otherQualificationsText: modifyText,
-        };
+            "startDate" :startDate,
+            "endDate": endDate
+        }
         $.ajax({
-            url: "/api/graduation/scheduleBoard/modify/"+selectValue,
+            url: "/api/graduation/schedule/modify/"+tableId,
             type: "post",
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
@@ -200,6 +234,32 @@
                 window.location.reload();
             }
         })
+    }
+
+    function textSubmit(){
+        let modifyText = CKEDITOR.instances.editor.getData();
+        if (modifyText.length !== 0){
+            const data = {
+                receivedText: modifyText,
+                proposalText: modifyText,
+                interimReportText: modifyText,
+                finalReportText: modifyText,
+                finalPassText: modifyText,
+                otherQualificationsText: modifyText,
+            };
+            $.ajax({
+                url: "/api/graduation/scheduleBoard/modify/"+selectValue,
+                type: "post",
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                success: ()=>{
+                    alert("데이터 변경완료")
+                    window.location.reload();
+                }
+            })
+        }
+        else alert("빈칸을 채워주세요")
+
     }
 </script>
 </body>
