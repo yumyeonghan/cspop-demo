@@ -35,6 +35,7 @@
             margin-top: 5%;
         }
     </style>
+    <script src="../../../assets/js/ckeditor/ckeditor.js"></script>
 </head>
 <%@include file="../common/sessionController.jsp"%>
 <body>
@@ -132,10 +133,37 @@
                             <h4 class="alert-light-info">기타자격</h4>
                             <p class="bi-text-indent-left">${data.otherQualificationsText}</p>
                             <br>
-                            <button style="width: 80px; height: 30px;" type="submit"
-                                    onclick="location.href='scheduleBoardModify/${data.id}'">수정</button>
+<%--                            <button style="width: 80px; height: 30px;" type="submit" onclick="location.href='scheduleBoardModify/${data.id}'">수정</button>--%>
                             <br>
                         </c:forEach>
+                    </div>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Launch static backdrop modal
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <select id="selectValue">
+                                        <option value="receivedText">신청접수</option>
+                                        <option value="proposalText">제안서</option>
+                                        <option value="interimReportText">중간보고서</option>
+                                        <option value="finalReportText">최종보고서</option>
+                                        <option value="finalPassText">최종통과</option>
+                                        <option value="otherQualificationsText">기타자격</option>
+                                    </select>
+                                </div>
+                                <div class="modal-body">
+                                    <textarea id="editor" name="editor" cols="30" rows="10"></textarea> 동적으로 들어가야 됨
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                    <button type="button" class="btn btn-primary" onclick="submit()">수정</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -143,6 +171,34 @@
     </div>
 </section>
 <%@include file="../common/commonJS.jsp" %>
+<script>
+    CKEDITOR.replace('editor',{
+        height: 200,
+    })
+    function submit(){
+        let selectValue = $('#selectValue').val()
+        let modifyText = CKEDITOR.instances.editor.getData();
+
+        const data = {
+            receivedText: modifyText,
+            proposalText: modifyText,
+            interimReportText: modifyText,
+            finalReportText: modifyText,
+            finalPassText: modifyText,
+            otherQualificationsText: modifyText,
+        };
+        $.ajax({
+            url: "/api/graduation/scheduleBoard/modify/"+selectValue,
+            type: "post",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            success: ()=>{
+                alert("데이터 변경완료")
+                window.location.reload();
+            }
+        })
+    }
+</script>
 </body>
 </html>
 
