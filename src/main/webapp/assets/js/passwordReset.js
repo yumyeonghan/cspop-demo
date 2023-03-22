@@ -57,8 +57,8 @@ function validatePassword() {
     return true;
 }
 
-// 서버로부터 비밀번호 찾기 질문 가져오기
-function getPasswordQuestion(target) {
+//db로부터 저장된 학번가져오기
+function getStudentNumber(target) {
     if (validateId() === false) {
         return;
     }
@@ -86,8 +86,8 @@ function getPasswordQuestion(target) {
     })
 }
 
-// 서버에 비밀번호 리셋 요청 함수
-function resetPassword() {
+//학번에 해당하는 비밀번호 답 가져오기
+function passwordAnswer(target){
 
     // 아이디(학번) 유효성 검사
     if (validateId() === false) {
@@ -98,6 +98,33 @@ function resetPassword() {
         alert('질문의 답변을 입력해주세요.');
         return;
     }
+
+    let answerData = {
+        answerPw: $(`#answerPw`).val(),
+    }
+
+    $.ajax({
+        url: `/api/answerPassword`,
+        type: "post",
+        data: JSON.stringify(answerData),
+        contentType: "application/json; charset=utf-8",
+        dataTypes: "json",
+        success: (answerData) => {
+            $('#answerPw').attr('disabled', true);
+            $(target).attr("disabled", true);
+        }, error: (error) => alert(error.responseJSON.errorMessage)
+
+    })
+}
+
+// 서버에 비밀번호 리셋 요청 함수
+function resetPassword() {
+
+    // 아이디(학번) 유효성 검사
+    if (validateId() === false) {
+        return;
+    }
+
     // 비밀번호 유효성 검사
     if (validatePassword() === false) {
         return;
@@ -105,8 +132,7 @@ function resetPassword() {
 
     const studentId = $(`#id`).val();
     let editData = {
-        studentPassword: $(`#password`).val(),
-        answerPw: $(`#answerPw`).val(),
+        studentPassword: $(`#password`).val()
     }
 
     $.ajax({

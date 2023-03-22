@@ -48,7 +48,7 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="id" placeholder="학번을 입력해주세요."
                                            value="" required maxlength="9">
-                                    <button id="btnIdCheck" class="btn btn-primary" onclick="getPasswordQuestion(this)">확인</button>
+                                    <button id="btnIdCheck" class="btn btn-primary" onclick="getStudentNumber(this)">확인</button>
                                 </div>
                             </div>
                         </div>
@@ -59,6 +59,7 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="answerPw" placeholder="답을 입력해 주세요."
                                            value="" required maxlength="9">
+                                    <button id="btnAnswerCheck" class="btn btn-primary" onclick="passwordAnswer(this)">확인</button>
                                     <!--//아이디명 pwAnswer로 변경하였습니다-->
                                 </div>
                             </div>
