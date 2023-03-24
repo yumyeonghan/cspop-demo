@@ -36,9 +36,9 @@
         }
     </style>
 </head>
-<%@include file="../common/sessionController.jsp"%>
+<%@include file="../common/sessionController.jsp" %>
 <body>
-<%@include file="../common/header.jsp"%>
+<%@include file="../common/header.jsp" %>
 <section class="page-start">
     <!-- pageheader section -->
     <div class="bg-shape bg-secondary">
@@ -81,13 +81,14 @@
                         <div class="card-body p-4 p-lg-7">
                             <div>
                                 <div class="card table-responsive">
-                                    <c:forEach var="data" items="${dataL}">
-                                        <p class="bi-text-indent-left"> ${data.text}</p>
-
-                                        <button style="width: 80px; height: 30px;" type="submit"
-                                                onclick="location.href='modifyGuide/${data.id}'">수정
-                                        </button>
-                                    </c:forEach>
+                                    <div class="card-body">
+                                        <div class="row mt-2">
+                                            <div class="col-12">
+                                                <div class="card-text" style="height: 1300px">${data.text}</div>
+                                            </div>
+                                        </div>
+                                        <a href="modifyGuide/${data.id}" class="btn btn-primary text-white">수정</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

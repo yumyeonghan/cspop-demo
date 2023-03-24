@@ -1,40 +1,19 @@
 package kyonggi.cspop.application.schedule.dto;
 
-import kyonggi.cspop.domain.schedule.enums.ScheduleState;
-import lombok.Getter;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-@Getter
+@Data
 public class ScheduleDto {
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull
-    private final LocalDate startDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "값을 입력하세요")
+    private LocalDate startDate;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull
-    private final LocalDate endDate;
-
-    private final ScheduleState state;
-
-    private ScheduleDto(LocalDate startDate, LocalDate endDate) {
-        LocalDate now = LocalDate.now();
-
-        ScheduleState state;
-        if (now.isAfter(endDate)) {
-            state = ScheduleState.valueOf("END");
-        }
-        else if (now.isBefore(startDate)){
-            state = ScheduleState.valueOf("WAIT");
-        }
-        else{
-            state = ScheduleState.valueOf("PROCEEDING");
-        }
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.state = state;
-    }
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "값을 입력하세요")
+    private LocalDate endDate;
 }

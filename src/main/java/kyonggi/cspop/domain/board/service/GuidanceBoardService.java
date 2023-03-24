@@ -16,11 +16,6 @@ public class GuidanceBoardService {
 
     private final GuidanceBoardRepository guidanceBoardRepository;
 
-    //Schedules 로직
-    public List<GuidanceBoard> findGuideList() {
-        return guidanceBoardRepository.findAll();
-    }
-
     public GuidanceBoard findGuidanceId(Long id){
         return guidanceBoardRepository.findById(id).get();
     }

@@ -66,6 +66,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
+                                <h1 class="h2 text-white mb-2">안내 및 내규</h1>
                                 <p class="text-white-50 lead">
                                     글 수정하기
                                 </p>
@@ -90,7 +91,7 @@
                                         </c:if>
                                     </spring:hasBindErrors>
                                     <textarea id="editor" name="text">${data.text}</textarea>
-                                    <button type="submit" class="btn btn-default">수정</button>
+                                    <button type="submit" class="btn btn-primary">쓰기</button>
                                 </div>
                             </form>
                         </div>

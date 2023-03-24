@@ -22,29 +22,23 @@ public class GuidanceController {
 
     @GetMapping("/guide")
     public String guide(Model model) {
-
-        List<GuidanceBoard> guideList = guidanceBoardService.findGuideList();
-        model.addAttribute("dataL", guideList);
+        GuidanceBoard guidanceBoard = guidanceBoardService.findGuidanceId(1l);
+        model.addAttribute("data", guidanceBoard);
         return "graduation/guide";
     }
 
     @GetMapping("/modifyGuide/{guidanceBoardId}")
     public String guideModifyForm(@PathVariable Long guidanceBoardId, Model model) {
-
         GuidanceBoard guidanceBoard = guidanceBoardService.findGuidanceId(guidanceBoardId);
         model.addAttribute("data", new GuidanceViewDto(guidanceBoard));
-
         return "graduation/guidanceModify";
     }
 
     @PostMapping("/modifyGuide/{guidanceBoardId}")
     public String guideModify(@PathVariable Long guidanceBoardId, @Validated @ModelAttribute GuidanceBoardRequestDto guidanceBoardRequestDto, BindingResult result) {
-
         if (result.hasErrors()) {
             return "graduation/guidanceModify";
         }
-
-        //데이터 수정(update)
         guidanceBoardService.updateGuidanceBoard(guidanceBoardId, guidanceBoardRequestDto);
         return "redirect:../guide";
     }

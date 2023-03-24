@@ -1,9 +1,9 @@
 package kyonggi.cspop.domain.board;
 
-import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.application.schedule.dto.ScheduleBoardDto;
-import lombok.Getter;
+import kyonggi.cspop.domain.entity.BaseEntity;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicUpdate;
@@ -51,5 +51,29 @@ public class ScheduleBoard extends BaseEntity {
         this.finalReportText = scheduleBoardDto.getFinalReportText();
         this.finalPassText = scheduleBoardDto.getFinalPassText();
         this.otherQualificationsText = scheduleBoardDto.getOtherQualificationsText();
+    }
+
+    public void updateReceivedText(String receivedText) {
+        this.receivedText = receivedText;
+    }
+
+    public void updateProposalText(String proposalText) {
+        this.proposalText = proposalText;
+    }
+
+    public void updateInterimReportText(String interimReportText) {
+        this.interimReportText = interimReportText;
+    }
+
+    public void updateFinalReportText(String finalReportText) {
+        this.finalReportText = finalReportText;
+    }
+
+    public void updateFinalPassText(String finalPassText) {
+        this.finalPassText = finalPassText;
+    }
+
+    public void updateOtherQualificationsText(String otherQualificationsText) {
+        this.otherQualificationsText = otherQualificationsText;
     }
 }

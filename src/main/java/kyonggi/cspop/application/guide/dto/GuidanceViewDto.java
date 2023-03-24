@@ -5,12 +5,10 @@ import lombok.Data;
 @Data
 public class GuidanceViewDto {
 
-    Long id;
-
-    String text;
+    private Long id;
+    private String text;
 
     public GuidanceViewDto(GuidanceBoard guidanceBoard) {
-
         this.id = guidanceBoard.getId();
         this.text = guidanceBoard.getText();
     }
