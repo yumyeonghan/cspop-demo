@@ -36,7 +36,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="/api/graduation/progress_schedule" data-bs-display="static">
+                        <a class="nav-link " href="/api/graduation/schedule" data-bs-display="static">
                             진행일정
                         </a>
                     </li>
