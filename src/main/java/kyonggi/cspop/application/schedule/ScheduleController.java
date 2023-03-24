@@ -1,6 +1,5 @@
 package kyonggi.cspop.application.schedule;
 
-import kyonggi.cspop.application.schedule.dto.ScheduleBoardDto;
 import kyonggi.cspop.application.schedule.dto.ScheduleDto;
 import kyonggi.cspop.application.schedule.dto.scheduleBoarad.*;
 import kyonggi.cspop.domain.board.ScheduleBoard;
@@ -11,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,7 +33,7 @@ public class ScheduleController {
         List<ScheduleBoard> schedulesTextList = scheduleBoardService.findScheduleBoardList();
         model.addAttribute("schedulesTextList", schedulesTextList);
 
-        return "graduation/progress_schedule";
+        return "graduation/schedule/progress_schedule";
     }
 
     //AJAX 통신용 API 진행일정 텍스트
