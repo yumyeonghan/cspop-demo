@@ -16,17 +16,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Libs CSS -->
-    <link rel="stylesheet" href="../../../assets/libs/ion-rangeslider/css/ion.rangeSlider.min.css">
-    <link rel="stylesheet" href="../../../assets/libs/litepicker/dist/css/litepicker.css">
-    <link rel="stylesheet" href="../../../assets/libs/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../../../assets/libs/magnific-popup/dist/magnific-popup.css">
+    <link rel="stylesheet" href="../../../../assets/libs/ion-rangeslider/css/ion.rangeSlider.min.css">
+    <link rel="stylesheet" href="../../../../assets/libs/litepicker/dist/css/litepicker.css">
+    <link rel="stylesheet" href="../../../../assets/libs/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../../../assets/libs/magnific-popup/dist/magnific-popup.css">
     <!-- 부트스트랩 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- 부트스트랩 테이블 -->
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="../../../assets/css/theme.min.css">
+    <link rel="stylesheet" href="../../../../assets/css/theme.min.css">
     <style>
         .fixed-top {
             background-color: #672EBB;
@@ -39,9 +39,9 @@
 
 </head>
 
-<%@include file="../common/sessionController.jsp"%>
+<%@include file="../../common/sessionController.jsp" %>
 <body>
-<%@include file="../common/header.jsp"%>
+<%@include file="../../common/header.jsp" %>
 <section class="page-start">
     <!-- pageheader section -->
     <div class="bg-shape bg-secondary">
@@ -61,15 +61,15 @@
                                             <a href="/notice/find?page=0&size=10">공지사항</a>
                                         </li>
                                         <li class="breadcrumb-item active " aria-current="page">
-                                            글쓰기
+                                            글 수정하기
                                         </li>
                                     </ol>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
-                                <h1 class="h2 text-white mb-2">공지사항</h1>
+                                <h1 class="h2 text-white mb-2">${detailView.title}</h1>
                                 <p class="text-white-50 lead">
-                                    글쓰기
+                                    글 수정하기
                                 </p>
                             </div>
                         </div>
@@ -87,19 +87,21 @@
                             <form id="myForm" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <spring:hasBindErrors name="noticeBoardRequestDto">
-                                        <c:if test="${errors.hasFieldErrors('title') }">
+                                        <c:if test="${errors.hasFieldErrors('title')}">
                                             <span style="color: red">${errors.getFieldError( 'title' ).defaultMessage }</span>
                                         </c:if>
                                     </spring:hasBindErrors>
-                                    <input type="text" class="form-control" id="post_title" name="title" placeholder="제목 :">
+                                    <input type="text" class="form-control" id="post_title" name="title"
+                                           value="${detailView.title}" placeholder="제목 : ">
                                     <spring:hasBindErrors name="noticeBoardRequestDto">
-                                        <c:if test="${errors.hasFieldErrors('text') }">
+                                        <c:if test="${errors.hasFieldErrors('text')}">
                                             <span style="color: red">${errors.getFieldError( 'text' ).defaultMessage }</span>
                                         </c:if>
                                     </spring:hasBindErrors>
-                                    <textarea id="editor" name="text">${data}</textarea>
-                                    <input id="inputFile" type="file" name="files" multiple>
-                                    <button type="submit" class="btn btn-default">쓰기</button>
+                                    <textarea id="editor" name="text">${detailView.text}</textarea>
+                                    <%--저기에 텍스트 들어가면 됨--%>
+                                    <input id="inputFil정e" type="file" name="files" multiple>
+                                    <button type="submit" class="btn btn-default">수정</button>
                                 </div>
                             </form>
                         </div>
@@ -109,11 +111,11 @@
         </div>
     </div>
 </section>
-<%@include file="../common/commonJS.jsp" %>
-<script src="../../../assets/js/ckeditor/ckeditor.js"></script>
+<%@include file="../../common/commonJS.jsp" %>
+<script src="../../../../assets/js/ckeditor/ckeditor.js"></script>
 <script>
-<%--    api/notice/form--%>
-    CKEDITOR.replace('editor',{
+    <%--    api/notice/form--%>
+    CKEDITOR.replace('editor', {
         height: 500,
         allowedContent: true, // 허용되는 컨텐츠 설정
     })

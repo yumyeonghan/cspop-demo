@@ -61,14 +61,14 @@ public class NoticeBoardController {
         model.addAttribute("endBlockPage", endBlockPage);
         model.addAttribute("allNoticeBoard", allNoticeBoard);
 
-        return "graduation/notice";
+        return "graduation/notice/notice";
     }
 
     @PostMapping("api/graduation/form")
     public String saveNoticeBoard(HttpServletRequest request, @Validated @ModelAttribute NoticeBoardRequestDto noticeBoardRequestDto, BindingResult bindingResult, Model model) throws IOException {
         if (bindingResult.hasErrors()) {
             model.addAttribute("data", noticeBoardRequestDto.getText() != null ? noticeBoardRequestDto.getText() : "");
-            return "graduation/noticeForm";
+            return "graduation/notice/noticeForm";
         }
 
         UserSessionDto adminSession = (UserSessionDto) request.getSession().getAttribute(SessionFactory.CSPOP_SESSION_KEY);
@@ -113,20 +113,20 @@ public class NoticeBoardController {
         //자세히 보기 누르면 view + 1 돼야함.
         NoticeBoard detailNoticeBoard = noticeBoardService.findDetailNoticeBoard(noticeBoardId);
         model.addAttribute("detailView", new NoticeViewDto(detailNoticeBoard));
-        return "graduation/noticeDetail";
+        return "graduation/notice/noticeDetail";
     }
 
     @GetMapping("api/graduation/modifyForm/{noticeBoardId}")
     public String noticeModifyForm(@PathVariable Long noticeBoardId, Model model) {
         NoticeBoard findNoticeBoard = noticeBoardService.findNoticeBoard(noticeBoardId);
         model.addAttribute("detailView", new NoticeViewDto(findNoticeBoard));
-        return "graduation/noticeModifyForm";
+        return "graduation/notice/noticeModifyForm";
     }
 
     @PostMapping("api/graduation/modifyForm/{noticeBoardId}")
     public String noticeModify(@PathVariable Long noticeBoardId, @Validated @ModelAttribute NoticeBoardRequestDto noticeBoardRequestDto, BindingResult bindingResult, Model model) throws IOException {
         if (bindingResult.hasErrors()) {
-            return "graduation/noticeModifyForm";
+            return "graduation/notice/noticeModifyForm";
         }
         List<NoticeBoardUploadFile> storeFiles = fileStore.storeFiles(noticeBoardRequestDto.getFiles());
         noticeBoardService.updateNoticeBoard(noticeBoardId, noticeBoardRequestDto, storeFiles);

@@ -32,7 +32,7 @@ public class HomeController {
     public String excel() {return "excel/excelIndex";}
     
     @GetMapping("api/graduation/form")
-    public String noticeForm() {return "graduation/noticeForm";}
+    public String noticeForm() {return "graduation/notice/noticeForm";}
     @GetMapping("api/graduation/detail")
-    public String noticeDetail() {return "graduation/noticeDetail";}
+    public String noticeDetail() {return "graduation/notice/noticeDetail";}
 }
