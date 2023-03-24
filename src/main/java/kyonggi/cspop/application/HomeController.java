@@ -23,6 +23,11 @@ public class HomeController {
         return "account/signup";
     }
 
+    @GetMapping("api/passwordReset")
+    public String resetPassword(){
+        return "account/passwordReset";
+    }
+
     @GetMapping("api/excel")
     public String excel() {return "excel/excelIndex";}
     

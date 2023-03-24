@@ -10,7 +10,7 @@
 <html lang="en">
 
 <head>
-    <title>CSPOP</title>
+    <title>CSPOP : 회원가입</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,24 +25,39 @@
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="../../../assets/css/theme.min.css">
+    <style>
+        body {
+            width: 100%;
+        }
+    
+        /* Default styles for larger screens */
+        input::placeholder {
+            font-size: 12.5px;
+        }
+        
+        .form-label {
+            font-size: .975rem;
+            font-weight: 750;
+        }
+    </style>
 </head>
 
 <body class="bg-light">
 <!-- content section -->
 
-<div class="d-flex align-items-center position-relative vh-100">
+<div class="d-flex align-items-center position-relative vh-50">
 
 
-    <div class="col-lg-5 col-xl-4 d-none d-lg-flex border-top border-primary border-4 align-items-center vh-100 px-0"
+    <!-- <div class="col-lg-5 col-xl-4 d-none d-lg-flex border-top border-primary border-4 align-items-center vh-50 px-0"
          style="background-image: url(../assets/images/register-img.jpg); background-position:13% 50%;">
-    </div>
-    <div class="container">
-        <div class="row g-0">
-            <div class="col-md-8 col-lg-7 col-xl-6 offset-md-2 offset-lg-2 offset-xl-3 space-top-3 space-lg-0">
+    </div> -->
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="row">
+            <!-- <div class="col-md-8 col-lg-7 col-xl-6 offset-md-2 offset-lg-2 offset-xl-3 space-top-3 space-lg-0"> -->
                 <!-- Form -->
                 <div class="bg-white p-4 p-xl-6 p-xxl-8 p-lg-4 rounded-3 border">
 <%--                    <form id="form" action="/api/home" method="get">--%>
-                        <h1 class="mb-2 text-center h3 ">Register</h1>
+                        <h1 class="mb-2 text-center h3 ">회원가입</h1>
 
                         <!-- <div class="mb-3">
                             <label for="id" class="form-label">학번<span class="text-danger">*</span> </label>
@@ -61,18 +76,18 @@
                         </div>
                         <div class="mb-3 ">
                             <label for="password" class="form-label">비밀번호<span class="text-danger">*</span></label>
-                            <input type="password" id="password" class="form-control" placeholder="8글자 이상으로 설정하세요"
+                            <input type="password" id="password" class="form-control" placeholder="8~16자 영문 대소문자, 숫자, 특수문자를 사용하세요."
                                    required="">
                         </div>
                         <div class="mb-3 ">
                             <label for="password" class="form-label">비밀번호 확인<span
                                     class="text-danger">*</span></label>
-                            <input type="password" id="password2" class="form-control" placeholder="비밀번호 확인"
+                            <input type="password" id="confirmPassword" class="form-control" placeholder="비밀번호를 확인해주세요."
                                    required="">
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">이름<span class="text-danger">*</span></label>
-                            <input type="text" id="name" class="form-control" placeholder="이름을 입력해주세요" required="">
+                            <input type="text" id="name" class="form-control" placeholder="이름을 입력해주세요." required="">
                         </div>
                         <div class="md-3">
                             <label for="gender" class="form-label">성별</label>
@@ -89,38 +104,49 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="md-3">
+                        <div class="mb-3">
                             <label for="email" class="form-label">E-mail</label><span id="warningEmail"></span>
                             <div class="input-group">
                                 <input type="email" class="form-control" id="email" placeholder="E-mail을 입력해주세요.">
                             </div>
                         </div>
-                        <div class="col-12">
+
+                        <div class="mb-3">
                             <label for="phone" class="form-label">휴대폰 번호</label>
                             <input type="text" class="form-control" id="phone" placeholder="휴대폰 번호를 입력해주세요."
                                    required maxlength="13"/>
                         </div>
-                        <div class="col-12">
+                        <div class="mb-3">
                             <label for="major" class="form-label">학과</label>
                             <select class="form-select" id="major" required></select>
                             <div class="invalid-feedback">
                                 학과를 선택해 주세요
                             </div>
                         </div>
+                        <div class="col-12">
+                            <label for="questionPw" class="form-label">비밀번호 찾기 질문</label>
+                            <select class="form-select" id="questionPw" required></select>
+                            <div class="invalid-feedback">
+                                비밀번호 찾기 질문을 선택하시고, 답변을 입력해주세요.
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="answerPw" class="form-label"></label>
+                            <input type="text" class="form-control" id="answerPw" placeholder="답변을 입력해주세요.">
+                        </div>
                         <br>
-
                         <div class="d-grid">
-                            <button class="btn btn-primary" type="submit" onclick="signUp()" id="submit-button" >
+                            <button class="btn btn-primary" type="submit" onclick="signUp(event)" id="submit-button" >
                                 회원가입
                             </button>
                         </div>
-                        <p class="mt-3 mb-0 text-muted font-14">
-                            이미 회원입니까?<a href="/api/login">Login</a>
+                        <p class="mt-3 mb-0 text-muted font-17">
+                            이미 회원입니까? <a href="/api/login">Login</a>
                         </p>
 <%--                    </form>--%>
                 </div>
                 <!-- End Form -->
-            </div>
+            <!-- </div> -->
         </div>
     </div>
 
@@ -130,7 +156,7 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <%--account js include--%>
-<script src="../../../assets/js/account.js"></script>
+<script src="../../../assets/js/signUp.js"></script>
 <%@include file="../common/commonJS.jsp"%>
 </body>
 
