@@ -1,6 +1,6 @@
 package kyonggi.cspop.domain.board.service;
 
-import kyonggi.cspop.application.board.noticeBoard.dto.NoticeBoardRequestDto;
+import kyonggi.cspop.application.controller.board.notice.dto.NoticeBoardRequestDto;
 import kyonggi.cspop.domain.board.NoticeBoard;
 import kyonggi.cspop.domain.board.dto.NoticeBoardResponseDto;
 import kyonggi.cspop.domain.board.repository.NoticeBoardRepository;

@@ -1,6 +1,6 @@
 package kyonggi.cspop.domain.schedule;
 
-import kyonggi.cspop.application.schedule.dto.ScheduleDto;
+import kyonggi.cspop.application.controller.board.schedule.dto.ScheduleDto;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.schedule.enums.ScheduleState;
 import kyonggi.cspop.domain.schedule.enums.Step;

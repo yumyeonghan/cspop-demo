@@ -1,13 +1,11 @@
 package kyonggi.cspop.domain.board.service;
 
-import kyonggi.cspop.application.guide.dto.GuidanceBoardRequestDto;
+import kyonggi.cspop.application.controller.board.guide.dto.GuidanceBoardRequestDto;
 import kyonggi.cspop.domain.board.GuidanceBoard;
 import kyonggi.cspop.domain.board.repository.GuidanceBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional(readOnly = true)

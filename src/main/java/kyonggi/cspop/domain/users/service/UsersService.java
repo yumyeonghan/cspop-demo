@@ -1,6 +1,6 @@
 package kyonggi.cspop.domain.users.service;
 
-import kyonggi.cspop.application.users.dto.UserPasswordRequestDto;
+import kyonggi.cspop.application.controller.users.dto.UserPasswordRequestDto;
 import kyonggi.cspop.application.util.crypto.BCryptoPasswordEncoder;
 import kyonggi.cspop.application.util.crypto.PasswordEncoder;
 import kyonggi.cspop.domain.users.Users;

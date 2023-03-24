@@ -1,7 +1,6 @@
 package kyonggi.cspop.domain.board.service;
 
-import kyonggi.cspop.application.schedule.dto.ScheduleBoardDto;
-import kyonggi.cspop.application.schedule.dto.ScheduleDto;
+import kyonggi.cspop.application.controller.board.schedule.dto.ScheduleDto;
 import kyonggi.cspop.domain.board.ScheduleBoard;
 import kyonggi.cspop.domain.board.repository.ScheduleBoardRepository;
 import kyonggi.cspop.domain.board.repository.ScheduleRepository;

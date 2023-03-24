@@ -1,8 +1,8 @@
 package kyonggi.cspop.application;
 
-import kyonggi.cspop.application.board.noticeBoard.NoticeBoardController;
-import kyonggi.cspop.application.excel.ExcelBoardController;
-import kyonggi.cspop.application.users.UsersController;
+import kyonggi.cspop.application.controller.board.notice.NoticeBoardController;
+import kyonggi.cspop.application.controller.board.excel.graduate.ExcelBoardController;
+import kyonggi.cspop.application.controller.users.UsersController;
 import kyonggi.cspop.exception.CsPopException;
 import kyonggi.cspop.exception.ErrorResponse;
 import org.springframework.http.ResponseEntity;
