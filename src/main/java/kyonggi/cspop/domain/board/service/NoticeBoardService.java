@@ -1,6 +1,6 @@
 package kyonggi.cspop.domain.board.service;
 
-import kyonggi.cspop.application.board.noticeBoard.dto.NoticeBoardRequestDto;
+import kyonggi.cspop.application.controller.board.notice.dto.NoticeBoardRequestDto;
 import kyonggi.cspop.domain.board.NoticeBoard;
 import kyonggi.cspop.domain.board.dto.NoticeBoardResponseDto;
 import kyonggi.cspop.domain.board.repository.NoticeBoardRepository;
@@ -8,7 +8,6 @@ import kyonggi.cspop.domain.uploadfile.NoticeBoardUploadFile;
 import kyonggi.cspop.exception.CsPopErrorCode;
 import kyonggi.cspop.exception.CsPopException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-@Slf4j
 public class NoticeBoardService {
 
     private final NoticeBoardRepository noticeBoardRepository;

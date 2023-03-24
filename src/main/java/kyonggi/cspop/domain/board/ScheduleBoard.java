@@ -1,6 +1,6 @@
 package kyonggi.cspop.domain.board;
 
-import kyonggi.cspop.application.schedule.dto.ScheduleBoardDto;
+import kyonggi.cspop.application.controller.board.schedule.dto.ScheduleBoardDto;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Getter;

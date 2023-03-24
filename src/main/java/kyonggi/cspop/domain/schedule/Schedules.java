@@ -1,13 +1,12 @@
 package kyonggi.cspop.domain.schedule;
 
-import kyonggi.cspop.application.schedule.dto.ScheduleDto;
+import kyonggi.cspop.application.controller.board.schedule.dto.ScheduleDto;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.schedule.enums.ScheduleState;
 import kyonggi.cspop.domain.schedule.enums.Step;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -17,7 +16,6 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Slf4j
 @DynamicUpdate
 public class Schedules extends BaseEntity {
 
@@ -64,18 +62,15 @@ public class Schedules extends BaseEntity {
         if (now.isAfter(endDate)) {
             this.scheduleState = ScheduleState.valueOf("END");
             System.out.println("scheduleState = " + scheduleState);
-            log.info("End");
         }
         else if (now.isBefore(startDate)){
             this.scheduleState = ScheduleState.valueOf("WAIT");
             System.out.println("scheduleState = " + scheduleState);
-            log.info("wait");
 
         }
         else{
             this.scheduleState = ScheduleState.valueOf("PROCEEDING");
             System.out.println("scheduleState = " + scheduleState);
-            log.info("Proceeding");
         }
     }
 }
