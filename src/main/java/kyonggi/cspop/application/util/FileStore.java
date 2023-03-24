@@ -1,7 +1,6 @@
 package kyonggi.cspop.application.util;
 
 import kyonggi.cspop.domain.uploadfile.NoticeBoardUploadFile;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,7 +12,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-@Slf4j
 public class FileStore {
 
     @Value("${file.dir}")

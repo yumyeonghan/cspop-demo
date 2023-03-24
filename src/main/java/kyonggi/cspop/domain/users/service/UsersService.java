@@ -8,7 +8,6 @@ import kyonggi.cspop.domain.users.repository.UsersRepository;
 import kyonggi.cspop.exception.CsPopErrorCode;
 import kyonggi.cspop.exception.CsPopException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-@Slf4j
 public class UsersService implements UserDetailsService {
 
     private final UsersRepository usersRepository;
@@ -60,7 +58,6 @@ public class UsersService implements UserDetailsService {
         if (!usersRepository.existsByStudentId(studentId)) {
             throw new CsPopException(CsPopErrorCode.USER_NOT_FOUND);
         }
-        log.info("존재하는 아이디 = {}", studentId);
     }
 
     //저장되어있는 비밀번호 대답이 아니면 예외를 던짐
@@ -68,7 +65,6 @@ public class UsersService implements UserDetailsService {
         if (!usersRepository.existsUsersByAnswerPw(answerPw)){
             throw new CsPopException(CsPopErrorCode.ANSWER_PASSWORD_NOT_FOUND);
         }
-        log.info("비밀번호 답 = {}", answerPw);
     }
 
     //비밀번호 재설정

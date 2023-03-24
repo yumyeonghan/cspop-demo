@@ -4,7 +4,7 @@ import kyonggi.cspop.application.controller.login.dto.LoginDto;
 import kyonggi.cspop.domain.login.LoginService;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,19 +14,19 @@ import java.util.Objects;
 
 import static kyonggi.cspop.application.SessionFactory.CSPOP_SESSION_KEY;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping(("/api"))
-@Slf4j
 public class LoginController {
 
     private final LoginService loginService;
 
-    @GetMapping("api/login")
+    @GetMapping("/login")
     public String login() {
         return "account/login";
     }
 
+    @ResponseBody
     @PostMapping("/login/auth")
     public String login(@Validated @RequestBody LoginDto loginDto, HttpServletRequest request) {
         UserSessionDto adminSession = loginService.loginAsAdmin(loginDto.getLoginId(), loginDto.getLoginPassword());
@@ -39,6 +39,7 @@ public class LoginController {
         return "/api/home";
     }
 
+    @ResponseBody
     @PostMapping("/logout")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);

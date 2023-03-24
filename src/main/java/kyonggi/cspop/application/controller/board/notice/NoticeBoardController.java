@@ -13,7 +13,6 @@ import kyonggi.cspop.domain.board.service.NoticeBoardService;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;
 import kyonggi.cspop.domain.uploadfile.NoticeBoardUploadFile;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -36,7 +35,6 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 public class NoticeBoardController {
 
     @Value("${file.dir}")

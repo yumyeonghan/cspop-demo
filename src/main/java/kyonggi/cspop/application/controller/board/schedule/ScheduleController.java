@@ -6,7 +6,6 @@ import kyonggi.cspop.domain.board.ScheduleBoard;
 import kyonggi.cspop.domain.board.service.ScheduleBoardService;
 import kyonggi.cspop.domain.schedule.Schedules;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +15,6 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 @RequestMapping("/api/graduation")
 public class ScheduleController {
 

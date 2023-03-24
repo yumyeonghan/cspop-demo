@@ -1,4 +1,4 @@
-package kyonggi.cspop.application;
+package kyonggi.cspop.application.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
