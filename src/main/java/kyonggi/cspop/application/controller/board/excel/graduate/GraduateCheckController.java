@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,23 +28,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+//졸업자 조회 리스트 게시판 컨트롤러
 @Controller
 @RequiredArgsConstructor
-public class ExcelBoardController {
+@RequestMapping("/api/graduation")
+public class GraduateCheckController {
 
     private final ExcelBoardService excelBoardService;
 
-    @GetMapping("api/excel")
-    public String excel() {return "excel/excelIndex";}
 
-    @GetMapping("/excel")
+    @GetMapping("graduate_management")
     public String excel(Model model) {
-        List<ExcelBoard> dataList = excelBoardService.findExcelList();
-        model.addAttribute("dataL", dataList);
-        return "excel/excel";
+        List<ExcelBoard> graduationList = excelBoardService.findExcelList();
+        model.addAttribute("graduator", graduationList);
+        return "graduation/graduateManagement/graduation_list";
     }
 
-    @PostMapping("/excel.read")
+    @PostMapping("/graduate_management.read")
     public String upload(@RequestParam("file") MultipartFile file, Model model) throws IOException {
         //액셀 파일인지 검사
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
@@ -59,7 +60,7 @@ public class ExcelBoardController {
     }
 
     @SneakyThrows
-    @GetMapping("/excel.download")
+    @GetMapping("/graduate_management.download")
     public ResponseEntity<InputStreamResource> downloadExcel(HttpServletResponse response) {
 
         File tmpFile = getTmpFile();
