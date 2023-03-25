@@ -49,7 +49,7 @@
                     </c:if>
                     <c:if test="${fn:contains(userId, 'admin')}">
                         <li class="nav-item">
-                            <a class="nav-link " href="/api/graduation/target_management" data-bs-display="static">
+                            <a class="nav-link " href="/api/graduation/graduate_management" data-bs-display="static">
                                 졸업자 조회
                             </a>
                         </li>
@@ -93,6 +93,6 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <%--account js include--%>
-<script src="../../../assets/js/signup.js"></script>
+<script src="../../../../assets/js/signUp.js"></script>
 
 <!-- navigation close -->
