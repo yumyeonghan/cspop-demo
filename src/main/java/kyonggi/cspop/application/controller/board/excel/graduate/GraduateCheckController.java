@@ -194,8 +194,12 @@ public class GraduateCheckController {
     }
 
     private static void checkUploadFileExtension(String extension) {
+
+        if (extension.equals("")) {
+            throw new CsPopException(CsPopErrorCode.NO_UPLOAD_FILE);
+        }
         if (!extension.equals("xlsx") && !extension.equals("xls")) {
-            throw new CsPopException(CsPopErrorCode.INVALILD_UPLOAD_FILE_EXTENSION);
+            throw new CsPopException(CsPopErrorCode.INVALID_UPLOAD_FILE_EXTENSION);
         }
     }
 }
