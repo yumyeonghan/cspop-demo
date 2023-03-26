@@ -129,14 +129,10 @@
                                     </table>
                                 </div>
                             </div>
-                            <br><br><hr>
-                            <form action="graduate_management.read" method="post" enctype="multipart/form-data">
-                                <h5>엑셀 찾기: <input type="file" name="file"/></h5>
-                                <h5>엑셀 업로드: <input type="submit" value="업로드" /></h5>
-                            </form>
                             <form action="graduate_management.download" method="get">
-                                <h5>엑셀 다운로드: <input type="submit" id="excelDown" value="다운로드"/></h5>
+                                <button class="btn btn-primary btn-sm float-right">다운로드</button>
                             </form>
+                            <a href="/api/graduation/graduate_upload"><button class="btn btn-primary btn-sm float-right">파일 올리기</button></a>
                         </div>
                     </div>
                 </div>

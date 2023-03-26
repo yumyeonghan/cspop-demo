@@ -31,17 +31,22 @@ import java.util.Objects;
 //졸업자 조회 리스트 게시판 컨트롤러
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/api/graduation")
+@RequestMapping("api/graduation")
 public class GraduateCheckController {
 
     private final ExcelBoardService excelBoardService;
 
 
-    @GetMapping("graduate_management")
-    public String excel(Model model) {
+    @GetMapping("/graduate_management")
+    public String graduateCheck(Model model) {
         List<ExcelBoard> graduationList = excelBoardService.findExcelList();
         model.addAttribute("graduator", graduationList);
         return "graduation/graduateManagement/graduation_list";
+    }
+
+    @GetMapping("/graduate_upload")
+    public String graduateUpdateForm(){
+        return "graduation/graduateManagement/graduatorModifyForm";
     }
 
     @PostMapping("/graduate_management.read")
@@ -51,12 +56,12 @@ public class GraduateCheckController {
         checkUploadFileExtension(extension);
         //업로드 된 Excel 파일의 데이터를 ExcelBoard 객체 리스트 형태로 저장 (액셀 파일의 문자만 받고, 숫자는 못받는 버그 수정해야함)
         Sheet worksheet = getWorksheet(file, extension);
-        List<ExcelBoard> dataList = getExcelBoardList(worksheet);
+        List<ExcelBoard> graduationList = getExcelBoardList(worksheet);
 
-        excelBoardService.deleteExcelListAndUploadExcelList(dataList);
+        excelBoardService.deleteExcelListAndUploadExcelList(graduationList);
 
-        model.addAttribute("dataL", dataList);
-        return "excel/excel";
+        model.addAttribute("graduator", graduationList);
+        return "redirect:./graduate_management";
     }
 
     @SneakyThrows
@@ -162,13 +167,13 @@ public class GraduateCheckController {
     }
 
     private static List<ExcelBoard> getExcelBoardList(Sheet worksheet) {
-        List<ExcelBoard> dataList = new ArrayList<>();
+        List<ExcelBoard> graduationList = new ArrayList<>();
         for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
             Row row = worksheet.getRow(i);
             ExcelBoard data = ExcelBoard.createExcelBoard(row);
-            dataList.add(data);
+            graduationList.add(data);
         }
-        return dataList;
+        return graduationList;
     }
 
     private static Sheet getWorksheet(MultipartFile file, String extension) throws IOException {

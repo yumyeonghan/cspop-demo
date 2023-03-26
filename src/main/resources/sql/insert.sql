@@ -20,3 +20,8 @@ INSERT INTO `CSPOP`.`notice_board` (`id`, `created_date`, `last_modified_date`, 
 INSERT INTO `CSPOP`.`guidance_board`(`id`, `created_date`, `last_modified_date`, `text`) VALUES(1,NOW(),NOW(),'안녕하세요');
 insert into cspop.schedule_board(id, created_date, last_modified_date, final_pass_text, final_report_text, interim_report_text, other_qualifications_text, proposal_text, received_text)
 VALUES (1,NOW(),NOW(),'내용','내용','내용','내용','내용','내용');
+
+INSERT INTO `CSPOP`.`excel_board`(`id`, `created_date`, `last_modified_date`,`capstone_completion`,`graduation_date`,`other_qualifications`,`professor_name`,`step`,`state`,`student_id`,`student_name`)
+VALUES (1,NOW(),NOW(),'이수','2023-06-23','미제출','김인철','제안서','마감','201812345','이승훈');
+INSERT INTO `CSPOP`.`excel_board`(`id`, `created_date`, `last_modified_date`,`capstone_completion`,`graduation_date`,`other_qualifications`,`professor_name`,`step`,`state`,`student_id`,`student_name`)
+VALUES (2,NOW(),NOW(),'이수','2023-06-23','미제출','정경용','제안서','진행중','201814231','나영재');
