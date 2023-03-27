@@ -196,8 +196,5 @@ public class GraduateCheckController {
         if (!extension.equals("xlsx") && !extension.equals("xls")) {
             throw new CsPopException(CsPopErrorCode.INVALID_UPLOAD_FILE_EXTENSION);
         }
-        else{
-            throw new CsPopException(CsPopErrorCode.NO_SAME_CONTENT_EXTENSION);
-        }
     }
 }
