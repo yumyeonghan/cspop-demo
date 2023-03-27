@@ -31,6 +31,7 @@
         }
     </style>
     <script src="../../../../assets/js/ckeditor/ckeditor.js"></script>
+    <script src="../../../../assets/js/graduation.js"></script>
 </head>
 <%@include file="../../common/sessionController.jsp"%>
 <body>
@@ -132,7 +133,30 @@
                             <form action="graduate_management.download" method="get">
                                 <button class="btn btn-primary btn-sm float-right">다운로드</button>
                             </form>
-                            <a href="/api/graduation/graduate_upload"><button class="btn btn-primary btn-sm float-right">파일 올리기</button></a>
+                            <!-- <a href="/api/graduation/graduate_upload"><button class="btn btn-primary btn-sm float-right">파일 올리기</button></a> -->
+                            <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#modifyTable">파일 올리기</button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="modifyTable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3>파일 올리기</h3>
+                                        </div>
+                                        <form action="graduate_management.read" id="myForm" method="post" enctype="multipart/form-data">
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <input type="file" name="file" />
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                <button type="submit" class="btn btn-primary" onclick="uploadExcel(event)">업로드</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
