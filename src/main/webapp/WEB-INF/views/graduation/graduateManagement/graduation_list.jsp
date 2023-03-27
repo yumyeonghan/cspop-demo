@@ -130,11 +130,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <form action="graduate_management.download" method="get">
-                                <button class="btn btn-primary btn-sm float-right">다운로드</button>
-                            </form>
-                            <!-- <a href="/api/graduation/graduate_upload"><button class="btn btn-primary btn-sm float-right">파일 올리기</button></a> -->
-                            <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#modifyTable">파일 올리기</button>
+
                             <!-- Modal -->
                             <div class="modal fade" id="modifyTable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -159,6 +155,10 @@
                             </div>
                         </div>
                     </div>
+                    <form action="graduate_management.download" method="get">
+                        <button class="btn btn-primary btn-sm float-right">다운로드</button>
+                    </form>
+                    <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#modifyTable">파일 올리기</button>
                 </div>
             </div>
         </div>
