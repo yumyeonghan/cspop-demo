@@ -44,11 +44,6 @@ public class GraduateCheckController {
         return "graduation/graduateManagement/graduation_list";
     }
 
-    @GetMapping("/graduate_upload")
-    public String graduateUpdateForm(){
-        return "graduation/graduateManagement/graduatorModifyForm";
-    }
-
     @PostMapping("/graduate_management.read")
     public String upload(@RequestParam("file") MultipartFile file, Model model) throws IOException {
         //액셀 파일인지 검사
@@ -196,10 +191,13 @@ public class GraduateCheckController {
     private static void checkUploadFileExtension(String extension) {
 
         if (extension.equals("")) {
-            throw new CsPopException(CsPopErrorCode.NO_UPLOAD_FILE);
+            throw new CsPopException(CsPopErrorCode.NO_UPLOAD_FILE_EXTENSION);
         }
         if (!extension.equals("xlsx") && !extension.equals("xls")) {
             throw new CsPopException(CsPopErrorCode.INVALID_UPLOAD_FILE_EXTENSION);
+        }
+        else{
+            throw new CsPopException(CsPopErrorCode.NO_SAME_CONTENT_EXTENSION);
         }
     }
 }
