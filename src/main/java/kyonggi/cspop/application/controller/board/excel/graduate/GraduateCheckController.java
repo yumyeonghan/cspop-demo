@@ -1,6 +1,7 @@
 package kyonggi.cspop.application.controller.board.excel.graduate;
 
 import kyonggi.cspop.domain.board.ExcelBoard;
+import kyonggi.cspop.domain.board.dto.ExcelBoardResponseDto;
 import kyonggi.cspop.domain.board.service.ExcelBoardService;
 import kyonggi.cspop.exception.CsPopErrorCode;
 import kyonggi.cspop.exception.CsPopException;
@@ -12,6 +13,8 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -38,9 +41,19 @@ public class GraduateCheckController {
 
 
     @GetMapping("/graduate_management")
-    public String graduateCheck(Model model) {
-        List<ExcelBoard> graduationList = excelBoardService.findExcelList();
-        model.addAttribute("graduator", graduationList);
+    public String graduateForm(Pageable pageable, Model model) {
+        Page<ExcelBoardResponseDto> allExcelBoard = excelBoardService.findAllExcelBoard(pageable);
+
+        int pageNumber = allExcelBoard.getPageable().getPageNumber();
+        int totalPages = allExcelBoard.getTotalPages();
+        int pageBlock = 10;
+        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
+        int endBlockPage = startBlockPage + pageBlock - 1;
+        endBlockPage = totalPages < endBlockPage ? totalPages : endBlockPage;
+
+        model.addAttribute("startBlockPage", startBlockPage);
+        model.addAttribute("endBlockPage", endBlockPage);
+        model.addAttribute("graduator", allExcelBoard);
         return "graduation/graduateManagement/graduation_list";
     }
 
@@ -56,7 +69,7 @@ public class GraduateCheckController {
         excelBoardService.deleteExcelListAndUploadExcelList(graduationList);
 
         model.addAttribute("graduator", graduationList);
-        return "redirect:./graduate_management";
+        return "redirect:./graduate_management?page=0&size=10";
     }
 
     @SneakyThrows

@@ -111,7 +111,7 @@
                                             </th>
                                         </tr>
                                         </thead>
-                                        <c:forEach var="data" items="${graduator}" varStatus="count">
+                                        <c:forEach var="data" items="${graduator.content}" varStatus="count">
                                             <tbody>
                                             <!--enum type stepToString-->
                                             <tr style="text-align: center">
@@ -154,6 +154,43 @@
                                 </div>
                             </div>
                         </div>
+                        <!--페이징 영역 시작-->
+                        <div class="text-xs-center">
+                            <ul class="pagination justify-content-center">
+                                <!-- 이전 -->
+                                <c:choose>
+                                    <c:when test="${graduator.first}"></c:when>
+                                    <c:otherwise>
+                                        <li class="page-item"><a class="page-link" href="/api/graduation/graduate_management?page=0&size=10">처음</a></li>
+                                        <li class="page-item"><a class="page-link" href="/api/graduation/graduate_management?page=${graduator.number-1}&size=10">이전</a>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
+
+                                <!-- 페이지 그룹 -->
+                                <c:forEach begin="${startBlockPage}" end="${endBlockPage}" var="i">
+                                    <c:choose>
+                                        <c:when test="${graduator.pageable.pageNumber+1 == i}">
+                                            <li class="page-item disabled"><a class="page-link" href="/api/graduation/graduate_management?page=${i-1}&size=10">${i}</a>
+                                            </li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li class="page-item"><a class="page-link" href="/api/graduation/graduate_management?page=${i-1}&size=10">${i}</a>
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                                <!-- 다음 -->
+                                <c:choose>
+                                    <c:when test="${ulist.last}"></c:when>
+                                    <c:otherwise>
+                                        <li class="page-item "><a class="page-link" href="/api/graduation/graduate_management?page=${graduator.number+1}&size=10">다음</a></li>
+                                        <li class="page-item "><a class="page-link" href="/api/graduation/graduate_management?page=${graduator.totalPages-1}&size=10">마지막</a></li>
+                                    </c:otherwise>
+                                </c:choose>
+                            </ul>
+                        </div>
+                        <!-- 페이징 영역 끝 -->
                     </div>
                     <form action="graduate_management.download" method="get">
                         <button class="btn btn-primary btn-sm float-right">다운로드</button>

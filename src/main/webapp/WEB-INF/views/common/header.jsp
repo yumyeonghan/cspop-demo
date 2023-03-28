@@ -8,7 +8,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-default">
             <a class="navbar-brand" href="/api/home">
-                <img src="../../../assets/images/fitness/cspop_logo.png" alt="" width="100em">
+                <img src="../../../../assets/images/fitness/cspop_logo.png" alt="" width="100em">
             </a>
             <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbar-default" aria-controls="navbar-default"
@@ -49,7 +49,7 @@
                     </c:if>
                     <c:if test="${fn:contains(userId, 'admin')}">
                         <li class="nav-item">
-                            <a class="nav-link " href="/api/graduation/graduate_management" data-bs-display="static">
+                            <a class="nav-link " href="/api/graduation/graduate_management?page=0&size=10" data-bs-display="static">
                                 졸업자 조회
                             </a>
                         </li>
