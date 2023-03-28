@@ -19,7 +19,13 @@ function uploadExcel(event) {
         },
         error: (error) => {
             console.log("hi",error);
-            alert(error.responseJSON.errorMessage)
+
+            if(error.status === 500) {
+                alert("내용이 일치하지 않는 파일입니다.");
+            }
+            else{
+                alert(error.responseJSON.errorMessage);
+            }
         }
     });
 }
