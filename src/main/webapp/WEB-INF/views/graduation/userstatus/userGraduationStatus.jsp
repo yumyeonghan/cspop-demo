@@ -89,14 +89,14 @@
                                             </li>
                                         </ul>
                                         <div class="tab-content" id="pills-tabContent">
-                                            <div class="tab-pane fade Overview" id="pills-Overview" role="tabpanel" aria-labelledby="pills-Overview-tab">
-                                                <div>
-
+                                            <div class="tab-pane fade Overview active show" id="pills-Overview" role="tabpanel" aria-labelledby="pills-Overview-tab">
+                                                <div id="thesis">
+                                                    <p>test</p>
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade Curriculum" id="pills-Curriculum" role="tabpanel" aria-labelledby="pills-Curriculum-tab">
-                                                <div>
-
+                                                <div id="otherQualifications">
+                                                    <p>test</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -198,8 +198,25 @@
     </div>
 </section>
 <%@include file="../../common/commonJS.jsp" %>
-<script src="../../../../assets/js/detailPage.js">
-
+<script>
+<%--
+${userDetail.otherQualifications}
+${userDetail.thesis}
+--%>
+$(()=>{
+    let image;
+    if (${userDetail.otherQualifications} || ${userDetail.thesis}) { //졸업, 기타 요건 중 하나가 true일때,
+        if (${userDetail.thesis}) { // 논문이 true일때 기타요건에 들어갈 이미지
+            image = "other"
+            $('#otherQualifications').html(image)
+            //thesis의 내용을 넣는 js function이 들어감
+        } else if (${userDetail.otherQualifications}) { // 기타요건이 true일때 논문에 들어갈 이미지
+            image = "thesis"
+            $('#thesis').html(image)
+            //other의 내용을 넣는 js function이 들어감
+        }
+    }
+});
 </script>
 </body>
 </html>
