@@ -18,6 +18,7 @@ ${userDetail.graduationDate}
 ${userDetail.studentName}
 ${userDetail.otherQualifications}
 ${userDetail.department}
+${userDetail.advisor}
 
 </body>
 </html>

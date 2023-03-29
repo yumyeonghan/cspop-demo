@@ -14,6 +14,7 @@ public class UserDetailDto {
     private String studentName;
     private String department;
     private String otherQualifications;
+    private String advisor;
 
     public UserDetailDto(String studentId,
                          String studentName,
@@ -24,6 +25,6 @@ public class UserDetailDto {
         this.studentName = studentName;
         this.department = department;
         this.otherQualifications = "신청서 만들면";
-
+        this.advisor = "김도훈";
     }
 }
