@@ -12,6 +12,6 @@
     <title>CSPOP</title>
 </head>
 <body>
-
+유저별 졸업 진행 상황 테스트 뷰
 </body>
 </html>
