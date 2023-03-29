@@ -13,5 +13,11 @@
 </head>
 <body>
 유저별 졸업 진행 상황 테스트 뷰
+${userDetail.studentId}
+${userDetail.graduationDate}
+${userDetail.studentName}
+${userDetail.otherQualifications}
+${userDetail.department}
+
 </body>
 </html>
