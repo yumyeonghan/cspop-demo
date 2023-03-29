@@ -49,12 +49,12 @@ public class GraduateCheckController {
         int pageBlock = 10;
         int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
         int endBlockPage = startBlockPage + pageBlock - 1;
-        endBlockPage = totalPages < endBlockPage ? totalPages : endBlockPage;
+        endBlockPage = Math.min(totalPages, endBlockPage);
 
         model.addAttribute("startBlockPage", startBlockPage);
         model.addAttribute("endBlockPage", endBlockPage);
         model.addAttribute("graduator", allExcelBoard);
-        return "graduation/graduateManagement/graduation_list";
+        return "graduation/graduator/graduation_list";
     }
 
     @PostMapping("/graduate_management.read")
@@ -62,6 +62,7 @@ public class GraduateCheckController {
         //액셀 파일인지 검사
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
         checkUploadFileExtension(extension);
+
         //업로드 된 Excel 파일의 데이터를 ExcelBoard 객체 리스트 형태로 저장 (액셀 파일의 문자만 받고, 숫자는 못받는 버그 수정해야함)
         Sheet worksheet = getWorksheet(file, extension);
         List<ExcelBoard> graduationList = getExcelBoardList(worksheet);
@@ -178,6 +179,42 @@ public class GraduateCheckController {
         List<ExcelBoard> graduationList = new ArrayList<>();
         for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
             Row row = worksheet.getRow(i);
+
+            //들어온 값이 문자가 아닐 경우 문자열로 변환 (row 1 or 7)
+            for (Cell cell : row) {
+
+                if (cell.getCellType() != CellType.STRING) {
+                    double value = cell.getNumericCellValue();
+                    String stringValue = String.valueOf(value);
+
+                    StringBuilder row1 = new StringBuilder();
+
+                    if (stringValue.length()>5){
+                        for (int j=0;j<stringValue.length();j++) {
+                            char c = stringValue.charAt(j);
+
+                            if (c=='.')
+                                continue;
+
+                            if (c>='A' && c<='Z')
+                                break;
+
+                            row1.append(c);
+                        }
+                    }
+                    else{
+                    for (int j=0;j<stringValue.length();j++) {
+                            char c = stringValue.charAt(j);
+
+                            if (c == '.')
+                                break;
+
+                            row1.append(c);
+                        }
+                    }
+                    cell.setCellValue(row1.toString());
+                }
+            }
             ExcelBoard data = ExcelBoard.createExcelBoard(row);
             graduationList.add(data);
         }
