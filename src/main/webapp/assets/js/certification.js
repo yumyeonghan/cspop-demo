@@ -11,7 +11,7 @@ function uploadExcel(event) {
         data: data,
         processData: false,    
         contentType: false,
-        dataTypes: JSON,
+        dataTypes: "json",
         cache:false,
         success: (data) => {
             // console.log(data);
@@ -22,7 +22,7 @@ function uploadExcel(event) {
             console.log("hi",error);
 
             if(error.status === 500) {
-                alert("내용이 일치하지 않는 파일입니다.");
+                alert("형식은 같으나 내용이 일치하지 않는 파일입니다.");
             }
             else{
                 alert(error.responseJson.errorMessage);//
