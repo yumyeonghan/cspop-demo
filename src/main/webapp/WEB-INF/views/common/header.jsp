@@ -63,7 +63,7 @@
                     </c:if>
                     <c:if test="${not fn:contains(userId, 'admin')}">
                         <li class="nav-item">
-                            <a class="nav-link " href="/api/graduation/graduation_status" data-bs-display="static">
+                            <a class="nav-link " href="/api/userStatus" data-bs-display="static">
                                 나의 졸업 현황
                             </a>
                         </li>
