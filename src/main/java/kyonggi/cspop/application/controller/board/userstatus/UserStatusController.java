@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -32,11 +33,20 @@ public class UserStatusController {
     public String userStatusHome(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false)UserSessionDto userSessionDto,
                                  Model model) {
         Users user = usersRepository.findByStudentId(userSessionDto.getStudentId()).get();
+        Optional<ExcelBoard> excelByStudentId = excelBoardService.findExcelByStudentId(user.getStudentId());
+        if(Objects.isNull(user.getSubmitForm()) && excelByStudentId.isEmpty()) {
+            model.addAttribute("errorMessage", true);
+            return "index";
+        }
 
-        //유저의 submitForm 만들면 리팩토링 해야
-        UserDetailDto userDetailDto = new UserDetailDto(user.getStudentId(),
+        String advisor = excelByStudentId.get().getProfessorName();
+        UserDetailDto userDetailDto = new UserDetailDto(
+                user.getStudentId(),
                 user.getStudentName(),
-                user.getDepartment());
+                user.getDepartment(),
+                advisor != null ? advisor : "없음",
+                excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false
+                );
         model.addAttribute("userDetail", userDetailDto);
 
         return "graduation/userstatus/userGraduationStatus";

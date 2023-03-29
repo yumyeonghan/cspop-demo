@@ -1,30 +1,48 @@
 package kyonggi.cspop.application.controller.board.userstatus.dto;
 
-import kyonggi.cspop.domain.otherqualifications.OtherQualifications;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 public class UserDetailDto {
 
+    /**
+     * 유저별 진행상황 뷰 공통 속성
+     */
     private String studentId;
-    private String graduationDate;
+    private LocalDate graduationDate;
     private String studentName;
     private String department;
-    private String otherQualifications;
     private String advisor;
+    private boolean capstoneCompletionStatus;
+    //private String delayNumber;
+
+    /**
+     * 유저별 진행상황 뷰 분리될 속성
+     */
+    private boolean otherQualifications;
+    private boolean thesis;
 
     public UserDetailDto(String studentId,
                          String studentName,
-                         String department) {
+                         String department,
+                         String advisor,
+                         boolean capstoneCompletionStatus) {
 
         this.studentId = studentId;
-        this.graduationDate = "신청서 만들면";
+        this.graduationDate = LocalDate.now();
         this.studentName = studentName;
         this.department = department;
-        this.otherQualifications = "신청서 만들면";
-        this.advisor = "김도훈";
+        this.advisor = advisor;
+        this.capstoneCompletionStatus = capstoneCompletionStatus;
+
+        //신청서 만들면 거기서 꺼내와야함
+        this.otherQualifications = true;
+        this.thesis = false;
     }
+
+
+
+
 }
