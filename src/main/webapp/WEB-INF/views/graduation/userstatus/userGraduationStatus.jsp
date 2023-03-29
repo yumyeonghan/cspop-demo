@@ -80,23 +80,23 @@
                                     <div>
                                         <ul class="nav-pills-border nav nav-pills nav-justified mb-5 " id="pills-tab" role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link active fw-bold" id="pills-Overview-tab" data-bs-toggle="pill" href="#pills-Overview" role="tab" aria-controls="pills-Overview" aria-selected="true">
+                                                <a class="nav-link active fw-bold" id="thesis-tab-id" data-bs-toggle="pill" href="#thesis-id" role="tab" aria-controls="pills-Overview" aria-selected="true">
                                                     졸업 논문</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link fw-bold" id="pills-Curriculum-tab" data-bs-toggle="pill" href="#pills-Curriculum" role="tab" aria-controls="pills-Curriculum" aria-selected="false">
+                                                <a class="nav-link fw-bold" id="Qualifications-id" data-bs-toggle="pill" href="#Qualifications-tab" role="tab" aria-controls="pills-Curriculum" aria-selected="false">
                                                     기타 자격</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content" id="pills-tabContent">
-                                            <div class="tab-pane fade Overview active show" id="pills-Overview" role="tabpanel" aria-labelledby="pills-Overview-tab">
+                                            <div class="tab-pane fade Overview active show" id="thesis-id" role="tabpanel" aria-labelledby="thesis-tab-id">
                                                 <div id="thesis">
-                                                    <p>test</p>
+                                                    <div class="progress" style="height: 20px;" id="thesisPercent"></div>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane fade Curriculum" id="pills-Curriculum" role="tabpanel" aria-labelledby="pills-Curriculum-tab">
+                                            <div class="tab-pane fade Curriculum" id="Qualifications-tab" role="tabpanel" aria-labelledby="Qualifications-id">
                                                 <div id="otherQualifications">
-                                                    <p>test</p>
+                                                    <div class="progress" style="height: 20px;" id="otherPercent"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -207,16 +207,27 @@ $(()=>{
     let image;
     if (${userDetail.otherQualifications} || ${userDetail.thesis}) { //졸업, 기타 요건 중 하나가 true일때,
         if (${userDetail.thesis}) { // 논문이 true일때 기타요건에 들어갈 이미지
-            image = "other"
+            image = "논문으로 신청하셨습니다"
             $('#otherQualifications').html(image)
             //thesis의 내용을 넣는 js function이 들어감
         } else if (${userDetail.otherQualifications}) { // 기타요건이 true일때 논문에 들어갈 이미지
-            image = "thesis"
+            image = "기타 자격으로 신청하셨습니다."
             $('#thesis').html(image)
             //other의 내용을 넣는 js function이 들어감
         }
     }
 });
+$(() => { // 기타 자격 progress bar 추가 함수
+    let percentage = 50; // percent가 동적으로 변경되어야 함
+    let appendText = `<div class="progress-bar bg-success" role="progressbar" aria-label="Basic example" style="width: \${percentage}%" aria-valuenow="\${percentage}" aria-valuemin="0" aria-valuemax="100">\${percentage}%</div>`;
+    $('#otherPercent').html(appendText)
+});
+$(() => { // 논문 progress bar 추가 함수
+    let percentage = 50; // percent가 동적으로 변경되어야 함
+    let appendText = `<div class="progress-bar bg-success" role="progressbar" aria-label="Basic example" style="width: \${percentage}%" aria-valuenow="\${percentage}" aria-valuemin="0" aria-valuemax="100">\${percentage}%</div>`;
+    $('#thesisPercent').html(appendText)
+});
+
 </script>
 </body>
 </html>
