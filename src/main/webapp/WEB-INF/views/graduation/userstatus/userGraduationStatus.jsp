@@ -80,24 +80,26 @@
                                     <div>
                                         <ul class="nav-pills-border nav nav-pills nav-justified mb-5 " id="pills-tab" role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link active fw-bold" id="thesis-tab-id" data-bs-toggle="pill" href="#thesis-id" role="tab" aria-controls="pills-Overview" aria-selected="true">
+                                                <a class="nav-link active fw-bold" id="thesis-tab-id" data-bs-toggle="pill" href="#thesis-id" role="tab" aria-controls="thesis" aria-selected="true">
                                                     졸업 논문</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link fw-bold" id="Qualifications-id" data-bs-toggle="pill" href="#Qualifications-tab" role="tab" aria-controls="pills-Curriculum" aria-selected="false">
+                                                <a class="nav-link fw-bold" id="Qualifications-id" data-bs-toggle="pill" href="#Qualifications-tab" role="tab" aria-controls="Qualifications" aria-selected="false">
                                                     기타 자격</a>
                                             </li>
                                         </ul>
-                                        <div class="tab-content" id="pills-tabContent">
-                                            <div class="tab-pane fade Overview active show" id="thesis-id" role="tabpanel" aria-labelledby="thesis-tab-id">
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade active show" id="thesis-id" role="tabpanel" aria-labelledby="thesis-tab-id">
                                                 <div id="thesis">
                                                     <div class="progress" style="height: 20px;" id="thesisPercent"></div>
                                                 </div>
+                                                <div>table 자리</div>
                                             </div>
-                                            <div class="tab-pane fade Curriculum" id="Qualifications-tab" role="tabpanel" aria-labelledby="Qualifications-id">
+                                            <div class="tab-pane fade" id="Qualifications-tab" role="tabpanel" aria-labelledby="Qualifications-id">
                                                 <div id="otherQualifications">
                                                     <div class="progress" style="height: 20px;" id="otherPercent"></div>
                                                 </div>
+                                                <div>table 자리</div>
                                             </div>
                                         </div>
                                     </div>
