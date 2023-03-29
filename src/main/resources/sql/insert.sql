@@ -28,4 +28,4 @@ INSERT INTO `CSPOP`.`excel_board`(`id`, `created_date`, `last_modified_date`,`ca
 INSERT INTO `CSPOP`.`excel_board`(`id`, `created_date`, `last_modified_date`,`capstone_completion`,`graduation_date`,`other_qualifications`,`professor_name`,`step`,`state`,`student_id`,`student_name`)VALUES (2,NOW(),NOW(),'이수','2023-06-23','미제출','정경용','제안서','진행중','201814231','나영재');
 
 --certification_board 데이터
-INSERT INTO `CSPOP`.`certification_board`(`id`,`created_date`,`last_modified_date`,`department`,`student_id`,`student_name`,`current_semester`,`professional_education`,`msc_bsm`,`design`, `major`,`essential`,`first_and_last`,`total`,`special_note`)VALUES (1,NOW(),NOW(),'AI컴퓨터공학부','201812345','홍길동',7,6,15,7.5,100,'부','가',126,'해당사항 없음');
+INSERT INTO `CSPOP`.`certification_board`(`id`,`created_date`,`last_modified_date`,`department`,`student_id`,`student_name`,`current_semester`,`professional_education`,`msc_bsm`,`design`, `major`,`essential`,`first_and_last`,`total`,`special_note`)VALUES (1,NOW(),NOW(),'AI컴퓨터공학부','201812345','홍길동','7','6','15','7.5','100','부','가','126','해당사항 없음');

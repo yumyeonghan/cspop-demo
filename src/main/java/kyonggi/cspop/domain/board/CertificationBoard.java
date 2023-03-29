@@ -9,6 +9,7 @@ import org.hibernate.annotations.Comment;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -17,8 +18,7 @@ import javax.persistence.Id;
 @Setter
 public class CertificationBoard extends BaseEntity {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Comment("소속 학과")
@@ -31,19 +31,19 @@ public class CertificationBoard extends BaseEntity {
     private String studentName;
 
     @Comment("현재 학기")
-    private Integer currentSemester;
+    private String currentSemester;
 
     @Comment("전문교양 학점")
-    private Integer professionalEducation;
+    private String professionalEducation;
 
     @Comment("MSC/BSM 학점")
-    private Integer mscBsm;
+    private String mscBsm;
 
     @Comment("설계 학점")
-    private Float design;
+    private String design;
 
     @Comment("전공 학점")
-    private Integer major;
+    private String major;
 
     @Comment("필수 과목")
     private String essential;
@@ -52,7 +52,7 @@ public class CertificationBoard extends BaseEntity {
     private String firstAndLast;
 
     @Comment("총 학점")
-    private Integer total;
+    private String total;
 
     @Comment("특이 사항")
     private String specialNote;
