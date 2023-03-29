@@ -33,7 +33,7 @@ public class UserStatusController {
                                  Model model) {
         Users user = usersRepository.findByStudentId(userSessionDto.getStudentId()).get();
 
-        //유저의 submitForm 만들면 리팩토링 해야함
+        //유저의 submitForm 만들면 리팩토링 해야
         UserDetailDto userDetailDto = new UserDetailDto(user.getStudentId(),
                 user.getStudentName(),
                 user.getDepartment());
