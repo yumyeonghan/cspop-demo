@@ -56,6 +56,13 @@
                     </c:if>
                     <c:if test="${fn:contains(userId, 'admin')}">
                         <li class="nav-item">
+                            <a class="nav-link " href="/api/graduation/certification_management?page=0&size=10" data-bs-display="static">
+                                공학인증 조회
+                            </a>
+                        </li>
+                    </c:if>
+                    <c:if test="${fn:contains(userId, 'admin')}">
+                        <li class="nav-item">
                             <a class="nav-link " href="/api/graduation/application_management" data-bs-display="static">
                                 신청서 접수 관리
                             </a>

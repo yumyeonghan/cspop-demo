@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.poi.ss.usermodel.Row;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.Entity;
@@ -14,8 +15,7 @@ import javax.persistence.Id;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Getter
-@Setter
+@Getter @Setter
 public class CertificationBoard extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,4 +56,21 @@ public class CertificationBoard extends BaseEntity {
 
     @Comment("특이 사항")
     private String specialNote;
+
+    public static CertificationBoard createCertificationBoard(Row row) {
+        CertificationBoard certificationBoard = new CertificationBoard();
+        certificationBoard.department = row.getCell(0).getStringCellValue();
+        certificationBoard.studentId = row.getCell(1).getStringCellValue();
+        certificationBoard.studentName =  row.getCell(2).getStringCellValue();
+        certificationBoard.currentSemester = row.getCell(3).getStringCellValue();
+        certificationBoard.professionalEducation = row.getCell(4).getStringCellValue();
+        certificationBoard.mscBsm = row.getCell(5).getStringCellValue();
+        certificationBoard.design =  row.getCell(6).getStringCellValue();
+        certificationBoard.major = row.getCell(7).getStringCellValue();
+        certificationBoard.essential = row.getCell(8).getStringCellValue();
+        certificationBoard.firstAndLast = row.getCell(9).getStringCellValue();
+        certificationBoard.total =  row.getCell(10).getStringCellValue();
+        certificationBoard.specialNote = row.getCell(11).getStringCellValue();
+        return certificationBoard;
+    }
 }
