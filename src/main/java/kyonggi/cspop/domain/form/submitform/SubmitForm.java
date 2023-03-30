@@ -1,7 +1,7 @@
-package kyonggi.cspop.domain.submitform;
+package kyonggi.cspop.domain.form.submitform;
 
 import kyonggi.cspop.domain.entity.BaseEntity;
-import kyonggi.cspop.domain.submitform.enums.GraduationRequirements;
+import kyonggi.cspop.domain.form.submitform.enums.GraduationRequirements;
 import kyonggi.cspop.domain.uploadfile.SubmitFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
 import lombok.AccessLevel;

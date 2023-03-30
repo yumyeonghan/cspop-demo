@@ -1,6 +1,6 @@
 package kyonggi.cspop.domain.uploadfile;
 
-import kyonggi.cspop.domain.submitform.SubmitForm;
+import kyonggi.cspop.domain.form.submitform.SubmitForm;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

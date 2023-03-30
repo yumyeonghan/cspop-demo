@@ -1,7 +1,7 @@
 package kyonggi.cspop.application.controller.board.userstatus.dto;
 
-import kyonggi.cspop.domain.submitform.SubmitForm;
-import kyonggi.cspop.domain.submitform.enums.GraduationRequirements;
+import kyonggi.cspop.domain.form.submitform.SubmitForm;
+import kyonggi.cspop.domain.form.submitform.enums.GraduationRequirements;
 import lombok.Data;
 
 import java.time.LocalDate;

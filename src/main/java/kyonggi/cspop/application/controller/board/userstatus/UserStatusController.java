@@ -9,7 +9,7 @@ import kyonggi.cspop.domain.board.service.ScheduleBoardService;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;
 import kyonggi.cspop.domain.schedule.Schedules;
 import kyonggi.cspop.domain.schedule.enums.Step;
-import kyonggi.cspop.domain.submitform.enums.GraduationRequirements;
+import kyonggi.cspop.domain.form.submitform.enums.GraduationRequirements;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.repository.UsersRepository;
 import kyonggi.cspop.domain.users.service.UsersService;

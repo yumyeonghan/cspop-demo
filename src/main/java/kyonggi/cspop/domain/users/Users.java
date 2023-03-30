@@ -1,7 +1,7 @@
 package kyonggi.cspop.domain.users;
 
 import kyonggi.cspop.domain.entity.BaseEntity;
-import kyonggi.cspop.domain.submitform.SubmitForm;
+import kyonggi.cspop.domain.form.submitform.SubmitForm;
 import kyonggi.cspop.domain.users.enums.Classification;
 import kyonggi.cspop.domain.users.enums.Sex;
 import lombok.AccessLevel;

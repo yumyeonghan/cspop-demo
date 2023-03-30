@@ -1,4 +1,4 @@
-package kyonggi.cspop.domain.submitform.enums;
+package kyonggi.cspop.domain.form.submitform.enums;
 
 import lombok.Getter;
 
