@@ -36,9 +36,9 @@
         }
     </style>
 </head>
-<%@include file="../../common/sessionController.jsp"%>
+<%@include file="../../common/sessionController.jsp" %>
 <body>
-<%@include file="../../common/header.jsp"%>
+<%@include file="../../common/header.jsp" %>
 <section class="page-start">
     <!-- pageheader section -->
     <div class="bg-shape bg-secondary">
@@ -78,28 +78,76 @@
                             <div class="row">
                                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-12 mb-8">
                                     <div>
-                                        <ul class="nav-pills-border nav nav-pills nav-justified mb-5 " id="pills-tab" role="tablist">
+                                        <ul class="nav-pills-border nav nav-pills nav-justified mb-5 " id="pills-tab"
+                                            role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link active fw-bold" id="thesis-tab-id" data-bs-toggle="pill" href="#thesis-id" role="tab" aria-controls="thesis" aria-selected="true">
+                                                <a class="nav-link active fw-bold" id="thesis-tab-id"
+                                                   data-bs-toggle="pill" href="#thesis-id" role="tab"
+                                                   aria-controls="thesis" aria-selected="true">
                                                     졸업 논문</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link fw-bold" id="Qualifications-id" data-bs-toggle="pill" href="#Qualifications-tab" role="tab" aria-controls="Qualifications" aria-selected="false">
+                                                <a class="nav-link fw-bold" id="Qualifications-id" data-bs-toggle="pill"
+                                                   href="#Qualifications-tab" role="tab"
+                                                   aria-controls="Qualifications" aria-selected="false">
                                                     기타 자격</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content">
-                                            <div class="tab-pane fade active show" id="thesis-id" role="tabpanel" aria-labelledby="thesis-tab-id">
+                                            <div class="tab-pane fade active show" id="thesis-id" role="tabpanel"
+                                                 aria-labelledby="thesis-tab-id">
                                                 <div id="thesis">
-                                                    <div class="progress" style="height: 20px;" id="thesisPercent"></div>
+                                                    <div class="progress" style="height: 20px;"
+                                                         id="thesisPercent"></div>
                                                 </div>
                                                 <div>table 자리</div>
+                                                <table>
+                                                    <thead>
+                                                    <tr>
+                                                        <th>단계</th>
+                                                        <th>시작날짜</th>
+                                                        <th>종료날짜</th>
+                                                        <th>제출</th>
+                                                        <th>비고</th>
+                                                    </tr>
+                                                    <c:forEach items="${userSchedules}" var="userSchedule">
+                                                        <tr class="text-center">
+                                                            <td>${userSchedule.step}</td>
+                                                            <td>${userSchedule.startDate}</td>
+                                                            <td>${userSchedule.endDate}</td>
+                                                            <td>${userSchedule.submitStatus}</td>
+                                                            <td>${userSchedule.approvalStatus}</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                    </thead>
+                                                </table>
                                             </div>
-                                            <div class="tab-pane fade" id="Qualifications-tab" role="tabpanel" aria-labelledby="Qualifications-id">
+                                            <div class="tab-pane fade" id="Qualifications-tab" role="tabpanel"
+                                                 aria-labelledby="Qualifications-id">
                                                 <div id="otherQualifications">
                                                     <div class="progress" style="height: 20px;" id="otherPercent"></div>
                                                 </div>
                                                 <div>table 자리</div>
+                                                <table>
+                                                    <thead>
+                                                    <tr>
+                                                        <th>단계</th>
+                                                        <th>시작날짜</th>
+                                                        <th>종료날짜</th>
+                                                        <th>제출</th>
+                                                        <th>비고</th>
+                                                    </tr>
+                                                    <c:forEach items="${userSchedules}" var="userSchedule">
+                                                        <tr class="text-center">
+                                                            <td>${userSchedule.step}</td>
+                                                            <td>${userSchedule.startDate}</td>
+                                                            <td>${userSchedule.endDate}</td>
+                                                            <td>${userSchedule.submitStatus}</td>
+                                                            <td>${userSchedule.approvalStatus}</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                    </thead>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
@@ -201,34 +249,34 @@
 </section>
 <%@include file="../../common/commonJS.jsp" %>
 <script>
-<%--
-${userDetail.otherQualifications}
-${userDetail.thesis}
---%>
-$(()=>{
-    let image;
-    if (${userDetail.otherQualifications} || ${userDetail.thesis}) { //졸업, 기타 요건 중 하나가 true일때,
-        if (${userDetail.thesis}) { // 논문이 true일때 기타요건에 들어갈 이미지
-            image = "논문으로 신청하셨습니다"
-            $('#otherQualifications').html(image)
-            //thesis의 내용을 넣는 js function이 들어감
-        } else if (${userDetail.otherQualifications}) { // 기타요건이 true일때 논문에 들어갈 이미지
-            image = "기타 자격으로 신청하셨습니다."
-            $('#thesis').html(image)
-            //other의 내용을 넣는 js function이 들어감
+    <%--
+    ${userDetail.otherQualifications}
+    ${userDetail.thesis}
+    --%>
+    $(() => {
+        let image;
+        if (${userDetail.otherQualifications} || ${userDetail.thesis}) { //졸업, 기타 요건 중 하나가 true일때,
+            if (${userDetail.thesis}) { // 논문이 true일때 기타요건에 들어갈 이미지
+                image = "논문으로 신청하셨습니다"
+                $('#otherQualifications').html(image)
+                //thesis의 내용을 넣는 js function이 들어감
+            } else if (${userDetail.otherQualifications}) { // 기타요건이 true일때 논문에 들어갈 이미지
+                image = "기타 자격으로 신청하셨습니다."
+                $('#thesis').html(image)
+                //other의 내용을 넣는 js function이 들어감
+            }
         }
-    }
-});
-$(() => { // 기타 자격 progress bar 추가 함수
-    let percentage = 50; // percent가 동적으로 변경되어야 함
-    let appendText = `<div class="progress-bar bg-success" role="progressbar" aria-label="Basic example" style="width: \${percentage}%" aria-valuenow="\${percentage}" aria-valuemin="0" aria-valuemax="100">\${percentage}%</div>`;
-    $('#otherPercent').html(appendText)
-});
-$(() => { // 논문 progress bar 추가 함수
-    let percentage = 50; // percent가 동적으로 변경되어야 함
-    let appendText = `<div class="progress-bar bg-success" role="progressbar" aria-label="Basic example" style="width: \${percentage}%" aria-valuenow="\${percentage}" aria-valuemin="0" aria-valuemax="100">\${percentage}%</div>`;
-    $('#thesisPercent').html(appendText)
-});
+    });
+    $(() => { // 기타 자격 progress bar 추가 함수
+        let percentage = 50; // percent가 동적으로 변경되어야 함
+        let appendText = `<div class="progress-bar bg-success" role="progressbar" aria-label="Basic example" style="width: \${percentage}%" aria-valuenow="\${percentage}" aria-valuemin="0" aria-valuemax="100">\${percentage}%</div>`;
+        $('#otherPercent').html(appendText)
+    });
+    $(() => { // 논문 progress bar 추가 함수
+        let percentage = 50; // percent가 동적으로 변경되어야 함
+        let appendText = `<div class="progress-bar bg-success" role="progressbar" aria-label="Basic example" style="width: \${percentage}%" aria-valuenow="\${percentage}" aria-valuemin="0" aria-valuemax="100">\${percentage}%</div>`;
+        $('#thesisPercent').html(appendText)
+    });
 
 </script>
 </body>

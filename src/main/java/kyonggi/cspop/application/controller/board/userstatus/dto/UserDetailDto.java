@@ -1,5 +1,7 @@
 package kyonggi.cspop.application.controller.board.userstatus.dto;
 
+import kyonggi.cspop.domain.submitform.SubmitForm;
+import kyonggi.cspop.domain.submitform.enums.GraduationRequirements;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -28,7 +30,8 @@ public class UserDetailDto {
                          String studentName,
                          String department,
                          String advisor,
-                         boolean capstoneCompletionStatus) {
+                         boolean capstoneCompletionStatus,
+                         SubmitForm submitForm) {
 
         this.studentId = studentId;
         this.graduationDate = LocalDate.now();
@@ -37,12 +40,14 @@ public class UserDetailDto {
         this.advisor = advisor;
         this.capstoneCompletionStatus = capstoneCompletionStatus;
 
-        //신청서 만들면 거기서 꺼내와야함
-        this.otherQualifications = true;
-        this.thesis = false;
+        if (submitForm.getGraduationRequirements().equals(GraduationRequirements.THESIS)) {
+            this.otherQualifications = false;
+            this.thesis = true;
+        }
+
+        if (submitForm.getGraduationRequirements().equals(GraduationRequirements.Other_Qualifications)) {
+            this.otherQualifications = true;
+            this.thesis = false;
+        }
     }
-
-
-
-
 }

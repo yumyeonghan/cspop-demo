@@ -15,7 +15,6 @@ import kyonggi.cspop.domain.users.repository.UsersRepository;
 import kyonggi.cspop.domain.users.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTIgnoredError;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,7 +50,7 @@ public class UserStatusController {
          * 유저별 세부 정보 데이터 전송
          */
         String advisor = excelByStudentId.get().getProfessorName();
-        UserDetailDto userDetailDto = new UserDetailDto(user.getStudentId(), user.getStudentName(), user.getDepartment(), advisor != null ? advisor : "없음", excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false);
+        UserDetailDto userDetailDto = new UserDetailDto(user.getStudentId(), user.getStudentName(), user.getDepartment(), advisor != null ? advisor : "없음", excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false, user.getSubmitForm());
         model.addAttribute("userDetail", userDetailDto);
 
         /**
@@ -87,7 +86,7 @@ public class UserStatusController {
             //모든 신청서 마다 위처럼 해야함
         }
         log.info("userSchedules = {}", userSchedules);
-        model.addAttribute("userSchedule", userSchedules);
+        model.addAttribute("userSchedules", userSchedules);
         return "graduation/userstatus/userGraduationStatus";
     }
 }
