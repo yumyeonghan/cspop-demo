@@ -50,4 +50,10 @@ public class UserDetailDto {
             this.thesis = false;
         }
     }
+
+    public UserDetailDto(String studentId, String studentName, String department) {
+        this.studentId = studentId;
+        this.studentName = studentName;
+        this.department = department;
+    }
 }
