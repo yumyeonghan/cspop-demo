@@ -143,19 +143,6 @@
                     </div>
                   </div>
                 </li>
-                <li class="list-group-item py-3">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                      <div class="d-flex align-items-center">
-                        <i class="fas fa-clock me-2 font-16 fa-fw text-muted"></i>
-                        <h5 class="mb-0 font-weight-medium">졸업시기</h5>
-                      </div>
-                    </div>
-                    <div>
-                      <p class="mb-0 text-muted">${userDetail.graduationDate}</p>
-                    </div>
-                  </div>
-                </li>
               </ul>
             </div>
           </div>
