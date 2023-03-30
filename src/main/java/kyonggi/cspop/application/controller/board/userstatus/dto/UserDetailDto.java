@@ -13,11 +13,12 @@ public class UserDetailDto {
      * 유저별 진행상황 뷰 공통 속성
      */
     private String studentId;
-    private LocalDate graduationDate;
+    private String graduationDate;
     private String studentName;
     private String department;
     private String advisor;
     private boolean capstoneCompletionStatus;
+    private String qualification;
     //private String delayNumber;
 
     /**
@@ -34,7 +35,8 @@ public class UserDetailDto {
                          SubmitForm submitForm) {
 
         this.studentId = studentId;
-        this.graduationDate = LocalDate.now();
+        //액셀에서 가져오는걸로 바꿔야함
+        this.graduationDate = String.valueOf(LocalDate.now());
         this.studentName = studentName;
         this.department = department;
         this.advisor = advisor;
@@ -55,5 +57,19 @@ public class UserDetailDto {
         this.studentId = studentId;
         this.studentName = studentName;
         this.department = department;
+    }
+
+    public UserDetailDto(String studentId, String graduationDate, String studentName, String department, String advisor, SubmitForm submitForm) {
+        this.studentId = studentId;
+        this.graduationDate = graduationDate;
+        this.studentName = studentName;
+        this.department = department;
+        this.advisor = advisor;
+
+        if (submitForm.getGraduationRequirements().equals(GraduationRequirements.THESIS)) {
+            this.qualification = "논문";
+        } else {
+            this.qualification = "기타자격";
+        }
     }
 }

@@ -132,9 +132,20 @@ CREATE TABLE other_form
 -- -----------------------------------------------------
 CREATE TABLE proposal_form
 (
-    `id`                 BIGINT      NOT NULL,
-    `created_date`       DATETIME(6) NULL DEFAULT NULL COMMENT '등록일',
-    `last_modified_date` DATETIME(6) NULL DEFAULT NULL COMMENT '수정일'
+    `id`                 BIGINT       NOT NULL,
+    `created_date`       DATETIME(6)  NULL DEFAULT NULL COMMENT '등록일',
+    `last_modified_date` DATETIME(6)  NULL DEFAULT NULL COMMENT '수정일',
+    `student_id`         VARCHAR(255) NOT NULL COMMENT '학번',
+    `graduation_date`    VARCHAR(255) NOT NULL COMMENT '졸업날짜',
+    `advisor`            VARCHAR(255) NOT NULL COMMENT '담당교수',
+    `student_name`       VARCHAR(255) NOT NULL COMMENT '학생이름',
+    `department`         VARCHAR(255) NOT NULL COMMENT '학부',
+    `qualification`      VARCHAR(255) NOT NULL COMMENT '자격',
+    `approval`           BIT(1)       NOT NULL COMMENT '승인여부',
+    `title`              VARCHAR(255) NOT NULL COMMENT '제목',
+    `division`           VARCHAR(255) NOT NULL COMMENT '구분',
+    `keyword`            VARCHAR(255) NOT NULL COMMENT '키워드',
+    `text`               VARCHAR(255) NOT NULL COMMENT '본문'
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4;
@@ -175,6 +186,7 @@ CREATE TABLE users
     `student_password`   VARCHAR(255) NOT NULL COMMENT '학생 비밀번호',
     `answer_Pw`          VARCHAR(255) NOT NULL COMMENT '비밀번호 대답',
     `submit_form_id`     BIGINT       NULL DEFAULT NULL,
+    `proposal_form_id`   BIGINT       NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE INDEX `submit_form_id_unique` (`submit_form_id` ASC) VISIBLE,
     CONSTRAINT `fk_users_to_submit_form`

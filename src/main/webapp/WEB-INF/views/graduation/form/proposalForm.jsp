@@ -53,7 +53,7 @@
                     <div class="row">
                         <div class="card">
 
-                            <form action="" method="POST">
+                            <form method="POST">
                                 <input type="hidden" name="studentId" value=${userDetail.studentId}>
                                 <input type="hidden" name="studentName" value=${userDetail.studentName}>
                                 <input type="hidden" name="department" value=${userDetail.department}>
@@ -157,7 +157,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <h5 class="mb-0 text-dark fw-bold">${userDetail.otherQualification}</h5>
+                                        <h5 class="mb-0 text-dark fw-bold">${userDetail.qualification}</h5>
                                     </div>
                                 </div>
                             </li>

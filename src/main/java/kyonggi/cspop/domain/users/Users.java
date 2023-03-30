@@ -1,6 +1,7 @@
 package kyonggi.cspop.domain.users;
 
 import kyonggi.cspop.domain.entity.BaseEntity;
+import kyonggi.cspop.domain.form.proposalform.ProposalForm;
 import kyonggi.cspop.domain.form.submitform.SubmitForm;
 import kyonggi.cspop.domain.users.enums.Classification;
 import kyonggi.cspop.domain.users.enums.Sex;
@@ -67,6 +68,11 @@ public class Users extends BaseEntity {
     @JoinColumn(name = "submitForm_id", foreignKey = @ForeignKey(name = "fk_users_to_submit_form"))
     private SubmitForm submitForm;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "proposalForm_id", foreignKey = @ForeignKey(name = "fk_users_to_proposal_form"))
+    private ProposalForm proposalForm;
+
+
     //==생성 메소드==//
     public static Users createUser(String studentId, String studentPassword, String studentName, Sex sex, LocalDate birth, String email,
                                    String phoneNumber, Classification classification, String department,String answerPw) {
@@ -95,9 +101,16 @@ public class Users extends BaseEntity {
         this.studentPassword = encryptPassword;
     }
 
-    // 양방향 연관관계 편의 메소드
+    /**
+     *  양방향 연관관계 메서드
+     */
     public void addSubmitForms(SubmitForm submitForm) {
         this.submitForm = submitForm;
         submitForm.designateUsers(this);
+    }
+
+    public void addProposalForms(ProposalForm proposalForm) {
+        this.proposalForm = proposalForm;
+        proposalForm.designateUsers(this);
     }
 }
