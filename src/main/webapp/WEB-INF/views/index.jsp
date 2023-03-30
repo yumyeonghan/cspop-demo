@@ -33,7 +33,7 @@
 <body>
 <c:if test="${errorMessage eq true}">
     <script>
-        alert("조교의 신청서 승인후 열람이 가능합니다.");
+        alert("신청서 작성 후 열람이 가능합니다.");
     </script>
 </c:if>
 <div class="header fixed-top border-3 border-top border-primary">

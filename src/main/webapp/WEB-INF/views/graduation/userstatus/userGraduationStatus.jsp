@@ -158,7 +158,7 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <h5 class="mb-0 text-dark fw-bold">${userDetail.studentName}</h5>
+                                                        <h5 class="mb-0 text-dark fw-bold">${userDetail.advisor}</h5>
                                                     </div>
                                                 </div>
                                             </li>

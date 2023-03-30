@@ -73,6 +73,8 @@ CREATE TABLE submit_form (
                              `graduation_date` DATE NOT NULL COMMENT '졸업날짜',
                              `student_id` VARCHAR(255) NOT NULL COMMENT '학번',
                              `student_name` VARCHAR(255) NOT NULL COMMENT '학생 이름',
+                             `approval` BIT(1) NOT NULL COMMENT '승인여부',
+                             `graduation_requirements` VARCHAR(255) NULL DEFAULT NULL COMMENT '졸업요건',
                              PRIMARY KEY (`id`))
     ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -130,20 +132,6 @@ CREATE TABLE notice_board_upload_file (
                                           CONSTRAINT `fk_notice_board_upload_file_to_notice_board`
                                               FOREIGN KEY (`notice_board_id`)
                                                   REFERENCES notice_board (`id`))
-    ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
-
--- -----------------------------------------------------
--- Table `test`.`other_qualifications`
--- -----------------------------------------------------
-CREATE TABLE other_qualifications (
-                                      `id` BIGINT NOT NULL,
-                                      `qualification` VARCHAR(255) NULL DEFAULT NULL COMMENT '기타자격',
-                                      `submit_form_id` BIGINT NULL DEFAULT NULL,
-                                      PRIMARY KEY (`id`),
-                                      CONSTRAINT `fk_other_qualifications_to_submit_form`
-                                          FOREIGN KEY (`submit_form_id`)
-                                              REFERENCES submit_form (`id`))
     ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 

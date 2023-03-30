@@ -1,7 +1,7 @@
 package kyonggi.cspop.domain.submitform;
 
 import kyonggi.cspop.domain.entity.BaseEntity;
-import kyonggi.cspop.domain.otherqualifications.OtherQualifications;
+import kyonggi.cspop.domain.submitform.enums.GraduationRequirements;
 import kyonggi.cspop.domain.uploadfile.SubmitFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
 import lombok.AccessLevel;
@@ -39,14 +39,18 @@ public class SubmitForm extends BaseEntity {
     @Column(nullable = false)
     private LocalDate graduationDate;
 
-    @OneToMany(mappedBy = "submitForm", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OtherQualifications> otherQualifications = new ArrayList<>();
+    @Comment("승인여부")
+    @Column(nullable = false)
+    private boolean approval;
+
+    @Enumerated(EnumType.STRING)
+    private GraduationRequirements graduationRequirements;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "submitForm")
     private Users users;
 
-    @OneToMany(mappedBy = "submitForm", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SubmitFormUploadFile> uploadFiles = new ArrayList<>();
+    @OneToOne(mappedBy = "submitForm", cascade = CascadeType.ALL, orphanRemoval = true)
+    private SubmitFormUploadFile submitFormUploadFile;
 
     public void designateUsers(Users users) {
         this.users = users;
@@ -54,13 +58,7 @@ public class SubmitForm extends BaseEntity {
 
     // 양방향 연관관계 편의 메소드
     public void addUploadFile(SubmitFormUploadFile uploadFile) {
-        uploadFiles.add(uploadFile);
         uploadFile.designateSubmitForm(this);
-    }
-
-    //양방향 연관관계 편의 메소드
-    public void addOtherQualifications(OtherQualifications otherQualification) {
-        otherQualifications.add(otherQualification);
-        otherQualification.designateSubmitForm(this);
+        this.submitFormUploadFile = uploadFile;
     }
 }
