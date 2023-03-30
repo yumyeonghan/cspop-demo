@@ -200,6 +200,17 @@ public class GraduateCheckController {
 
                             row1.append(c);
                         }
+                        //학번 뒷자리에 0이 연속해서 올 경우 있는 만큼 0 추가
+                        if (row1.length() == 8) {
+                            row1.append("0");
+                        }
+                        else if (row1.length() == 7) {
+                            row1.append("00");
+                        }
+                        else if (row1.length() == 6) {
+                            row1.append("000");
+                        }
+                        //이외의 경우는 없다고 봄
                     }
                     else{
                     for (int j=0;j<stringValue.length();j++) {

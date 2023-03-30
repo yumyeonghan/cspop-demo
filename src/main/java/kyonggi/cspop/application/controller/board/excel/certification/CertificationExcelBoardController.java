@@ -192,7 +192,6 @@ public class CertificationExcelBoardController {
             Row row = worksheet.getRow(i);
 
             //들어온 값이 문자가 아닐 경우 문자열로 변환
-            //설계 학점은 따로 반환
             for (Cell cell : row) {
 
                 if (cell.getCellType() != CellType.STRING) {
@@ -201,7 +200,7 @@ public class CertificationExcelBoardController {
 
                     StringBuilder row1 = new StringBuilder();
 
-                    if (stringValue.length()>5){
+                    if (stringValue.length()>8){
                         for (int j=0;j<stringValue.length();j++) {
                             char c = stringValue.charAt(j);
 
@@ -213,15 +212,32 @@ public class CertificationExcelBoardController {
 
                             row1.append(c);
                         }
+                        //학번 뒷자리에 0이 연속해서 올 경우 있는 만큼 0 추가
+                        if (row1.length() == 8) {
+                            row1.append("0");
+                        }
+                        else if (row1.length() == 7) {
+                            row1.append("00");
+                        }
+                        else if (row1.length() == 6) {
+                            row1.append("000");
+                        }
+                        //이외의 경우는 없다고 봄
                     }
                     else{
-                        for (int j=0;j<stringValue.length();j++) {
-                            char c = stringValue.charAt(j);
+                        //설계 학점은 따로 반환
+                        if (!stringValue.contains(".0")) {
+                            row1.append(stringValue);
+                        }
+                        else{
+                            for (int j = 0; j < stringValue.length(); j++) {
+                                char c = stringValue.charAt(j);
 
-                            if (c == '.')
-                                break;
+                                if (c == '.')
+                                    break;
 
-                            row1.append(c);
+                                row1.append(c);
+                            }
                         }
                     }
                     cell.setCellValue(row1.toString());
