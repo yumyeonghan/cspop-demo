@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -51,7 +50,14 @@ public class UserStatusController {
          * 유저별 세부 정보 데이터 전송
          */
         String advisor = excelByStudentId.get().getProfessorName();
-        UserDetailDto userDetailDto = new UserDetailDto(user.getStudentId(), user.getStudentName(), user.getDepartment(), advisor != null ? advisor : "없음", excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false, user.getSubmitForm());
+        UserDetailDto userDetailDto = new UserDetailDto(
+                user.getStudentId(),
+                user.getStudentName(),
+                user.getDepartment(),
+                advisor != null ? advisor : "없음",
+                excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false,
+                user.getSubmitForm(),
+                excelByStudentId.get().getGraduationDate());
         model.addAttribute("userDetail", userDetailDto);
 
         /**
@@ -70,10 +76,7 @@ public class UserStatusController {
                     continue;
                 }
             }
-            //졸업 신청 요건별로 들어가는 테이블 나눴고, 이제 그에 맞게 데이터 넣어주면 됨
-            //신청서 별로 승인 신청 여부에 따라 데이터 넣어주면 되고,
-            //데이터는 단계(스케쥴 단계 그대로), 일정(스케쥴 시작일정, 종료일정 그대로), 제출(제출했으면 완료, 안했으면 미제출 ), 비고(폼 양식마다 승인이면 승인, 아니면 미승인)
-            //jsp 에서 테이블에서 미제출 누르면 해당 신청 폼으로 가지는데 이때 전단계가 승인인지 미승인인지 검증 후 이동 or x
+
             if (schedules.getStep().equals(Step.RECEIVED)) {
                 UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(),
                         schedules.getStartDate(),

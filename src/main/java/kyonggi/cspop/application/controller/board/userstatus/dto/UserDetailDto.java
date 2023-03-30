@@ -4,8 +4,6 @@ import kyonggi.cspop.domain.form.submitform.SubmitForm;
 import kyonggi.cspop.domain.form.submitform.enums.GraduationRequirements;
 import lombok.Data;
 
-import java.time.LocalDate;
-
 @Data
 public class UserDetailDto {
 
@@ -19,7 +17,6 @@ public class UserDetailDto {
     private String advisor;
     private boolean capstoneCompletionStatus;
     private String qualification;
-    //private String delayNumber;
 
     /**
      * 유저별 진행상황 뷰 분리될 속성
@@ -27,16 +24,17 @@ public class UserDetailDto {
     private boolean otherQualifications;
     private boolean thesis;
 
+
     public UserDetailDto(String studentId,
                          String studentName,
                          String department,
                          String advisor,
                          boolean capstoneCompletionStatus,
-                         SubmitForm submitForm) {
+                         SubmitForm submitForm,
+                         String graduationDate) {
 
         this.studentId = studentId;
-        //액셀에서 가져오는걸로 바꿔야함
-        this.graduationDate = String.valueOf(LocalDate.now());
+        this.graduationDate = graduationDate;
         this.studentName = studentName;
         this.department = department;
         this.advisor = advisor;

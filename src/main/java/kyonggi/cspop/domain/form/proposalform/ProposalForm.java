@@ -5,7 +5,6 @@ import kyonggi.cspop.domain.users.Users;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 
