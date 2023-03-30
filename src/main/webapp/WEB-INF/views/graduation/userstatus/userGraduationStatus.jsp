@@ -262,9 +262,6 @@
                                                 </div>
                                             </li>
                                         </ul>
-                                        <div class="text-center">
-                                            <button onclick="logger()">console</button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
