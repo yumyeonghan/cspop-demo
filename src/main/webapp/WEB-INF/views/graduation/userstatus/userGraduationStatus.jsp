@@ -117,6 +117,9 @@
                                                                 <div class="th-inner sortable both">제출</div>
                                                             </th>
                                                             <th>
+                                                                <div class="th-inner sortable both">이동</div>
+                                                            </th>
+                                                            <th>
                                                                 <div class="th-inner sortable both">비고</div>
                                                             </th>
                                                         </tr>
@@ -128,6 +131,7 @@
                                                                 <td>${userSchedule.startDate}</td>
                                                                 <td>${userSchedule.endDate}</td>
                                                                 <td>${userSchedule.submitStatus}</td>
+                                                                <td><a href="/api/proposalForm">이동</a></td>
                                                                 <td>${userSchedule.approvalStatus}</td>
                                                             </tr>
                                                             </tbody>
@@ -155,6 +159,9 @@
                                                                 <div class="th-inner sortable both">제출</div>
                                                             </th>
                                                             <th>
+                                                                <div class="th-inner sortable both">이동</div>
+                                                            </th>
+                                                            <th>
                                                                 <div class="th-inner sortable both">비고</div>
                                                             </th>
                                                         </tr>
@@ -166,6 +173,7 @@
                                                                 <td>${userSchedule.startDate}</td>
                                                                 <td>${userSchedule.endDate}</td>
                                                                 <td>${userSchedule.submitStatus}</td>
+                                                                <td><a href="/api/proposalForm">이동</a></td>
                                                                 <td>${userSchedule.approvalStatus}</td>
                                                             </tr>
                                                             </tbody>
