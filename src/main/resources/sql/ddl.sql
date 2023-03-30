@@ -229,7 +229,7 @@ CREATE TABLE certification_board (
                                      `essential` VARCHAR(255) NULL DEFAULT NULL COMMENT '필수 과목',
                                      `first_and_last` VARCHAR(255) NULL DEFAULT NULL COMMENT '선/후수 과목',
                                      `total` VARCHAR(255) NULL DEFAULT NULL COMMENT '총 학점',
-                                     `special_note` VARCHAR(255) NULL DEFAULT NULL COMMENT '특이 사항',
+                                     `special_note` VARCHAR(255) NULL DEFAULT NULL COMMENT '특이사항',
                                      PRIMARY KEY (`id`))
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4;

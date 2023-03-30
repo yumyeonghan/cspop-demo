@@ -90,41 +90,41 @@
                                               <div class="th-inner sortable both">#</div>
                                             </th>
                                             <th data-field="department">
-                                              <div class="th-inner sortable both">소속 학과</div>
+                                              <div class="th-inner sortable both">소속학과</div>
                                             </th>
                                             <th data-field="studentId">
                                               <div class="th-inner sortable both">학번</div>
                                             </th>
                                             <th data-field="studentName">
-                                              <div class="th-inner sortable both">학생 이름</div>
+                                              <div class="th-inner sortable both">이름</div>
                                             </th>
                                             <th data-field="currentSemester">
-                                              <div class="th-inner sortable both">현재 학기</div>
+                                              <div class="th-inner sortable both">현재학기</div>
                                             </th>
                                             <th data-field="professionalEducation">
-                                                <div class="th-inner sortable both">전문교양 학점</div>
+                                                <div class="th-inner sortable both">전문교양</div>
                                             </th>
                                             <th data-field="mscBsm">
-                                                <div class="th-inner sortable both">MSC/BSM 학점</div>
+                                                <div class="th-inner sortable both">MSC/BSM</div>
                                             </th>
                                             <th data-field="design">
-                                                <div class="th-inner sortable both">설계 학점</div>
+                                                <div class="th-inner sortable both">설계</div>
                                             </th>
                                             <th data-field="major">
-                                                <div class="th-inner sortable both">전공 학점</div>
+                                                <div class="th-inner sortable both">전공</div>
                                             </th>
 
                                             <th data-field="essential">
-                                                <div class="th-inner sortable both">필수 과목</div>
+                                                <div class="th-inner sortable both">필수</div>
                                             </th>
                                             <th data-field="firstAndLast">
-                                                <div class="th-inner sortable both">선/후수 과목</div>
+                                                <div class="th-inner sortable both">선/후수</div>
                                             </th>
                                             <th data-field="total">
                                                 <div class="th-inner sortable both">총 학점</div>
                                             </th>
                                             <th data-field="specialNote">
-                                                <div class="th-inner sortable both">특이 사항</div>
+                                                <div class="th-inner sortable both">특이사항</div>
                                             </th>
                                         </tr>
                                         </thead>

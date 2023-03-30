@@ -54,7 +54,7 @@ public class CertificationBoard extends BaseEntity {
     @Comment("총 학점")
     private String total;
 
-    @Comment("특이 사항")
+    @Comment("특이사항")
     private String specialNote;
 
     public static CertificationBoard createCertificationBoard(Row row) {
