@@ -30,9 +30,9 @@ public class ExcelBoardResponseDto {
         this.studentId = excelBoard.getStudentId();
         this.studentName = excelBoard.getStudentName();
         this.professorName = excelBoard.getProfessorName();
-        this.graduationDate = excelBoard.getProfessorName();
+        this.graduationDate = excelBoard.getGraduationDate();
         this.step = excelBoard.getStep();
-        this.state = excelBoard.getStep();
+        this.state = excelBoard.getState();
         this.otherQualifications = excelBoard.getOtherQualifications();
         this.capstoneCompletion = excelBoard.getCapstoneCompletion();
     }
