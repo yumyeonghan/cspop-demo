@@ -7,11 +7,10 @@ function uploadExcel(event) {
     $.ajax({
         type: 'post',
         enctype: 'multipart/form-data',
-        url: '/api/certification/certification_management.read',
+        url: '/api/graduation/certification_management.read',
         data: data,
         processData: false,    
         contentType: false,
-        dataTypes: "json",
         cache:false,
         success: (data) => {
             // console.log(data);
@@ -25,7 +24,7 @@ function uploadExcel(event) {
                 alert("형식은 같으나 내용이 일치하지 않는 파일입니다.");
             }
             else{
-                alert(error.responseJson.errorMessage);//
+                alert(error.responseJSON.errorMessage);//
             }
         }
     });

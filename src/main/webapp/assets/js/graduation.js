@@ -11,7 +11,6 @@ function uploadExcel(event) {
         data: data,
         processData: false,    
         contentType: false,
-        dataTypes: "json",
         cache:false,
         success: (data) => {
             // console.log(data);
