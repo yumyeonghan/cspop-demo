@@ -49,33 +49,74 @@
     <div class="bg-shape bg-secondary">
         <div class="container">
             <div class="row">
+                <div class="container">
+                    <div class="row">
+                        <div class="offset-xl-1 col-xl-10 col-lg-12 col-md-12 col-12">
+                            <div class="pt-lg-18 pb-lg-16 py-12 ">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-12 col-md-12 col-12 mb-3">
+                                        <!-- breadcrumb -->
+                                        <div class="custom-breadcrumb">
+                                            <ol class="breadcrumb mb-2">
+                                                <li class="breadcrumb-item text-white">
+                                                    <a href="/api/home">Home</a>
+                                                </li>
+                                                <li class="breadcrumb-item active " aria-current="page">
+                                                    제안서
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-12">
+                                        <h1 class="h2 text-white mb-2">제안서 작성</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pb-10 mt-n10">
+        <div class="container">
+            <div class="row">
                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-12 mb-8">
                     <div class="row">
                         <div class="card">
-
-                            <form method="POST">
+                            <form method="POST" >
                                 <input type="hidden" name="studentId" value=${userDetail.studentId}>
                                 <input type="hidden" name="studentName" value=${userDetail.studentName}>
                                 <input type="hidden" name="department" value=${userDetail.department}>
                                 <input type="hidden" name="graduationDate" value=${userDetail.graduationDate}>
-                                <input type="hidden" name="advisor" value=${userDetail.advisor}>
-                                <input type="hidden" name="qualification" value=${userDetail.qualification}>
-
-                                <label for="title">제목:</label>
-                                <input type="text" id="title" name="title" required><br>
-동
-                                <input type="radio" id="category1" name="division" value="option1" required>
-                                <label for="category1">구현논문</label>
-                                <input type="radio" id="category2" name="division" value="option2">
-                                <label for="category2">조사(이론)논문</label><br>
-
-                                <label for="keywords">키워드:</label>
-                                <input type="text" id="keywords" name="keyword" required><br>
-
-                                <label for="content">내용:</label>
-                                <textarea id="content" name="text" required>입력하세요</textarea><br>
-                                <button type="submit" class="btn btn-lg btn-primary" style="width: 100%">제출</button>
+                                <input type="hidden" name="advisor" value="${userDetail.advisor}">
+                                <input type="hidden" name="qualification" value="${userDetail.qualification}">
+                                <div class="form-group">
+                                    <label for="title">제목</label>
+                                    <input type="text" class="form-control" id="title" name="title" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>구분</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" id="category1" name="division" value="option1" required>
+                                        <label class="form-check-label" for="category1">구현논문</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" id="category2" name="division" value="option2">
+                                        <label class="form-check-label" for="category2">조사(이론)논문</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="keywords">키워드</label>
+                                    <input type="text" class="form-control" id="keywords" name="keyword" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="content">내용</label>
+                                    <textarea class="form-control" id="content" name="text" required>입력하세요</textarea>
+                                </div>
+                                <button type="submit" class="btn btn-lg btn-primary" style="width: 10%">제출</button>
                             </form>
+
                         </div>
                     </div>
                 </div>
