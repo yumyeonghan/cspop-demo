@@ -33,13 +33,14 @@ import java.util.Optional;
 public class UserStatusController {
 
     private final UsersService usersService;
-    private final UsersRepository usersRepository;
     private final ExcelBoardService excelBoardService;
     private final ScheduleBoardService scheduleBoardService;
 
     @GetMapping
     public String userStatusHome(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, Model model) {
-        Users user = usersRepository.findByStudentId(userSessionDto.getStudentId()).get();
+
+        Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
+        log.info("유저 왜 안나오냐 = {}", user.getSubmitForm());
         Optional<ExcelBoard> excelByStudentId = excelBoardService.findExcelByStudentId(user.getStudentId());
         if (Objects.isNull(user.getSubmitForm()) && excelByStudentId.isEmpty()) {
             model.addAttribute("errorMessage", true);
