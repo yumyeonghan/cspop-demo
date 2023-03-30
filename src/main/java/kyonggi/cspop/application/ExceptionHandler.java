@@ -1,5 +1,6 @@
 package kyonggi.cspop.application;
 
+import kyonggi.cspop.application.controller.board.excel.certification.CertificationExcelBoardController;
 import kyonggi.cspop.application.controller.board.excel.graduate.GraduateCheckController;
 import kyonggi.cspop.application.controller.board.notice.NoticeBoardController;
 import kyonggi.cspop.application.controller.users.UsersController;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice(assignableTypes = {
         UsersController.class,
         GraduateCheckController.class,
+        CertificationExcelBoardController.class,
         NoticeBoardController.class
 })
 public class ExceptionHandler {
