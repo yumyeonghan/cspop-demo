@@ -6,12 +6,11 @@ import kyonggi.cspop.application.controller.board.userstatus.dto.UserScheduleDto
 import kyonggi.cspop.domain.board.ExcelBoard;
 import kyonggi.cspop.domain.board.service.ExcelBoardService;
 import kyonggi.cspop.domain.board.service.ScheduleBoardService;
+import kyonggi.cspop.domain.form.submitform.enums.GraduationRequirements;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;
 import kyonggi.cspop.domain.schedule.Schedules;
 import kyonggi.cspop.domain.schedule.enums.Step;
-import kyonggi.cspop.domain.form.submitform.enums.GraduationRequirements;
 import kyonggi.cspop.domain.users.Users;
-import kyonggi.cspop.domain.users.repository.UsersRepository;
 import kyonggi.cspop.domain.users.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,11 +39,10 @@ public class UserStatusController {
     public String userStatusHome(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, Model model) {
 
         Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
-        log.info("유저 왜 안나오냐 = {}", user.getSubmitForm());
         Optional<ExcelBoard> excelByStudentId = excelBoardService.findExcelByStudentId(user.getStudentId());
         if (Objects.isNull(user.getSubmitForm()) && excelByStudentId.isEmpty()) {
             model.addAttribute("errorMessage", true);
-            return "index";
+            return "graduation/userstatus/applyGraduation";
         }
 
         /**

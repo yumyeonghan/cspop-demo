@@ -38,6 +38,11 @@
 </head>
 <%@include file="../../common/sessionController.jsp"%>
 <body>
+<c:if test="${errorMessage eq true}">
+  <script>
+    alert("신청서 작성 후 열람이 가능합니다.");
+  </script>
+</c:if>
 <%@include file="../../common/header.jsp"%>
 <section class="page-start">
   <!-- pageheader section -->
