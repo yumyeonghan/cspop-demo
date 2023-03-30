@@ -63,7 +63,6 @@ public class GraduateCheckController {
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
         checkUploadFileExtension(extension);
 
-        //업로드 된 Excel 파일의 데이터를 ExcelBoard 객체 리스트 형태로 저장 (액셀 파일의 문자만 받고, 숫자는 못받는 버그 수정해야함)
         Sheet worksheet = getWorksheet(file, extension);
         List<ExcelBoard> graduationList = getExcelBoardList(worksheet);
 

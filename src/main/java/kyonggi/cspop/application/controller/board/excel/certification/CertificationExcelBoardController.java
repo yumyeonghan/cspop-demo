@@ -52,7 +52,7 @@ public class CertificationExcelBoardController {
 
         model.addAttribute("startBlockPage", startBlockPage);
         model.addAttribute("endBlockPage", endBlockPage);
-        model.addAttribute("graduator", allCertificationBoard);
+        model.addAttribute("certification", allCertificationBoard);
         return "graduation/certification/certification_list";
     }
 
@@ -60,15 +60,14 @@ public class CertificationExcelBoardController {
     public String uploadCertification(@RequestParam("file") MultipartFile file, Model model) throws IOException {
         //액셀 파일인지 검사
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-        checkUploadFileExtension(extension);
+        checkUploadCertificationFileExtension(extension);
 
-        //업로드 된 Excel 파일의 데이터를 ExcelBoard 객체 리스트 형태로 저장 (액셀 파일의 문자만 받고, 숫자는 못받는 버그 수정해야함)
         Sheet worksheet = getWorksheet(file, extension);
         List<CertificationBoard> certificationBoardList = getCertificationList(worksheet);
 
-        certificationBoardService.deleteExcelListAndUploadExcelList(certificationBoardList);
+        certificationBoardService.deleteExcelListAndUploadCertificationList(certificationBoardList);
 
-        model.addAttribute("graduator", certificationBoardList);
+        model.addAttribute("certification", certificationBoardList);
         return "redirect:./certification_management?page=0&size=10";
     }
 
@@ -82,7 +81,7 @@ public class CertificationExcelBoardController {
         return ResponseEntity.ok() //
                 .contentLength(tmpFile.length()) //
                 .contentType(MediaType.APPLICATION_OCTET_STREAM) //
-                .header("Content-Disposition", "attachment;filename=graduation.xlsx") //
+                .header("Content-Disposition", "attachment;filename=certification.xlsx") //
                 .body(new InputStreamResource(excelFile));
     }
 
@@ -121,14 +120,18 @@ public class CertificationExcelBoardController {
     }
 
     private static void setColumnSize(Sheet sheet) {
-        sheet.setColumnWidth(0, 3000);
+        sheet.setColumnWidth(0, 3500);
         sheet.setColumnWidth(1, 3000);
         sheet.setColumnWidth(2, 3000);
         sheet.setColumnWidth(3, 3000);
-        sheet.setColumnWidth(4, 3000);
-        sheet.setColumnWidth(5, 3000);
-        sheet.setColumnWidth(6, 3000);
-        sheet.setColumnWidth(7, 3500);
+        sheet.setColumnWidth(4, 2500);
+        sheet.setColumnWidth(5, 2500);
+        sheet.setColumnWidth(6, 2500);
+        sheet.setColumnWidth(7, 2500);
+        sheet.setColumnWidth(8, 2500);
+        sheet.setColumnWidth(9, 2500);
+        sheet.setColumnWidth(10, 2500);
+        sheet.setColumnWidth(11, 8000);
     }
 
     private void createBody(Sheet sheet, int rowNo) {
@@ -157,12 +160,12 @@ public class CertificationExcelBoardController {
         headerRow.createCell(1).setCellValue("학번");
         headerRow.createCell(2).setCellValue("학생 이름");
         headerRow.createCell(3).setCellValue("현재 학기");
-        headerRow.createCell(4).setCellValue("전문교양 학점");
-        headerRow.createCell(5).setCellValue("MSC/BSM 학점");
-        headerRow.createCell(6).setCellValue("설계 학점");
-        headerRow.createCell(7).setCellValue("전공 학점");
-        headerRow.createCell(8).setCellValue("필수 과목");
-        headerRow.createCell(9).setCellValue("선/후수 과목");
+        headerRow.createCell(4).setCellValue("전문교양");
+        headerRow.createCell(5).setCellValue("MSC/BSM");
+        headerRow.createCell(6).setCellValue("설계");
+        headerRow.createCell(7).setCellValue("전공");
+        headerRow.createCell(8).setCellValue("필수");
+        headerRow.createCell(9).setCellValue("선/후수");
         headerRow.createCell(10).setCellValue("총 학점");
         headerRow.createCell(11).setCellValue("특이 사항");
 
@@ -188,7 +191,8 @@ public class CertificationExcelBoardController {
         for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
             Row row = worksheet.getRow(i);
 
-            //들어온 값이 문자가 아닐 경우 문자열로 변환 (row 1 or 7)
+            //들어온 값이 문자가 아닐 경우 문자열로 변환
+            //설계 학점은 따로 반환
             for (Cell cell : row) {
 
                 if (cell.getCellType() != CellType.STRING) {
@@ -246,7 +250,7 @@ public class CertificationExcelBoardController {
         return workbook;
     }
 
-    private static void checkUploadFileExtension(String extension) {
+    private static void checkUploadCertificationFileExtension(String extension) {
 
         if (extension.equals("")) {
             throw new CsPopException(CsPopErrorCode.NO_UPLOAD_FILE_EXTENSION);

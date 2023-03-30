@@ -105,7 +105,7 @@
                                                 <div class="th-inner sortable both">전문교양 학점</div>
                                             </th>
                                             <th data-field="mscBsm">
-                                                <div class="th-inner sortable both">msc/bsm 학점</div>
+                                                <div class="th-inner sortable both">MSC/BSM 학점</div>
                                             </th>
                                             <th data-field="design">
                                                 <div class="th-inner sortable both">설계 학점</div>
@@ -128,7 +128,7 @@
                                             </th>
                                         </tr>
                                         </thead>
-                                        <c:forEach var="data" items="${graduator.content}" varStatus="count">
+                                        <c:forEach var="data" items="${certification.content}" varStatus="count">
                                             <tbody>
                                             <!--enum type stepToString-->
                                             <tr style="text-align: center">
@@ -180,10 +180,10 @@
                             <ul class="pagination justify-content-center">
                                 <!-- 이전 -->
                                 <c:choose>
-                                    <c:when test="${graduator.first}"></c:when>
+                                    <c:when test="${certification.first}"></c:when>
                                     <c:otherwise>
                                         <li class="page-item"><a class="page-link" href="/api/graduation/certification_management?page=0&size=10">처음</a></li>
-                                        <li class="page-item"><a class="page-link" href="/api/graduation/certification_management?page=${graduator.number-1}&size=10">이전</a>
+                                        <li class="page-item"><a class="page-link" href="/api/graduation/certification_management?page=${certification.number-1}&size=10">이전</a>
                                         </li>
                                     </c:otherwise>
                                 </c:choose>
@@ -191,7 +191,7 @@
                                 <!-- 페이지 그룹 -->
                                 <c:forEach begin="${startBlockPage}" end="${endBlockPage}" var="i">
                                     <c:choose>
-                                        <c:when test="${graduator.pageable.pageNumber+1 == i}">
+                                        <c:when test="${certification.pageable.pageNumber+1 == i}">
                                             <li class="page-item disabled"><a class="page-link" href="/api/graduation/certification_management?page=${i-1}&size=10">${i}</a>
                                             </li>
                                         </c:when>
@@ -205,8 +205,8 @@
                                 <c:choose>
                                     <c:when test="${ulist.last}"></c:when>
                                     <c:otherwise>
-                                        <li class="page-item "><a class="page-link" href="/api/graduation/certification_management?page=${graduator.number+1}&size=10">다음</a></li>
-                                        <li class="page-item "><a class="page-link" href="/api/graduation/certification_management?page=${graduator.totalPages-1}&size=10">마지막</a></li>
+                                        <li class="page-item "><a class="page-link" href="/api/graduation/certification_management?page=${certification.number+1}&size=10">다음</a></li>
+                                        <li class="page-item "><a class="page-link" href="/api/graduation/certification_management?page=${certification.totalPages-1}&size=10">마지막</a></li>
                                     </c:otherwise>
                                 </c:choose>
                             </ul>

@@ -27,7 +27,7 @@ public class CertificationBoardService {
     }
 
     @Transactional
-    public void deleteExcelListAndUploadExcelList(List<CertificationBoard> dataList) {
+    public void deleteExcelListAndUploadCertificationList(List<CertificationBoard> dataList) {
         certificationBoardRepository.deleteAllInBatch();
         certificationBoardRepository.saveAll(dataList);
     }
