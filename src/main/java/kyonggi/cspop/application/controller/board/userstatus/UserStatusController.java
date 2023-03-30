@@ -81,9 +81,51 @@ public class UserStatusController {
                         Objects.isNull(user.getSubmitForm()) || !user.getSubmitForm().isApproval() ? "미승인" : "승인");
                 userSchedules.add(userScheduleDto);
             }
-            log.info("단계 = {}", schedules.getStep().getStepToString());
 
-            //모든 신청서 마다 위처럼 해야함
+            if (schedules.getStep().equals(Step.PROPOSAL)) {
+                UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(),
+                        schedules.getStartDate(),
+                        schedules.getEndDate(),
+                        Objects.isNull(user.getSubmitForm()) ? "미제출" : "완료",
+                        Objects.isNull(user.getSubmitForm()) || !user.getSubmitForm().isApproval() ? "미승인" : "승인");
+                userSchedules.add(userScheduleDto);
+            }
+
+            if (schedules.getStep().equals(Step.INTERIM_REPORT)) {
+                UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(),
+                        schedules.getStartDate(),
+                        schedules.getEndDate(),
+                        Objects.isNull(user.getSubmitForm()) ? "미제출" : "완료",
+                        Objects.isNull(user.getSubmitForm()) || !user.getSubmitForm().isApproval() ? "미승인" : "승인");
+                userSchedules.add(userScheduleDto);
+            }
+
+            if (schedules.getStep().equals(Step.FINAL_REPORT)) {
+                UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(),
+                        schedules.getStartDate(),
+                        schedules.getEndDate(),
+                        Objects.isNull(user.getSubmitForm()) ? "미제출" : "완료",
+                        Objects.isNull(user.getSubmitForm()) || !user.getSubmitForm().isApproval() ? "미승인" : "승인");
+                userSchedules.add(userScheduleDto);
+            }
+
+            if (schedules.getStep().equals(Step.OTHER_QUALIFICATIONS)) {
+                UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(),
+                        schedules.getStartDate(),
+                        schedules.getEndDate(),
+                        Objects.isNull(user.getSubmitForm()) ? "미제출" : "완료",
+                        Objects.isNull(user.getSubmitForm()) || !user.getSubmitForm().isApproval() ? "미승인" : "승인");
+                userSchedules.add(userScheduleDto);
+            }
+
+            if (schedules.getStep().equals(Step.FINAL_PASS)) {
+                UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(),
+                        schedules.getStartDate(),
+                        schedules.getEndDate(),
+                        Objects.isNull(user.getSubmitForm()) ? "미제출" : "완료",
+                        Objects.isNull(user.getSubmitForm()) || !user.getSubmitForm().isApproval() ? "미승인" : "승인");
+                userSchedules.add(userScheduleDto);
+            }
         }
         log.info("userSchedules = {}", userSchedules);
         model.addAttribute("userSchedules", userSchedules);
