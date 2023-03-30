@@ -34,6 +34,9 @@
         img {
             margin-top: 5%;
         }
+        .nav-pills .nav-link{
+            background: white;
+        }
     </style>
 </head>
 <%@include file="../../common/sessionController.jsp" %>
@@ -95,59 +98,81 @@
                                         </ul>
                                         <div class="tab-content">
                                             <div class="tab-pane fade active show" id="thesis-id" role="tabpanel"
-                                                 aria-labelledby="thesis-tab-id">
+                                                 aria-labelledby="thesis-tab-id"> <!-- 졸업논문 tab 코드 -->
                                                 <div id="thesis">
-                                                    <div class="progress" style="height: 20px;"
-                                                         id="thesisPercent"></div>
-                                                </div>
-                                                <div>table 자리</div>
-                                                <table>
-                                                    <thead>
-                                                    <tr>
-                                                        <th>단계</th>
-                                                        <th>시작날짜</th>
-                                                        <th>종료날짜</th>
-                                                        <th>제출</th>
-                                                        <th>비고</th>
-                                                    </tr>
-                                                    <c:forEach items="${userSchedules}" var="userSchedule">
-                                                        <tr class="text-center">
-                                                            <td>${userSchedule.step}</td>
-                                                            <td>${userSchedule.startDate}</td>
-                                                            <td>${userSchedule.endDate}</td>
-                                                            <td>${userSchedule.submitStatus}</td>
-                                                            <td>${userSchedule.approvalStatus}</td>
+                                                    <div class="progress" style="height: 20px;" id="thesisPercent"></div>
+                                                    <table class="table mb-0" border-color="black">
+                                                        <thead class="table-success">
+                                                        <tr style="text-align: center">
+                                                            <th>
+                                                                <div class="th-inner sortable both">단계</div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner sortable both">시작날짜</div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner sortable both">종료날짜</div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner sortable both">제출</div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner sortable both">비고</div>
+                                                            </th>
                                                         </tr>
-                                                    </c:forEach>
-                                                    </thead>
-                                                </table>
+                                                        </thead>
+                                                        <c:forEach items="${userSchedules}" var="userSchedule">
+                                                            <tbody>
+                                                            <tr class="text-center">
+                                                                <td>${userSchedule.step}</td>
+                                                                <td>${userSchedule.startDate}</td>
+                                                                <td>${userSchedule.endDate}</td>
+                                                                <td>${userSchedule.submitStatus}</td>
+                                                                <td>${userSchedule.approvalStatus}</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </c:forEach>
+                                                    </table>
+                                                </div>
                                             </div>
                                             <div class="tab-pane fade" id="Qualifications-tab" role="tabpanel"
-                                                 aria-labelledby="Qualifications-id">
+                                                 aria-labelledby="Qualifications-id"> <!-- 기타자격 tab 코드 -->
                                                 <div id="otherQualifications">
                                                     <div class="progress" style="height: 20px;" id="otherPercent"></div>
-                                                </div>
-                                                <div>table 자리</div>
-                                                <table>
-                                                    <thead>
-                                                    <tr>
-                                                        <th>단계</th>
-                                                        <th>시작날짜</th>
-                                                        <th>종료날짜</th>
-                                                        <th>제출</th>
-                                                        <th>비고</th>
-                                                    </tr>
-                                                    <c:forEach items="${userSchedules}" var="userSchedule">
-                                                        <tr class="text-center">
-                                                            <td>${userSchedule.step}</td>
-                                                            <td>${userSchedule.startDate}</td>
-                                                            <td>${userSchedule.endDate}</td>
-                                                            <td>${userSchedule.submitStatus}</td>
-                                                            <td>${userSchedule.approvalStatus}</td>
+                                                    <table class="table mb-0" border-color="black">
+                                                        <thead class="table-success">
+                                                        <tr style="text-align: center">
+                                                            <th>
+                                                                <div class="th-inner sortable both">단계</div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner sortable both">시작날짜</div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner sortable both">종료날짜</div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner sortable both">제출</div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner sortable both">비고</div>
+                                                            </th>
                                                         </tr>
-                                                    </c:forEach>
-                                                    </thead>
-                                                </table>
+                                                        </thead>
+                                                        <c:forEach items="${userSchedules}" var="userSchedule">
+                                                            <tbody>
+                                                            <tr class="text-center">
+                                                                <td>${userSchedule.step}</td>
+                                                                <td>${userSchedule.startDate}</td>
+                                                                <td>${userSchedule.endDate}</td>
+                                                                <td>${userSchedule.submitStatus}</td>
+                                                                <td>${userSchedule.approvalStatus}</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </c:forEach>
+                                                    </table>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -237,6 +262,9 @@
                                                 </div>
                                             </li>
                                         </ul>
+                                        <div class="text-center">
+                                            <button onclick="logger()">console</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -249,31 +277,31 @@
 </section>
 <%@include file="../../common/commonJS.jsp" %>
 <script>
-    <%--
-    ${userDetail.otherQualifications}
-    ${userDetail.thesis}
-    --%>
-    $(() => {
+    const thesisPercentage = {
+
+    }
+    const otherPercentage = {
+
+    }
+    $(() => { // 졸업, 기타 요건중 유저가 신청한 졸업 전형 table만 띄워준다.
         let image;
         if (${userDetail.otherQualifications} || ${userDetail.thesis}) { //졸업, 기타 요건 중 하나가 true일때,
             if (${userDetail.thesis}) { // 논문이 true일때 기타요건에 들어갈 이미지
                 image = "논문으로 신청하셨습니다"
                 $('#otherQualifications').html(image)
-                //thesis의 내용을 넣는 js function이 들어감
             } else if (${userDetail.otherQualifications}) { // 기타요건이 true일때 논문에 들어갈 이미지
                 image = "기타 자격으로 신청하셨습니다."
                 $('#thesis').html(image)
-                //other의 내용을 넣는 js function이 들어감
             }
         }
     });
     $(() => { // 기타 자격 progress bar 추가 함수
-        let percentage = 50; // percent가 동적으로 변경되어야 함
+        let percentage = 100; // percent가 동적으로 변경되어야 함
         let appendText = `<div class="progress-bar bg-success" role="progressbar" aria-label="Basic example" style="width: \${percentage}%" aria-valuenow="\${percentage}" aria-valuemin="0" aria-valuemax="100">\${percentage}%</div>`;
         $('#otherPercent').html(appendText)
     });
     $(() => { // 논문 progress bar 추가 함수
-        let percentage = 50; // percent가 동적으로 변경되어야 함
+        let percentage = 100; // percent가 동적으로 변경되어야 함
         let appendText = `<div class="progress-bar bg-success" role="progressbar" aria-label="Basic example" style="width: \${percentage}%" aria-valuenow="\${percentage}" aria-valuemin="0" aria-valuemax="100">\${percentage}%</div>`;
         $('#thesisPercent').html(appendText)
     });
