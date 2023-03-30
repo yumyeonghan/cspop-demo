@@ -1,0 +1,186 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: hamhyeonjun
+  Date: 2023/02/22
+  Time: 1:09
+  To change this template use File | Settings | File Templates.
+--%>
+
+<%--
+    자주 쓰이는 레이아웃 jsp 파일입니다.
+
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CSPOP</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Libs CSS -->
+    <link rel="stylesheet" href="../../../../assets/libs/ion-rangeslider/css/ion.rangeSlider.min.css">
+    <link rel="stylesheet" href="../../../../assets/libs/litepicker/dist/css/litepicker.css">
+    <link rel="stylesheet" href="../../../../assets/libs/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../../../assets/libs/magnific-popup/dist/magnific-popup.css">
+    <!-- 부트스트랩 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- 부트스트랩 테이블 -->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="../../../../assets/css/theme.min.css">
+    <style>
+        .fixed-top {
+            background-color: #672EBB;
+        }
+
+        img {
+            margin-top: 5%;
+        }
+    </style>
+</head>
+<%@include file="../../common/sessionController.jsp"%>
+<body>
+<%@include file="../../common/header.jsp"%>
+<section class="page-start">
+    <!-- pageheader section -->
+    <div class="bg-shape bg-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-12 mb-8">
+                    <div class="row">
+                        <div class="card">
+
+                            <form action="" method="POST">
+                                <input type="hidden" name="studentId" value=${userDetail.studentId}>
+                                <input type="hidden" name="studentName" value=${userDetail.studentName}>
+                                <input type="hidden" name="department" value=${userDetail.department}>
+                                <input type="hidden" name="graduationDate" value=${userDetail.graduationDate}>
+                                <input type="hidden" name="advisor" value=${userDetail.advisor}>
+                                <input type="hidden" name="qualification" value=${userDetail.qualification}>
+
+                                <label for="title">제목:</label>
+                                <input type="text" id="title" name="title" required><br>
+동
+                                <input type="radio" id="category1" name="division" value="option1" required>
+                                <label for="category1">구현논문</label>
+                                <input type="radio" id="category2" name="division" value="option2">
+                                <label for="category2">조사(이론)논문</label><br>
+
+                                <label for="keywords">키워드:</label>
+                                <input type="text" id="keywords" name="keyword" required><br>
+
+                                <label for="content">내용:</label>
+                                <textarea id="content" name="text" required>입력하세요</textarea><br>
+                                <button type="submit" class="btn btn-lg btn-primary" style="width: 100%">제출</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- sidebar -->
+                <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 mb-8">
+                    <div class="card">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item py-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-money-bill-alt me-2 font-16 fa-fw text-muted"></i>
+                                            <h5 class="mb-0 font-weight-medium">학번</h5>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-0 text-dark fw-bold">${userDetail.studentId}</h5>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item py-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-money-bill-alt me-2 font-16 fa-fw text-muted"></i>
+                                            <h5 class="mb-0 font-weight-medium">이름</h5>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-0 text-dark fw-bold">${userDetail.studentName}</h5>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item py-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-user-tie me-2 font-16 fa-fw text-muted"></i>
+                                            <h5 class="mb-0 font-weight-medium">소속학과</h5>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-0 text-dark">${userDetail.department}</h5>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item py-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-money-bill-alt me-2 font-16 fa-fw text-muted"></i>
+                                            <h5 class="mb-0 font-weight-medium">졸업시기</h5>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-0 text-dark fw-bold">${userDetail.graduationDate}</h5>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item py-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-money-bill-alt me-2 font-16 fa-fw text-muted"></i>
+                                            <h5 class="mb-0 font-weight-medium">지도교수</h5>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-0 text-dark fw-bold">${userDetail.advisor}</h5>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item py-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-money-bill-alt me-2 font-16 fa-fw text-muted"></i>
+                                            <h5 class="mb-0 font-weight-medium">자격</h5>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-0 text-dark fw-bold">${userDetail.otherQualification}</h5>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item py-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-file-alt me-2 font-16 fa-fw text-muted"></i>
+                                            <h5 class="mb-0 font-weight-medium">캡스톤이수 여부</h5>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0 text-muted">${userDetail.capstoneCompletionStatus}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<%@include file="../../common/commonJS.jsp" %>
+</body>
+</html>
