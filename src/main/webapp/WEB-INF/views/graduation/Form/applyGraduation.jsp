@@ -94,7 +94,7 @@
                 </form>
               </div>
               <div class="col-md-6">
-                <form method="post" action="api/submitForm">
+                <form method="post" action="/api/submitForm">
                   <input type="hidden" name="studentId" value=${userDetail.studentId}>
                   <input type="hidden" name="studentName" value=${userDetail.studentName}>
                   <input type="hidden" name="department" value=${userDetail.department}>

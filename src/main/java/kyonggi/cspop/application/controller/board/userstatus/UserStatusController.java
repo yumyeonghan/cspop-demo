@@ -44,7 +44,7 @@ public class UserStatusController {
         if (Objects.isNull(user.getSubmitForm()) && excelByStudentId.isEmpty()) {
             model.addAttribute("errorMessage", true);
             model.addAttribute("userDetail",new UserDetailDto(user.getStudentId(), user.getStudentName(), user.getDepartment()));
-            return "graduation/userstatus/applyGraduation";
+            return "graduation/Form/applyGraduation";
         }
 
         /**
