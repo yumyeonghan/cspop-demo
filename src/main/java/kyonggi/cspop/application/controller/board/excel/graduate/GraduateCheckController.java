@@ -179,47 +179,73 @@ public class GraduateCheckController {
         for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
             Row row = worksheet.getRow(i);
 
-            //들어온 값이 문자가 아닐 경우 문자열로 변환 (row 1 or 7)
-            for (Cell cell : row) {
+            for (int j = 0; j < row.getLastCellNum(); j++) {
+                Cell cell = row.getCell(j);
 
-                if (cell.getCellType() != CellType.STRING) {
+                StringBuilder row1 = new StringBuilder();
+
+                //null 또는 빈 값일 경우 대체 값 대입
+                if (cell == null) {
+                    String value = "N/A";
+                    cell = row.createCell(j);
+                    cell.setCellValue(value);
+                }
+                else if (cell.getCellType() == CellType.BLANK) {
+                    String value = "N/A";
+                    cell.setCellValue(value);
+                }
+                else if (cell.getCellType() == CellType.STRING) {
+                    String value = cell.getStringCellValue();
+                    if (value == null || value.trim().isEmpty()) {
+                        // 빈 문자열인 경우 대체 값을 설정하고 셀에 입력
+                        String replacementValue = "N/A";
+                        cell.setCellValue(replacementValue);
+                    }
+                }
+
+                else if (cell.getCellType() == CellType.NUMERIC) {
                     double value = cell.getNumericCellValue();
                     String stringValue = String.valueOf(value);
 
-                    StringBuilder row1 = new StringBuilder();
-
-                    if (stringValue.length()>5){
-                        for (int j=0;j<stringValue.length();j++) {
-                            char c = stringValue.charAt(j);
-
-                            if (c=='.')
-                                continue;
-
-                            if (c>='A' && c<='Z')
-                                break;
-
-                            row1.append(c);
-                        }
-                        //학번 뒷자리에 0이 연속해서 올 경우 있는 만큼 0 추가
-                        if (row1.length() == 8) {
-                            row1.append("0");
-                        }
-                        else if (row1.length() == 7) {
-                            row1.append("00");
-                        }
-                        else if (row1.length() == 6) {
-                            row1.append("000");
-                        }
-                        //이외의 경우는 없다고 봄
+                    //들어온 값이 빈 값
+                    if (stringValue.trim().isEmpty()) {
+                        String replacementValue = "N/A";
+                        cell.setCellValue(replacementValue);
                     }
-                    else{
-                    for (int j=0;j<stringValue.length();j++) {
-                            char c = stringValue.charAt(j);
 
-                            if (c == '.')
-                                break;
+                    //들어온 값이 빈 값이 아니고 문자가 아닐 경우 문자열로 변환 (row 1 or 7)
+                    else {
+                        if (stringValue.length() > 5) {
+                            for (int k = 0; k < stringValue.length(); k++) {
+                                char c = stringValue.charAt(k);
 
-                            row1.append(c);
+                                if (c == '.')
+                                    continue;
+
+                                if (c >= 'A' && c <= 'Z')
+                                    break;
+
+                                row1.append(c);
+                            }
+                            //학번 뒷자리에 0이 연속해서 올 경우 있는 만큼 0 추가
+                            if (row1.length() == 8) {
+                                row1.append("0");
+                            } else if (row1.length() == 7) {
+                                row1.append("00");
+                            } else if (row1.length() == 6) {
+                                row1.append("000");
+                            }
+                            //이외의 경우는 없다고 봄
+                        }
+                        else {
+                            for (int k = 0; k < stringValue.length(); k++) {
+                                char c = stringValue.charAt(k);
+
+                                if (c == '.')
+                                    break;
+
+                                row1.append(c);
+                            }
                         }
                     }
                     cell.setCellValue(row1.toString());
