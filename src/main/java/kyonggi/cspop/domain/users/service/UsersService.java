@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -40,6 +42,12 @@ public class UsersService implements UserDetailsService {
         if (usersRepository.existsByStudentId(studentId)) {
             throw new CsPopException(CsPopErrorCode.DUPLICATE_STUDENT_ID);
         }
+    }
+
+    public Users findUserByStudentId(String studentId) {
+        Users users = usersRepository.findByStudentId(studentId).get();
+        users.getSubmitForm();
+        return users;
     }
 
     //사용 안함

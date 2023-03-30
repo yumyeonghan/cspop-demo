@@ -7,6 +7,10 @@ INSERT INTO users
 VALUES (2, '2023-03-14 12:35:29.857156', '2023-03-14 12:35:29.857156', '2023-09-01', 'UNDERGRADUATE_STUDENT', '컴퓨터공학부',
         '1234@naver.com', '010-1234-5678', 'FEMALE', '201812753', '함현준',
         '$2a$10$jvXXjxBH9uxs6wCjsOapu.oCqPdQNO22/VvfNYbyWvlAz1GDrjO76', '서울', 2);
+INSERT INTO users
+VALUES (3, '2023-03-14 12:35:29.857156', '2023-03-14 12:35:29.857156', '2023-09-01', 'UNDERGRADUATE_STUDENT', '컴퓨터공학부',
+        '1234@naver.com', '010-1234-5678', 'FEMALE', '201811111', '홍길동',
+        '$2a$10$jvXXjxBH9uxs6wCjsOapu.oCqPdQNO22/VvfNYbyWvlAz1GDrjO76', '서울', null);
 
 --schedules 데이터
 INSERT INTO schedules
