@@ -85,14 +85,20 @@
 
             <div class="row">
               <div class="col-md-6">
-                <form method="post">
-                  <input type="hidden" name="기타자격" value="기타자격">
+                <form method="post" action="api/submitForm">
+                  <input type="hidden" name="studentId" value="${userDetail.studentId}">
+                  <input type="hidden" name="studentName" value="${userDetail.studentName}">
+                  <input type="hidden" name="department" value="${userDetail.department}">
+                  <input type="hidden" name="qualification" value="기타자격">
                   <button type="submit" class="btn btn-lg btn-primary" style="width: 100%">기타자격</button>
                 </form>
               </div>
               <div class="col-md-6">
-                <form method="post">
-                  <input type="hidden" name="논문" value="논문">
+                <form method="post" action="api/submitForm">
+                  <input type="hidden" name="studentId" value="${userDetail.studentId}">
+                  <input type="hidden" name="studentName" value="${userDetail.studentName}">
+                  <input type="hidden" name="department" value="${userDetail.department}">
+                  <input type="hidden" name="qualification" value="논문">
                   <button type="submit" class="btn btn-lg btn-primary" style="width: 100%">졸업논문</button>
                 </form>
               </div>
