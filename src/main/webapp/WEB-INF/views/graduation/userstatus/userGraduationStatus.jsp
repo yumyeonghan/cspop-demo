@@ -139,6 +139,7 @@
                                                     </table>
                                                 </div>
                                             </div>
+                                            단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}
                                             <div class="tab-pane fade" id="Qualifications-tab" role="tabpanel"
                                                  aria-labelledby="Qualifications-id"> <!-- 기타자격 tab 코드 -->
                                                 <div id="otherQualifications">
@@ -180,7 +181,6 @@
                                                         </c:forEach>
                                                     </table>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
