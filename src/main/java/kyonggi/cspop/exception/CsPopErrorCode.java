@@ -13,10 +13,11 @@ public enum CsPopErrorCode {
     ANSWER_PASSWORD_NOT_FOUND(HttpStatus.NOT_FOUND, "저장되지 않은 답입니다."),
 
     //ExcelBoard
-    INVALILD_UPLOAD_FILE_EXTENSION(HttpStatus.NOT_ACCEPTABLE, "엑셀파일을 업로드 해주세요."),
+    INVALID_UPLOAD_FILE_EXTENSION(HttpStatus.NOT_ACCEPTABLE, "잘못된 파일 형식입니다."),
+    NO_UPLOAD_FILE_EXTENSION(HttpStatus.NOT_FOUND, "엑셀파일을 업로드 해주세요."),
 
     //NoticeBoard
-    NOTICE_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND, "게신판이 이미 삭제 되었습니다.");
+    NOTICE_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND, "게시판이 이미 삭제 되었습니다.");
 
 
     private HttpStatus httpStatus;

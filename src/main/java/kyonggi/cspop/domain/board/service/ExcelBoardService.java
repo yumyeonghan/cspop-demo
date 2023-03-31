@@ -1,8 +1,11 @@
 package kyonggi.cspop.domain.board.service;
 
 import kyonggi.cspop.domain.board.ExcelBoard;
+import kyonggi.cspop.domain.board.dto.ExcelBoardResponseDto;
 import kyonggi.cspop.domain.board.repository.ExcelBoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +21,10 @@ public class ExcelBoardService {
 
     public List<ExcelBoard> findExcelList() {
         return excelBoardRepository.findAll();
+    }
+
+    public Page<ExcelBoardResponseDto> findAllExcelBoard(Pageable pageable) {
+        return excelBoardRepository.findAllByOrderById(pageable).map(ExcelBoardResponseDto::new);
     }
 
     @Transactional

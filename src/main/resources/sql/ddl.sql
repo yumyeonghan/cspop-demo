@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS proposal_form;
 DROP TABLE IF EXISTS schedules;
 DROP TABLE IF EXISTS excel_board;
 DROP TABLE IF EXISTS guidance_board;
+DROP TABLE IF EXISTS certification_board;
 DROP TABLE IF EXISTS schedule_board;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -285,12 +286,41 @@ CREATE TABLE schedule_board
     DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
+-- Table `test`.`certification_board`
+-- -----------------------------------------------------
+CREATE TABLE certification_board (
+                                     `id` BIGINT NOT NULL,
+                                     `created_date` DATETIME(6) NULL DEFAULT NULL COMMENT '등록일',
+                                     `last_modified_date` DATETIME(6) NULL DEFAULT NULL COMMENT '수정일',
+                                     `department` VARCHAR(255) NULL DEFAULT NULL COMMENT '소속 학과',
+                                     `student_id` VARCHAR(255) NULL DEFAULT NULL COMMENT '학번',
+                                     `student_name` VARCHAR(255) NULL DEFAULT NULL COMMENT '학생 이름',
+                                     `current_semester` VARCHAR(255) NULL DEFAULT NULL COMMENT '현재 학기',
+                                     `professional_education` VARCHAR(255) NULL DEFAULT NULL COMMENT '전문교양 학점',
+                                     `msc_bsm` VARCHAR(255) NULL DEFAULT NULL COMMENT 'MSC/BSM 학점',
+                                     `design` VARCHAR(255) NULL DEFAULT NULL COMMENT '설계 학점',
+                                     `major` VARCHAR(255) NULL DEFAULT NULL COMMENT '전공 학점',
+                                     `essential` VARCHAR(255) NULL DEFAULT NULL COMMENT '필수 과목',
+                                     `first_and_last` VARCHAR(255) NULL DEFAULT NULL COMMENT '선/후수 과목',
+                                     `total` VARCHAR(255) NULL DEFAULT NULL COMMENT '총 학점',
+                                     `special_note` VARCHAR(255) NULL DEFAULT NULL COMMENT '특이사항',
+                                     PRIMARY KEY (`id`))
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
 -- alter table
 -- -----------------------------------------------------
 alter table excel_board
     modify id bigint auto_increment;
 
 alter table excel_board
+    auto_increment = 1;
+
+alter table certification_board
+    modify id bigint auto_increment;
+
+alter table certification_board
     auto_increment = 1;
 
 alter table admins
