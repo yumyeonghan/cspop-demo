@@ -67,7 +67,7 @@ public class UserStatusController {
         List<Schedules> scheduleList = scheduleBoardService.findScheduleList();
         for (Schedules schedules : scheduleList) {
             if (user.getSubmitForm().getGraduationRequirements().equals(GraduationRequirements.Other_Qualifications)) {
-                if (schedules.getStep().equals(Step.PROPOSAL) || schedules.getStep().equals(Step.INTERIM_REPORT) || schedules.getStep().equals(Step.FINAL_REPORT)) {
+                if (schedules.getStep().equals(Step.INTERIM_REPORT) || schedules.getStep().equals(Step.FINAL_REPORT)) {
                     continue;
                 }
             }
