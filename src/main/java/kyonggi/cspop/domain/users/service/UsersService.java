@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
+
 
 @Service
 @RequiredArgsConstructor
@@ -42,6 +44,14 @@ public class UsersService implements UserDetailsService {
         }
     }
 
+    public Users findUserByStudentId(String studentId) {
+        Users users = usersRepository.findByStudentId(studentId).get();
+        if (!Objects.isNull(users.getSubmitForm())) {
+            users.getSubmitForm().getStudentId();
+        }
+        return users;
+    }
+
     //사용 안함
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -50,6 +60,7 @@ public class UsersService implements UserDetailsService {
 
     /**
      * 비밀번호 변경 시 사용 메서드
+     *
      * @param studentId
      */
 
@@ -61,8 +72,8 @@ public class UsersService implements UserDetailsService {
     }
 
     //저장되어있는 비밀번호 대답이 아니면 예외를 던짐
-    public void checkExistPasswordAnswer(String answerPw){
-        if (!usersRepository.existsUsersByAnswerPw(answerPw)){
+    public void checkExistPasswordAnswer(String answerPw) {
+        if (!usersRepository.existsUsersByAnswerPw(answerPw)) {
             throw new CsPopException(CsPopErrorCode.ANSWER_PASSWORD_NOT_FOUND);
         }
     }

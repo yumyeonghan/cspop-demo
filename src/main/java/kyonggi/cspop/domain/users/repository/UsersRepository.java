@@ -14,5 +14,5 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
     // 비밀번호 대답 체크
     boolean existsUsersByAnswerPw(String answerPw);
 
-    Optional<Users> findByStudentId(String loginId);
+    Optional<Users> findByStudentId(String studentId);
 }

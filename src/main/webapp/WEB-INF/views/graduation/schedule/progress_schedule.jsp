@@ -104,7 +104,7 @@
                                             <tbody>
                                             <!--enum type stepToString-->
                                             <tr style="text-align: center">
-                                                <td><a href="scheduleModify/${data.id}">${data.step.stepToString}</a></td>
+                                                <td>${data.step.stepToString}</td>
                                                 <td>${data.startDate}</td>
                                                 <td>${data.endDate}</td>
                                                 <td>${data.scheduleState.scheduleStateToString}</td>
@@ -126,8 +126,8 @@
                                                 <option value="2">제안서</option>
                                                 <option value="3">중간보고서</option>
                                                 <option value="4">최종보고서</option>
-                                                <option value="5">최종통과</option>
-                                                <option value="6">기타자격</option>
+                                                <option value="5">기타자격</option>
+                                                <option value="6">최종통과</option>
                                             </select>
                                         </div>
                                         <div class="modal-body">
@@ -162,11 +162,11 @@
                             <h4 class="alert-light-info">최종보고서</h4>
                             <p>${data.finalReportText}</p>
                             <br>
-                            <h4 class="alert-light-info">최종통과</h4>
-                            <p>${data.finalPassText}</p>
-                            <br>
                             <h4 class="alert-light-info">기타자격</h4>
                             <p>${data.otherQualificationsText}</p>
+                            <br>
+                            <h4 class="alert-light-info">최종통과</h4>
+                            <p>${data.finalPassText}</p>
                             <br>
 <%--                            <button style="width: 80px; height: 30px;" type="submit" onclick="location.href='scheduleBoardModify/${data.id}'">수정</button>--%>
                             <br>
@@ -186,8 +186,8 @@
                                         <option value="proposalText">제안서</option>
                                         <option value="interimReportText">중간보고서</option>
                                         <option value="finalReportText">최종보고서</option>
-                                        <option value="finalPassText">최종통과</option>
                                         <option value="otherQualificationsText">기타자격</option>
+                                        <option value="finalPassText">최종통과</option>
                                     </select>
                                 </div>
                                 <div class="modal-body">
