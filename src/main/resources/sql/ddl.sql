@@ -82,7 +82,6 @@ CREATE TABLE submit_form
     `created_date`            DATETIME(6)  NULL DEFAULT NULL COMMENT '등록일',
     `last_modified_date`      DATETIME(6)  NULL DEFAULT NULL COMMENT '수정일',
     `department`              VARCHAR(255) NOT NULL COMMENT '소속학과',
-    `graduation_date`         DATE         NOT NULL COMMENT '졸업날짜',
     `student_id`              VARCHAR(255) NOT NULL COMMENT '학번',
     `student_name`            VARCHAR(255) NOT NULL COMMENT '학생 이름',
     `approval`                BIT(1)       NOT NULL COMMENT '승인여부',
@@ -350,5 +349,12 @@ alter table notice_board_upload_file
 
 alter table notice_board_upload_file
     auto_increment = 1;
+
+alter table submit_form
+    modify id bigint auto_increment;
+
+alter table submit_form
+    auto_increment = 1;
+
 
 -- form 테이블들도 auto 로 설정 해줘야 함
