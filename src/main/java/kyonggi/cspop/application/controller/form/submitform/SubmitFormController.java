@@ -31,15 +31,6 @@ public class SubmitFormController {
 
     private final ExcelBoardService excelBoardService;
 
-
-    //추후 뷰 연결
-    @GetMapping("api/submitForm")
-    public String saveSubmitForm(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto) {
-
-        Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
-        return "graduation/form/submitForm";
-    }
-
     @PostMapping("api/submitForm")
     public String saveSubmitFormProgress(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, @Validated @ModelAttribute SubmitFormDto submitFormDto) {
 
@@ -56,6 +47,6 @@ public class SubmitFormController {
 
         log.info("폼 = {}", submitFormDto);
         //신청 폼 저장 -> 액셀 업데이트 -> 졸업 진행 상황 테이블 업데이트 -> 신청자 리스트 업데이트
-        return "redirect:api/userStatus";
+        return "redirect:/api/userStatus";
     }
 }
