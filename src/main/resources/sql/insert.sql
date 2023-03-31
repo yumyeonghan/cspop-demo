@@ -12,6 +12,12 @@ VALUES (3, '2023-03-14 12:35:29.857156', '2023-03-14 12:35:29.857156', '2023-09-
         '1234@naver.com', '010-1234-5678', 'FEMALE', '201811111', '홍길동',
         '$2a$10$jvXXjxBH9uxs6wCjsOapu.oCqPdQNO22/VvfNYbyWvlAz1GDrjO76', '서울', null, null, null, null, null);
 
+INSERT INTO users
+VALUES (4, '2023-03-14 12:35:29.857156', '2023-03-14 12:35:29.857156', '2023-09-01', 'UNDERGRADUATE_STUDENT', '컴퓨터공학부',
+        '1234@naver.com', '010-1234-5678', 'FEMALE', '202013149', '고은아',
+        '$2a$10$jvXXjxBH9uxs6wCjsOapu.oCqPdQNO22/VvfNYbyWvlAz1GDrjO76', '서울', 3, null, null, null, null);
+
+
 --schedules 데이터
 INSERT INTO schedules
 VALUES (1, '2023-03-14 13:52:38.000000', '2023-03-14 13:52:46.764849', '2023-03-24', 'WAIT', '2023-03-15', 'RECEIVED'),
@@ -69,6 +75,8 @@ insert into submit_form
 values (1, NOW(), NOW(), '컴퓨터공학부', NOW(), '201811612', '유명한', 1, 'THESIS');
 insert into submit_form
 values (2, NOW(), NOW(), '컴퓨터공학부', NOW(), '201812753', '함현준', 1, 'Other_Qualifications');
+insert into submit_form
+values (3, NOW(), NOW(), '컴퓨터공학부', NOW(), '202013149', '고은아', 1, 'THESIS');
 
 --certification_board 데이터
 INSERT INTO `CSPOP`.`certification_board`(`id`, `created_date`, `last_modified_date`, `department`, `student_id`,
@@ -81,3 +89,5 @@ INSERT INTO `CSPOP`.`excel_board`
 VALUES (1, NOW(), NOW(), '이수', '1999/10/13', '공모전', '김도훈', '진행', '제안서', '201811612', '유명한');
 INSERT INTO `CSPOP`.`excel_board`
 VALUES (2, NOW(), NOW(), '이수', '1999/10/13', '공모전', '이은정', '진행', '제안서', '201812753', '함현준');
+INSERT INTO `CSPOP`.`excel_board`
+VALUES (3, NOW(), NOW(), '이수', '1999/10/13', '공모전', '이은정', '진행', '제안서', '202013149', '고은아');

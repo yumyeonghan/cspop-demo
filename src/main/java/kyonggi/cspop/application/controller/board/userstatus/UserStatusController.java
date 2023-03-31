@@ -95,11 +95,14 @@ public class UserStatusController {
                 userSchedules.add(userScheduleDto);
             }
         }
+        model.addAttribute("userSchedules", userSchedules);
 
         //진행 단계들이 모두 승인 났으면 최종 통과는 true, 아니면 false
         model.addAttribute("finalPass", userSchedules.stream().allMatch(e -> e.getApprovalStatus().equals("승인")));
+
         //함씨가 말한 어디까지 승인이 됐는지 뷰에 알려주는 로직 작성
-        model.addAttribute("userSchedules", userSchedules);
+
+
         return "graduation/userstatus/userGraduationStatus";
     }
 }
