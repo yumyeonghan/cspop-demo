@@ -3,6 +3,8 @@ package kyonggi.cspop.domain.board.service;
 import kyonggi.cspop.domain.board.ExcelBoard;
 import kyonggi.cspop.domain.board.dto.ExcelBoardResponseDto;
 import kyonggi.cspop.domain.board.repository.ExcelBoardRepository;
+import kyonggi.cspop.domain.form.submitform.SubmitForm;
+import kyonggi.cspop.domain.users.Users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,5 +38,10 @@ public class ExcelBoardService {
     public Optional<ExcelBoard> findExcelByStudentId(String studentId) {
         Optional<ExcelBoard> excelBoard = excelBoardRepository.findByStudentId(studentId);
         return excelBoard;
+    }
+
+    @Transactional
+    public void addExcelBySubmitForm(Users users, SubmitForm submitForm) {
+        excelBoardRepository.save(ExcelBoard.addExcelBySubmitForm(users, submitForm));
     }
 }

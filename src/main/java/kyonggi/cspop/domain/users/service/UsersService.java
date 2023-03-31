@@ -3,6 +3,7 @@ package kyonggi.cspop.domain.users.service;
 import kyonggi.cspop.application.controller.users.dto.UserPasswordRequestDto;
 import kyonggi.cspop.application.util.crypto.BCryptoPasswordEncoder;
 import kyonggi.cspop.application.util.crypto.PasswordEncoder;
+import kyonggi.cspop.domain.form.submitform.SubmitForm;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.repository.UsersRepository;
 import kyonggi.cspop.exception.CsPopErrorCode;
@@ -88,5 +89,11 @@ public class UsersService implements UserDetailsService {
         BCryptoPasswordEncoder encoder = new BCryptoPasswordEncoder();
         String securePw = encoder.encryptPassword(userPasswordRequestDto.getStudentPassword());
         users.updatePassword(securePw);
+    }
+
+    @Transactional
+    public void updateExcelBySubmitForm(Users users, SubmitForm submitForm) {
+        users.addSubmitForms(submitForm);
+        usersRepository.save(users);
     }
 }

@@ -1,6 +1,10 @@
 package kyonggi.cspop.domain.board;
 
 import kyonggi.cspop.domain.entity.BaseEntity;
+import kyonggi.cspop.domain.form.submitform.SubmitForm;
+import kyonggi.cspop.domain.form.submitform.enums.GraduationRequirements;
+import kyonggi.cspop.domain.schedule.enums.Step;
+import kyonggi.cspop.domain.users.Users;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -49,6 +53,26 @@ public class ExcelBoard extends BaseEntity {
         excelBoard.state =  row.getCell(5).getStringCellValue();
         excelBoard.otherQualifications = row.getCell(6).getStringCellValue();
         excelBoard.capstoneCompletion = row.getCell(7).getStringCellValue();
+        return excelBoard;
+    }
+
+    public static ExcelBoard addExcelBySubmitForm(Users users, SubmitForm submitForm) {
+
+        ExcelBoard excelBoard = new ExcelBoard();
+        excelBoard.studentId = users.getStudentId();
+        excelBoard.studentName = users.getStudentName();
+        excelBoard.professorName = "미정";
+        excelBoard.graduationDate = "미확인";
+        excelBoard.step = Step.RECEIVED.getStepToString();
+        excelBoard.state = "미승인";
+
+        if (submitForm.getGraduationRequirements().getGraduationRequirementsToString().equals("기타자격")) {
+            excelBoard.otherQualifications = GraduationRequirements.Other_Qualifications.getGraduationRequirementsToString();
+        }
+        else{
+            excelBoard.otherQualifications = GraduationRequirements.THESIS.getGraduationRequirementsToString();
+        }
+        excelBoard.capstoneCompletion = "미확인";
         return excelBoard;
     }
 }
