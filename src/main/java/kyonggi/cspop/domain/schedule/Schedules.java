@@ -61,16 +61,13 @@ public class Schedules extends BaseEntity {
 
         if (now.isAfter(endDate)) {
             this.scheduleState = ScheduleState.valueOf("END");
-            System.out.println("scheduleState = " + scheduleState);
         }
         else if (now.isBefore(startDate)){
             this.scheduleState = ScheduleState.valueOf("WAIT");
-            System.out.println("scheduleState = " + scheduleState);
 
         }
         else{
             this.scheduleState = ScheduleState.valueOf("PROCEEDING");
-            System.out.println("scheduleState = " + scheduleState);
         }
     }
 }

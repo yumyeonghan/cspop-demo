@@ -1,6 +1,6 @@
 package kyonggi.cspop.domain.uploadfile;
 
-import kyonggi.cspop.domain.submitform.SubmitForm;
+import kyonggi.cspop.domain.form.submitform.SubmitForm;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +22,7 @@ public class SubmitFormUploadFile {
     @Comment("서버 내부에서 관리하는 파일명")
     private String storeFileName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "submitForm_id", foreignKey = @ForeignKey(name = "fk_submit_form_upload_file_to_notice_board"))
     private SubmitForm submitForm;
 
