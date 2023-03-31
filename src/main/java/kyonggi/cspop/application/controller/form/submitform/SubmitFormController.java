@@ -14,6 +14,7 @@ public class SubmitFormController {
     @PostMapping("api/submitForm")
     public String saveSubmitForm(@ModelAttribute SubmitFormDto submitFormDto) {
         log.info("폼 = {}", submitFormDto);
+        log.info("안녕하세요");
         //신청 폼 저장 -> 액셀 업데이트 -> 졸업 진행 상황 테이블 업데이트 -> 신청자 리스트 업데이트
         return "redirect:api/userStatus";
     }
