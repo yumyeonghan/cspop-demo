@@ -6,9 +6,9 @@ import lombok.Getter;
 public enum GraduationRequirements {
     THESIS("논문"), Other_Qualifications("기타자격");
 
-    private final String graduationRequirements;
+    private final String graduationRequirementsToString;
 
-    GraduationRequirements(String graduationRequirements) {
-        this.graduationRequirements = graduationRequirements;
+    GraduationRequirements(String graduationRequirementsToString) {
+        this.graduationRequirementsToString = graduationRequirementsToString;
     }
 }

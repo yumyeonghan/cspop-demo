@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -33,10 +32,6 @@ public class SubmitForm extends BaseEntity {
     @Column(nullable = false)
     private String department;
 
-    @Comment("졸업날짜")
-    @Column(nullable = false)
-    private LocalDate graduationDate;
-
     @Comment("승인여부")
     @Column(nullable = false)
     private boolean approval;
@@ -58,5 +53,23 @@ public class SubmitForm extends BaseEntity {
     public void addUploadFile(SubmitFormUploadFile uploadFile) {
         uploadFile.designateSubmitForm(this);
         this.submitFormUploadFile = uploadFile;
+    }
+
+
+    //신청서 생성 메소드
+    public static SubmitForm createSubmitForm(String studentId, String studentName, String department, boolean approval, String graduationRequirements) {
+        SubmitForm submitForm = new SubmitForm();
+        submitForm.studentId = studentId;
+        submitForm.studentName = studentName;
+        submitForm.department = department;
+        submitForm.approval = approval;
+
+        if (graduationRequirements.equals("기타자격")) {
+            submitForm.graduationRequirements = GraduationRequirements.Other_Qualifications;
+        }
+        else{
+            submitForm.graduationRequirements = GraduationRequirements.THESIS;
+        }
+        return submitForm;
     }
 }
