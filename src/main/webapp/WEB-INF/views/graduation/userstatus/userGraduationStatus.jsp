@@ -139,7 +139,8 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                            단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}
+                                            <p>단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}</p>
+                                            <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>
                                             <div class="tab-pane fade" id="Qualifications-tab" role="tabpanel"
                                                  aria-labelledby="Qualifications-id"> <!-- 기타자격 tab 코드 -->
                                                 <div id="otherQualifications">

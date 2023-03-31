@@ -101,7 +101,9 @@ public class UserStatusController {
         model.addAttribute("finalPass", userSchedules.stream().allMatch(e -> e.getApprovalStatus().equals("승인")));
 
         //함씨가 말한 어디까지 승인이 됐는지 뷰에 알려주는 로직 작성
-
+        List<String> notApprovalList = new ArrayList<>();
+        userSchedules.stream().filter(e -> e.getApprovalStatus().equals("미승인")).forEach(e -> notApprovalList.add(e.getStep()));
+        model.addAttribute("notApprovalList", notApprovalList);
 
         return "graduation/userstatus/userGraduationStatus";
     }

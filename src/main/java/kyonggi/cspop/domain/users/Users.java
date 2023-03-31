@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
-import javax.print.attribute.standard.MediaSize;
 import java.time.LocalDate;
 
 @Entity
