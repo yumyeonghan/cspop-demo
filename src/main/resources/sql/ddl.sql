@@ -99,7 +99,9 @@ CREATE TABLE final_form
 (
     `id`                 BIGINT      NOT NULL,
     `created_date`       DATETIME(6) NULL DEFAULT NULL COMMENT '등록일',
-    `last_modified_date` DATETIME(6) NULL DEFAULT NULL COMMENT '수정일'
+    `last_modified_date` DATETIME(6) NULL DEFAULT NULL COMMENT '수정일',
+    `approval`                BIT(1)       NOT NULL COMMENT '승인여부'
+
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4;
@@ -111,7 +113,8 @@ CREATE TABLE interim_form
 (
     `id`                 BIGINT      NOT NULL,
     `created_date`       DATETIME(6) NULL DEFAULT NULL COMMENT '등록일',
-    `last_modified_date` DATETIME(6) NULL DEFAULT NULL COMMENT '수정일'
+    `last_modified_date` DATETIME(6) NULL DEFAULT NULL COMMENT '수정일',
+    `approval`                BIT(1)       NOT NULL COMMENT '승인여부'
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4;
@@ -123,7 +126,8 @@ CREATE TABLE other_form
 (
     `id`                 BIGINT      NOT NULL,
     `created_date`       DATETIME(6) NULL DEFAULT NULL COMMENT '등록일',
-    `last_modified_date` DATETIME(6) NULL DEFAULT NULL COMMENT '수정일'
+    `last_modified_date` DATETIME(6) NULL DEFAULT NULL COMMENT '수정일',
+    `approval`                BIT(1)       NOT NULL COMMENT '승인여부'
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4;
@@ -188,6 +192,10 @@ CREATE TABLE users
     `answer_Pw`          VARCHAR(255) NOT NULL COMMENT '비밀번호 대답',
     `submit_form_id`     BIGINT       NULL DEFAULT NULL,
     `proposal_form_id`   BIGINT       NULL DEFAULT NULL,
+    `interim_form_id`    BIGINT       NULL DEFAULT NULL,
+    `final_form_id`      BIGINT       NULL DEFAULT NULL,
+    `other_form_id`      BIGINT       NULL DEFAULT NULL,
+
     PRIMARY KEY (`id`),
     UNIQUE INDEX `submit_form_id_unique` (`submit_form_id` ASC) VISIBLE,
     CONSTRAINT `fk_users_to_submit_form`
@@ -288,23 +296,25 @@ CREATE TABLE schedule_board
 -- -----------------------------------------------------
 -- Table `test`.`certification_board`
 -- -----------------------------------------------------
-CREATE TABLE certification_board (
-                                     `id` BIGINT NOT NULL,
-                                     `created_date` DATETIME(6) NULL DEFAULT NULL COMMENT '등록일',
-                                     `last_modified_date` DATETIME(6) NULL DEFAULT NULL COMMENT '수정일',
-                                     `department` VARCHAR(255) NULL DEFAULT NULL COMMENT '소속 학과',
-                                     `student_id` VARCHAR(255) NULL DEFAULT NULL COMMENT '학번',
-                                     `student_name` VARCHAR(255) NULL DEFAULT NULL COMMENT '학생 이름',
-                                     `current_semester` VARCHAR(255) NULL DEFAULT NULL COMMENT '현재 학기',
-                                     `professional_education` VARCHAR(255) NULL DEFAULT NULL COMMENT '전문교양 학점',
-                                     `msc_bsm` VARCHAR(255) NULL DEFAULT NULL COMMENT 'MSC/BSM 학점',
-                                     `design` VARCHAR(255) NULL DEFAULT NULL COMMENT '설계 학점',
-                                     `major` VARCHAR(255) NULL DEFAULT NULL COMMENT '전공 학점',
-                                     `essential` VARCHAR(255) NULL DEFAULT NULL COMMENT '필수 과목',
-                                     `first_and_last` VARCHAR(255) NULL DEFAULT NULL COMMENT '선/후수 과목',
-                                     `total` VARCHAR(255) NULL DEFAULT NULL COMMENT '총 학점',
-                                     `special_note` VARCHAR(255) NULL DEFAULT NULL COMMENT '특이사항',
-                                     PRIMARY KEY (`id`))
+CREATE TABLE certification_board
+(
+    `id`                     BIGINT       NOT NULL,
+    `created_date`           DATETIME(6)  NULL DEFAULT NULL COMMENT '등록일',
+    `last_modified_date`     DATETIME(6)  NULL DEFAULT NULL COMMENT '수정일',
+    `department`             VARCHAR(255) NULL DEFAULT NULL COMMENT '소속 학과',
+    `student_id`             VARCHAR(255) NULL DEFAULT NULL COMMENT '학번',
+    `student_name`           VARCHAR(255) NULL DEFAULT NULL COMMENT '학생 이름',
+    `current_semester`       VARCHAR(255) NULL DEFAULT NULL COMMENT '현재 학기',
+    `professional_education` VARCHAR(255) NULL DEFAULT NULL COMMENT '전문교양 학점',
+    `msc_bsm`                VARCHAR(255) NULL DEFAULT NULL COMMENT 'MSC/BSM 학점',
+    `design`                 VARCHAR(255) NULL DEFAULT NULL COMMENT '설계 학점',
+    `major`                  VARCHAR(255) NULL DEFAULT NULL COMMENT '전공 학점',
+    `essential`              VARCHAR(255) NULL DEFAULT NULL COMMENT '필수 과목',
+    `first_and_last`         VARCHAR(255) NULL DEFAULT NULL COMMENT '선/후수 과목',
+    `total`                  VARCHAR(255) NULL DEFAULT NULL COMMENT '총 학점',
+    `special_note`           VARCHAR(255) NULL DEFAULT NULL COMMENT '특이사항',
+    PRIMARY KEY (`id`)
+)
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4;
 

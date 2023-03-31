@@ -1,6 +1,9 @@
 package kyonggi.cspop.domain.users;
 
 import kyonggi.cspop.domain.entity.BaseEntity;
+import kyonggi.cspop.domain.form.finalform.FinalForm;
+import kyonggi.cspop.domain.form.interimform.InterimForm;
+import kyonggi.cspop.domain.form.otherform.OtherForm;
 import kyonggi.cspop.domain.form.proposalform.ProposalForm;
 import kyonggi.cspop.domain.form.submitform.SubmitForm;
 import kyonggi.cspop.domain.users.enums.Classification;
@@ -11,6 +14,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
+import javax.print.attribute.standard.MediaSize;
 import java.time.LocalDate;
 
 @Entity
@@ -72,6 +76,17 @@ public class Users extends BaseEntity {
     @JoinColumn(name = "proposalForm_id", foreignKey = @ForeignKey(name = "fk_users_to_proposal_form"))
     private ProposalForm proposalForm;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "interimForm_id", foreignKey = @ForeignKey(name = "fk_users_to_interim_form"))
+    private InterimForm interimForm;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "finalForm_id", foreignKey = @ForeignKey(name = "fk_users_to_final_form"))
+    private FinalForm finalForm;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "otherForm_id", foreignKey = @ForeignKey(name = "fk_users_to_other_form"))
+    private OtherForm otherForm;
 
     //==생성 메소드==//
     public static Users createUser(String studentId, String studentPassword, String studentName, Sex sex, LocalDate birth, String email,
@@ -112,5 +127,20 @@ public class Users extends BaseEntity {
     public void addProposalForms(ProposalForm proposalForm) {
         this.proposalForm = proposalForm;
         proposalForm.designateUsers(this);
+    }
+
+    public void addInterimForms(InterimForm interimForm) {
+        this.interimForm = interimForm;
+        interimForm.designateUsers(this);
+    }
+
+    public void addFinalForms(FinalForm finalForm) {
+        this.finalForm = finalForm;
+        finalForm.designateUsers(this);
+    }
+
+    public void addOtherForms(OtherForm otherForm) {
+        this.otherForm = otherForm;
+        otherForm.designateUsers(this);
     }
 }

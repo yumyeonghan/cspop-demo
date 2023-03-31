@@ -90,8 +90,8 @@ public class UserStatusController {
                 UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(),
                         schedules.getStartDate(),
                         schedules.getEndDate(),
-                        Objects.isNull(user.getSubmitForm()) ? "미제출" : "완료",
-                        Objects.isNull(user.getSubmitForm()) || !user.getSubmitForm().isApproval() ? "미승인" : "승인");
+                        Objects.isNull(user.getProposalForm()) ? "미제출" : "완료",
+                        Objects.isNull(user.getProposalForm()) || !user.getProposalForm().isApproval() ? "미승인" : "승인");
                 userSchedules.add(userScheduleDto);
             }
 
@@ -99,8 +99,8 @@ public class UserStatusController {
                 UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(),
                         schedules.getStartDate(),
                         schedules.getEndDate(),
-                        Objects.isNull(user.getSubmitForm()) ? "미제출" : "완료",
-                        Objects.isNull(user.getSubmitForm()) || !user.getSubmitForm().isApproval() ? "미승인" : "승인");
+                        Objects.isNull(user.getInterimForm()) ? "미제출" : "완료",
+                        Objects.isNull(user.getInterimForm()) || !user.getInterimForm().isApproval() ? "미승인" : "승인");
                 userSchedules.add(userScheduleDto);
             }
 
@@ -108,8 +108,8 @@ public class UserStatusController {
                 UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(),
                         schedules.getStartDate(),
                         schedules.getEndDate(),
-                        Objects.isNull(user.getSubmitForm()) ? "미제출" : "완료",
-                        Objects.isNull(user.getSubmitForm()) || !user.getSubmitForm().isApproval() ? "미승인" : "승인");
+                        Objects.isNull(user.getFinalForm()) ? "미제출" : "완료",
+                        Objects.isNull(user.getFinalForm()) || !user.getFinalForm().isApproval() ? "미승인" : "승인");
                 userSchedules.add(userScheduleDto);
             }
 
@@ -117,11 +117,12 @@ public class UserStatusController {
                 UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(),
                         schedules.getStartDate(),
                         schedules.getEndDate(),
-                        Objects.isNull(user.getSubmitForm()) ? "미제출" : "완료",
-                        Objects.isNull(user.getSubmitForm()) || !user.getSubmitForm().isApproval() ? "미승인" : "승인");
+                        Objects.isNull(user.getOtherForm()) ? "미제출" : "완료",
+                        Objects.isNull(user.getOtherForm()) || !user.getOtherForm().isApproval() ? "미승인" : "승인");
                 userSchedules.add(userScheduleDto);
             }
 
+            //로직 다시 짜야함
             if (schedules.getStep().equals(Step.FINAL_PASS)) {
                 UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(),
                         schedules.getStartDate(),
