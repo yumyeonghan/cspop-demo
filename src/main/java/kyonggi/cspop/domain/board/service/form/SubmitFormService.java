@@ -1,4 +1,4 @@
-package kyonggi.cspop.domain.board.service;
+package kyonggi.cspop.domain.board.service.form;
 
 import kyonggi.cspop.application.controller.form.submitform.SubmitFormDto;
 import kyonggi.cspop.domain.board.repository.SubmitFormRepository;
