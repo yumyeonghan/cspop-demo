@@ -149,7 +149,8 @@ CREATE TABLE proposal_form
     `title`              VARCHAR(255) NOT NULL COMMENT '제목',
     `division`           VARCHAR(255) NOT NULL COMMENT '구분',
     `keyword`            VARCHAR(255) NOT NULL COMMENT '키워드',
-    `text`               VARCHAR(255) NOT NULL COMMENT '본문'
+    `text`               VARCHAR(255) NOT NULL COMMENT '본문',
+    PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4;
@@ -354,6 +355,12 @@ alter table submit_form
     modify id bigint auto_increment;
 
 alter table submit_form
+    auto_increment = 1;
+
+alter table proposal_form
+    modify id bigint auto_increment;
+
+alter table proposal_form
     auto_increment = 1;
 
 
