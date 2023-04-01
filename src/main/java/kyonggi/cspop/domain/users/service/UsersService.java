@@ -51,6 +51,22 @@ public class UsersService implements UserDetailsService {
         if (!Objects.isNull(users.getSubmitForm())) {
             users.getSubmitForm().getStudentId();
         }
+
+        if (!Objects.isNull(users.getProposalForm())) {
+            users.getProposalForm().getStudentId();
+        }
+
+        if (!Objects.isNull(users.getInterimForm())) {
+            users.getInterimForm().getCreatedDate();
+        }
+
+        if (!Objects.isNull(users.getFinalForm())) {
+            users.getFinalForm().getCreatedDate();
+        }
+
+        if (!Objects.isNull(users.getOtherForm())) {
+            users.getOtherForm().getCreatedDate();
+        }
         return users;
     }
 
