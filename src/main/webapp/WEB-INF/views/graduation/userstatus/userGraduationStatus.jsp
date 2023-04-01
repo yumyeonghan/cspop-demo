@@ -131,7 +131,7 @@
                                                                 <td>${userSchedule.startDate}</td>
                                                                 <td>${userSchedule.endDate}</td>
                                                                 <td>${userSchedule.submitStatus}</td>
-                                                                <td><a href="/api/proposalForm">이동</a></td>
+                                                                <td><a href="/api/interimForm">이동</a></td>
                                                                 <td>${userSchedule.approvalStatus}</td>
                                                             </tr>
                                                             </tbody>
