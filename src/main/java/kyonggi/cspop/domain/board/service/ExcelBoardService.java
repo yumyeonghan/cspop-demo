@@ -3,9 +3,7 @@ package kyonggi.cspop.domain.board.service;
 import kyonggi.cspop.domain.board.ExcelBoard;
 import kyonggi.cspop.domain.board.dto.ExcelBoardResponseDto;
 import kyonggi.cspop.domain.board.repository.ExcelBoardRepository;
-import kyonggi.cspop.domain.form.proposalform.ProposalForm;
 import kyonggi.cspop.domain.form.submitform.SubmitForm;
-import kyonggi.cspop.domain.login.dto.UserSessionDto;
 import kyonggi.cspop.domain.users.Users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -51,5 +49,11 @@ public class ExcelBoardService {
     public void updateExcelByProposalForm(Users users) {
         ExcelBoard excelBoard = excelBoardRepository.findById(users.getId()).get();
         excelBoard.updateExcelByProposalForm();
+    }
+
+    @Transactional
+    public void updateExcelByInterimForm(Users users) {
+        ExcelBoard excelBoard = excelBoardRepository.findById(users.getId()).get();
+        excelBoard.updateExcelByInterimForm();
     }
 }

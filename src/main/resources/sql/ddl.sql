@@ -4,11 +4,11 @@ DROP TABLE IF EXISTS notice_board;
 DROP TABLE IF EXISTS admins;
 DROP TABLE IF EXISTS other_qualifications;
 DROP TABLE IF EXISTS submit_form_upload_file;
-DROP TABLE IF EXISTS interim_form_upload_file;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS submit_form;
 DROP TABLE IF EXISTS final_form;
 DROP TABLE IF EXISTS interim_form;
+DROP TABLE IF EXISTS interim_form_upload_file;
 DROP TABLE IF EXISTS other_form;
 DROP TABLE IF EXISTS proposal_form;
 DROP TABLE IF EXISTS schedules;
@@ -111,16 +111,21 @@ CREATE TABLE final_form
 -- -----------------------------------------------------
 CREATE TABLE interim_form
 (
-    `id`                 BIGINT      NOT NULL,
-    `created_date`       DATETIME(6) NULL DEFAULT NULL COMMENT '등록일',
-    `last_modified_date` DATETIME(6) NULL DEFAULT NULL COMMENT '수정일',
-    `approval`                BIT(1)       NOT NULL COMMENT '승인여부',
-    `title`              VARCHAR(255) NOT NULL COMMENT '제목',
-    `division`           VARCHAR(255) NOT NULL COMMENT '구분',
-    `text`            VARCHAR(255) NOT NULL COMMENT '진행내용',
-    `plan`               VARCHAR(255) NOT NULL COMMENT '향후계획',
-    PRIMARY KEY (`id`)
+    `id`                          BIGINT       NOT NULL,
+    `created_date`                DATETIME(6)  NULL DEFAULT NULL COMMENT '등록일',
+    `last_modified_date`          DATETIME(6)  NULL DEFAULT NULL COMMENT '수정일',
+    `approval`                    BIT(1)       NOT NULL COMMENT '승인여부',
+    `title`                       VARCHAR(255) NOT NULL COMMENT '제목',
+    `division`                    VARCHAR(255) NOT NULL COMMENT '구분',
+    `text`                        VARCHAR(255) NOT NULL COMMENT '진행내용',
+    `plan`                        VARCHAR(255) NOT NULL COMMENT '향후계획',
+    `interim_form_upload_file_id`  BIGINT       NULL DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    CONSTRAINT `fk_interim_form_to_interim_form_upload_file`
+        FOREIGN KEY (`interim_form_upload_file_id`)
+            REFERENCES interim_form_upload_file (`id`)
 )
+
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4;
 
@@ -133,11 +138,7 @@ CREATE TABLE interim_form_upload_file
     `id`               BIGINT       NOT NULL,
     `store_file_name`  VARCHAR(255) NULL DEFAULT NULL COMMENT '서버 내부에서 관리하는 파일명',
     `upload_file_name` VARCHAR(255) NULL DEFAULT NULL COMMENT '유저가 업로드한 파일명',
-    `interim_form_id`   BIGINT       NULL DEFAULT NULL,
-    PRIMARY KEY (`id`),
-    CONSTRAINT `fk_interim_form_upload_file_to_interim_form`
-        FOREIGN KEY (`interim_form_id`)
-            REFERENCES interim_form (`id`)
+    PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4;
@@ -391,6 +392,12 @@ alter table interim_form
     modify id bigint auto_increment;
 
 alter table interim_form
+    auto_increment = 1;
+
+alter table interim_form_upload_file
+    modify id bigint auto_increment;
+
+alter table interim_form_upload_file
     auto_increment = 1;
 
 
