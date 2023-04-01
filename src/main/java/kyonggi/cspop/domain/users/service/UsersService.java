@@ -3,6 +3,7 @@ package kyonggi.cspop.domain.users.service;
 import kyonggi.cspop.application.controller.users.dto.UserPasswordRequestDto;
 import kyonggi.cspop.application.util.crypto.BCryptoPasswordEncoder;
 import kyonggi.cspop.application.util.crypto.PasswordEncoder;
+import kyonggi.cspop.domain.form.proposalform.ProposalForm;
 import kyonggi.cspop.domain.form.submitform.SubmitForm;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.repository.UsersRepository;
@@ -94,6 +95,12 @@ public class UsersService implements UserDetailsService {
     @Transactional
     public void updateExcelBySubmitForm(Users users, SubmitForm submitForm) {
         users.addSubmitForms(submitForm);
+        usersRepository.save(users);
+    }
+
+    @Transactional
+    public void updateExcelByProposalForm(Users users, ProposalForm proposalForm) {
+        users.addProposalForms(proposalForm);
         usersRepository.save(users);
     }
 }
