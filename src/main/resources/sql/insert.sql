@@ -26,7 +26,7 @@ VALUES (5, '2023-03-14 12:35:29.857156', '2023-03-14 12:35:29.857156', '2023-09-
 INSERT INTO users
 VALUES (6, '2023-03-14 12:35:29.857156', '2023-03-14 12:35:29.857156', '2023-09-01', 'UNDERGRADUATE_STUDENT', '컴퓨터공학부',
         '1234@naver.com', '010-1234-5678', 'MALE', '201812301', '정경원',
-        '$2a$10$jvXXjxBH9uxs6wCjsOapu.oCqPdQNO22/VvfNYbyWvlAz1GDrjO76', '서울', 6, null, null, null, null);
+        '$2a$10$jvXXjxBH9uxs6wCjsOapu.oCqPdQNO22/VvfNYbyWvlAz1GDrjO76', '서울', 6, 1, null, null, null);
 
 
 --schedules 데이터
@@ -91,11 +91,11 @@ values (3, NOW(), NOW(), '컴퓨터공학부', '202013149', '고은아', 1, 'THE
 insert into submit_form
 values (4, NOW(), NOW(), '컴퓨터공학부', '202016034', '이도현', 1, 'THESIS');
 insert into submit_form
-values (6, NOW(), NOW(), '컴퓨터공학부', '201812301', '정경원', 1, 'Other_Qualifications');
+values (6, NOW(), NOW(), '컴퓨터공학부', '201812301', '정경원', 1, 'THESIS');
 
 --  proposal form 데이터
 insert into proposal_form
-values (1, NOW(), NOW(), '201812345', '2022-02-22', '이은정', '가나다', '컴퓨터공학부', 'THESIS', 1, '타이틀', '구분', '키워드', '텍스트');
+values (1, NOW(), NOW(), '201812301', '1999/10/13', '이은정', '정경원', '컴퓨터공학부', 'THESIS', 1, '타이틀', '구분', '키워드', '텍스트');
 
 
 
@@ -116,4 +116,4 @@ VALUES (3, NOW(), NOW(), '이수', '1999/10/13', '공모전', '이은정', '진�
 INSERT INTO `CSPOP`.`excel_board`
 VALUES (4, NOW(), NOW(), '이수', '1999/10/13', '공모전', '이은정', '진행', '제안서', '202016034', '이도현');
 INSERT INTO `CSPOP`.`excel_board`
-VALUES (6, NOW(), NOW(), '이수', '1999/10/13', '공모전', '이은정', '진행', '신청접수', '201812301', '정경원');
+VALUES (6, NOW(), NOW(), '이수', '1999/10/13', '공모전', '이은정', '진행', '제안서', '201812301', '정경원');
