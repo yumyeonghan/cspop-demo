@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class InterimFormUploadFile {
+public class FinalFormUploadFile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

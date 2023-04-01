@@ -2,7 +2,6 @@ package kyonggi.cspop.domain.form.submitform;
 
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.form.submitform.enums.GraduationRequirements;
-import kyonggi.cspop.domain.uploadfile.SubmitFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -42,19 +41,9 @@ public class SubmitForm extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "submitForm")
     private Users users;
 
-    @OneToOne(mappedBy = "submitForm", cascade = CascadeType.ALL, orphanRemoval = true)
-    private SubmitFormUploadFile submitFormUploadFile;
-
     public void designateUsers(Users users) {
         this.users = users;
     }
-
-    // 양방향 연관관계 편의 메소드
-    public void addUploadFile(SubmitFormUploadFile uploadFile) {
-        uploadFile.designateSubmitForm(this);
-        this.submitFormUploadFile = uploadFile;
-    }
-
 
     //신청서 생성 메소드
     public static SubmitForm createSubmitForm(String studentId, String studentName, String department, boolean approval, String graduationRequirements) {

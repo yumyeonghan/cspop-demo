@@ -1,7 +1,6 @@
 package kyonggi.cspop.domain.board;
 
 import kyonggi.cspop.domain.entity.BaseEntity;
-import kyonggi.cspop.domain.form.proposalform.ProposalForm;
 import kyonggi.cspop.domain.form.submitform.SubmitForm;
 import kyonggi.cspop.domain.form.submitform.enums.GraduationRequirements;
 import kyonggi.cspop.domain.schedule.enums.Step;

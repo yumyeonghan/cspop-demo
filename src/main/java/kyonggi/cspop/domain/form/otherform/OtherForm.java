@@ -1,6 +1,7 @@
 package kyonggi.cspop.domain.form.otherform;
 
 import kyonggi.cspop.domain.entity.BaseEntity;
+import kyonggi.cspop.domain.uploadfile.OtherFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -17,7 +18,20 @@ public class OtherForm extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "submitForm")
+    @Column
+    private String title;
+
+    @Column
+    private String division;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "otherFormUploadFile_id", foreignKey = @ForeignKey(name = "fk_other_form_upload_file_to_other_form"))
+    private OtherFormUploadFile otherFormUploadFile;
+
+    @Column
+    private String text;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "otherForm")
     private Users users;
 
     @Column

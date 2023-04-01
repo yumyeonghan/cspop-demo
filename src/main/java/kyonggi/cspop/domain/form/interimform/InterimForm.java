@@ -27,7 +27,7 @@ public class InterimForm extends BaseEntity {
     private String text;
     @Column
     private String plan;
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "submitForm")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "interimForm")
     private Users users;
 
     @OneToOne(fetch = FetchType.LAZY)

@@ -131,11 +131,15 @@
                                                                 <td>${userSchedule.startDate}</td>
                                                                 <td>${userSchedule.endDate}</td>
                                                                 <td>${userSchedule.submitStatus}</td>
-                                                                <td><a href="/api/interimForm">이동</a></td>
+                                                                <td><a href="#">이동</a></td>
                                                                 <td>${userSchedule.approvalStatus}</td>
                                                             </tr>
                                                             </tbody>
                                                         </c:forEach>
+                                                        <div><a href="/api/proposalForm">테스트 제안서 신청 폼 이동</a></div>
+                                                        <div><a href="/api/interimForm">테스트 중간 보고서 신청 폼 이동</a></div>
+                                                        <div><a href="/api/finalForm">테스트 최종 보고서 신청 폼 이동</a></div>
+                                                        <div><a href="/api/otherForm">테스트 기타 자격 신청 폼 이동</a></div>
                                                     </table>
                                                 </div>
                                             </div>

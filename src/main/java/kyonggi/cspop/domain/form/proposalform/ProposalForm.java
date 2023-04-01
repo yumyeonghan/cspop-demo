@@ -39,7 +39,7 @@ public class ProposalForm extends BaseEntity {
     @Column
     private String text;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "submitForm")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "proposalForm")
     private Users users;
 
     public void designateUsers(Users users) {
