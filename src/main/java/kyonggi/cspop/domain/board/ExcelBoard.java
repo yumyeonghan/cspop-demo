@@ -1,6 +1,7 @@
 package kyonggi.cspop.domain.board;
 
 import kyonggi.cspop.domain.entity.BaseEntity;
+import kyonggi.cspop.domain.form.proposalform.ProposalForm;
 import kyonggi.cspop.domain.form.submitform.SubmitForm;
 import kyonggi.cspop.domain.form.submitform.enums.GraduationRequirements;
 import kyonggi.cspop.domain.schedule.enums.Step;
@@ -46,11 +47,11 @@ public class ExcelBoard extends BaseEntity {
     public static ExcelBoard createExcelBoard(Row row) {
         ExcelBoard excelBoard = new ExcelBoard();
         excelBoard.studentId = row.getCell(0).getStringCellValue();
-        excelBoard.studentName =  row.getCell(1).getStringCellValue();
+        excelBoard.studentName = row.getCell(1).getStringCellValue();
         excelBoard.professorName = row.getCell(2).getStringCellValue();
         excelBoard.graduationDate = row.getCell(3).getStringCellValue();
-        excelBoard.step =  row.getCell(4).getStringCellValue();
-        excelBoard.state =  row.getCell(5).getStringCellValue();
+        excelBoard.step = row.getCell(4).getStringCellValue();
+        excelBoard.state = row.getCell(5).getStringCellValue();
         excelBoard.otherQualifications = row.getCell(6).getStringCellValue();
         excelBoard.capstoneCompletion = row.getCell(7).getStringCellValue();
         return excelBoard;
@@ -69,10 +70,16 @@ public class ExcelBoard extends BaseEntity {
         if (submitForm.getGraduationRequirements().getGraduationRequirementsToString().equals("기타자격")) {
             excelBoard.otherQualifications = GraduationRequirements.Other_Qualifications.getGraduationRequirementsToString();
         }
-        else{
+        else {
             excelBoard.otherQualifications = GraduationRequirements.THESIS.getGraduationRequirementsToString();
         }
         excelBoard.capstoneCompletion = "미확인";
         return excelBoard;
     }
+
+    public void updateExcelByProposalForm() {
+        this.step = Step.PROPOSAL.getStepToString();
+        this.state = "미승인";
+    }
+
 }
