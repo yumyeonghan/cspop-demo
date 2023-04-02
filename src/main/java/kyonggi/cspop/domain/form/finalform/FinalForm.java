@@ -44,4 +44,31 @@ public class FinalForm extends BaseEntity {
         this.users = users;
     }
 
+    public static FinalForm createFinalForm(boolean approval, String title, String division, String qualification, Integer pageNumber, FinalFormUploadFile uploadFile) {
+
+        FinalForm finalForm = new FinalForm();
+        finalForm.approval = approval;
+        finalForm.title = title;
+
+        if (division.equals("option1")) {
+            finalForm.division = "구현논문";
+        }
+        else {
+            finalForm.division = "조사(이론)논문";
+        }
+
+        if (qualification.equals("option1")) {
+            finalForm.qualification = "논문양식파일사용";
+        }
+        else if (qualification.equals("option2")) {
+            finalForm.qualification = "목차,서론,본론,결론,참고문헌 포함";
+        }
+        else{
+            finalForm.qualification = "본인이 직접 작성한 파일임을 확인함";
+        }
+        finalForm.pageNumber = pageNumber;
+        finalForm.finalFormUploadFile = uploadFile;
+
+        return finalForm;
+    }
 }

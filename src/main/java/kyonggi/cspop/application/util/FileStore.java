@@ -1,5 +1,6 @@
 package kyonggi.cspop.application.util;
 
+import kyonggi.cspop.domain.uploadfile.FinalFormUploadFile;
 import kyonggi.cspop.domain.uploadfile.InterimFormUploadFile;
 import kyonggi.cspop.domain.uploadfile.NoticeBoardUploadFile;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,6 +53,18 @@ public class FileStore {
         String storeFileName = createStoreFileName(originalFilename);
         multipartFile.transferTo(new File(getFullPath(storeFileName)));
         return new InterimFormUploadFile(originalFilename, storeFileName);
+    }
+
+    //최종 보고서 파일 저장 메서드
+    public FinalFormUploadFile storeFinalFile(MultipartFile multipartFile) throws IOException {
+
+        if (multipartFile.isEmpty()) {
+            return null;
+        }
+        String originalFilename = urlEncodingFileName(multipartFile);
+        String storeFileName = createStoreFileName(originalFilename);
+        multipartFile.transferTo(new File(getFullPath(storeFileName)));
+        return new FinalFormUploadFile(originalFilename, storeFileName);
     }
 
     //이거 정규식으로 한번에 처리해야 하지만 일단은 이렇게 함
