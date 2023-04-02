@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>중간보고서 파일</label>
+                                    <label>파일 제출</label>
                                     <input id="inputFile" type="file" name="interimFormUploadFile">
                                 </div>
                                 <div class="form-group">
