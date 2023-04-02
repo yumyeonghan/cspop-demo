@@ -56,4 +56,10 @@ public class ExcelBoardService {
         ExcelBoard excelBoard = excelBoardRepository.findById(users.getId()).get();
         excelBoard.updateExcelByInterimForm();
     }
+
+    @Transactional
+    public void updateExcelByFinalForm(Users user){
+        ExcelBoard excelBoard = excelBoardRepository.findById(user.getId()).get();
+        excelBoard.updateExcelByFinalForm();
+    }
 }
