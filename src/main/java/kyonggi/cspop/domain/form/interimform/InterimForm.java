@@ -38,7 +38,7 @@ public class InterimForm extends BaseEntity {
         this.users = users;
     }
 
-    public static InterimForm createInterimForm(boolean approval, String title, String division, String text, String plan) {
+    public static InterimForm createInterimForm(boolean approval, String title, String division, String text, String plan, InterimFormUploadFile uploadFile) {
 
         InterimForm interimForm = new InterimForm();
         interimForm.approval = approval;
@@ -47,12 +47,13 @@ public class InterimForm extends BaseEntity {
         if (division.equals("option1")) {
             interimForm.division = "구현논문";
         }
-        else{
+        else {
             interimForm.division = "조사(이론)논문";
         }
 
         interimForm.text = text;
         interimForm.plan = plan;
+        interimForm.interimFormUploadFile = uploadFile;
 
         return interimForm;
     }

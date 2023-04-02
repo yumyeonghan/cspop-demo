@@ -84,7 +84,7 @@
                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-12 mb-8">
                     <div class="row">
                         <div class="card">
-                            <form method="POST" >
+                            <form method="POST" enctype="multipart/form-data" >
                                 <input type="hidden" name="studentId" value=${userDetail.studentId}>
                                 <input type="hidden" name="studentName" value=${userDetail.studentName}>
                                 <input type="hidden" name="department" value=${userDetail.department}>

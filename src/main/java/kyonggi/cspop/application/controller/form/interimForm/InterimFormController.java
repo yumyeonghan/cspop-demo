@@ -2,11 +2,13 @@ package kyonggi.cspop.application.controller.form.interimForm;
 
 import kyonggi.cspop.application.SessionFactory;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
+import kyonggi.cspop.application.util.FileStore;
 import kyonggi.cspop.domain.board.ExcelBoard;
 import kyonggi.cspop.domain.board.service.ExcelBoardService;
 import kyonggi.cspop.domain.board.service.form.InterimFormService;
 import kyonggi.cspop.domain.form.interimform.InterimForm;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;
+import kyonggi.cspop.domain.uploadfile.InterimFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.service.UsersService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Controller
@@ -30,6 +33,7 @@ public class InterimFormController {
     private final InterimFormService interimFormService;
     private final ExcelBoardService excelBoardService;
 
+    private final FileStore fileStore;
 
     @GetMapping("api/interimForm")
     public String saveInterimForm(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, Model model) {
@@ -43,17 +47,22 @@ public class InterimFormController {
                 user.getDepartment(),
                 excelByStudentId.get().getProfessorName(),
                 user.getSubmitForm());
+
         model.addAttribute("userDetail", userDetailDto);
         return "graduation/form/interimForm";
     }
 
     @PostMapping("api/interimForm")
-    public String saveInterimFormProgress(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, @Validated @ModelAttribute InterimFormDto interimFormDto) {
+    public String saveInterimFormProgress(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, @Validated @ModelAttribute InterimFormDto interimFormDto) throws IOException {
 
         Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
 
+        //중간 보고서 파일 저장
+        InterimFormUploadFile interimFormUploadFile = fileStore.storeInterimFile(interimFormDto.getInterimFormUploadFile());
+        interimFormService.saveInterimFormUploadFile(interimFormUploadFile);
+
         //중간 보고서 폼 등록
-        InterimForm interimForm = InterimForm.createInterimForm(false, interimFormDto.getTitle(), interimFormDto.getDivision(), interimFormDto.getText(), interimFormDto.getPlan());
+        InterimForm interimForm = InterimForm.createInterimForm(false, interimFormDto.getTitle(), interimFormDto.getDivision(), interimFormDto.getText(), interimFormDto.getPlan(),interimFormUploadFile);
         interimFormService.saveInterimForm(interimForm);
 
         //유저 테이블 수정
