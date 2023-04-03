@@ -300,7 +300,7 @@ CREATE TABLE excel_board
     `last_modified_date`   DATETIME(6)  NULL DEFAULT NULL COMMENT '수정일',
     `capstone_completion`  VARCHAR(255) NULL DEFAULT NULL COMMENT '캡스톤 이수',
     `graduation_date`      VARCHAR(255) NULL DEFAULT NULL COMMENT '학생 졸업날짜',
-    `other_qualifications` VARCHAR(255) NULL DEFAULT NULL COMMENT '기타 자격',
+    `qualifications` VARCHAR(255) NULL DEFAULT NULL COMMENT '자격',
     `professor_name`       VARCHAR(255) NULL DEFAULT NULL COMMENT '교수 이름',
     `state`                VARCHAR(255) NULL DEFAULT NULL COMMENT '상태',
     `step`                 VARCHAR(255) NULL DEFAULT NULL COMMENT '단계',

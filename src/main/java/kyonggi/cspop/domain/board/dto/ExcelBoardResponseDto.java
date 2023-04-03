@@ -33,7 +33,7 @@ public class ExcelBoardResponseDto {
         this.graduationDate = excelBoard.getGraduationDate();
         this.step = excelBoard.getStep();
         this.state = excelBoard.getState();
-        this.otherQualifications = excelBoard.getOtherQualifications();
+        this.otherQualifications = excelBoard.getQualifications();
         this.capstoneCompletion = excelBoard.getCapstoneCompletion();
     }
 }

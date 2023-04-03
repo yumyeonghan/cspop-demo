@@ -38,23 +38,10 @@ public class ExcelBoard extends BaseEntity {
     private String step;
     @Comment("상태")
     private String state;
-    @Comment("기타 자격")
-    private String otherQualifications;
+    @Comment("자격")
+    private String qualifications;
     @Comment("캡스톤 이수")
     private String capstoneCompletion;
-
-    public static ExcelBoard createExcelBoard(Row row) {
-        ExcelBoard excelBoard = new ExcelBoard();
-        excelBoard.studentId = row.getCell(0).getStringCellValue();
-        excelBoard.studentName = row.getCell(1).getStringCellValue();
-        excelBoard.professorName = row.getCell(2).getStringCellValue();
-        excelBoard.graduationDate = row.getCell(3).getStringCellValue();
-        excelBoard.step = row.getCell(4).getStringCellValue();
-        excelBoard.state = row.getCell(5).getStringCellValue();
-        excelBoard.otherQualifications = row.getCell(6).getStringCellValue();
-        excelBoard.capstoneCompletion = row.getCell(7).getStringCellValue();
-        return excelBoard;
-    }
 
     public static ExcelBoard addExcelBySubmitForm(Users users, SubmitForm submitForm) {
 
@@ -67,10 +54,10 @@ public class ExcelBoard extends BaseEntity {
         excelBoard.state = "미승인";
 
         if (submitForm.getGraduationRequirements().getGraduationRequirementsToString().equals("기타자격")) {
-            excelBoard.otherQualifications = GraduationRequirements.Other_Qualifications.getGraduationRequirementsToString();
+            excelBoard.qualifications = GraduationRequirements.Other_Qualifications.getGraduationRequirementsToString();
         }
         else {
-            excelBoard.otherQualifications = GraduationRequirements.THESIS.getGraduationRequirementsToString();
+            excelBoard.qualifications = GraduationRequirements.THESIS.getGraduationRequirementsToString();
         }
         excelBoard.capstoneCompletion = "미확인";
         return excelBoard;
