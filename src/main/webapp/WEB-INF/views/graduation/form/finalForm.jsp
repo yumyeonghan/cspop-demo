@@ -119,31 +119,31 @@
                                     <label>자격요건</label>
                                     <div class="card" style="padding: 5px;">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="qualification1"
-                                                name="check" value="check1" required>
-                                            <label class="form-check-label" for="qualification1">논문양식파일사용</label>
+                                            <input class="form-check-input" type="checkbox" name="qualification"
+                                                id="category3" value="option1" required>
+                                            <label class="form-check-label" for="qualification">논문양식파일사용</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="qualification2"
-                                                name="check" value="check2" required>
-                                            <label class="form-check-label" for="qualification2">목차,서론,본론,결론,참고문헌
+                                            <input class="form-check-input" type="checkbox" name="qualification"
+                                            id="category4" value="option2" required>
+                                            <label class="form-check-label" for="qualification">목차,서론,본론,결론,참고문헌
                                                 포함</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="qualification3"
-                                                name="check" value="check3" required>
+                                            <input class="form-check-input" type="checkbox" name="qualification"
+                                            id="category5" value="option3" required>
                                             <label class="form-check-label" for="qualification3">본인이 직접 작성한 파일임을
                                                 확인함</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="pages">쪽수</label>
+                                    <label for="pageNumber">쪽수</label>
                                     <div class="card" style="padding: 5px;">
                                         <div class="row">
                                             <div class="col-lg-2 col-3">
-                                                <input type="number" class="form-control" name="numberOfPages"
-                                                    id="pages" required>
+                                                <input type="number" class="form-control" name="pageNumber"
+                                                    id="pageNumber" required>
                                             </div>
                                             <div class="col align-self-center">
                                                 쪽 (서론/본론/결론/참고문헌 부분 쪽수, 표지/목차 제외)
