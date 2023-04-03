@@ -91,4 +91,8 @@ public class ExcelBoard extends BaseEntity {
         this.state = "미승인";
     }
 
+    public void updateExcelByOtherForm(){
+        this.step = Step.OTHER_QUALIFICATIONS.getStepToString();
+        this.state = "미승인";
+    }
 }

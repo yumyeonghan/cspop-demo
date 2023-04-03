@@ -17,6 +17,5 @@ public class FinalFormDto {
     @NumberFormat(style = NumberFormat.Style.NUMBER )
     private Integer pageNumber;
 
-
     private MultipartFile finalFormUploadFile;
 }

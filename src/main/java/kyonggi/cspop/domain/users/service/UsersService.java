@@ -5,6 +5,8 @@ import kyonggi.cspop.application.util.crypto.BCryptoPasswordEncoder;
 import kyonggi.cspop.application.util.crypto.PasswordEncoder;
 import kyonggi.cspop.domain.form.finalform.FinalForm;
 import kyonggi.cspop.domain.form.interimform.InterimForm;
+import kyonggi.cspop.domain.form.otherform.OtherForm;
+import kyonggi.cspop.domain.form.otherform.repository.OtherFormRepository;
 import kyonggi.cspop.domain.form.proposalform.ProposalForm;
 import kyonggi.cspop.domain.form.submitform.SubmitForm;
 import kyonggi.cspop.domain.users.Users;
@@ -28,6 +30,7 @@ public class UsersService implements UserDetailsService {
 
     private final UsersRepository usersRepository;
     private final PasswordEncoder passwordEncoder;
+    private final OtherFormRepository otherFormRepository;
 
 
     @Transactional
@@ -132,5 +135,11 @@ public class UsersService implements UserDetailsService {
     public void updateExcelByFinalForm(Users users, FinalForm finalForm) {
         users.addFinalForms(finalForm);
         usersRepository.save(users);
+    }
+
+    @Transactional
+    public void updateUserByOtherForm(Long userId, Long otherFormId) {
+        Users user = usersRepository.findById(userId).get();
+        user.addOtherForms(otherFormRepository.findById(otherFormId).get());
     }
 }

@@ -62,4 +62,9 @@ public class ExcelBoardService {
         ExcelBoard excelBoard = excelBoardRepository.findByStudentId(users.getStudentId()).get();
         excelBoard.updateExcelByFinalForm();
     }
+    @Transactional
+    public void updateExcelByOtherForm(Users users){
+        ExcelBoard excelBoard = excelBoardRepository.findByStudentId(users.getStudentId()).get();
+        excelBoard.updateExcelByOtherForm();
+    }
 }
