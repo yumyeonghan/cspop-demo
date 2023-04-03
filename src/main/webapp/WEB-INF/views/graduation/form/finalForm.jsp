@@ -119,20 +119,20 @@
                                     <label>자격요건</label>
                                     <div class="card" style="padding: 5px;">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="qualification"
+                                            <input class="form-check-input" type="radio" name="qualification"
                                                 id="category3" value="option1" required>
-                                            <label class="form-check-label" for="qualification">논문양식파일사용</label>
+                                            <label class="form-check-label" for="category3">논문양식파일사용</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="qualification"
+                                            <input class="form-check-input" type="radio" name="qualification"
                                             id="category4" value="option2" required>
-                                            <label class="form-check-label" for="qualification">목차,서론,본론,결론,참고문헌
+                                            <label class="form-check-label" for="category4">목차,서론,본론,결론,참고문헌
                                                 포함</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="qualification"
+                                            <input class="form-check-input" type="radio" name="qualification"
                                             id="category5" value="option3" required>
-                                            <label class="form-check-label" for="qualification3">본인이 직접 작성한 파일임을
+                                            <label class="form-check-label" for="category5">본인이 직접 작성한 파일임을
                                                 확인함</label>
                                         </div>
                                     </div>
