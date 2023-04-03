@@ -29,7 +29,7 @@ VALUES (6, '2023-03-14 12:35:29.857156', '2023-03-14 12:35:29.857156', '2023-09-
         '$2a$10$jvXXjxBH9uxs6wCjsOapu.oCqPdQNO22/VvfNYbyWvlAz1GDrjO76', '서울', 6, 1, 1, null, null);
 
 
---schedules 데이터
+--  schedules 데이터
 INSERT INTO schedules
 VALUES (1, '2023-03-14 13:52:38.000000', '2023-03-14 13:52:46.764849', '2023-03-24', 'WAIT', '2023-03-15', 'RECEIVED'),
        (2, '2023-03-14 13:52:38.000000', '2023-03-14 13:52:50.544745', '2023-03-14', 'PROCEEDING', '2023-03-13',
@@ -43,7 +43,7 @@ VALUES (1, '2023-03-14 13:52:38.000000', '2023-03-14 13:52:46.764849', '2023-03-
        (6, '2023-03-14 13:52:38.000000', '2023-03-14 13:52:38.000000', '2023-03-15', 'PROCEEDING', '2023-03-13',
         'FINAL_PASS');
 
---notice_board 데이터
+--  notice_board 데이터
 INSERT INTO `CSPOP`.`notice_board` (`id`, `created_date`, `last_modified_date`, `fixed`, `text`, `title`, `views`,
                                     `admins_id`)
 VALUES ('1', '1999-10-13', '1999-10-13', 1, 'text1', 'text1', 1, '1');
@@ -101,7 +101,7 @@ values (1, NOW(), NOW(), '201812301', '1999/10/13', '이은정', '정경원', '�
 insert into interim_form
 values (1,NOW(),NOW(),1,'제목','구현논문','텍스트','계획',1);
 
---certification_board 데이터
+--  certification_board 데이터
 INSERT INTO `CSPOP`.`certification_board`(`id`, `created_date`, `last_modified_date`, `department`, `student_id`,
                                           `student_name`, `current_semester`, `professional_education`, `msc_bsm`,
                                           `design`, `major`, `essential`, `first_and_last`, `total`, `special_note`)
@@ -113,8 +113,8 @@ VALUES (1, NOW(), NOW(), '이수', '1999/10/13', '공모전', '김도훈', '진�
 INSERT INTO `CSPOP`.`excel_board`
 VALUES (2, NOW(), NOW(), '이수', '1999/10/13', '공모전', '이은정', '진행', '제안서', '201812753', '함현준');
 INSERT INTO `CSPOP`.`excel_board`
-VALUES (3, NOW(), NOW(), '이수', '1999/10/13', '공모전', '이은정', '진행', '제안서', '202013149', '고은아');
+VALUES (4, NOW(), NOW(), '이수', '1999/10/13', '공모전', '이은정', '진행', '신청접수', '202013149', '고은아');
 INSERT INTO `CSPOP`.`excel_board`
-VALUES (4, NOW(), NOW(), '이수', '1999/10/13', '공모전', '이은정', '진행', '제안서', '202016034', '이도현');
+VALUES (5, NOW(), NOW(), '이수', '1999/10/13', '공모전', '이은정', '진행', '신청접수', '202016034', '이도현');
 INSERT INTO `CSPOP`.`excel_board`
 VALUES (6, NOW(), NOW(), '이수', '1999/10/13', '공모전', '이은정', '진행', '중간보고서', '201812301', '정경원');
