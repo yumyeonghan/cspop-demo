@@ -1,6 +1,6 @@
 package kyonggi.cspop.config;
 
-import kyonggi.cspop.domain.board.service.ScheduleBoardService;
+import kyonggi.cspop.domain.board.schedule.service.ScheduleBoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;

@@ -1,14 +1,10 @@
 package kyonggi.cspop.application.controller.board.excel.graduate;
 
-import kyonggi.cspop.domain.board.ExcelBoard;
-import kyonggi.cspop.domain.board.dto.ExcelBoardResponseDto;
-import kyonggi.cspop.domain.board.service.ExcelBoardService;
-import kyonggi.cspop.exception.CsPopErrorCode;
-import kyonggi.cspop.exception.CsPopException;
+import kyonggi.cspop.domain.board.excel.ExcelBoard;
+import kyonggi.cspop.domain.board.excel.dto.ExcelBoardResponseDto;
+import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -20,16 +16,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 //졸업자 조회 리스트 게시판 컨트롤러
 @Controller

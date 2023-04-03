@@ -1,7 +1,6 @@
 package kyonggi.cspop.application.controller.form.otherform;
 
 import lombok.Data;
-import lombok.Getter;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;

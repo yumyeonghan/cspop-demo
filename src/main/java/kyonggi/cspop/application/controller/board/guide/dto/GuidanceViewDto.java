@@ -1,5 +1,5 @@
 package kyonggi.cspop.application.controller.board.guide.dto;
-import kyonggi.cspop.domain.board.GuidanceBoard;
+import kyonggi.cspop.domain.board.guidance.GuidanceBoard;
 import lombok.Data;
 
 @Data

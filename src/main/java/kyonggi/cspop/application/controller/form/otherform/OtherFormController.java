@@ -2,16 +2,12 @@ package kyonggi.cspop.application.controller.form.otherform;
 
 import kyonggi.cspop.application.SessionFactory;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
-import kyonggi.cspop.application.controller.form.interimForm.InterimFormDto;
 import kyonggi.cspop.application.util.FileStore;
-import kyonggi.cspop.domain.board.ExcelBoard;
-import kyonggi.cspop.domain.board.service.ExcelBoardService;
-import kyonggi.cspop.domain.board.service.form.InterimFormService;
-import kyonggi.cspop.domain.form.interimform.InterimForm;
+import kyonggi.cspop.domain.board.excel.ExcelBoard;
+import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
 import kyonggi.cspop.domain.form.otherform.OtherForm;
 import kyonggi.cspop.domain.form.otherform.service.OtherFormService;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;
-import kyonggi.cspop.domain.uploadfile.InterimFormUploadFile;
 import kyonggi.cspop.domain.uploadfile.OtherFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.service.UsersService;
@@ -43,7 +39,6 @@ public class OtherFormController {
     public String saveOtherForm(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, Model model) {
         Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
         Optional<ExcelBoard> excelByStudentId = excelBoardService.findExcelByStudentId(user.getStudentId());
-        String advisor = excelByStudentId.get().getProfessorName();
         UserDetailDto userDetailDto = new UserDetailDto(user.getStudentId(), excelByStudentId.get().getGraduationDate(), user.getStudentName(), user.getDepartment(), excelByStudentId.get().getProfessorName(), user.getSubmitForm());
 
         model.addAttribute("userDetail", userDetailDto);

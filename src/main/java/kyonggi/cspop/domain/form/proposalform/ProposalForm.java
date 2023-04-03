@@ -46,7 +46,7 @@ public class ProposalForm extends BaseEntity {
         this.users = users;
     }
 
-    public static ProposalForm createProposalForm(String studentId, String studentName, String department, String graduationDate, String advisor, String qualification, boolean approval, String title, String division, String keyword, String text) {
+    public static ProposalForm createProposalForm(String studentId, String studentName, String department, String graduationDate, String advisor, String qualification, String title, String division, String keyword, String text) {
 
         ProposalForm proposalForm = new ProposalForm();
         proposalForm.studentId = studentId;
@@ -55,7 +55,7 @@ public class ProposalForm extends BaseEntity {
         proposalForm.graduationDate = graduationDate;
         proposalForm.advisor = advisor;
         proposalForm.qualification = qualification;
-        proposalForm.approval = approval;
+        proposalForm.approval = false;
         proposalForm.title = title;
 
         if (division.equals("option1")) {

@@ -30,7 +30,7 @@ public class InterimForm extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "interimForm")
     private Users users;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "interimFormUploadFile_id", foreignKey = @ForeignKey(name = "fk_interim_form_upload_file_to_interim_form"))
     private InterimFormUploadFile interimFormUploadFile;
 
@@ -38,10 +38,10 @@ public class InterimForm extends BaseEntity {
         this.users = users;
     }
 
-    public static InterimForm createInterimForm(boolean approval, String title, String division, String text, String plan, InterimFormUploadFile uploadFile) {
+    public static InterimForm createInterimForm(String title, String division, String text, String plan, InterimFormUploadFile uploadFile) {
 
         InterimForm interimForm = new InterimForm();
-        interimForm.approval = approval;
+        interimForm.approval = false;
         interimForm.title = title;
 
         if (division.equals("option1")) {

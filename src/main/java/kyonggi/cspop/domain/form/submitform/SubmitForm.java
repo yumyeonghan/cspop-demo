@@ -46,12 +46,12 @@ public class SubmitForm extends BaseEntity {
     }
 
     //신청서 생성 메소드
-    public static SubmitForm createSubmitForm(String studentId, String studentName, String department, boolean approval, String graduationRequirements) {
+    public static SubmitForm createSubmitForm(String studentId, String studentName, String department, String graduationRequirements) {
         SubmitForm submitForm = new SubmitForm();
         submitForm.studentId = studentId;
         submitForm.studentName = studentName;
         submitForm.department = department;
-        submitForm.approval = approval;
+        submitForm.approval = false;
 
         if (graduationRequirements.equals("기타자격")) {
             submitForm.graduationRequirements = GraduationRequirements.Other_Qualifications;

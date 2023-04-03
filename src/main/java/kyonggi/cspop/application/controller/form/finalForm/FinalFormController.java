@@ -4,10 +4,10 @@ package kyonggi.cspop.application.controller.form.finalForm;
 import kyonggi.cspop.application.SessionFactory;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
 import kyonggi.cspop.application.util.FileStore;
-import kyonggi.cspop.domain.board.ExcelBoard;
-import kyonggi.cspop.domain.board.service.ExcelBoardService;
-import kyonggi.cspop.domain.board.service.form.FinalFormService;
+import kyonggi.cspop.domain.board.excel.ExcelBoard;
+import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
 import kyonggi.cspop.domain.form.finalform.FinalForm;
+import kyonggi.cspop.domain.form.finalform.service.FinalFormService;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;
 import kyonggi.cspop.domain.uploadfile.FinalFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
@@ -58,14 +58,13 @@ public class FinalFormController {
 
         //최종 보고서 파일 저장
         FinalFormUploadFile finalFormUploadFile = fileStore.storeFinalFile(finalFormDto.getFinalFormUploadFile());
-        finalFormService.saveFinalFormUploadFile(finalFormUploadFile);
 
         //최종 보고서 폼 등록
-        FinalForm finalForm = FinalForm.createFinalForm(false, finalFormDto.getTitle(), finalFormDto.getDivision(), finalFormDto.getQualification(), finalFormDto.getPageNumber(),finalFormUploadFile);
-        finalFormService.saveFinalForm(finalForm);
+        FinalForm finalForm = FinalForm.createFinalForm(finalFormDto.getTitle(), finalFormDto.getDivision(), finalFormDto.getQualification(), finalFormDto.getPageNumber(),finalFormUploadFile);
+        Long finalFormId = finalFormService.saveFinalForm(finalForm);
 
         //유저 테이블 수정
-        usersService.updateExcelByFinalForm(user, finalForm);
+        usersService.updateExcelByFinalForm(user.getId(), finalFormId);
 
         //엑셀보드 업데이트
         excelBoardService.updateExcelByFinalForm(user);

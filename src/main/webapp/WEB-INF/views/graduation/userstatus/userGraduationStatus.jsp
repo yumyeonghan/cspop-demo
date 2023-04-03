@@ -143,8 +143,6 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                            <p>단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}</p>
-                                            <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>
                                             <div class="tab-pane fade" id="Qualifications-tab" role="tabpanel"
                                                  aria-labelledby="Qualifications-id"> <!-- 기타자격 tab 코드 -->
                                                 <div id="otherQualifications">
@@ -179,15 +177,21 @@
                                                                 <td>${userSchedule.startDate}</td>
                                                                 <td>${userSchedule.endDate}</td>
                                                                 <td>${userSchedule.submitStatus}</td>
-                                                                <td><a href="/api/proposalForm">이동</a></td>
+                                                                <td><a href="#">이동</a></td>
                                                                 <td>${userSchedule.approvalStatus}</td>
                                                             </tr>
                                                             </tbody>
                                                         </c:forEach>
+                                                        <div><a href="/api/proposalForm">테스트 제안서 신청 폼 이동</a></div>
+                                                        <div><a href="/api/interimForm">테스트 중간 보고서 신청 폼 이동</a></div>
+                                                        <div><a href="/api/finalForm">테스트 최종 보고서 신청 폼 이동</a></div>
+                                                        <div><a href="/api/otherForm">테스트 기타 자격 신청 폼 이동</a></div>
                                                     </table>
                                                 </div>
                                             </div>
                                         </div>
+                                        <p>단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}</p>
+                                        <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>
                                     </div>
                                 </div>
                                 <!-- sidebar -->

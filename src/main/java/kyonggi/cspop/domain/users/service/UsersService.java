@@ -3,12 +3,11 @@ package kyonggi.cspop.domain.users.service;
 import kyonggi.cspop.application.controller.users.dto.UserPasswordRequestDto;
 import kyonggi.cspop.application.util.crypto.BCryptoPasswordEncoder;
 import kyonggi.cspop.application.util.crypto.PasswordEncoder;
-import kyonggi.cspop.domain.form.finalform.FinalForm;
-import kyonggi.cspop.domain.form.interimform.InterimForm;
-import kyonggi.cspop.domain.form.otherform.OtherForm;
+import kyonggi.cspop.domain.form.finalform.repository.FinalFormRepository;
+import kyonggi.cspop.domain.form.interimform.repository.InterimFormRepository;
 import kyonggi.cspop.domain.form.otherform.repository.OtherFormRepository;
-import kyonggi.cspop.domain.form.proposalform.ProposalForm;
-import kyonggi.cspop.domain.form.submitform.SubmitForm;
+import kyonggi.cspop.domain.form.proposalform.repository.ProposalFormRepository;
+import kyonggi.cspop.domain.form.submitform.repository.SubmitFormRepository;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.repository.UsersRepository;
 import kyonggi.cspop.exception.CsPopErrorCode;
@@ -30,6 +29,10 @@ public class UsersService implements UserDetailsService {
 
     private final UsersRepository usersRepository;
     private final PasswordEncoder passwordEncoder;
+    private final SubmitFormRepository submitFormRepository;
+    private final ProposalFormRepository proposalFormRepository;
+    private final InterimFormRepository interimFormRepository;
+    private final FinalFormRepository finalFormRepository;
     private final OtherFormRepository otherFormRepository;
 
 
@@ -114,27 +117,27 @@ public class UsersService implements UserDetailsService {
     }
 
     @Transactional
-    public void updateExcelBySubmitForm(Users users, SubmitForm submitForm) {
-        users.addSubmitForms(submitForm);
-        usersRepository.save(users);
+    public void updateExcelBySubmitForm(Long userId, Long submitFormId) {
+        Users user = usersRepository.findById(userId).get();
+        user.addSubmitForms(submitFormRepository.findById(submitFormId).get());
     }
 
     @Transactional
-    public void updateExcelByProposalForm(Users users, ProposalForm proposalForm) {
-        users.addProposalForms(proposalForm);
-        usersRepository.save(users);
+    public void updateExcelByProposalForm(Long userId, Long proposalFormId) {
+        Users user = usersRepository.findById(userId).get();
+        user.addProposalForms(proposalFormRepository.findById(proposalFormId).get());
     }
 
     @Transactional
-    public void updateExcelByInterimForm(Users users, InterimForm interimForm) {
-        users.addInterimForms(interimForm);
-        usersRepository.save(users);
+    public void updateExcelByInterimForm(Long userId, Long interimFormId) {
+        Users user = usersRepository.findById(userId).get();
+        user.addInterimForms(interimFormRepository.findById(interimFormId).get());
     }
 
     @Transactional
-    public void updateExcelByFinalForm(Users users, FinalForm finalForm) {
-        users.addFinalForms(finalForm);
-        usersRepository.save(users);
+    public void updateExcelByFinalForm(Long userId, Long finalFormId) {
+        Users user = usersRepository.findById(userId).get();
+        user.addFinalForms(finalFormRepository.findById(finalFormId).get());
     }
 
     @Transactional

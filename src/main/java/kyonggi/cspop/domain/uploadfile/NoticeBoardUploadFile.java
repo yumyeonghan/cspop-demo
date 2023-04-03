@@ -1,6 +1,6 @@
 package kyonggi.cspop.domain.uploadfile;
 
-import kyonggi.cspop.domain.board.NoticeBoard;
+import kyonggi.cspop.domain.board.notice.NoticeBoard;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -2,8 +2,8 @@ package kyonggi.cspop.application.controller.board.schedule;
 
 import kyonggi.cspop.application.controller.board.schedule.dto.ScheduleDto;
 import kyonggi.cspop.application.controller.board.schedule.dto.scheduleBoarad.*;
-import kyonggi.cspop.domain.board.ScheduleBoard;
-import kyonggi.cspop.domain.board.service.ScheduleBoardService;
+import kyonggi.cspop.domain.board.schedule.ScheduleBoard;
+import kyonggi.cspop.domain.board.schedule.service.ScheduleBoardService;
 import kyonggi.cspop.domain.schedule.Schedules;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

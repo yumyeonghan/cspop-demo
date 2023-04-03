@@ -1,6 +1,5 @@
 package kyonggi.cspop.application.controller.form.finalForm;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.web.multipart.MultipartFile;

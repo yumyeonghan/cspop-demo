@@ -3,10 +3,10 @@ package kyonggi.cspop.application.controller.form.proposalform;
 
 import kyonggi.cspop.application.SessionFactory;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
-import kyonggi.cspop.domain.board.ExcelBoard;
-import kyonggi.cspop.domain.board.service.ExcelBoardService;
-import kyonggi.cspop.domain.board.service.form.ProposalFormService;
+import kyonggi.cspop.domain.board.excel.ExcelBoard;
+import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
 import kyonggi.cspop.domain.form.proposalform.ProposalForm;
+import kyonggi.cspop.domain.form.proposalform.service.ProposalFormService;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.service.UsersService;
@@ -55,11 +55,11 @@ public class ProposalFormController {
         String advisor = excelByStudentId.get().getProfessorName();
 
         //제안서 폼 등록
-        ProposalForm proposalForm = ProposalForm.createProposalForm(user.getStudentId(), user.getStudentName(), user.getDepartment(), excelByStudentId.get().getGraduationDate(), excelByStudentId.get().getProfessorName(), excelByStudentId.get().getQualifications(), false, proposalFormDto.getTitle(), proposalFormDto.getDivision(), proposalFormDto.getKeyword(), proposalFormDto.getText());
-        proposalFormService.saveProposalForm(proposalForm);
+        ProposalForm proposalForm = ProposalForm.createProposalForm(user.getStudentId(), user.getStudentName(), user.getDepartment(), excelByStudentId.get().getGraduationDate(), excelByStudentId.get().getProfessorName(), excelByStudentId.get().getQualifications(), proposalFormDto.getTitle(), proposalFormDto.getDivision(), proposalFormDto.getKeyword(), proposalFormDto.getText());
+        Long proposalFormId = proposalFormService.saveProposalForm(proposalForm);
 
         //유저 테이블 수정
-        usersService.updateExcelByProposalForm(user, proposalForm);
+        usersService.updateExcelByProposalForm(user.getId(), proposalFormId);
 
         //엑셀보드 업데이트
         excelBoardService.updateExcelByProposalForm(user);

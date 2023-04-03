@@ -2,8 +2,8 @@ package kyonggi.cspop.application.controller.board.guide;
 
 import kyonggi.cspop.application.controller.board.guide.dto.GuidanceBoardRequestDto;
 import kyonggi.cspop.application.controller.board.guide.dto.GuidanceViewDto;
-import kyonggi.cspop.domain.board.GuidanceBoard;
-import kyonggi.cspop.domain.board.service.GuidanceBoardService;
+import kyonggi.cspop.domain.board.guidance.GuidanceBoard;
+import kyonggi.cspop.domain.board.guidance.service.GuidanceBoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

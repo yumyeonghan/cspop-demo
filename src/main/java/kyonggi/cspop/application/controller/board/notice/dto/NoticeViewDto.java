@@ -1,6 +1,6 @@
 package kyonggi.cspop.application.controller.board.notice.dto;
 
-import kyonggi.cspop.domain.board.NoticeBoard;
+import kyonggi.cspop.domain.board.notice.NoticeBoard;
 import kyonggi.cspop.domain.uploadfile.NoticeBoardUploadFile;
 import lombok.Data;
 

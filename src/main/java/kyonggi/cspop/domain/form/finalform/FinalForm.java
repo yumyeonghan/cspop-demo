@@ -36,7 +36,7 @@ public class FinalForm extends BaseEntity {
     @Column
     private Integer pageNumber;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "finalFormUploadFile_id", foreignKey = @ForeignKey(name = "fk_final_form_upload_file_to_final_form"))
     private FinalFormUploadFile finalFormUploadFile;
 
@@ -44,10 +44,10 @@ public class FinalForm extends BaseEntity {
         this.users = users;
     }
 
-    public static FinalForm createFinalForm(boolean approval, String title, String division, String qualification, Integer pageNumber, FinalFormUploadFile uploadFile) {
+    public static FinalForm createFinalForm(String title, String division, String qualification, Integer pageNumber, FinalFormUploadFile uploadFile) {
 
         FinalForm finalForm = new FinalForm();
-        finalForm.approval = approval;
+        finalForm.approval = false;
         finalForm.title = title;
 
         if (division.equals("option1")) {

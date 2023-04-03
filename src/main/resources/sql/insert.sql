@@ -97,10 +97,6 @@ values (6, NOW(), NOW(), '컴퓨터공학부', '201812301', '정경원', 1, 'THE
 insert into proposal_form
 values (1, NOW(), NOW(), '201812301', '1999/10/13', '이은정', '정경원', '컴퓨터공학부', 'THESIS', 1, '타이틀', '구분', '키워드', '텍스트');
 
--- interim form 데이터
-insert into interim_form
-values (1,NOW(),NOW(),1,'제목','구현논문','텍스트','계획',1);
-
 --  certification_board 데이터
 INSERT INTO `CSPOP`.`certification_board`(`id`, `created_date`, `last_modified_date`, `department`, `student_id`,
                                           `student_name`, `current_semester`, `professional_education`, `msc_bsm`,

@@ -1,6 +1,6 @@
 package kyonggi.cspop.domain.comments;
 
-import kyonggi.cspop.domain.board.NoticeBoard;
+import kyonggi.cspop.domain.board.notice.NoticeBoard;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

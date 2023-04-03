@@ -1,8 +1,6 @@
 package kyonggi.cspop.domain.form.otherform;
 
 import kyonggi.cspop.domain.entity.BaseEntity;
-import kyonggi.cspop.domain.form.interimform.InterimForm;
-import kyonggi.cspop.domain.uploadfile.InterimFormUploadFile;
 import kyonggi.cspop.domain.uploadfile.OtherFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
 import lombok.AccessLevel;

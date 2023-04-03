@@ -1,9 +1,9 @@
 package kyonggi.cspop.application.controller.form.submitform;
 
 import kyonggi.cspop.application.SessionFactory;
-import kyonggi.cspop.domain.board.service.ExcelBoardService;
-import kyonggi.cspop.domain.board.service.form.SubmitFormService;
+import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
 import kyonggi.cspop.domain.form.submitform.SubmitForm;
+import kyonggi.cspop.domain.form.submitform.service.SubmitFormService;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.service.UsersService;
@@ -30,11 +30,11 @@ public class SubmitFormController {
 
         Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
         //수정폼 등록
-        SubmitForm submitForm = SubmitForm.createSubmitForm(submitFormDto.getStudentId(), submitFormDto.getStudentName(), submitFormDto.getDepartment(), false, submitFormDto.getQualification());
-        submitFormService.saveSubmitForm(submitForm);
+        SubmitForm submitForm = SubmitForm.createSubmitForm(submitFormDto.getStudentId(), submitFormDto.getStudentName(), submitFormDto.getDepartment(), submitFormDto.getQualification());
+        Long submitFormId = submitFormService.saveSubmitForm(submitForm);
 
         //유저 테이블 수정
-        usersService.updateExcelBySubmitForm(user,submitForm);
+        usersService.updateExcelBySubmitForm(user.getId(),submitFormId);
 
         //엑셀보드에 유저 로우 저장
         excelBoardService.addExcelBySubmitForm(user, submitForm);
