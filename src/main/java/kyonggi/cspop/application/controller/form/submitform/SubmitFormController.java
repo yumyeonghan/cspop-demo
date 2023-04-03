@@ -34,7 +34,7 @@ public class SubmitFormController {
         Long submitFormId = submitFormService.saveSubmitForm(submitForm);
 
         //유저 테이블 수정
-        usersService.updateExcelBySubmitForm(user.getId(),submitFormId);
+        usersService.updateUserBySubmitForm(user.getId(),submitFormId);
 
         //엑셀보드에 유저 로우 저장
         excelBoardService.addExcelBySubmitForm(user, submitForm);

@@ -117,25 +117,25 @@ public class UsersService implements UserDetailsService {
     }
 
     @Transactional
-    public void updateExcelBySubmitForm(Long userId, Long submitFormId) {
+    public void updateUserBySubmitForm(Long userId, Long submitFormId) {
         Users user = usersRepository.findById(userId).get();
         user.addSubmitForms(submitFormRepository.findById(submitFormId).get());
     }
 
     @Transactional
-    public void updateExcelByProposalForm(Long userId, Long proposalFormId) {
+    public void updateUserByProposalForm(Long userId, Long proposalFormId) {
         Users user = usersRepository.findById(userId).get();
         user.addProposalForms(proposalFormRepository.findById(proposalFormId).get());
     }
 
     @Transactional
-    public void updateExcelByInterimForm(Long userId, Long interimFormId) {
+    public void updateUserByInterimForm(Long userId, Long interimFormId) {
         Users user = usersRepository.findById(userId).get();
         user.addInterimForms(interimFormRepository.findById(interimFormId).get());
     }
 
     @Transactional
-    public void updateExcelByFinalForm(Long userId, Long finalFormId) {
+    public void updateUserByFinalForm(Long userId, Long finalFormId) {
         Users user = usersRepository.findById(userId).get();
         user.addFinalForms(finalFormRepository.findById(finalFormId).get());
     }

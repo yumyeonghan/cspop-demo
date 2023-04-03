@@ -59,7 +59,7 @@ public class ProposalFormController {
         Long proposalFormId = proposalFormService.saveProposalForm(proposalForm);
 
         //유저 테이블 수정
-        usersService.updateExcelByProposalForm(user.getId(), proposalFormId);
+        usersService.updateUserByProposalForm(user.getId(), proposalFormId);
 
         //엑셀보드 업데이트
         excelBoardService.updateExcelByProposalForm(user);

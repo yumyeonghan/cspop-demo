@@ -15,22 +15,8 @@ import java.util.List;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ScheduleBoardService {
-    private final ScheduleRepository scheduleRepository;
     private final ScheduleBoardRepository scheduleBoardRepository;
 
-    public List<Schedules> findScheduleList() {
-        return scheduleRepository.findAll();
-    }
-
-    public Schedules findByScheduleId(Long id) {
-        return scheduleRepository.findById(id).get();
-    }
-
-    @Transactional
-    public void updateSchedules(Long id, ScheduleDto scheduleDto) {
-        Schedules schedules = findByScheduleId(id);
-        schedules.updateInfo(scheduleDto);
-    }
 
     public List<ScheduleBoard> findScheduleBoardList() {
         return scheduleBoardRepository.findAll();
@@ -65,12 +51,5 @@ public class ScheduleBoardService {
     @Transactional
     public void updateOtherQualificationsText(String otherQualificationsText) {
         scheduleBoardRepository.findById(1l).get().updateOtherQualificationsText(otherQualificationsText);
-    }
-
-    //Schedules 자동 업데이트 로직
-    @Transactional
-    public void autoUpdateSchedulesState() {
-        List<Schedules> findScheduleList = scheduleRepository.findAll();
-        findScheduleList.stream().forEach(e->e.updateScheduleState());
     }
 }

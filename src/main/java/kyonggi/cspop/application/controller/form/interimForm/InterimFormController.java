@@ -64,7 +64,7 @@ public class InterimFormController {
         Long interimFormId = interimFormService.saveInterimForm(interimForm);
 
         //유저 테이블 수정
-        usersService.updateExcelByInterimForm(user.getId(), interimFormId);
+        usersService.updateUserByInterimForm(user.getId(), interimFormId);
 
         //엑셀보드 업데이트
         excelBoardService.updateExcelByInterimForm(user);

@@ -64,7 +64,7 @@ public class FinalFormController {
         Long finalFormId = finalFormService.saveFinalForm(finalForm);
 
         //유저 테이블 수정
-        usersService.updateExcelByFinalForm(user.getId(), finalFormId);
+        usersService.updateUserByFinalForm(user.getId(), finalFormId);
 
         //엑셀보드 업데이트
         excelBoardService.updateExcelByFinalForm(user);

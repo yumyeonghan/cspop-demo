@@ -5,11 +5,11 @@ import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserScheduleDto;
 import kyonggi.cspop.domain.board.excel.ExcelBoard;
 import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
-import kyonggi.cspop.domain.board.schedule.service.ScheduleBoardService;
 import kyonggi.cspop.domain.form.submitform.enums.GraduationRequirements;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;
 import kyonggi.cspop.domain.schedule.Schedules;
 import kyonggi.cspop.domain.schedule.enums.Step;
+import kyonggi.cspop.domain.schedule.service.ScheduleService;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.service.UsersService;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +33,7 @@ public class UserStatusController {
 
     private final UsersService usersService;
     private final ExcelBoardService excelBoardService;
-    private final ScheduleBoardService scheduleBoardService;
+    private final ScheduleService scheduleService;
 
     @GetMapping
     public String userStatusHome(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, Model model) {
@@ -57,7 +57,7 @@ public class UserStatusController {
          * 진행 상황 테이블 데이터 전송
          */
         List<UserScheduleDto> userSchedules = new ArrayList<>();
-        List<Schedules> scheduleList = scheduleBoardService.findScheduleList();
+        List<Schedules> scheduleList = scheduleService.findScheduleList();
         for (Schedules schedules : scheduleList) {
             if (user.getSubmitForm().getGraduationRequirements().equals(GraduationRequirements.Other_Qualifications)) {
                 if (schedules.getStep().equals(Step.INTERIM_REPORT) || schedules.getStep().equals(Step.FINAL_REPORT)) {
