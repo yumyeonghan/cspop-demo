@@ -1,10 +1,7 @@
 package kyonggi.cspop.domain.board.schedule.service;
 
-import kyonggi.cspop.application.controller.board.schedule.dto.ScheduleDto;
 import kyonggi.cspop.domain.board.schedule.ScheduleBoard;
 import kyonggi.cspop.domain.board.schedule.repository.ScheduleBoardRepository;
-import kyonggi.cspop.domain.schedule.Schedules;
-import kyonggi.cspop.domain.schedule.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

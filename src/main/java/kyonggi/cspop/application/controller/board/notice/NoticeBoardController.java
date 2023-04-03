@@ -13,7 +13,6 @@ import kyonggi.cspop.domain.board.notice.service.NoticeBoardService;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;
 import kyonggi.cspop.domain.uploadfile.NoticeBoardUploadFile;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
@@ -36,9 +35,6 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class NoticeBoardController {
-
-    @Value("${file.dir}")
-    private String fileDir;
 
     private final NoticeBoardService noticeBoardService;
     private final AdminsRepository adminsRepository;
@@ -85,12 +81,6 @@ public class NoticeBoardController {
         noticeBoardService.saveNoticeBoard(noticeBoard, storeFiles);
 
         return "redirect:/notice/find?page=0&size=10";
-    }
-
-    @ResponseBody
-    @GetMapping("/attach/{filename}")
-    public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
-        return new UrlResource("file:" + fileStore.getFullPath(filename));
     }
 
     @GetMapping("/attach/{noticeBoardId}/{uploadFileName}")
