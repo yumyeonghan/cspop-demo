@@ -6,10 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%--
-    자주 쓰이는 레이아웃 jsp 파일입니다.
-
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -38,6 +34,16 @@
 
         img {
             margin-top: 5%;
+        }
+        .label { 
+            display:inline-block; width:100px; line-height:50px; 
+        }
+        .footer{
+            text-align: right;
+        }
+        .btn {
+            text-align: center;
+            border:none;
         }
     </style>
 </head>
@@ -84,39 +90,38 @@
                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-12 mb-8">
                     <div class="row">
                         <div class="card">
-                            <form method="POST" >
+                            <form method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="studentId" value=${userDetail.studentId}>
                                 <input type="hidden" name="studentName" value=${userDetail.studentName}>
                                 <input type="hidden" name="department" value=${userDetail.department}>
                                 <input type="hidden" name="graduationDate" value=${userDetail.graduationDate}>
                                 <input type="hidden" name="advisor" value="${userDetail.advisor}">
                                 <input type="hidden" name="qualification" value="${userDetail.qualification}">
-                                <div class="form-group">
-                                    <label for="title">제목</label>
-                                    <input type="text" class="form-control" id="title" name="title" required>
+                                <br>
+                                <div>
+                                    <label class="fw-bold" for="title">제목
+                                    <input type="text" id="title" name="title" style="width:800px;" required></label>
                                 </div>
-                                <div class="form-group">
-                                    <label>구분</label>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="category1" name="division" value="option1" required>
-                                        <label class="form-check-label" for="category1">구현논문</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="category2" name="division" value="option2">
-                                        <label class="form-check-label" for="category2">조사(이론)논문</label>
-                                    </div>
+                                <div>
+                                    <label class="mb-3 fw-bold" for="thesis">구분</label>&nbsp;
+                                    <label><input type="radio" id="thesis1"name="thesis" value="option1">구현논문</label>&nbsp;&nbsp;
+                                    <label><input type="radio" id="thesis2" name="thesis" value="option2">조사(이론)논문</label>
                                 </div>
-                                <div class="form-group">
-                                    <label for="keywords">키워드</label>
-                                    <input type="text" class="form-control" id="keywords" name="keyword" required>
+                                <div class="mb-3">
+                                    <label class="fw-bold" for="keywords">키워드 <input type="text" id="keywords" name="keywords">&nbsp<input type="text" id="keywords" name="keywords"></label>
                                 </div>
-                                <div class="form-group">
-                                    <label for="content">내용</label>
-                                    <textarea class="form-control" id="content" name="text" required>입력하세요</textarea>
+                                <div>
+                                    <label class="fw-bold" for="content">내용</label>
+                                    <textarea class="form-control" id="content" name="text" style="height: 100px; width: 835px;" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-lg btn-primary" style="width: 10%">제출</button>
-                            </form>
-
+                                <br>
+                                <div class="footer">
+                                    <label class="fw-bold" for="sign">서명
+                                    <input type="text" id="sign" name="sign" style="width:200px;" required></label>&nbsp;
+                                    <button type="submit" class="btn btn-primary" style="width: 90px; height: 40px;">완료</button>&nbsp;
+                                    <button type="cancel" class="btn btn-primary" style="width: 90px; height: 40px;">취소</button>&nbsp;&nbsp;&nbsp;
+                                </div>
+                            </form> 
                         </div>
                     </div>
                 </div>
