@@ -47,19 +47,19 @@ public class ExcelBoardService {
 
     @Transactional
     public void updateExcelByProposalForm(Users users) {
-        ExcelBoard excelBoard = excelBoardRepository.findById(users.getId()).get();
+        ExcelBoard excelBoard = excelBoardRepository.findByStudentId(users.getStudentId()).get();
         excelBoard.updateExcelByProposalForm();
     }
 
     @Transactional
     public void updateExcelByInterimForm(Users users) {
-        ExcelBoard excelBoard = excelBoardRepository.findById(users.getId()).get();
+        ExcelBoard excelBoard = excelBoardRepository.findByStudentId(users.getStudentId()).get();
         excelBoard.updateExcelByInterimForm();
     }
 
     @Transactional
-    public void updateExcelByFinalForm(Users user){
-        ExcelBoard excelBoard = excelBoardRepository.findById(user.getId()).get();
+    public void updateExcelByFinalForm(Users users){
+        ExcelBoard excelBoard = excelBoardRepository.findByStudentId(users.getStudentId()).get();
         excelBoard.updateExcelByFinalForm();
     }
 }
