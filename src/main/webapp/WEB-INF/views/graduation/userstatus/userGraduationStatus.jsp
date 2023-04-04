@@ -194,6 +194,12 @@
                                         <p>단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}</p>
                                         <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>
                                         <div class="container">
+                                            <c:set var="finalFormExists" value="true" />
+                                            <c:forEach var="element" items="${notApprovalList}">
+                                                <c:if test="${element == '최종보고서'}">
+                                                    <c:set var="finalFormExists" value="false" />
+                                                </c:if>
+                                            </c:forEach>
                                             <div class="row">
                                                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-12 mb-8">
                                                     <div class="row">
