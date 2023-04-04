@@ -83,8 +83,8 @@
             <div class="row">
                 <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-12 mb-8">
                     <div class="row">
-                        <div class="card">
-                            <form method="POST" enctype="multipart/form-data" >
+                        <div class="card" style="padding: 10px;">
+                            <form method="POST" enctype="multipart/form-data" onsubmit="return confirm('제출 하시겠습니까?')">
                                 <input type="hidden" name="studentId" value=${userDetail.studentId}>
                                 <input type="hidden" name="studentName" value=${userDetail.studentName}>
                                 <input type="hidden" name="department" value=${userDetail.department}>
@@ -92,33 +92,44 @@
                                 <input type="hidden" name="advisor" value="${userDetail.advisor}">
                                 <input type="hidden" name="qualification" value="${userDetail.qualification}">
                                 <div class="form-group">
-                                    <label for="title">제목</label>
-                                    <input type="text" class="form-control" id="title" name="title" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>구분</label>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="category1" name="division" value="option1" required>
-                                        <label class="form-check-label" for="category1">구현논문</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="category2" name="division" value="option2">
-                                        <label class="form-check-label" for="category2">조사(이론)논문</label>
+                                    <label for="title"><b>제목</b></label>
+                                    <div class="card" style="padding: 5px;">
+                                        <input type="text" class="form-control" id="title" name="title" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>파일 제출</label>
-                                    <input id="inputFile" type="file" name="interimFormUploadFile">
+                                    <label><b>구분</b></label>
+                                    <div class="card" style="padding: 5px;">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="category1" name="division" value="option1" required>
+                                            <label class="form-check-label" for="category1">구현논문</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="category2" name="division" value="option2">
+                                            <label class="form-check-label" for="category2">조사(이론)논문</label>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="content">진행 내용</label>
-                                    <textarea type="text" class="form-control" id="content" name="text">입력하세요</textarea>
+                                    <label><b>파일 제출</b></label>
+                                    <div class="card" style="padding: 5px;">
+                                        <input id="inputFile" type="file" name="interimFormUploadFile">
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="plan">향후 계획</label>
-                                    <textarea class="form-control" id="plan" name="plan" required>입력하세요</textarea>
+                                    <label for="content"><b>진행 내용</b></label>
+                                    <div class="card" style="padding: 5px;">
+                                        <textarea type="text" class="form-control" id="content" name="text" placeholder="입력하세요"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="plan"><b>향후 계획</b></label>
+                                    <div class="card" style="padding: 5px;">
+                                        <textarea class="form-control" id="plan" name="plan" placeholder="입력하세요" required></textarea>
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-lg btn-primary" style="width: 10%">제출</button>
+                                <button type="button" class="btn btn-lg btn-secondary" style="width: 10%">취소</button>
                             </form>
 
                         </div>
