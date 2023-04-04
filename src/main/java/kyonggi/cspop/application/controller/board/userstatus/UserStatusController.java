@@ -1,25 +1,33 @@
 package kyonggi.cspop.application.controller.board.userstatus;
 
 import kyonggi.cspop.application.SessionFactory;
+import kyonggi.cspop.application.controller.board.schedule.dto.scheduleBoarad.FinalReportText;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserScheduleDto;
+import kyonggi.cspop.application.controller.form.finalForm.FinalFormDto;
+import kyonggi.cspop.application.controller.form.finalForm.FinalViewDto;
+import kyonggi.cspop.application.util.FileStore;
 import kyonggi.cspop.domain.board.excel.ExcelBoard;
 import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
+import kyonggi.cspop.domain.form.finalform.FinalForm;
+import kyonggi.cspop.domain.form.finalform.service.FinalFormService;
 import kyonggi.cspop.domain.form.submitform.enums.GraduationRequirements;
+import kyonggi.cspop.domain.form.submitform.service.SubmitFormService;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;
 import kyonggi.cspop.domain.schedule.Schedules;
 import kyonggi.cspop.domain.schedule.enums.Step;
 import kyonggi.cspop.domain.schedule.service.ScheduleService;
+import kyonggi.cspop.domain.uploadfile.FinalFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -34,6 +42,12 @@ public class UserStatusController {
     private final UsersService usersService;
     private final ExcelBoardService excelBoardService;
     private final ScheduleService scheduleService;
+
+    private final SubmitFormService submitFormService;
+
+    private final FinalFormService finalFormService;
+
+    private final FileStore fileStore;
 
     @GetMapping
     public String userStatusHome(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, Model model) {
@@ -106,5 +120,27 @@ public class UserStatusController {
         model.addAttribute("notApprovalList", notApprovalList);
 
         return "graduation/userstatus/userGraduationStatus";
+    }
+
+    //AJAX 통신용 API 신청접수 폼
+    //@PostMapping("/modify/submitForm/{id}")
+    public ResponseEntity<Void> modifySubmitForm(@RequestBody FinalReportText finalReportText) {
+        return ResponseEntity.noContent().build();
+    }
+
+    //AJAX 통신용 API 최종보고서 수정 및 확인 뷰
+    @GetMapping("/modifyFinalForm/{finalFormId}")
+    public ResponseEntity<Void> FinalForm(@PathVariable Long finalFormId, Model model) {
+        FinalForm finalForm = finalFormService.findFinalForm(finalFormId);
+        model.addAttribute("finalForm", new FinalViewDto(finalForm));
+        return ResponseEntity.ok().build();
+    }
+
+    //수정 로직
+    @PostMapping("/modifyFinalForm/{finalFormId}")
+    public ResponseEntity<Void> modifyFinalForm(@PathVariable Long finalFormId, @RequestBody FinalFormDto finalFormDto) throws IOException {
+        FinalFormUploadFile finalFormUploadFile = fileStore.storeFinalFile(finalFormDto.getFinalFormUploadFile());
+        finalFormService.updateUserFinalForm(finalFormId, finalFormDto, finalFormUploadFile);
+        return ResponseEntity.noContent().build();
     }
 }

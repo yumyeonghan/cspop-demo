@@ -1,11 +1,13 @@
 package kyonggi.cspop.domain.form.finalform;
 
+import kyonggi.cspop.application.controller.form.finalForm.FinalFormDto;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.uploadfile.FinalFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 
@@ -70,5 +72,16 @@ public class FinalForm extends BaseEntity {
         finalForm.finalFormUploadFile = uploadFile;
 
         return finalForm;
+    }
+
+    public void updateFinalForm(FinalFormDto finalFormDto) {
+        this.title = finalFormDto.getTitle();
+        this.division = finalFormDto.getDivision();
+        this.qualification = finalFormDto.getQualification();
+        this.pageNumber = finalFormDto.getPageNumber();
+    }
+
+    public void updateFiles(FinalFormUploadFile finalFormUploadFile) {
+        this.finalFormUploadFile = finalFormUploadFile;
     }
 }
