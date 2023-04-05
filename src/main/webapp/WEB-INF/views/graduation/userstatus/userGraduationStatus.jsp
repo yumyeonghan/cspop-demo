@@ -193,28 +193,54 @@
                                         </div>
                                         <p>단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}</p>
                                         <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>
+                                        <div>
                                         <button class="btn btn-primary btn-sm float-right"
-                                        data-bs-toggle="modal" data-bs-target="#modifyTable">최종 보고서 모달(js로연동해야됨)</button>
+                                        data-bs-toggle="modal" data-bs-target="#finalFormModify">최종 보고서 모달(js로연동해야됨)</button>
                                         <button class="btn btn-primary btn-sm" onclick="getFinalForm()">최종보고서 get ajax 테스트</button>
                                         <!-- Modal -->
-                                        <div class="modal fade" id="modifyTable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal fade" id="finalFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h3>최종 보고서</h3>
                                                     </div>
-                                                    <form action="certification_management.read" id="certificationForm" method="post" enctype="multipart/form-data">
-                                                        <div class="modal-body">
-                                                            <%@include file="../form/finalFormModal.jsp" %>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                                            <button type="button" class="btn btn-primary" onclick="clickFinalFormModify(event)">수정</button>
-                                                        </div>
-                                                    </form>
+                                                    <div class="modal-body">
+                                                        <%@include file="../form/finalFormModal.jsp" %>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                        <button type="button" class="btn btn-primary" onclick="clickFinalFormModify(event)">수정</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <button class="btn btn-primary btn-sm float-right"
+                                        data-bs-toggle="modal" data-bs-target="#proposalFormModify">제안서 모달(js로연동해야됨)</button>
+                                        <button class="btn btn-primary btn-sm" onclick="getProposalForm()">제안서 get ajax 테스트</button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="proposalFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                          <div class="modal-dialog">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h3>제안서</h3>
+                                              </div>
+                                              <div class="modal-body">
+                                                <%@include file="../form/proposalFormModal.jsp" %>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <%@include file="../form/proposalFormModal.jsp" %>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                <button type="button" class="btn btn-primary" onclick="clickProposalFormModify(event)">수정</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        </div>            
                                     </div>
                                 </div>
                                 <!-- sidebar -->
