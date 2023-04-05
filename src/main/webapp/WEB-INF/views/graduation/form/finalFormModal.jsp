@@ -11,14 +11,14 @@
     <div class="row">
         <!-- <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-12 mb-8"> -->
             <div class="row">
-                <form id="finalFormModal" method="POST" action="/api/finalForm" enctype="multipart/form-data" onsubmit="return confirm('제출 하시겠습니까?')">
+                <!-- <form id="finalFormModal" method="POST" action="/api/finalForm" enctype="multipart/form-data" onsubmit="return confirm('제출 하시겠습니까?')"> -->
                     <div class="card" style="padding: 10px;">
-                        <input type="hidden" name="studentId" value=${userDetail.studentId}>
+                        <!-- <input type="hidden" name="studentId" value=${userDetail.studentId}>
                         <input type="hidden" name="studentName" value=${userDetail.studentName}>
                         <input type="hidden" name="department" value=${userDetail.department}>
                         <input type="hidden" name="graduationDate" value=${userDetail.graduationDate}>
                         <input type="hidden" name="advisor" value="${userDetail.advisor}">
-                        <input type="hidden" name="qualification" value="${userDetail.qualification}">
+                        <input type="hidden" name="qualification" value="${userDetail.qualification}"> -->
                         <div class="form-group">
                             <label for="title" class="custom-label">제목</label>
                             <div class="card" style="padding: 5px;">
@@ -31,36 +31,36 @@
                             <div class="card" style="padding: 5px;">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="category1" name="division"
-                                    ${finalForm.division == 'option1' ? 'checked' : ''} ${finalFormExists ? 'disabled' : ''} value="option1" required>
+                                    ${finalForm.division == '구현논문' ? 'checked' : ''} ${finalFormExists ? 'disabled' : ''} value="option1" required>
                                     <label class="form-check-label" for="category1">구현논문</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="category2" name="division"
-                                    ${finalForm.division == 'option2' ? 'checked' : ''} ${finalFormExists ? 'disabled' : ''}    value="option2">
+                                    ${finalForm.division == '조사(이론)논문' ? 'checked' : ''} ${finalFormExists ? 'disabled' : ''}    value="option2">
                                     <label class="form-check-label" for="category2">조사(이론)논문</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>자격요건</label>
+                            <label>자격요건 ${finalForm.qualification} ${finalForm.qualification ? '값있음':'값없음'}</label>
                             <div class="card" style="padding: 5px;">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="qualification"
-                                    ${finalForm.qualification == 'check1' ? 'checked' : ''} ${finalFormExists ? 'disabled' : ''}
-                                     id="category3" value="check1" required>
+                                    ${finalForm.qualification == '논문양식파일사용' ? 'checked' : ''} ${finalFormExists ? 'disabled' : ''}
+                                     id="category3" value="option1" required>
                                     <label class="form-check-label" for="category3">논문양식파일사용</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="qualification"
-                                    ${finalForm.qualification == 'check2' ? 'checked' : ''} ${finalFormExists ? 'disabled' : ''}
-                                    id="category4" value="check2" required>
+                                    ${finalForm.qualification == '목차,서론,본론,결론,참고문헌 포함' ? 'checked' : ''} ${finalFormExists ? 'disabled' : ''}
+                                    id="category4" value="option2" required>
                                     <label class="form-check-label" for="category4">목차,서론,본론,결론,참고문헌
                                         포함</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="qualification"
-                                    ${finalForm.qualification == 'check3' ? 'checked' : ''} ${finalFormExists ? 'disabled' : ''}
-                                    id="category5" value="check3" required>
+                                    ${finalForm.qualification == '본인이 직접 작성한 파일임을 확인함' ? 'checked' : ''} ${finalFormExists ? 'disabled' : ''}
+                                    id="category5" value="option3" required>
                                     <label class="form-check-label" for="category5">본인이 직접 작성한 파일임을
                                         확인함</label>
                                 </div>
@@ -104,7 +104,7 @@
                         <!-- <button type="button" class="btn btn-lg btn-secondary"
                             style="width: 13%; height: 10%;">취소</button> -->
                     </div>
-                </form>
+                <!-- </form> -->
             </div>
         <!-- </div> -->
         
