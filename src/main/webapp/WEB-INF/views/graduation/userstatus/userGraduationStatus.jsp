@@ -232,9 +232,6 @@
                                                 <%@include file="../form/proposalFormModal.jsp" %>
                                               </div>
                                               <div class="modal-footer">
-                                                <%@include file="../form/proposalFormModal.jsp" %>
-                                              </div>
-                                              <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                 <button type="button" class="btn btn-primary" onclick="clickProposalFormModify(event)">수정</button>
                                               </div>
