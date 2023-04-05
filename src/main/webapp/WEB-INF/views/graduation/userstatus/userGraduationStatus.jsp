@@ -201,7 +201,7 @@
                                         <div class="modal fade" id="finalFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <form id="finalFormModal" method="POST" action="/api/userStatus/modifyFinalForm?finalFormId=1" enctype="multipart/form-data"
-                                                    onsubmit="return confirm('제출 하시겠습니까?')">
+                                                    onsubmit="finalFormModalOnSubmit(event)">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h3>최종 보고서</h3>

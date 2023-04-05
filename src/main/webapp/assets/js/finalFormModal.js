@@ -12,8 +12,9 @@ function clickFinalFormModify(event) {
     }
     console.log(inputsInFinalForm);
     event.target.innerHTML = '제출';
-    event.target.type = 'submit';
-    event.target.removeAttribute('onclick');
+    // event.target.type = 'submit';
+    // event.target.removeAttribute('onclick');
+    event.target.setAttribute('onclick','finalFormModalSubmit(this)');
     event.preventDefault();
     console.log(event);
 }
@@ -25,10 +26,44 @@ function getFinalForm() {
         
         success: (data) => {
             console.log(data);
+            $('#finalFormModify .modal-body').empty();
             $('#finalFormModify .modal-body').append(data);
+            
         },
         error: (error) => {
             console.log(error);
         }
     });
+}
+
+function finalFormModalSubmit(target) {
+    
+    if(confirm('제출 하시겠습니까?')){
+        // Get form         
+        var form = $('#finalFormModal')[0];  	    
+        // Create an FormData object          
+        var data = new FormData(form);
+        $.ajax({
+            type: 'post',
+            enctype: 'multipart/form-data',
+            url: '/api/userStatus/modifyFinalForm?finalFormId=1',
+            data: data,
+            processData: false,    
+            contentType: false,
+            cache:false,
+            success: (data) => {
+                console.log(data);
+                getFinalForm();
+                target.innerHTML='수정'
+                target.setAttribute('onclick','clickFinalFormModify(event)');
+                // location.reload(); // 새로고침
+            },
+            error: (error) => {
+                console.log("hi",error);
+            }
+        });
+        return true;
+    }
+    
+    return false;
 }
