@@ -200,18 +200,21 @@
                                         <!-- Modal -->
                                         <div class="modal fade" id="finalFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                             <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h3>최종 보고서</h3>
+                                                <form id="finalFormModal" method="POST" action="/api/userStatus/modifyFinalForm?finalFormId=1" enctype="multipart/form-data"
+                                                    onsubmit="return confirm('제출 하시겠습니까?')">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h3>최종 보고서</h3>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                            <button type="button" class="btn btn-primary" onclick="clickFinalFormModify(event)">수정</button>
+                                                        </div>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <%@include file="../form/finalFormModal.jsp" %>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                                        <button type="button" class="btn btn-primary" onclick="clickFinalFormModify(event)">수정</button>
-                                                    </div>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                         </div>
