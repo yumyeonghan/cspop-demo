@@ -195,7 +195,7 @@
                                         <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>
                                         <div>
                                         <button class="btn btn-primary btn-sm float-right"
-                                        data-bs-toggle="modal" data-bs-target="#finalFormModify">최종 보고서 모달(js로연동해야됨)</button>
+                                        data-bs-toggle="modal" data-bs-target="#finalFormModify" onclick="getFinalForm()"">최종 보고서 모달</button>
                                         <button class="btn btn-primary btn-sm" onclick="getFinalForm()">최종보고서 get ajax 테스트</button>
                                         <!-- Modal -->
                                         <div class="modal fade" id="finalFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
