@@ -18,16 +18,15 @@ public class FinalViewDto {
 
     private Integer pageNumber;
 
-    private String finalFormUploadFile;
+    private FinalFormUploadFile file;
+
 
     public FinalViewDto(FinalForm finalForm) {
-
-        FinalFormUploadFile file = finalForm.getFinalFormUploadFile();
 
         this.id = finalForm.getId();
         this.title = finalForm.getTitle();
         this.division = finalForm.getDivision();
         this.pageNumber = finalForm.getPageNumber();
-        this.finalFormUploadFile = file.getUploadFileName();
+        this.file = finalForm.getFinalFormUploadFile();
     }
 }
