@@ -7,7 +7,6 @@ import kyonggi.cspop.domain.users.Users;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 
@@ -74,14 +73,11 @@ public class FinalForm extends BaseEntity {
         return finalForm;
     }
 
-    public void updateFinalForm(FinalFormDto finalFormDto) {
+    public void updateFinalForm(FinalFormDto finalFormDto,FinalFormUploadFile finalFormUploadFile) {
         this.title = finalFormDto.getTitle();
         this.division = finalFormDto.getDivision();
         this.qualification = finalFormDto.getQualification();
         this.pageNumber = finalFormDto.getPageNumber();
-    }
-
-    public void updateFiles(FinalFormUploadFile finalFormUploadFile) {
         this.finalFormUploadFile = finalFormUploadFile;
     }
 }
