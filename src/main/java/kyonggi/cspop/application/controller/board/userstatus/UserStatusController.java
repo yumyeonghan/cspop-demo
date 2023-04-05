@@ -119,6 +119,13 @@ public class UserStatusController {
         userSchedules.stream().filter(e -> e.getApprovalStatus().equals("미승인")).forEach(e -> notApprovalList.add(e.getStep()));
         model.addAttribute("notApprovalList", notApprovalList);
 
+
+        //파라미터 넘기는 로직
+        if (!Objects.isNull(user.getFinalForm())) {
+            FinalForm finalFormId = finalFormService.findFinalForm(user.getFinalForm().getId());
+            model.addAttribute("userFinalFormInfo", new FinalViewDto(finalFormId));
+        }
+
         return "graduation/userstatus/userGraduationStatus";
     }
 
