@@ -217,6 +217,7 @@
                                         </div>
                                         <br>
                                         <br>
+                                        <div>
                                         <button class="btn btn-primary btn-sm float-right"
                                         data-bs-toggle="modal" data-bs-target="#proposalFormModify">제안서 모달(js로연동해야됨)</button>
                                         <button class="btn btn-primary btn-sm" onclick="getProposalForm()">제안서 get ajax 테스트</button>
