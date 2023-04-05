@@ -1,7 +1,6 @@
 package kyonggi.cspop.application.controller.board.userstatus;
 
 import kyonggi.cspop.application.SessionFactory;
-import kyonggi.cspop.application.controller.board.schedule.dto.scheduleBoarad.FinalReportText;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserScheduleDto;
 import kyonggi.cspop.application.controller.form.finalForm.FinalFormDto;
@@ -122,23 +121,20 @@ public class UserStatusController {
         return "graduation/userstatus/userGraduationStatus";
     }
 
-    //AJAX 통신용 API 신청접수 폼
-    //@PostMapping("/modify/submitForm/{id}")
-    public ResponseEntity<Void> modifySubmitForm(@RequestBody FinalReportText finalReportText) {
-        return ResponseEntity.noContent().build();
-    }
 
-    //AJAX 통신용 API 최종보고서 수정 및 확인 뷰
-    @GetMapping("/modifyFinalForm/{finalFormId}")
-    public ResponseEntity<Void> FinalForm(@PathVariable Long finalFormId, Model model) {
+    //AJAX 통신용 API 최종보고서 확인 뷰
+    @GetMapping("/modifyFinalForm")
+    public String FinalForm(@RequestParam("finalFormId") Long finalFormId, Model model) {
+
         FinalForm finalForm = finalFormService.findFinalForm(finalFormId);
         model.addAttribute("finalForm", new FinalViewDto(finalForm));
-        return ResponseEntity.ok().build();
+        return "graduation/form/finalFormModal";
     }
 
     //수정 로직
-    @PostMapping("/modifyFinalForm/{finalFormId}")
-    public ResponseEntity<Void> modifyFinalForm(@PathVariable Long finalFormId, @RequestBody FinalFormDto finalFormDto) throws IOException {
+    @PostMapping("/modifyFinalForm")
+    public ResponseEntity<Void> modifyFinalForm(@RequestParam("finalFormId") Long finalFormId, @RequestBody FinalFormDto finalFormDto) throws IOException {
+
         FinalFormUploadFile finalFormUploadFile = fileStore.storeFinalFile(finalFormDto.getFinalFormUploadFile());
         finalFormService.updateUserFinalForm(finalFormId, finalFormDto, finalFormUploadFile);
         return ResponseEntity.noContent().build();
