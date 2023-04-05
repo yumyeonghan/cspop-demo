@@ -25,6 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -133,7 +134,7 @@ public class UserStatusController {
 
     //수정 로직
     @PostMapping("/modifyFinalForm")
-    public ResponseEntity<Void> modifyFinalForm(@RequestParam("finalFormId") Long finalFormId, @RequestBody FinalFormDto finalFormDto) throws IOException {
+    public ResponseEntity<Void> modifyFinalForm(@RequestParam("finalFormId") Long finalFormId, @Validated @ModelAttribute FinalFormDto finalFormDto) throws IOException {
 
         FinalFormUploadFile finalFormUploadFile = fileStore.storeFinalFile(finalFormDto.getFinalFormUploadFile());
         finalFormService.updateUserFinalForm(finalFormId, finalFormDto, finalFormUploadFile);
