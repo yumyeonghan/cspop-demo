@@ -26,8 +26,12 @@ public class FinalFormService {
     }
 
     @Transactional
-    public void updateUserFinalForm(Long id, FinalFormDto finalFormDto,FinalFormUploadFile finalFormUploadFile) {
+    public void updateUserFinalForm(Long id, FinalFormDto finalFormDto, FinalFormUploadFile file) {
         FinalForm finalForm = finalFormRepository.findById(id).get();
-        finalForm.updateFinalForm(finalFormDto, finalFormUploadFile);
+        finalForm.updateFinalForm(finalFormDto.getTitle(), finalFormDto.getDivision(), finalFormDto.getQualification(), finalFormDto.getPageNumber());
+
+        if (finalFormDto.getFinalFormUploadFile() != null) {
+            finalForm.updateFile(file);
+        }
     }
 }

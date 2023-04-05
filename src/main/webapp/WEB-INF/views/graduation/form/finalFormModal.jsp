@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>자격요건 ${finalForm.qualification} ${finalForm.qualification ? '값있음':'값없음'}</label>
+                            <label>자격요건</label>
                             <div class="card" style="padding: 5px;">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="qualification"
@@ -54,25 +54,23 @@
                                     <input class="form-check-input" type="radio" name="qualification"
                                     ${finalForm.qualification == '목차,서론,본론,결론,참고문헌 포함' ? 'checked' : ''} ${finalFormExists ? 'disabled' : ''}
                                     id="category4" value="option2" required>
-                                    <label class="form-check-label" for="category4">목차,서론,본론,결론,참고문헌
-                                        포함</label>
+                                    <label class="form-check-label" for="category4">목차,서론,본론,결론,참고문헌 포함</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="qualification"
                                     ${finalForm.qualification == '본인이 직접 작성한 파일임을 확인함' ? 'checked' : ''} ${finalFormExists ? 'disabled' : ''}
                                     id="category5" value="option3" required>
-                                    <label class="form-check-label" for="category5">본인이 직접 작성한 파일임을
-                                        확인함</label>
+                                    <label class="form-check-label" for="category5">본인이 직접 작성한 파일임을 확인함</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="pageNumber">쪽수</label>
+                            <label>쪽수</label>
                             <div class="card" style="padding: 5px;">
                                 <div class="row">
                                     <div class="col-lg-2 col-3">
                                         <input type="number" class="form-control" name="pageNumber"
-                                        value=${finalForm.pageNumber} ${finalFormExists ? 'readonly' : ''} 
+                                        value=${finalForm.pageNumber} ${finalFormExists ? 'readonly' : ''}
                                         id="pageNumber" style="width: 100px" required>
                                     </div>
                                     <div class="col align-self-center">
@@ -84,7 +82,7 @@
                         <div class="form-group">
                             <label>최종보고서 파일</label>
                             <div class="card" style="padding: 5px;">
-                                <input id="inputFile" type="file" name="finalFormUploadFile">
+                                <input id="inputFile" type="file" name="finalFormUploadFile" required>
                             </div>
                         </div>
                     </div>

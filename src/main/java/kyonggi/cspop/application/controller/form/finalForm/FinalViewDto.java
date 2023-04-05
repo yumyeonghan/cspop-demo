@@ -18,7 +18,7 @@ public class FinalViewDto {
 
     private Integer pageNumber;
 
-    private FinalFormUploadFile file;
+    private FinalFormUploadFile finalFormUploadFile;
 
 
     public FinalViewDto(FinalForm finalForm) {
@@ -26,7 +26,8 @@ public class FinalViewDto {
         this.id = finalForm.getId();
         this.title = finalForm.getTitle();
         this.division = finalForm.getDivision();
+        this.qualification = finalForm.getQualification();
         this.pageNumber = finalForm.getPageNumber();
-        this.file = finalForm.getFinalFormUploadFile();
+        this.finalFormUploadFile = finalForm.getFinalFormUploadFile();
     }
 }
