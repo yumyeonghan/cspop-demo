@@ -19,10 +19,10 @@ function clickFinalFormModify(event) {
     console.log(event);
 }
 
-function getFinalForm() {
+function getFinalForm(id) {
     $.ajax({
         type: 'get',    
-        url: '/api/userStatus/modifyFinalForm?finalFormId=1',
+        url: '/api/userStatus/modifyFinalForm?finalFormId='+id,
         
         success: (data) => {
             console.log(data);
