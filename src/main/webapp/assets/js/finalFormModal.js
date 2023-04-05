@@ -21,10 +21,11 @@ function clickFinalFormModify(event) {
 function getFinalForm() {
     $.ajax({
         type: 'get',    
-        url: '/api/userStatus/modifyFinalForm/1',
+        url: '/api/userStatus/modifyFinalForm?finalFormId=1',
         
         success: (data) => {
             console.log(data);
+            $('#finalFormModify .modal-body').append(data);
         },
         error: (error) => {
             console.log(error);
