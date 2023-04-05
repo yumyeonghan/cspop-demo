@@ -93,7 +93,7 @@
                                 <input type="hidden" name="department" value=${userDetail.department}>
                                 <input type="hidden" name="graduationDate" value=${userDetail.graduationDate}>
                                 <input type="hidden" name="advisor" value="${userDetail.advisor}">
-                                <input type="hidden" name="qualification" value="${userDetail.qualification}">
+                                <!-- <input type="hidden" name="qualification" value="${userDetail.qualification}"> -->
                                 <div class="form-group">
                                     <label for="title" class="custom-label">제목</label>
                                     <div class="card" style="padding: 5px;">
