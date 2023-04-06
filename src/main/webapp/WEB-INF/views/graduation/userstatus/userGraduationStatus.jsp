@@ -38,6 +38,7 @@
             background: white;
         }
     </style>
+    <script src="../../../../assets/js/modal/submitFormModal.js"></script>
     <script src="../../../../assets/js/modal/proposalFormModal.js"></script>
     <script src="../../../../assets/js/modal/interimFormModal.js"></script>
     <script src="../../../../assets/js/modal/otherFormModal.js"></script>
@@ -196,6 +197,29 @@
                                         </div>
                                         <p>단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}</p>
                                         <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>
+                                        <div>
+                                            <button class="btn btn-primary btn-sm float-right"
+                                                    data-bs-toggle="modal" data-bs-target="#submitFormModify" onclick="getSubmitForm(${userSubmitFormInfo.id})">신청접수 모달</button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="submitFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form id="submitFormModal">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h3>신청접수</h3>
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                                <button type="button" class="btn btn-primary" onclick="clickSubmitFormModify(event, ${userSubmitFormInfo.id})">수정</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div>
                                             <button class="btn btn-primary btn-sm float-right"
                                                     data-bs-toggle="modal" data-bs-target="#proposalFormModify" onclick="getProposalForm(${userProposalFormInfo.id})">제안서 모달</button>
