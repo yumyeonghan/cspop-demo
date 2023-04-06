@@ -1,5 +1,6 @@
 package kyonggi.cspop.domain.form.submitform;
 
+import kyonggi.cspop.application.controller.form.submitform.SubmitFormDto;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.form.submitform.enums.GraduationRequirements;
 import kyonggi.cspop.domain.users.Users;
@@ -60,5 +61,14 @@ public class SubmitForm extends BaseEntity {
             submitForm.graduationRequirements = GraduationRequirements.THESIS;
         }
         return submitForm;
+    }
+
+    public void updateSubmitForm(String graduationRequirements) {
+        if (graduationRequirements.equals("기타자격")) {
+            this.graduationRequirements = GraduationRequirements.Other_Qualifications;
+        }
+        else{
+            this.graduationRequirements = GraduationRequirements.THESIS;
+        }
     }
 }

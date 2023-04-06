@@ -1,7 +1,12 @@
 package kyonggi.cspop.domain.form.otherform.service;
 
+import kyonggi.cspop.application.controller.form.finalForm.FinalFormDto;
+import kyonggi.cspop.application.controller.form.otherform.OtherFormDto;
+import kyonggi.cspop.domain.form.finalform.FinalForm;
 import kyonggi.cspop.domain.form.otherform.OtherForm;
 import kyonggi.cspop.domain.form.otherform.repository.OtherFormRepository;
+import kyonggi.cspop.domain.uploadfile.FinalFormUploadFile;
+import kyonggi.cspop.domain.uploadfile.OtherFormUploadFile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,9 +18,23 @@ public class OtherFormService {
 
     private final OtherFormRepository otherFormRepository;
 
+    public OtherForm findOtherForm(Long id){
+
+        return otherFormRepository.findById(id).get();
+    }
     @Transactional
     public Long saveOtherForm(OtherForm otherForm) {
         OtherForm saveForm = otherFormRepository.save(otherForm);
         return saveForm.getId();
+    }
+
+    @Transactional
+    public void updateUserOtherForm(Long id, OtherFormDto otherFormDto, OtherFormUploadFile file) {
+        OtherForm otherForm = otherFormRepository.findById(id).get();
+        otherForm.updateOtherForm(otherFormDto.getTitle(), otherForm.getDivision(), otherForm.getText());
+
+        if (otherFormDto.getOtherFormUploadFile() != null) {
+            otherForm.updateFile(file);
+        }
     }
 }

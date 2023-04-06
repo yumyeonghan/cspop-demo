@@ -1,5 +1,6 @@
 package kyonggi.cspop.domain.form.proposalform;
 
+import kyonggi.cspop.application.controller.form.proposalform.ProposalFormDto;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.users.Users;
 import lombok.AccessLevel;
@@ -68,6 +69,20 @@ public class ProposalForm extends BaseEntity {
         proposalForm.text = text;
 
         return proposalForm;
+    }
+
+    public void updateProposalForm(String title, String division, String keyword, String text) {
+
+        this.title = title;
+
+        if (division.equals("option1")) {
+            this.division = "구현논문";
+        } else {
+            this.division = "조사(이론)논문";
+        }
+
+        this.keyword = keyword;
+        this.text = text;
     }
 
 }

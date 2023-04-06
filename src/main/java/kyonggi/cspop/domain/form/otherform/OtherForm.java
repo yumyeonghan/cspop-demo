@@ -1,5 +1,6 @@
 package kyonggi.cspop.domain.form.otherform;
 
+import kyonggi.cspop.application.controller.form.otherform.OtherFormDto;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.uploadfile.OtherFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
@@ -60,5 +61,22 @@ public class OtherForm extends BaseEntity {
         otherForm.otherFormUploadFile = uploadFile;
 
         return otherForm;
+    }
+
+    public void updateOtherForm(String title, String division, String text) {
+
+        this.title = title;
+
+        if (division.equals("option1")) {
+            this.division = "구현논문";
+        } else {
+            this.division = "조사(이론)논문";
+        }
+
+        this.text = text;
+    }
+
+    public void updateFile(OtherFormUploadFile otherFormUploadFile) {
+        this.otherFormUploadFile = otherFormUploadFile;
     }
 }

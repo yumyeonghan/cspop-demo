@@ -232,7 +232,7 @@
                                                 <h3>제안서</h3>
                                               </div>
                                               <div class="modal-body">
-                                                <%@include file="../form/proposalFormModal.jsp" %>
+                                                <%@include file="../form/modal/proposalFormModal.jsp" %>
                                               </div>
                                               <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>

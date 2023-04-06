@@ -14,6 +14,10 @@ public class SubmitFormService {
 
     private final SubmitFormRepository submitFormRepository;
 
+    public SubmitForm findSubmitForm(Long id) {
+        return submitFormRepository.findById(id).get();
+    }
+
     @Transactional
     public Long saveSubmitForm(SubmitForm submitForm) {
         SubmitForm saveForm = submitFormRepository.save(submitForm);
@@ -21,6 +25,8 @@ public class SubmitFormService {
     }
 
     @Transactional
-    public void updateSubmitForm(Long id, SubmitFormDto submitFormDto) {
+    public void updateUserSubmitForm(Long id, SubmitFormDto submitFormDto) {
+        SubmitForm submitForm = submitFormRepository.findById(id).get();
+        submitForm.updateSubmitForm(submitFormDto.getQualification());
     }
 }

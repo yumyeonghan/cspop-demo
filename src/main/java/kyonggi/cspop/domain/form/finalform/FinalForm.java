@@ -1,18 +1,19 @@
 package kyonggi.cspop.domain.form.finalform;
 
-import kyonggi.cspop.application.controller.form.finalForm.FinalFormDto;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.uploadfile.FinalFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@DynamicUpdate
 public class FinalForm extends BaseEntity {
 
     @Id
@@ -73,31 +74,28 @@ public class FinalForm extends BaseEntity {
         return finalForm;
     }
 
-    public void updateFinalForm(String title,String division,String qualification,Integer pageNumber) {
+    public void updateFinalForm(String title, String division, String qualification, Integer pageNumber) {
 
         this.title = title;
 
         if (division.equals("option1")) {
             this.division = "구현논문";
-        }
-        else {
+        } else {
             this.division = "조사(이론)논문";
         }
 
         if (qualification.equals("option1")) {
             this.qualification = "논문양식파일사용";
-        }
-        else if (qualification.equals("option2")) {
+        } else if (qualification.equals("option2")) {
             this.qualification = "목차,서론,본론,결론,참고문헌 포함";
-        }
-        else{
+        } else {
             this.qualification = "본인이 직접 작성한 파일임을 확인함";
         }
 
         this.pageNumber = pageNumber;
     }
 
-    public void updateFile(FinalFormUploadFile file) {
-        this.finalFormUploadFile = file;
+    public void updateFile(FinalFormUploadFile finalFormUploadFile) {
+        this.finalFormUploadFile = finalFormUploadFile;
     }
 }

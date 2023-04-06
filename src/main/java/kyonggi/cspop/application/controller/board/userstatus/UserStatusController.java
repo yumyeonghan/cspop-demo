@@ -5,11 +5,26 @@ import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserScheduleDto;
 import kyonggi.cspop.application.controller.form.finalForm.FinalFormDto;
 import kyonggi.cspop.application.controller.form.finalForm.FinalViewDto;
+import kyonggi.cspop.application.controller.form.interimForm.InterimFormDto;
+import kyonggi.cspop.application.controller.form.interimForm.InterimViewDto;
+import kyonggi.cspop.application.controller.form.otherform.OtherFormDto;
+import kyonggi.cspop.application.controller.form.otherform.OtherViewDto;
+import kyonggi.cspop.application.controller.form.proposalform.ProposalFormDto;
+import kyonggi.cspop.application.controller.form.proposalform.ProposalViewDto;
+import kyonggi.cspop.application.controller.form.submitform.SubmitFormDto;
+import kyonggi.cspop.application.controller.form.submitform.SubmitViewDto;
 import kyonggi.cspop.application.util.FileStore;
 import kyonggi.cspop.domain.board.excel.ExcelBoard;
 import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
 import kyonggi.cspop.domain.form.finalform.FinalForm;
 import kyonggi.cspop.domain.form.finalform.service.FinalFormService;
+import kyonggi.cspop.domain.form.interimform.InterimForm;
+import kyonggi.cspop.domain.form.interimform.service.InterimFormService;
+import kyonggi.cspop.domain.form.otherform.OtherForm;
+import kyonggi.cspop.domain.form.otherform.service.OtherFormService;
+import kyonggi.cspop.domain.form.proposalform.ProposalForm;
+import kyonggi.cspop.domain.form.proposalform.service.ProposalFormService;
+import kyonggi.cspop.domain.form.submitform.SubmitForm;
 import kyonggi.cspop.domain.form.submitform.enums.GraduationRequirements;
 import kyonggi.cspop.domain.form.submitform.service.SubmitFormService;
 import kyonggi.cspop.domain.login.dto.UserSessionDto;
@@ -17,6 +32,8 @@ import kyonggi.cspop.domain.schedule.Schedules;
 import kyonggi.cspop.domain.schedule.enums.Step;
 import kyonggi.cspop.domain.schedule.service.ScheduleService;
 import kyonggi.cspop.domain.uploadfile.FinalFormUploadFile;
+import kyonggi.cspop.domain.uploadfile.InterimFormUploadFile;
+import kyonggi.cspop.domain.uploadfile.OtherFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.service.UsersService;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +61,9 @@ public class UserStatusController {
     private final ScheduleService scheduleService;
 
     private final SubmitFormService submitFormService;
-
+    private final ProposalFormService proposalFormService;
+    private final InterimFormService interimFormService;
+    private final OtherFormService otherFormService;
     private final FinalFormService finalFormService;
 
     private final FileStore fileStore;
@@ -120,7 +139,24 @@ public class UserStatusController {
         model.addAttribute("notApprovalList", notApprovalList);
 
 
-        //파라미터 넘기는 로직
+        //파라미터 넘기는 로직(유저의 폼 별 아이디 정보)
+
+        if (!Objects.isNull(user.getSubmitForm())) {
+            SubmitForm submitForm = submitFormService.findSubmitForm(user.getSubmitForm().getId());
+            model.addAttribute("userSubmitFormInfo", new SubmitViewDto(submitForm));
+        }
+        if (!Objects.isNull(user.getProposalForm())) {
+            ProposalForm proposalForm = proposalFormService.findProposalForm(user.getProposalForm().getId());
+            model.addAttribute("userProposalFormInfo", new ProposalViewDto(proposalForm));
+        }
+        if (!Objects.isNull(user.getInterimForm())) {
+            InterimForm interimForm = interimFormService.findInterimForm(user.getInterimForm().getId());
+            model.addAttribute("userInterimFormInfo", new InterimViewDto(interimForm));
+        }
+        if (!Objects.isNull(user.getOtherForm())) {
+            OtherForm otherForm = otherFormService.findOtherForm(user.getOtherForm().getId());
+            model.addAttribute("userOtherFormInfo", new OtherViewDto(otherForm));
+        }
         if (!Objects.isNull(user.getFinalForm())) {
             FinalForm finalFormId = finalFormService.findFinalForm(user.getFinalForm().getId());
             model.addAttribute("userFinalFormInfo", new FinalViewDto(finalFormId));
@@ -129,22 +165,79 @@ public class UserStatusController {
         return "graduation/userstatus/userGraduationStatus";
     }
 
+    //AJAX 통신용 API 확인 뷰
 
-    //AJAX 통신용 API 최종보고서 확인 뷰
+    @GetMapping("/modifySubmitForm")
+    public String SubmitForm(@RequestParam("submitFormId") Long submitFormId, Model model) {
+        SubmitForm submitForm = submitFormService.findSubmitForm(submitFormId);
+        model.addAttribute("submitForm", new SubmitViewDto(submitForm));
+        return "graduation/form/submitFormModal";
+    }
+
+    @GetMapping("/modifyProposalForm")
+    public String ProposalForm(@RequestParam("proposalFormId") Long proposalFormId, Model model) {
+        ProposalForm proposalForm = proposalFormService.findProposalForm(proposalFormId);
+        model.addAttribute("proposalForm", new ProposalViewDto(proposalForm));
+        return "graduation/form/modal/proposalFormModal";
+    }
+
+    @GetMapping("/modifyInterimForm")
+    public String InterimForm(@RequestParam("interimFormId") Long interimFormId, Model model) {
+        InterimForm interimForm = interimFormService.findInterimForm(interimFormId);
+        model.addAttribute("interimForm", new InterimViewDto(interimForm));
+        return "graduation/form/interimFormModal";
+    }
+
+    @GetMapping("/modifyOtherForm")
+    public String OtherForm(@RequestParam("otherFormId") Long otherFormId, Model model) {
+        OtherForm otherForm = otherFormService.findOtherForm(otherFormId);
+        model.addAttribute("otherForm", new OtherViewDto(otherForm));
+        return "graduation/form/otherFormModal";
+    }
     @GetMapping("/modifyFinalForm")
     public String FinalForm(@RequestParam("finalFormId") Long finalFormId, Model model) {
 
         FinalForm finalForm = finalFormService.findFinalForm(finalFormId);
         model.addAttribute("finalForm", new FinalViewDto(finalForm));
-        return "graduation/form/finalFormModal";
+        return "graduation/form/modal/finalFormModal";
     }
 
     //수정 로직
+    @PostMapping("/modifySubmitForm")
+    public ResponseEntity<Void> modifySubmitForm(@RequestParam("submitFormId") Long submitFormId, @Validated @ModelAttribute SubmitFormDto submitFormDto){
+
+        submitFormService.updateUserSubmitForm(submitFormId, submitFormDto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/modifyProposalForm")
+    public ResponseEntity<Void> modifyProposalForm(@RequestParam("proposalFormId") Long proposalFormId, @Validated @ModelAttribute ProposalFormDto proposalFormDto) {
+
+        proposalFormService.updateUserProposalForm(proposalFormId, proposalFormDto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/modifyInterimForm")
+    public ResponseEntity<Void> modifyInterimForm(@RequestParam("interimFormId") Long interimFormId, @Validated @ModelAttribute InterimFormDto interimFormDto) throws IOException {
+
+        InterimFormUploadFile interimFormUploadFile = fileStore.storeInterimFile(interimFormDto.getInterimFormUploadFile());
+        interimFormService.updateUserInterimForm(interimFormId, interimFormDto, interimFormUploadFile);
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping("/modifyFinalForm")
     public ResponseEntity<Void> modifyFinalForm(@RequestParam("finalFormId") Long finalFormId, @Validated @ModelAttribute FinalFormDto finalFormDto) throws IOException {
 
         FinalFormUploadFile finalFormUploadFile = fileStore.storeFinalFile(finalFormDto.getFinalFormUploadFile());
         finalFormService.updateUserFinalForm(finalFormId, finalFormDto, finalFormUploadFile);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/modifyOtherForm")
+    public ResponseEntity<Void> modifyOtherForm(@RequestParam("otherFormId") Long otherFormId, @Validated @ModelAttribute OtherFormDto otherFormDto) throws IOException {
+
+        OtherFormUploadFile otherFormUploadFile = fileStore.storeOtherFile(otherFormDto.getOtherFormUploadFile());
+        otherFormService.updateUserOtherForm(otherFormId, otherFormDto, otherFormUploadFile);
         return ResponseEntity.noContent().build();
     }
 }

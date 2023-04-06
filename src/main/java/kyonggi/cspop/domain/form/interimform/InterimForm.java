@@ -1,17 +1,20 @@
 package kyonggi.cspop.domain.form.interimform;
 
+import kyonggi.cspop.application.controller.form.interimForm.InterimFormDto;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.uploadfile.InterimFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@DynamicUpdate
 public class InterimForm extends BaseEntity {
 
     @Id
@@ -56,5 +59,22 @@ public class InterimForm extends BaseEntity {
         interimForm.interimFormUploadFile = uploadFile;
 
         return interimForm;
+    }
+
+    public void updateInterimForm(String title, String division, String text, String plan) {
+
+        this.title = title;
+
+        if (division.equals("option1")) {
+            this.division = "구현논문";
+        } else {
+            this.division = "조사(이론)논문";
+        }
+        this.text = text;
+        this.plan = plan;
+    }
+
+    public void updateFile(InterimFormUploadFile interimFormUploadFile) {
+        this.interimFormUploadFile = interimFormUploadFile;
     }
 }
