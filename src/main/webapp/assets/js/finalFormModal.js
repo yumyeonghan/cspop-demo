@@ -53,7 +53,7 @@ function finalFormModalSubmit(target, id) {
                 console.log(data);
                 getFinalForm();
                 target.innerHTML='수정'
-                target.setAttribute('onclick','clickFinalFormModify(event)');
+                target.setAttribute('onclick',`clickFinalFormModify(event, ${id})`);
                 // location.reload(); // 새로고침
             },
             error: (error) => {
