@@ -10,6 +10,7 @@ public class SubmitViewDto {
     private String qualification;
 
     public SubmitViewDto(SubmitForm submitForm) {
+        this.id = submitForm.getId();
         this.qualification = submitForm.getGraduationRequirements().getGraduationRequirementsToString();
     }
 }
