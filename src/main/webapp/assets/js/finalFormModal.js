@@ -1,4 +1,4 @@
-function clickFinalFormModify(event) {
+function clickFinalFormModify(event, id) {
     let inputsInFinalForm = $('#finalFormModal input');
     for (let i = 0; i < inputsInFinalForm.length; i++) {
         if(inputsInFinalForm[i].attributes.hasOwnProperty('disabled')) {
@@ -12,9 +12,7 @@ function clickFinalFormModify(event) {
     }
     console.log(inputsInFinalForm);
     event.target.innerHTML = '제출';
-    // event.target.type = 'submit';
-    // event.target.removeAttribute('onclick');
-    event.target.setAttribute('onclick','finalFormModalSubmit(this)');
+    event.target.setAttribute('onclick',`finalFormModalSubmit(this, ${id})`);
     event.preventDefault();
     console.log(event);
 }
@@ -36,7 +34,7 @@ function getFinalForm(id) {
     });
 }
 
-function finalFormModalSubmit(target) {
+function finalFormModalSubmit(target, id) {
     
     if(confirm('제출 하시겠습니까?')){
         // Get form         
@@ -46,7 +44,7 @@ function finalFormModalSubmit(target) {
         $.ajax({
             type: 'post',
             enctype: 'multipart/form-data',
-            url: '/api/userStatus/modifyFinalForm?finalFormId=1',
+            url: '/api/userStatus/modifyFinalForm?finalFormId='+id,
             data: data,
             processData: false,    
             contentType: false,

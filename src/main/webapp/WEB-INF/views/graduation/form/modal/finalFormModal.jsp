@@ -9,16 +9,8 @@
         </c:if>
     </c:forEach>
     <div class="row">
-        <!-- <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-12 mb-8"> -->
             <div class="row">
-                <!-- <form id="finalFormModal" method="POST" action="/api/finalForm" enctype="multipart/form-data" onsubmit="return confirm('제출 하시겠습니까?')"> -->
                     <div class="card" style="padding: 10px;">
-                        <!-- <input type="hidden" name="studentId" value=${userDetail.studentId}>
-                        <input type="hidden" name="studentName" value=${userDetail.studentName}>
-                        <input type="hidden" name="department" value=${userDetail.department}>
-                        <input type="hidden" name="graduationDate" value=${userDetail.graduationDate}>
-                        <input type="hidden" name="advisor" value="${userDetail.advisor}">
-                        <input type="hidden" name="qualification" value="${userDetail.qualification}"> -->
                         <div class="form-group">
                             <label for="title" class="custom-label">제목</label>
                             <div class="card" style="padding: 5px;">
@@ -91,19 +83,5 @@
                         <input type="text" class="form-control" name="sign" id="sign" placeholder="본인의 이름을 입력"
                             style="display: inline-block; width: 200px;">
                         <br>
-                        <!-- <c:if test="${finalFormExists}">
-                            <button type="button" onclick="clickFinalFormModify(event)" class="btn btn-lg btn-primary"
-                                style="width: 13%; height: 10%;">수정</button>
-                        </c:if>
-                        <c:if test="${!finalFormExists}">
-                            <button type="submit" class="btn btn-lg btn-primary"
-                                style="width: 13%; height: 10%;">제출</button>
-                        </c:if> -->
-                        <!-- <button type="button" class="btn btn-lg btn-secondary"
-                            style="width: 13%; height: 10%;">취소</button> -->
-                    </div>
-                <!-- </form> -->
-            </div>
-        <!-- </div> -->
-        
+            </div>       
 </div>
