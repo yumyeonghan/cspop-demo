@@ -28,7 +28,7 @@ public class OtherFormService {
     @Transactional
     public void updateUserOtherForm(Long id, OtherFormDto otherFormDto, OtherFormUploadFile file) {
         OtherForm otherForm = otherFormRepository.findById(id).get();
-        otherForm.updateOtherForm(otherFormDto.getTitle(), otherForm.getDivision(), otherForm.getText());
+        otherForm.updateOtherForm(otherFormDto.getTitle(), otherFormDto.getDivision(), otherFormDto.getText());
 
         if (otherFormDto.getOtherFormUploadFile() != null) {
             otherForm.updateFile(file);

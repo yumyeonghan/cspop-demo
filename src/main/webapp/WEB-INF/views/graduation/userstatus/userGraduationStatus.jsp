@@ -38,7 +38,10 @@
             background: white;
         }
     </style>
-    <script src="../../../../assets/js/finalFormModal.js"></script>
+    <script src="../../../../assets/js/modal/proposalFormModal.js"></script>
+    <script src="../../../../assets/js/modal/interimFormModal.js"></script>
+    <script src="../../../../assets/js/modal/otherFormModal.js"></script>
+    <script src="../../../../assets/js/modal/finalFormModal.js"></script>
 </head>
 <%@include file="../../common/sessionController.jsp" %>
 <body>
@@ -194,53 +197,99 @@
                                         <p>단계별 과정이 모두 통과하면 최종통과여부: ${finalPass}</p>
                                         <p>제출 버튼 막을 미승인 리스트: ${notApprovalList}</p>
                                         <div>
+                                            <button class="btn btn-primary btn-sm float-right"
+                                                    data-bs-toggle="modal" data-bs-target="#proposalFormModify" onclick="getProposalForm(${userProposalFormInfo.id})">제안서 모달</button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="proposalFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form id="proposalFormModal">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h3>제안서</h3>
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                                <button type="button" class="btn btn-primary" onclick="clickProposalFormModify(event, ${userProposalFormInfo.id})">수정</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-primary btn-sm float-right"
+                                                    data-bs-toggle="modal" data-bs-target="#interimFormModify" onclick="getInterimForm(${userInterimFormInfo.id})">중간 보고서 모달</button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="interimFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form id="interimFormModal">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h3>중간 보고서</h3>
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                                <button type="button" class="btn btn-primary" onclick="clickInterimFormModify(event, ${userInterimFormInfo.id})">수정</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
                                         <button class="btn btn-primary btn-sm float-right"
-                                        data-bs-toggle="modal" data-bs-target="#finalFormModify" onclick="getFinalForm(${userFinalFormInfo.id})">최종 보고서 모달</button>
-                                        <button class="btn btn-primary btn-sm" onclick="getFinalForm()">최종보고서 get ajax 테스트</button>
+                                        data-bs-toggle="modal" data-bs-target="#otherFormModify" onclick="getOtherForm(${userOtherFormInfo.id})">기타 자격 모달</button>
                                         <!-- Modal -->
-                                        <div class="modal fade" id="finalFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal fade" id="otherFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                             <div class="modal-dialog">
-                                                <form id="finalFormModal">
+                                                <form id="otherFormModal">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h3>최종 보고서</h3>
+                                                            <h3>기타 자격</h3>
                                                         </div>
                                                         <div class="modal-body">
                                                 
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                                            <button type="button" class="btn btn-primary" onclick="clickFinalFormModify(event, ${userFinalFormInfo.id})">수정</button>
+                                                            <button type="button" class="btn btn-primary" onclick="clickOtherFormModify(event, ${userOtherFormInfo.id})">수정</button>
                                                         </div>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                         </div>
-                                        <br>
-                                        <br>
                                         <div>
-                                        <button class="btn btn-primary btn-sm float-right"
-                                        data-bs-toggle="modal" data-bs-target="#proposalFormModify">제안서 모달(js로연동해야됨)</button>
-                                        <button class="btn btn-primary btn-sm" onclick="getProposalForm()">제안서 get ajax 테스트</button>
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="proposalFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                          <div class="modal-dialog">
-                                            <div class="modal-content">
-                                              <div class="modal-header">
-                                                <h3>제안서</h3>
-                                              </div>
-                                              <div class="modal-body">
-                                                <%@include file="../form/modal/proposalFormModal.jsp" %>
-                                              </div>
-                                              <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                                <button type="button" class="btn btn-primary" onclick="clickProposalFormModify(event)">수정</button>
-                                              </div>
+                                            <button class="btn btn-primary btn-sm float-right"
+                                                    data-bs-toggle="modal" data-bs-target="#finalFormModify" onclick="getFinalForm(${userFinalFormInfo.id})">최종 보고서 모달</button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="finalFormModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form id="finalFormModal">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h3>최종 보고서</h3>
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                                <button type="button" class="btn btn-primary" onclick="clickFinalFormModify(event, ${userFinalFormInfo.id})">수정</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
-                                          </div>
                                         </div>
-                                        </div>            
+                                        <br>
+                                        <br>
                                     </div>
                                 </div>
                                 <!-- sidebar -->

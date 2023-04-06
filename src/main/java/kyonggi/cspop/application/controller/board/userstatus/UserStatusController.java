@@ -171,7 +171,7 @@ public class UserStatusController {
     public String SubmitForm(@RequestParam("submitFormId") Long submitFormId, Model model) {
         SubmitForm submitForm = submitFormService.findSubmitForm(submitFormId);
         model.addAttribute("submitForm", new SubmitViewDto(submitForm));
-        return "graduation/form/submitFormModal";
+        return "graduation/form/modal/submitFormModal";
     }
 
     @GetMapping("/modifyProposalForm")
@@ -185,14 +185,14 @@ public class UserStatusController {
     public String InterimForm(@RequestParam("interimFormId") Long interimFormId, Model model) {
         InterimForm interimForm = interimFormService.findInterimForm(interimFormId);
         model.addAttribute("interimForm", new InterimViewDto(interimForm));
-        return "graduation/form/interimFormModal";
+        return "graduation/form/modal/InterimFormModal";
     }
 
     @GetMapping("/modifyOtherForm")
     public String OtherForm(@RequestParam("otherFormId") Long otherFormId, Model model) {
         OtherForm otherForm = otherFormService.findOtherForm(otherFormId);
         model.addAttribute("otherForm", new OtherViewDto(otherForm));
-        return "graduation/form/otherFormModal";
+        return "graduation/form/modal/otherFormModal";
     }
     @GetMapping("/modifyFinalForm")
     public String FinalForm(@RequestParam("finalFormId") Long finalFormId, Model model) {

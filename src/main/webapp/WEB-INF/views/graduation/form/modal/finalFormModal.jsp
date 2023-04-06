@@ -83,5 +83,6 @@
                         <input type="text" class="form-control" name="sign" id="sign" placeholder="본인의 이름을 입력"
                             style="display: inline-block; width: 200px;">
                         <br>
-            </div>       
+                    </div>
+            </div>
 </div>
