@@ -1,11 +1,8 @@
 package kyonggi.cspop.domain.form.otherform.service;
 
-import kyonggi.cspop.application.controller.form.finalForm.FinalFormDto;
 import kyonggi.cspop.application.controller.form.otherform.OtherFormDto;
-import kyonggi.cspop.domain.form.finalform.FinalForm;
 import kyonggi.cspop.domain.form.otherform.OtherForm;
 import kyonggi.cspop.domain.form.otherform.repository.OtherFormRepository;
-import kyonggi.cspop.domain.uploadfile.FinalFormUploadFile;
 import kyonggi.cspop.domain.uploadfile.OtherFormUploadFile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

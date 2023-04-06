@@ -1,6 +1,5 @@
 package kyonggi.cspop.domain.form.interimform;
 
-import kyonggi.cspop.application.controller.form.interimForm.InterimFormDto;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.uploadfile.InterimFormUploadFile;
 import kyonggi.cspop.domain.users.Users;

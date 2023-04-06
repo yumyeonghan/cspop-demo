@@ -1,6 +1,5 @@
 package kyonggi.cspop.domain.form.submitform;
 
-import kyonggi.cspop.application.controller.form.submitform.SubmitFormDto;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.form.submitform.enums.GraduationRequirements;
 import kyonggi.cspop.domain.users.Users;

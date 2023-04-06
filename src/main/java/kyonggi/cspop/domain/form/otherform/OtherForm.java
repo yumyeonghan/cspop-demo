@@ -1,17 +1,19 @@
 package kyonggi.cspop.domain.form.otherform;
 
-import kyonggi.cspop.application.controller.form.otherform.OtherFormDto;
+
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.uploadfile.OtherFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@DynamicUpdate
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OtherForm extends BaseEntity {
 
