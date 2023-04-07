@@ -35,6 +35,7 @@ public class ProposalFormController {
     public String saveProposalForm(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, Model model) {
         Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
         Optional<ExcelBoard> excelByStudentId = excelBoardService.findExcelByStudentId(user.getStudentId());
+        System.out.println("excelByStudentId.get().getCapstoneCompletion() = " + excelByStudentId.get().getCapstoneCompletion());
         String advisor = excelByStudentId.get().getProfessorName();
         UserDetailDto userDetailDto = new UserDetailDto(
                 user.getStudentId(),
@@ -42,7 +43,8 @@ public class ProposalFormController {
                 user.getStudentName(),
                 user.getDepartment(),
                 excelByStudentId.get().getProfessorName(),
-                user.getSubmitForm());
+                user.getSubmitForm(),
+                excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false);
         model.addAttribute("userDetail", userDetailDto);
         return "graduation/form/proposalForm";
     }

@@ -24,7 +24,6 @@ public class UserDetailDto {
     private boolean otherQualifications;
     private boolean thesis;
 
-
     public UserDetailDto(String studentId,
                          String studentName,
                          String department,
@@ -57,7 +56,7 @@ public class UserDetailDto {
         this.department = department;
     }
 
-    public UserDetailDto(String studentId, String graduationDate, String studentName, String department, String advisor, SubmitForm submitForm) {
+    public UserDetailDto(String studentId, String graduationDate, String studentName, String department, String advisor, SubmitForm submitForm, boolean capstoneCompletionStatus) {
         this.studentId = studentId;
         this.graduationDate = graduationDate;
         this.studentName = studentName;
@@ -69,5 +68,7 @@ public class UserDetailDto {
         } else {
             this.qualification = "기타자격";
         }
+
+        this.capstoneCompletionStatus = capstoneCompletionStatus;
     }
 }

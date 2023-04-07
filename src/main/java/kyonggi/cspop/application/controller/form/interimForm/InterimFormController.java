@@ -39,13 +39,7 @@ public class InterimFormController {
     public String saveInterimForm(@SessionAttribute(name = SessionFactory.CSPOP_SESSION_KEY, required = false) UserSessionDto userSessionDto, Model model) {
         Users user = usersService.findUserByStudentId(userSessionDto.getStudentId());
         Optional<ExcelBoard> excelByStudentId = excelBoardService.findExcelByStudentId(user.getStudentId());
-        UserDetailDto userDetailDto = new UserDetailDto(
-                user.getStudentId(),
-                excelByStudentId.get().getGraduationDate(),
-                user.getStudentName(),
-                user.getDepartment(),
-                excelByStudentId.get().getProfessorName(),
-                user.getSubmitForm());
+        UserDetailDto userDetailDto = new UserDetailDto(user.getStudentId(), excelByStudentId.get().getGraduationDate(), user.getStudentName(), user.getDepartment(), excelByStudentId.get().getProfessorName(), user.getSubmitForm(), excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false);
 
         model.addAttribute("userDetail", userDetailDto);
         return "graduation/form/interimForm";
@@ -60,7 +54,7 @@ public class InterimFormController {
         InterimFormUploadFile interimFormUploadFile = fileStore.storeInterimFile(interimFormDto.getInterimFormUploadFile());
 
         //중간 보고서 폼 등록
-        InterimForm interimForm = InterimForm.createInterimForm(interimFormDto.getTitle(), interimFormDto.getDivision(), interimFormDto.getText(), interimFormDto.getPlan(),interimFormUploadFile);
+        InterimForm interimForm = InterimForm.createInterimForm(interimFormDto.getTitle(), interimFormDto.getDivision(), interimFormDto.getText(), interimFormDto.getPlan(), interimFormUploadFile);
         Long interimFormId = interimFormService.saveInterimForm(interimForm);
 
         //유저 테이블 수정
