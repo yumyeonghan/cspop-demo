@@ -51,7 +51,7 @@ function otherFormModalSubmit(target, id) {
             cache:false,
             success: (data) => {
                 console.log(data);
-                getOtherForm();
+                getOtherForm(id);
                 target.innerHTML='수정'
                 target.setAttribute('onclick',`clickOtherFormModify(event, ${id})`);
                 // location.reload(); // 새로고침

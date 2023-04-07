@@ -51,7 +51,7 @@ function interimFormModalSubmit(target, id) {
             cache:false,
             success: (data) => {
                 console.log(data);
-                getInterimForm();
+                getInterimForm(id);
                 target.innerHTML='수정'
                 target.setAttribute('onclick',`clickInterimFormModify(event, ${id})`);
                 // location.reload(); // 새로고침

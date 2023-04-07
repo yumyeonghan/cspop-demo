@@ -51,7 +51,7 @@ function proposalFormModalSubmit(target, id) {
             cache:false,
             success: (data) => {
                 console.log(data);
-                getProposalForm();
+                getProposalForm(id);
                 target.innerHTML='수정'
                 target.setAttribute('onclick',`clickProposalFormModify(event, ${id})`);
                 // location.reload(); // 새로고침

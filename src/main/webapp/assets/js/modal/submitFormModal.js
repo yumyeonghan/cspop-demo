@@ -51,7 +51,7 @@ function submitFormModalSubmit(target, id) {
             cache:false,
             success: (data) => {
                 console.log(data);
-                getSubmitForm();
+                getSubmitForm(id);
                 target.innerHTML='수정'
                 target.setAttribute('onclick',`clickSubmitFormModify(event, ${id})`);
                 // location.reload(); // 새로고침
