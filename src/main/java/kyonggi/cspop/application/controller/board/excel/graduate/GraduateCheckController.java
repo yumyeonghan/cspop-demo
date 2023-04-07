@@ -1,14 +1,10 @@
 package kyonggi.cspop.application.controller.board.excel.graduate;
 
-import kyonggi.cspop.domain.board.ExcelBoard;
-import kyonggi.cspop.domain.board.dto.ExcelBoardResponseDto;
-import kyonggi.cspop.domain.board.service.ExcelBoardService;
-import kyonggi.cspop.exception.CsPopErrorCode;
-import kyonggi.cspop.exception.CsPopException;
+import kyonggi.cspop.domain.board.excel.ExcelBoard;
+import kyonggi.cspop.domain.board.excel.dto.ExcelBoardResponseDto;
+import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -20,16 +16,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 //졸업자 조회 리스트 게시판 컨트롤러
 @Controller
@@ -55,21 +46,6 @@ public class GraduateCheckController {
         model.addAttribute("endBlockPage", endBlockPage);
         model.addAttribute("graduator", allExcelBoard);
         return "graduation/graduator/graduation_list";
-    }
-
-    @PostMapping("/graduate_management.read")
-    public String upload(@RequestParam("file") MultipartFile file, Model model) throws IOException {
-        //액셀 파일인지 검사
-        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-        checkUploadFileExtension(extension);
-
-        Sheet worksheet = getWorksheet(file, extension);
-        List<ExcelBoard> graduationList = getExcelBoardList(worksheet);
-
-        excelBoardService.deleteExcelListAndUploadExcelList(graduationList);
-
-        model.addAttribute("graduator", graduationList);
-        return "redirect:./graduate_management?page=0&size=10";
     }
 
     @SneakyThrows
@@ -141,7 +117,7 @@ public class GraduateCheckController {
             row.createCell(3).setCellValue(excelBoard.getGraduationDate());
             row.createCell(4).setCellValue(excelBoard.getStep());
             row.createCell(5).setCellValue(excelBoard.getState());
-            row.createCell(6).setCellValue(excelBoard.getOtherQualifications());
+            row.createCell(6).setCellValue(excelBoard.getQualifications());
             row.createCell(7).setCellValue(excelBoard.getCapstoneCompletion());
         }
     }
@@ -172,115 +148,5 @@ public class GraduateCheckController {
         font.setFontHeightInPoints((short) 13);
         headStyle.setFont(font);
         return headStyle;
-    }
-
-    private static List<ExcelBoard> getExcelBoardList(Sheet worksheet) {
-        List<ExcelBoard> graduationList = new ArrayList<>();
-        for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
-            Row row = worksheet.getRow(i);
-
-            for (int j = 0; j < row.getLastCellNum(); j++) {
-                Cell cell = row.getCell(j);
-
-                StringBuilder row1 = new StringBuilder();
-
-                //null 또는 빈 값일 경우 대체 값 대입
-                if (cell == null) {
-                    String value = "N/A";
-                    cell = row.createCell(j);
-                    cell.setCellValue(value);
-                }
-                else if (cell.getCellType() == CellType.BLANK) {
-                    String value = "N/A";
-                    cell.setCellValue(value);
-                }
-                else if (cell.getCellType() == CellType.STRING) {
-                    String value = cell.getStringCellValue();
-                    if (value == null || value.trim().isEmpty()) {
-                        // 빈 문자열인 경우 대체 값을 설정하고 셀에 입력
-                        String replacementValue = "N/A";
-                        cell.setCellValue(replacementValue);
-                    }
-                }
-
-                else if (cell.getCellType() == CellType.NUMERIC) {
-                    double value = cell.getNumericCellValue();
-                    String stringValue = String.valueOf(value);
-
-                    //들어온 값이 빈 값
-                    if (stringValue.trim().isEmpty()) {
-                        String replacementValue = "N/A";
-                        cell.setCellValue(replacementValue);
-                    }
-
-                    //들어온 값이 빈 값이 아니고 문자가 아닐 경우 문자열로 변환 (row 1 or 7)
-                    else {
-                        if (stringValue.length() > 5) {
-                            for (int k = 0; k < stringValue.length(); k++) {
-                                char c = stringValue.charAt(k);
-
-                                if (c == '.')
-                                    continue;
-
-                                if (c >= 'A' && c <= 'Z')
-                                    break;
-
-                                row1.append(c);
-                            }
-                            //학번 뒷자리에 0이 연속해서 올 경우 있는 만큼 0 추가
-                            if (row1.length() == 8) {
-                                row1.append("0");
-                            } else if (row1.length() == 7) {
-                                row1.append("00");
-                            } else if (row1.length() == 6) {
-                                row1.append("000");
-                            }
-                            //이외의 경우는 없다고 봄
-                        }
-                        else {
-                            for (int k = 0; k < stringValue.length(); k++) {
-                                char c = stringValue.charAt(k);
-
-                                if (c == '.')
-                                    break;
-
-                                row1.append(c);
-                            }
-                        }
-                    }
-                    cell.setCellValue(row1.toString());
-                }
-            }
-            ExcelBoard data = ExcelBoard.createExcelBoard(row);
-            graduationList.add(data);
-        }
-        return graduationList;
-    }
-
-    private static Sheet getWorksheet(MultipartFile file, String extension) throws IOException {
-        Workbook workbook = getWorkbook(file, extension);
-        Sheet worksheet = Objects.requireNonNull(workbook).getSheetAt(0);
-        return worksheet;
-    }
-
-    private static Workbook getWorkbook(MultipartFile file, String extension) throws IOException {
-        Workbook workbook = null;
-
-        if (extension.equals("xlsx")) {
-            workbook = new XSSFWorkbook(file.getInputStream());
-        } else if (extension.equals("xls")) {
-            workbook = new HSSFWorkbook(file.getInputStream());
-        }
-        return workbook;
-    }
-
-    private static void checkUploadFileExtension(String extension) {
-
-        if (extension.equals("")) {
-            throw new CsPopException(CsPopErrorCode.NO_UPLOAD_FILE_EXTENSION);
-        }
-        if (!extension.equals("xlsx") && !extension.equals("xls")) {
-            throw new CsPopException(CsPopErrorCode.INVALID_UPLOAD_FILE_EXTENSION);
-        }
     }
 }

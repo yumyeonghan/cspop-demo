@@ -2,26 +2,21 @@ package kyonggi.cspop.application.controller.form.proposalform;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 @Data
 public class ProposalFormDto {
 
-    private String studentId;
-
-    private String studentName;
-
-    private String department;
-
-    private String graduationDate;
-
-    private String advisor;
-
-    private String qualification;
-
+    @NotBlank @NotNull
     private String title;
 
+    @NotBlank @NotNull
     private String division;
 
+    @NotBlank @NotNull
     private String keyword;
 
+    @NotBlank @NotNull
     private String text;
 }

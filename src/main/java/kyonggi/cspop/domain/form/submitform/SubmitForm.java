@@ -2,7 +2,6 @@ package kyonggi.cspop.domain.form.submitform;
 
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.form.submitform.enums.GraduationRequirements;
-import kyonggi.cspop.domain.uploadfile.SubmitFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -10,7 +9,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -33,10 +31,6 @@ public class SubmitForm extends BaseEntity {
     @Column(nullable = false)
     private String department;
 
-    @Comment("졸업날짜")
-    @Column(nullable = false)
-    private LocalDate graduationDate;
-
     @Comment("승인여부")
     @Column(nullable = false)
     private boolean approval;
@@ -47,16 +41,33 @@ public class SubmitForm extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "submitForm")
     private Users users;
 
-    @OneToOne(mappedBy = "submitForm", cascade = CascadeType.ALL, orphanRemoval = true)
-    private SubmitFormUploadFile submitFormUploadFile;
-
     public void designateUsers(Users users) {
         this.users = users;
     }
 
-    // 양방향 연관관계 편의 메소드
-    public void addUploadFile(SubmitFormUploadFile uploadFile) {
-        uploadFile.designateSubmitForm(this);
-        this.submitFormUploadFile = uploadFile;
+    //신청서 생성 메소드
+    public static SubmitForm createSubmitForm(String studentId, String studentName, String department, String graduationRequirements) {
+        SubmitForm submitForm = new SubmitForm();
+        submitForm.studentId = studentId;
+        submitForm.studentName = studentName;
+        submitForm.department = department;
+        submitForm.approval = false;
+
+        if (graduationRequirements.equals("기타자격")) {
+            submitForm.graduationRequirements = GraduationRequirements.Other_Qualifications;
+        }
+        else{
+            submitForm.graduationRequirements = GraduationRequirements.THESIS;
+        }
+        return submitForm;
+    }
+
+    public void updateSubmitForm(String graduationRequirements) {
+        if (graduationRequirements.equals("기타자격")) {
+            this.graduationRequirements = GraduationRequirements.Other_Qualifications;
+        }
+        else{
+            this.graduationRequirements = GraduationRequirements.THESIS;
+        }
     }
 }

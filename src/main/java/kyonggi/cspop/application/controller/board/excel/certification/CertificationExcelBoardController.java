@@ -1,8 +1,8 @@
 package kyonggi.cspop.application.controller.board.excel.certification;
 
-import kyonggi.cspop.domain.board.CertificationBoard;
-import kyonggi.cspop.domain.board.dto.CertificationBoardResponseDto;
-import kyonggi.cspop.domain.board.service.CertificationBoardService;
+import kyonggi.cspop.domain.board.certification.CertificationBoard;
+import kyonggi.cspop.domain.board.certification.dto.CertificationBoardResponseDto;
+import kyonggi.cspop.domain.board.certification.service.CertificationBoardService;
 import kyonggi.cspop.exception.CsPopErrorCode;
 import kyonggi.cspop.exception.CsPopException;
 import lombok.RequiredArgsConstructor;

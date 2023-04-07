@@ -3,6 +3,11 @@ package kyonggi.cspop.domain.users.service;
 import kyonggi.cspop.application.controller.users.dto.UserPasswordRequestDto;
 import kyonggi.cspop.application.util.crypto.BCryptoPasswordEncoder;
 import kyonggi.cspop.application.util.crypto.PasswordEncoder;
+import kyonggi.cspop.domain.form.finalform.repository.FinalFormRepository;
+import kyonggi.cspop.domain.form.interimform.repository.InterimFormRepository;
+import kyonggi.cspop.domain.form.otherform.repository.OtherFormRepository;
+import kyonggi.cspop.domain.form.proposalform.repository.ProposalFormRepository;
+import kyonggi.cspop.domain.form.submitform.repository.SubmitFormRepository;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.repository.UsersRepository;
 import kyonggi.cspop.exception.CsPopErrorCode;
@@ -24,6 +29,11 @@ public class UsersService implements UserDetailsService {
 
     private final UsersRepository usersRepository;
     private final PasswordEncoder passwordEncoder;
+    private final SubmitFormRepository submitFormRepository;
+    private final ProposalFormRepository proposalFormRepository;
+    private final InterimFormRepository interimFormRepository;
+    private final FinalFormRepository finalFormRepository;
+    private final OtherFormRepository otherFormRepository;
 
 
     @Transactional
@@ -48,6 +58,22 @@ public class UsersService implements UserDetailsService {
         Users users = usersRepository.findByStudentId(studentId).get();
         if (!Objects.isNull(users.getSubmitForm())) {
             users.getSubmitForm().getStudentId();
+        }
+
+        if (!Objects.isNull(users.getProposalForm())) {
+            users.getProposalForm().getStudentId();
+        }
+
+        if (!Objects.isNull(users.getInterimForm())) {
+            users.getInterimForm().getCreatedDate();
+        }
+
+        if (!Objects.isNull(users.getFinalForm())) {
+            users.getFinalForm().getCreatedDate();
+        }
+
+        if (!Objects.isNull(users.getOtherForm())) {
+            users.getOtherForm().getCreatedDate();
         }
         return users;
     }
@@ -88,5 +114,35 @@ public class UsersService implements UserDetailsService {
         BCryptoPasswordEncoder encoder = new BCryptoPasswordEncoder();
         String securePw = encoder.encryptPassword(userPasswordRequestDto.getStudentPassword());
         users.updatePassword(securePw);
+    }
+
+    @Transactional
+    public void updateUserBySubmitForm(Long userId, Long submitFormId) {
+        Users user = usersRepository.findById(userId).get();
+        user.addSubmitForms(submitFormRepository.findById(submitFormId).get());
+    }
+
+    @Transactional
+    public void updateUserByProposalForm(Long userId, Long proposalFormId) {
+        Users user = usersRepository.findById(userId).get();
+        user.addProposalForms(proposalFormRepository.findById(proposalFormId).get());
+    }
+
+    @Transactional
+    public void updateUserByInterimForm(Long userId, Long interimFormId) {
+        Users user = usersRepository.findById(userId).get();
+        user.addInterimForms(interimFormRepository.findById(interimFormId).get());
+    }
+
+    @Transactional
+    public void updateUserByFinalForm(Long userId, Long finalFormId) {
+        Users user = usersRepository.findById(userId).get();
+        user.addFinalForms(finalFormRepository.findById(finalFormId).get());
+    }
+
+    @Transactional
+    public void updateUserByOtherForm(Long userId, Long otherFormId) {
+        Users user = usersRepository.findById(userId).get();
+        user.addOtherForms(otherFormRepository.findById(otherFormId).get());
     }
 }

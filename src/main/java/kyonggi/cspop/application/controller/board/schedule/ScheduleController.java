@@ -2,9 +2,10 @@ package kyonggi.cspop.application.controller.board.schedule;
 
 import kyonggi.cspop.application.controller.board.schedule.dto.ScheduleDto;
 import kyonggi.cspop.application.controller.board.schedule.dto.scheduleBoarad.*;
-import kyonggi.cspop.domain.board.ScheduleBoard;
-import kyonggi.cspop.domain.board.service.ScheduleBoardService;
+import kyonggi.cspop.domain.board.schedule.ScheduleBoard;
+import kyonggi.cspop.domain.board.schedule.service.ScheduleBoardService;
 import kyonggi.cspop.domain.schedule.Schedules;
+import kyonggi.cspop.domain.schedule.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,13 +19,14 @@ import java.util.List;
 @RequestMapping("/api/graduation")
 public class ScheduleController {
 
+    private final ScheduleService scheduleService;
     private final ScheduleBoardService scheduleBoardService;
 
     @GetMapping("/schedule")
     public String showSchedule(Model model) {
 
         //테이블 데이터 출력
-        List<Schedules> schedules = scheduleBoardService.findScheduleList();
+        List<Schedules> schedules = scheduleService.findScheduleList();
         model.addAttribute("schedules", schedules);
 
         //각 테이블 컬럼에 해당하는 세부 내용 출력
@@ -74,7 +76,7 @@ public class ScheduleController {
     //AJAX 통신용 API 진행일정 테이블
     @PostMapping("/schedule/modify/{id}")
     public ResponseEntity<Void> scheduleModify(@PathVariable Long id, @RequestBody ScheduleDto scheduleDto) {
-        scheduleBoardService.updateSchedules(id, scheduleDto);
+        scheduleService.updateSchedules(id, scheduleDto);
         return ResponseEntity.noContent().build();
     }
 }

@@ -3,12 +3,14 @@ DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS notice_board;
 DROP TABLE IF EXISTS admins;
 DROP TABLE IF EXISTS other_qualifications;
-DROP TABLE IF EXISTS submit_form_upload_file;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS submit_form;
 DROP TABLE IF EXISTS final_form;
+DROP TABLE IF EXISTS final_form_upload_file;
 DROP TABLE IF EXISTS interim_form;
+DROP TABLE IF EXISTS interim_form_upload_file;
 DROP TABLE IF EXISTS other_form;
+DROP TABLE IF EXISTS other_form_upload_file;
 DROP TABLE IF EXISTS proposal_form;
 DROP TABLE IF EXISTS schedules;
 DROP TABLE IF EXISTS excel_board;
@@ -82,7 +84,6 @@ CREATE TABLE submit_form
     `created_date`            DATETIME(6)  NULL DEFAULT NULL COMMENT '등록일',
     `last_modified_date`      DATETIME(6)  NULL DEFAULT NULL COMMENT '수정일',
     `department`              VARCHAR(255) NOT NULL COMMENT '소속학과',
-    `graduation_date`         DATE         NOT NULL COMMENT '졸업날짜',
     `student_id`              VARCHAR(255) NOT NULL COMMENT '학번',
     `student_name`            VARCHAR(255) NOT NULL COMMENT '학생 이름',
     `approval`                BIT(1)       NOT NULL COMMENT '승인여부',
@@ -97,33 +98,103 @@ CREATE TABLE submit_form
 -- -----------------------------------------------------
 CREATE TABLE final_form
 (
-    `id`                 BIGINT      NOT NULL,
-    `created_date`       DATETIME(6) NULL DEFAULT NULL COMMENT '등록일',
-    `last_modified_date` DATETIME(6) NULL DEFAULT NULL COMMENT '수정일'
+    `id`                        BIGINT       NOT NULL,
+    `created_date`              DATETIME(6)  NULL DEFAULT NULL COMMENT '등록일',
+    `last_modified_date`        DATETIME(6)  NULL DEFAULT NULL COMMENT '수정일',
+    `approval`                  BIT(1)       NOT NULL COMMENT '승인여부',
+    `title`                     VARCHAR(255) NOT NULL COMMENT '제목',
+    `division`                  VARCHAR(255) NOT NULL COMMENT '구분',
+    `qualification`             VARCHAR(255) NOT NULL COMMENT '자격요건',
+    `page_number`               INT          NOT NULL COMMENT '쪽수',
+    `final_form_upload_file_id` BIGINT       NULL DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    CONSTRAINT `fk_final_form_to_final_form_upload_file`
+        FOREIGN KEY (`final_form_upload_file_id`)
+            REFERENCES final_form_upload_file (`id`)
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table `test`.`final_form_upload_file`
+-- -----------------------------------------------------
+CREATE TABLE final_form_upload_file
+(
+    `id`               BIGINT       NOT NULL,
+    `store_file_name`  VARCHAR(255) NULL DEFAULT NULL COMMENT '서버 내부에서 관리하는 파일명',
+    `upload_file_name` VARCHAR(255) NULL DEFAULT NULL COMMENT '유저가 업로드한 파일명',
+    PRIMARY KEY (`id`)
+)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4;
+
 
 -- -----------------------------------------------------
 -- interim_form
 -- -----------------------------------------------------
 CREATE TABLE interim_form
 (
-    `id`                 BIGINT      NOT NULL,
-    `created_date`       DATETIME(6) NULL DEFAULT NULL COMMENT '등록일',
-    `last_modified_date` DATETIME(6) NULL DEFAULT NULL COMMENT '수정일'
+    `id`                          BIGINT       NOT NULL,
+    `created_date`                DATETIME(6)  NULL DEFAULT NULL COMMENT '등록일',
+    `last_modified_date`          DATETIME(6)  NULL DEFAULT NULL COMMENT '수정일',
+    `approval`                    BIT(1)       NOT NULL COMMENT '승인여부',
+    `title`                       VARCHAR(255) NOT NULL COMMENT '제목',
+    `division`                    VARCHAR(255) NOT NULL COMMENT '구분',
+    `text`                        VARCHAR(255) NOT NULL COMMENT '진행내용',
+    `plan`                        VARCHAR(255) NOT NULL COMMENT '향후계획',
+    `interim_form_upload_file_id` BIGINT       NULL DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    CONSTRAINT `fk_interim_form_to_interim_form_upload_file`
+        FOREIGN KEY (`interim_form_upload_file_id`)
+            REFERENCES interim_form_upload_file (`id`)
+)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `test`.`interim_form_upload_file`
+-- -----------------------------------------------------
+CREATE TABLE interim_form_upload_file
+(
+    `id`               BIGINT       NOT NULL,
+    `store_file_name`  VARCHAR(255) NULL DEFAULT NULL COMMENT '서버 내부에서 관리하는 파일명',
+    `upload_file_name` VARCHAR(255) NULL DEFAULT NULL COMMENT '유저가 업로드한 파일명',
+    PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
--- order_form
+-- other_form
 -- -----------------------------------------------------
 CREATE TABLE other_form
 (
-    `id`                 BIGINT      NOT NULL,
-    `created_date`       DATETIME(6) NULL DEFAULT NULL COMMENT '등록일',
-    `last_modified_date` DATETIME(6) NULL DEFAULT NULL COMMENT '수정일'
+    `id`                        BIGINT       NOT NULL,
+    `created_date`              DATETIME(6)  NULL DEFAULT NULL COMMENT '등록일',
+    `last_modified_date`        DATETIME(6)  NULL DEFAULT NULL COMMENT '수정일',
+    `approval`                  BIT(1)       NOT NULL COMMENT '승인여부',
+    `division`                  VARCHAR(255) NOT NULL COMMENT '구분',
+    `title`                     VARCHAR(255) NOT NULL COMMENT '제목',
+    `text`                      VARCHAR(255) NOT NULL COMMENT '본문',
+    `other_form_upload_file_id` BIGINT       NULL DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    CONSTRAINT `fk_other_form_to_other_form_upload_file`
+        FOREIGN KEY (`other_form_upload_file_id`)
+            REFERENCES other_form_upload_file (`id`)
+)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table `test`.`other_form_upload_file`
+-- -----------------------------------------------------
+CREATE TABLE other_form_upload_file
+(
+    `id`               BIGINT       NOT NULL,
+    `store_file_name`  VARCHAR(255) NULL DEFAULT NULL COMMENT '서버 내부에서 관리하는 파일명',
+    `upload_file_name` VARCHAR(255) NULL DEFAULT NULL COMMENT '유저가 업로드한 파일명',
+    PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4;
@@ -146,24 +217,8 @@ CREATE TABLE proposal_form
     `title`              VARCHAR(255) NOT NULL COMMENT '제목',
     `division`           VARCHAR(255) NOT NULL COMMENT '구분',
     `keyword`            VARCHAR(255) NOT NULL COMMENT '키워드',
-    `text`               VARCHAR(255) NOT NULL COMMENT '본문'
-)
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8mb4;
-
--- -----------------------------------------------------
--- Table `test`.`submit_form_upload_file`
--- -----------------------------------------------------
-CREATE TABLE submit_form_upload_file
-(
-    `id`               BIGINT       NOT NULL,
-    `store_file_name`  VARCHAR(255) NULL DEFAULT NULL COMMENT '서버 내부에서 관리하는 파일명',
-    `upload_file_name` VARCHAR(255) NULL DEFAULT NULL COMMENT '유저가 업로드한 파일명',
-    `submit_form_id`   BIGINT       NULL DEFAULT NULL,
-    PRIMARY KEY (`id`),
-    CONSTRAINT `fk_submit_form_upload_file_to_submit_form`
-        FOREIGN KEY (`submit_form_id`)
-            REFERENCES submit_form (`id`)
+    `text`               VARCHAR(255) NOT NULL COMMENT '본문',
+    PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4;
@@ -188,6 +243,10 @@ CREATE TABLE users
     `answer_Pw`          VARCHAR(255) NOT NULL COMMENT '비밀번호 대답',
     `submit_form_id`     BIGINT       NULL DEFAULT NULL,
     `proposal_form_id`   BIGINT       NULL DEFAULT NULL,
+    `interim_form_id`    BIGINT       NULL DEFAULT NULL,
+    `final_form_id`      BIGINT       NULL DEFAULT NULL,
+    `other_form_id`      BIGINT       NULL DEFAULT NULL,
+
     PRIMARY KEY (`id`),
     UNIQUE INDEX `submit_form_id_unique` (`submit_form_id` ASC) VISIBLE,
     CONSTRAINT `fk_users_to_submit_form`
@@ -241,7 +300,7 @@ CREATE TABLE excel_board
     `last_modified_date`   DATETIME(6)  NULL DEFAULT NULL COMMENT '수정일',
     `capstone_completion`  VARCHAR(255) NULL DEFAULT NULL COMMENT '캡스톤 이수',
     `graduation_date`      VARCHAR(255) NULL DEFAULT NULL COMMENT '학생 졸업날짜',
-    `other_qualifications` VARCHAR(255) NULL DEFAULT NULL COMMENT '기타 자격',
+    `qualifications` VARCHAR(255) NULL DEFAULT NULL COMMENT '자격',
     `professor_name`       VARCHAR(255) NULL DEFAULT NULL COMMENT '교수 이름',
     `state`                VARCHAR(255) NULL DEFAULT NULL COMMENT '상태',
     `step`                 VARCHAR(255) NULL DEFAULT NULL COMMENT '단계',
@@ -288,23 +347,25 @@ CREATE TABLE schedule_board
 -- -----------------------------------------------------
 -- Table `test`.`certification_board`
 -- -----------------------------------------------------
-CREATE TABLE certification_board (
-                                     `id` BIGINT NOT NULL,
-                                     `created_date` DATETIME(6) NULL DEFAULT NULL COMMENT '등록일',
-                                     `last_modified_date` DATETIME(6) NULL DEFAULT NULL COMMENT '수정일',
-                                     `department` VARCHAR(255) NULL DEFAULT NULL COMMENT '소속 학과',
-                                     `student_id` VARCHAR(255) NULL DEFAULT NULL COMMENT '학번',
-                                     `student_name` VARCHAR(255) NULL DEFAULT NULL COMMENT '학생 이름',
-                                     `current_semester` VARCHAR(255) NULL DEFAULT NULL COMMENT '현재 학기',
-                                     `professional_education` VARCHAR(255) NULL DEFAULT NULL COMMENT '전문교양 학점',
-                                     `msc_bsm` VARCHAR(255) NULL DEFAULT NULL COMMENT 'MSC/BSM 학점',
-                                     `design` VARCHAR(255) NULL DEFAULT NULL COMMENT '설계 학점',
-                                     `major` VARCHAR(255) NULL DEFAULT NULL COMMENT '전공 학점',
-                                     `essential` VARCHAR(255) NULL DEFAULT NULL COMMENT '필수 과목',
-                                     `first_and_last` VARCHAR(255) NULL DEFAULT NULL COMMENT '선/후수 과목',
-                                     `total` VARCHAR(255) NULL DEFAULT NULL COMMENT '총 학점',
-                                     `special_note` VARCHAR(255) NULL DEFAULT NULL COMMENT '특이사항',
-                                     PRIMARY KEY (`id`))
+CREATE TABLE certification_board
+(
+    `id`                     BIGINT       NOT NULL,
+    `created_date`           DATETIME(6)  NULL DEFAULT NULL COMMENT '등록일',
+    `last_modified_date`     DATETIME(6)  NULL DEFAULT NULL COMMENT '수정일',
+    `department`             VARCHAR(255) NULL DEFAULT NULL COMMENT '소속 학과',
+    `student_id`             VARCHAR(255) NULL DEFAULT NULL COMMENT '학번',
+    `student_name`           VARCHAR(255) NULL DEFAULT NULL COMMENT '학생 이름',
+    `current_semester`       VARCHAR(255) NULL DEFAULT NULL COMMENT '현재 학기',
+    `professional_education` VARCHAR(255) NULL DEFAULT NULL COMMENT '전문교양 학점',
+    `msc_bsm`                VARCHAR(255) NULL DEFAULT NULL COMMENT 'MSC/BSM 학점',
+    `design`                 VARCHAR(255) NULL DEFAULT NULL COMMENT '설계 학점',
+    `major`                  VARCHAR(255) NULL DEFAULT NULL COMMENT '전공 학점',
+    `essential`              VARCHAR(255) NULL DEFAULT NULL COMMENT '필수 과목',
+    `first_and_last`         VARCHAR(255) NULL DEFAULT NULL COMMENT '선/후수 과목',
+    `total`                  VARCHAR(255) NULL DEFAULT NULL COMMENT '총 학점',
+    `special_note`           VARCHAR(255) NULL DEFAULT NULL COMMENT '특이사항',
+    PRIMARY KEY (`id`)
+)
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4;
 
@@ -341,4 +402,50 @@ alter table notice_board_upload_file
 alter table notice_board_upload_file
     auto_increment = 1;
 
--- form 테이블들도 auto 로 설정 해줘야 함
+alter table submit_form
+    modify id bigint auto_increment;
+
+alter table submit_form
+    auto_increment = 1;
+
+alter table proposal_form
+    modify id bigint auto_increment;
+
+alter table proposal_form
+    auto_increment = 1;
+
+alter table interim_form
+    modify id bigint auto_increment;
+
+alter table interim_form
+    auto_increment = 1;
+
+alter table interim_form_upload_file
+    modify id bigint auto_increment;
+
+alter table interim_form_upload_file
+    auto_increment = 1;
+
+alter table final_form
+    modify id bigint auto_increment;
+
+alter table final_form
+    auto_increment = 1;
+
+alter table final_form_upload_file
+    modify id bigint auto_increment;
+
+alter table final_form_upload_file
+    auto_increment = 1;
+
+alter table other_form
+    modify id bigint auto_increment;
+
+alter table other_form
+    auto_increment = 1;
+
+alter table other_form_upload_file
+    modify id bigint auto_increment;
+
+alter table other_form_upload_file
+    auto_increment = 1;

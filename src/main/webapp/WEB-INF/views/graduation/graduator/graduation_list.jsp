@@ -33,9 +33,9 @@
     <script src="../../../../assets/js/ckeditor/ckeditor.js"></script>
     <script src="../../../../assets/js/graduation.js"></script>
 </head>
-<%@include file="../../common/sessionController.jsp"%>
+<%@include file="../../common/sessionController.jsp" %>
 <body>
-<%@include file="../../common/header.jsp"%>
+<%@include file="../../common/header.jsp" %>
 <section class="page-start">
     <!-- pageheader section -->
     <div class="bg-shape bg-secondary">
@@ -130,29 +130,6 @@
                                     </table>
                                 </div>
                             </div>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="modifyTable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h3>파일 올리기</h3>
-                                        </div>
-                                        <form action="graduate_management.read" id="myForm" method="post" enctype="multipart/form-data">
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <input type="file" name="file" />
-                                                    
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                                <button type="submit" class="btn btn-primary" onclick="uploadExcel(event)">업로드</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <!--페이징 영역 시작-->
                         <div class="text-xs-center">
@@ -161,8 +138,11 @@
                                 <c:choose>
                                     <c:when test="${graduator.first}"></c:when>
                                     <c:otherwise>
-                                        <li class="page-item"><a class="page-link" href="/api/graduation/graduate_management?page=0&size=10">처음</a></li>
-                                        <li class="page-item"><a class="page-link" href="/api/graduation/graduate_management?page=${graduator.number-1}&size=10">이전</a>
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="/api/graduation/graduate_management?page=0&size=10">처음</a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="/api/graduation/graduate_management?page=${graduator.number-1}&size=10">이전</a>
                                         </li>
                                     </c:otherwise>
                                 </c:choose>
@@ -171,11 +151,13 @@
                                 <c:forEach begin="${startBlockPage}" end="${endBlockPage}" var="i">
                                     <c:choose>
                                         <c:when test="${graduator.pageable.pageNumber+1 == i}">
-                                            <li class="page-item disabled"><a class="page-link" href="/api/graduation/graduate_management?page=${i-1}&size=10">${i}</a>
+                                            <li class="page-item disabled"><a class="page-link"
+                                                                              href="/api/graduation/graduate_management?page=${i-1}&size=10">${i}</a>
                                             </li>
                                         </c:when>
                                         <c:otherwise>
-                                            <li class="page-item"><a class="page-link" href="/api/graduation/graduate_management?page=${i-1}&size=10">${i}</a>
+                                            <li class="page-item"><a class="page-link"
+                                                                     href="/api/graduation/graduate_management?page=${i-1}&size=10">${i}</a>
                                             </li>
                                         </c:otherwise>
                                     </c:choose>
@@ -184,8 +166,12 @@
                                 <c:choose>
                                     <c:when test="${ulist.last}"></c:when>
                                     <c:otherwise>
-                                        <li class="page-item "><a class="page-link" href="/api/graduation/graduate_management?page=${graduator.number+1}&size=10">다음</a></li>
-                                        <li class="page-item "><a class="page-link" href="/api/graduation/graduate_management?page=${graduator.totalPages-1}&size=10">마지막</a></li>
+                                        <li class="page-item "><a class="page-link"
+                                                                  href="/api/graduation/graduate_management?page=${graduator.number+1}&size=10">다음</a>
+                                        </li>
+                                        <li class="page-item "><a class="page-link"
+                                                                  href="/api/graduation/graduate_management?page=${graduator.totalPages-1}&size=10">마지막</a>
+                                        </li>
                                     </c:otherwise>
                                 </c:choose>
                             </ul>
@@ -195,7 +181,6 @@
                     <form action="graduate_management.download" method="get">
                         <button class="btn btn-primary btn-sm float-right">다운로드</button>
                     </form>
-                    <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#modifyTable">파일 올리기</button>
                 </div>
             </div>
         </div>
