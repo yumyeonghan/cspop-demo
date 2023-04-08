@@ -86,4 +86,7 @@ public class ProposalForm extends BaseEntity {
         this.text = text;
     }
 
+    public void updateState() {
+        this.approval = true;
+    }
 }

@@ -70,4 +70,8 @@ public class SubmitForm extends BaseEntity {
             this.graduationRequirements = GraduationRequirements.THESIS;
         }
     }
+
+    public void updateState() {
+        this.approval = true;
+    }
 }

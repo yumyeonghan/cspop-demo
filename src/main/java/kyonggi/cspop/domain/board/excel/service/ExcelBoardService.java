@@ -2,6 +2,7 @@ package kyonggi.cspop.domain.board.excel.service;
 
 import kyonggi.cspop.domain.board.excel.ExcelBoard;
 import kyonggi.cspop.domain.board.excel.dto.ExcelBoardResponseDto;
+import kyonggi.cspop.domain.board.excel.dto.ExcelBoardSubmitFormDto;
 import kyonggi.cspop.domain.board.excel.repository.ExcelBoardRepository;
 import kyonggi.cspop.domain.form.submitform.SubmitForm;
 import kyonggi.cspop.domain.users.Users;
@@ -66,5 +67,17 @@ public class ExcelBoardService {
     public void updateExcelByOtherForm(Users users){
         ExcelBoard excelBoard = excelBoardRepository.findByStudentId(users.getStudentId()).get();
         excelBoard.updateExcelByOtherForm();
+    }
+
+    @Transactional
+    public void updateExcelBySubmitForm(Users users, ExcelBoardSubmitFormDto excelBoardSubmitFormDto) {
+        ExcelBoard excelBoard = excelBoardRepository.findByStudentId(users.getStudentId()).get();
+        excelBoard.updateExcelBySubmitForm(excelBoardSubmitFormDto.getProfessorName(), excelBoardSubmitFormDto.getGraduationDate(), excelBoardSubmitFormDto.getCapstoneCompletion());
+    }
+
+    @Transactional
+    public void updateApprovalState(Users users) {
+        ExcelBoard excelBoard = excelBoardRepository.findByStudentId(users.getStudentId()).get();
+        excelBoard.approvalUserForm();
     }
 }

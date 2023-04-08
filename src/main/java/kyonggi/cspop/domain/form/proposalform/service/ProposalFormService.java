@@ -29,4 +29,10 @@ public class ProposalFormService {
         ProposalForm proposalForm = proposalFormRepository.findById(id).get();
         proposalForm.updateProposalForm(proposalFormDto.getTitle(), proposalFormDto.getDivision(), proposalFormDto.getKeyword(), proposalFormDto.getText());
     }
+
+    @Transactional
+    public void updateUserProposalState(Long id) {
+        ProposalForm proposalForm = proposalFormRepository.findById(id).get();
+        proposalForm.updateState();
+    }
 }

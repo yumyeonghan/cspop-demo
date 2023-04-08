@@ -34,4 +34,9 @@ public class OtherFormService {
             otherForm.updateFile(file);
         }
     }
+    @Transactional
+    public void updateUserOtherState(Long id) {
+        OtherForm otherForm = otherFormRepository.findById(id).get();
+        otherForm.updateState();
+    }
 }

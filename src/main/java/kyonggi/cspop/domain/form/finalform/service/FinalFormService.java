@@ -34,4 +34,10 @@ public class FinalFormService {
             finalForm.updateFile(file);
         }
     }
+
+    @Transactional
+    public void updateUserFinalState(Long id) {
+        FinalForm finalForm = finalFormRepository.findById(id).get();
+        finalForm.updateState();
+    }
 }

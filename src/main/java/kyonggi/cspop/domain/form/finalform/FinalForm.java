@@ -98,4 +98,8 @@ public class FinalForm extends BaseEntity {
     public void updateFile(FinalFormUploadFile finalFormUploadFile) {
         this.finalFormUploadFile = finalFormUploadFile;
     }
+
+    public void updateState() {
+        this.approval = true;
+    }
 }

@@ -34,4 +34,10 @@ public class InterimFormService {
             interimForm.updateFile(file);
         }
     }
+
+    @Transactional
+    public void updateUserInterimState(Long id) {
+        InterimForm interimForm = interimFormRepository.findById(id).get();
+        interimForm.updateState();
+    }
 }
