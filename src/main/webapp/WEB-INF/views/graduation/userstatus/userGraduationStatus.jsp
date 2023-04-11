@@ -206,7 +206,26 @@
                                                                 <td>${userSchedule.step}</td>
                                                                 <td>${userSchedule.startDate}</td>
                                                                 <td>${userSchedule.endDate}</td>
-                                                                <td>${userSchedule.submitStatus}</td>
+                                                                <td>
+                                                                    <c:if test="${userSchedule.step eq '신청접수'}">
+                                                                        <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormModify"
+                                                                                onclick="getSubmitForm(${userSubmitFormInfo.id})">
+                                                                                ${userSchedule.submitStatus}
+                                                                        </button>
+                                                                    </c:if>
+                                                                    <c:if test="${userSchedule.step eq '제안서'}">
+                                                                        <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#proposalFormModify"
+                                                                                onclick="getProposalForm(${userProposalFormInfo.id})">
+                                                                                ${userSchedule.submitStatus}
+                                                                        </button>
+                                                                    </c:if>
+                                                                    <c:if test="${userSchedule.step eq '기타자격'}">
+                                                                        <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#otherFormModify"
+                                                                                onclick="getOtherForm(${userOtherFormInfo.id})">
+                                                                                ${userSchedule.submitStatus}
+                                                                        </button>
+                                                                    </c:if>
+                                                                </td>
                                                                 <td><a href="#">이동</a></td>
                                                                 <td>${userSchedule.approvalStatus}</td>
                                                             </tr>
