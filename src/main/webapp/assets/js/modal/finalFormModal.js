@@ -57,6 +57,7 @@ function finalFormModalSubmit(target, id) {
                 // location.reload(); // 새로고침
             },
             error: (error) => {
+                alert(error.responseJSON.errorMessage);
                 console.log("hi",error);
             }
         });

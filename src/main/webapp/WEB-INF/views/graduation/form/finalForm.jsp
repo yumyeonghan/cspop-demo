@@ -142,7 +142,7 @@
                                     <div class="card" style="padding: 5px;">
                                         <div class="row">
                                             <div class="col-lg-2 col-3">
-                                                <input type="number" class="form-control" name="pageNumber"
+                                                <input type="number" min="1" class="form-control" name="pageNumber"
                                                     id="pageNumber" required>
                                             </div>
                                             <div class="col align-self-center">
@@ -154,7 +154,7 @@
                                 <div class="form-group">
                                     <label>최종보고서 파일</label>
                                     <div class="card" style="padding: 5px;">
-                                        <input id="inputFile" type="file" name="finalFormUploadFile">
+                                        <input id="inputFile" type="file" name="finalFormUploadFile"required>
                                     </div>
                                 </div>
                             </div>

@@ -3,6 +3,8 @@ package kyonggi.cspop.domain.form.finalform;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.uploadfile.FinalFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
+import kyonggi.cspop.exception.CsPopErrorCode;
+import kyonggi.cspop.exception.CsPopException;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -68,6 +70,7 @@ public class FinalForm extends BaseEntity {
         else{
             finalForm.qualification = "본인이 직접 작성한 파일임을 확인함";
         }
+
         finalForm.pageNumber = pageNumber;
         finalForm.finalFormUploadFile = uploadFile;
 
@@ -92,6 +95,9 @@ public class FinalForm extends BaseEntity {
             this.qualification = "본인이 직접 작성한 파일임을 확인함";
         }
 
+        if (pageNumber <= 0) {
+            throw new CsPopException(CsPopErrorCode.FINAL_INVALID_PAGE);
+        }
         this.pageNumber = pageNumber;
     }
 
