@@ -175,7 +175,7 @@
                                 <td>${userSchedule.endDate}</td>
                                 <td>${userSchedule.submitStatus}</td>
                                 <td>${userSchedule.approvalStatus}</td>
-                                <td> <a href="../../update">신청서 승인 테스트</a>
+                                <td> <a href="/api/userStatus/approvalUser/${userDetail.studentId}/update">신청서 승인 테스트</a>
                                 </td>
                               </tr>
                               </tbody>

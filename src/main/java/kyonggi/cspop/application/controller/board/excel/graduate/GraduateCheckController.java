@@ -40,6 +40,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -155,7 +156,7 @@ public class GraduateCheckController {
         return "graduation/form/submitApprovalForm";
     }
     @PostMapping("api/userStatus/approvalUser/{studentId}/update")
-    public String test(@PathVariable String studentId, ExcelBoardSubmitFormDto excelBoardSubmitFormDto) {
+    public String test(@PathVariable String studentId, @Valid ExcelBoardSubmitFormDto excelBoardSubmitFormDto) {
 
         Users user = usersService.findUserByStudentId(studentId);
 
@@ -170,12 +171,12 @@ public class GraduateCheckController {
             }
         }
 
-        return "redirect:/graduation/userstatus/userApprovalStatus";
+        return "redirect:/api/userStatus/approvalUser/{studentId}";
     }
 
     //승인 처리 컨트롤러 - 신청서를 제외한 나머지는 승인버튼을 누를 시 승인 상태만 미승인->승인으로 변경 된다.
     @PostMapping("api/userStatus/approvalUser/{studentId}")
-    public ResponseEntity<Void> userApprovalProcess(@PathVariable String studentId, ExcelBoardSubmitFormDto excelBoardSubmitFormDto) {
+    public ResponseEntity<Void> userApprovalProcess(@PathVariable String studentId, @Valid ExcelBoardSubmitFormDto excelBoardSubmitFormDto) {
         Users user = usersService.findUserByStudentId(studentId);
 
         //신청접수 아이디가 있으나 미승인 상태라면 excel 및 submit_form 승인 상태 update

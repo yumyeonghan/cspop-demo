@@ -15,8 +15,5 @@ public class ExcelBoardSubmitFormDto {
     private String graduationDate;
 
     @NotBlank(message = "값을 입력하세요") @NotNull
-    private String state;
-
-    @NotBlank(message = "값을 입력하세요") @NotNull
     private String capstoneCompletion;
 }
