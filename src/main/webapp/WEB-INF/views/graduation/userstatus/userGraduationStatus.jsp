@@ -135,7 +135,32 @@
                                                                 <td>${userSchedule.step}</td>
                                                                 <td>${userSchedule.startDate}</td>
                                                                 <td>${userSchedule.endDate}</td>
-                                                                <td>${userSchedule.submitStatus}</td>
+                                                                <td>
+                                                                    <c:if test="${userSchedule.step eq '신청접수'}">
+                                                                        <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#submitFormModify"
+                                                                            onclick="getSubmitForm(${userSubmitFormInfo.id})">
+                                                                            ${userSchedule.submitStatus}
+                                                                        </button>
+                                                                    </c:if>
+                                                                    <c:if test="${userSchedule.step eq '제안서'}">
+                                                                        <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#proposalFormModify"
+                                                                            onclick="getProposalForm(${userProposalFormInfo.id})">
+                                                                            ${userSchedule.submitStatus}
+                                                                        </button>
+                                                                    </c:if>
+                                                                    <c:if test="${userSchedule.step eq '중간보고서'}">
+                                                                        <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#interimFormModify"
+                                                                            onclick="getInterimForm(${userInterimFormInfo.id})">
+                                                                            ${userSchedule.submitStatus}
+                                                                        </button>
+                                                                    </c:if>
+                                                                    <c:if test="${userSchedule.step eq '최종보고서'}">
+                                                                        <button class="btn btn-primary btn-sm float-right" data-bs-toggle="modal" data-bs-target="#finalFormModify"
+                                                                            onclick="getFinalForm(${userFinalFormInfo.id})">
+                                                                            ${userSchedule.submitStatus}
+                                                                        </button>
+                                                                    </c:if>
+                                                                </td>
                                                                 <td><a href="#">이동</a></td>
                                                                 <td>${userSchedule.approvalStatus}</td>
                                                             </tr>
@@ -445,3 +470,4 @@
 </script>
 </body>
 </html>
+
