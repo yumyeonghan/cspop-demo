@@ -26,6 +26,10 @@ public class NoticeBoardService {
         return noticeBoardRepository.findAllByOrderByFixedDescIdDesc(pageable).map(e-> new NoticeBoardResponseDto(e));
     }
 
+    public Page<NoticeBoardResponseDto> findSearchNotice(Pageable pageable, String word) {
+        return noticeBoardRepository.findByTitleOrderByFixedDescIdDesc(word, pageable).map(e -> new NoticeBoardResponseDto(e));
+    }
+
     @Transactional
     public Long saveNoticeBoard(NoticeBoard noticeBoard, List<NoticeBoardUploadFile> storeFiles) {
         storeFiles.stream().forEach(e -> e.designateNoticeBoard(noticeBoard));

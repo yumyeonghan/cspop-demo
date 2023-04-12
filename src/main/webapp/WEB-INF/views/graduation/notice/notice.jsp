@@ -36,9 +36,14 @@
         }
     </style>
 </head>
-<%@include file="../../common/sessionController.jsp"%>
+<%@include file="../../common/sessionController.jsp" %>
 <body>
-<%@include file="../../common/header.jsp"%>
+<c:if test="${errorMessage eq true}">
+    <script>
+        alert("검색 결과가 없습니다.")
+    </script>
+</c:if>
+<%@include file="../../common/header.jsp" %>
 <section class="page-start">
     <!-- pageheader section -->
     <div class="bg-shape bg-secondary">
@@ -67,11 +72,12 @@
                                 </p>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
-                                <form>
+                                <form action="/api/notice/search?page=10&size=10" method="get">
                                         <span class="position-absolute ps-3 pt-1 mt-1">
                                             <i class="fe fe-search"></i>
                                         </span>
-                                    <input type="search" class="form-control ps-6 mb-2 border-0" placeholder="search"/>
+                                    <input name="word" type="search" class="form-control ps-6 mb-2 border-0"
+                                           placeholder="search"/>
                                 </form>
                             </div>
                         </div>
@@ -100,12 +106,13 @@
                                         <c:forEach items="${allNoticeBoard.content}" var="noticeBoard">
                                             <tr class="text-center" data-id=${noticeBoard.id}>
                                                 <c:if test="${noticeBoard.fixed eq true}">
-                                                <td class="text-danger">[공지]</td>
+                                                    <td class="text-danger">[공지]</td>
                                                 </c:if>
                                                 <c:if test="${noticeBoard.fixed ne true}">
                                                     <td>${noticeBoard.id}</td>
                                                 </c:if>
-                                                <td><a href = "/notice/view/detail/${noticeBoard.id}" class="text-black">${noticeBoard.title}</a></td>
+                                                <td><a href="/notice/view/detail/${noticeBoard.id}"
+                                                       class="text-black">${noticeBoard.title}</a></td>
                                                 <td>관리자</td>
                                                 <td>${noticeBoard.createdDate}</td>
                                                 <td>${noticeBoard.views}</td>
@@ -123,8 +130,10 @@
                                 <c:choose>
                                     <c:when test="${allNoticeBoard.first}"></c:when>
                                     <c:otherwise>
-                                        <li class="page-item"><a class="page-link" href="/notice/find?page=0&size=10">처음</a></li>
-                                        <li class="page-item"><a class="page-link" href="/notice/find?page=${allNoticeBoard.number-1}&size=10">이전</a>
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="/notice/find?page=0&size=10">처음</a></li>
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="/notice/find?page=${allNoticeBoard.number-1}&size=10">이전</a>
                                         </li>
                                     </c:otherwise>
                                 </c:choose>
@@ -133,11 +142,13 @@
                                 <c:forEach begin="${startBlockPage}" end="${endBlockPage}" var="i">
                                     <c:choose>
                                         <c:when test="${allNoticeBoard.pageable.pageNumber+1 == i}">
-                                            <li class="page-item disabled"><a class="page-link" href="/notice/find?page=${i-1}&size=10">${i}</a>
+                                            <li class="page-item disabled"><a class="page-link"
+                                                                              href="/notice/find?page=${i-1}&size=10">${i}</a>
                                             </li>
                                         </c:when>
                                         <c:otherwise>
-                                            <li class="page-item"><a class="page-link" href="/notice/find?page=${i-1}&size=10">${i}</a>
+                                            <li class="page-item"><a class="page-link"
+                                                                     href="/notice/find?page=${i-1}&size=10">${i}</a>
                                             </li>
                                         </c:otherwise>
                                     </c:choose>
@@ -146,15 +157,21 @@
                                 <c:choose>
                                     <c:when test="${ulist.last}"></c:when>
                                     <c:otherwise>
-                                        <li class="page-item "><a class="page-link" href="/notice/find?page=${allNoticeBoard.number+1}&size=10">다음</a></li>
-                                        <li class="page-item "><a class="page-link" href="/notice/find?page=${allNoticeBoard.totalPages-1}&size=10">마지막</a></li>
+                                        <li class="page-item "><a class="page-link"
+                                                                  href="/notice/find?page=${allNoticeBoard.number+1}&size=10">다음</a>
+                                        </li>
+                                        <li class="page-item "><a class="page-link"
+                                                                  href="/notice/find?page=${allNoticeBoard.totalPages-1}&size=10">마지막</a>
+                                        </li>
                                     </c:otherwise>
                                 </c:choose>
                             </ul>
                         </div>
                         <!-- 페이징 영역 끝 -->
                     </div>
-                    <a href="/api/graduation/form"><button class="btn btn-primary btn-sm float-right">글쓰기</button></a>
+                    <a href="/api/graduation/form">
+                        <button class="btn btn-primary btn-sm float-right">글쓰기</button>
+                    </a>
                 </div>
             </div>
         </div>
