@@ -59,7 +59,7 @@
                                  <li><a class="dropdown-item" href="#">최종보고서</a></li>
                                  <li><a class="dropdown-item" href="#">기타자격</a></li>
                                  <li><a class="dropdown-item" href="#">최종통과</a></li>
-                                 <li><a class="dropdown-item" href="#">전체단계조회</a></li>
+                                 <li><a class="dropdown-item" href="/api/graduation/graduate_management?page=0&size=10">전체단계조회</a></li>
                             </ul>
                         </li>
                     </c:if>
