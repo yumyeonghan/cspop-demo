@@ -27,13 +27,12 @@ public class SearchController {
 
     @GetMapping("/notice/search")
     public String searchNotice(@RequestParam String word, Pageable pageable, Model model) {
-        Optional<NoticeBoard> findSearchNotice = noticeBoardRepository.findAll().stream().filter(e -> e.getTitle().contains(word)).findAny();
-        if (findSearchNotice.isEmpty()) {
+        Page<NoticeBoardResponseDto> searchNotice = noticeBoardService.findSearchNotice(pageable, word);
+        if (searchNotice.isEmpty()) {
             model.addAttribute("errorMessage", true);
             return "graduation/notice/notice";
         }
 
-        Page<NoticeBoardResponseDto> searchNotice = noticeBoardService.findSearchNotice(pageable, findSearchNotice.get().getTitle());
 
         int pageNumber = searchNotice.getPageable().getPageNumber(); //현재페이지
         int totalPages = searchNotice.getTotalPages(); //총 페이지 수

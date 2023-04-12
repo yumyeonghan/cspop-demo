@@ -27,7 +27,8 @@ public class NoticeBoardService {
     }
 
     public Page<NoticeBoardResponseDto> findSearchNotice(Pageable pageable, String word) {
-        return noticeBoardRepository.findByTitleOrderByFixedDescIdDesc(word, pageable).map(e -> new NoticeBoardResponseDto(e));
+        System.out.println("wordssss = " + word);
+        return noticeBoardRepository.findByTitleContainingOrderByFixedDescIdDesc(word, pageable).map(e -> new NoticeBoardResponseDto(e));
     }
 
     @Transactional
