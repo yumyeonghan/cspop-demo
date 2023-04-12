@@ -21,7 +21,7 @@ public class GraduateDetailCheckController {
 
     @GetMapping("/graduate_submitForm")
     public String graduateSubmitForm(Pageable pageable, Model model) {
-        Page<ExcelBoardResponseDto> applyGraduation = excelBoardService.findAllSubmitStep(pageable, "신청접수");
+        Page<ExcelBoardResponseDto> applyGraduation = excelBoardService.findAllStep(pageable, "신청접수");
 
         int pageNumber = applyGraduation.getPageable().getPageNumber();
         int totalPages = applyGraduation.getTotalPages();
@@ -38,7 +38,7 @@ public class GraduateDetailCheckController {
 
     @GetMapping("/graduate_proposalForm")
     public String graduateProposalForm(Pageable pageable, Model model) {
-        Page<ExcelBoardResponseDto> proposalFormStep = excelBoardService.findAllProposalStep(pageable,"제안서");
+        Page<ExcelBoardResponseDto> proposalFormStep = excelBoardService.findAllStep(pageable,"제안서");
 
         int pageNumber = proposalFormStep.getPageable().getPageNumber();
         int totalPages = proposalFormStep.getTotalPages();
@@ -55,7 +55,7 @@ public class GraduateDetailCheckController {
 
     @GetMapping("/graduate_interimForm")
     public String graduateInterimForm(Pageable pageable, Model model) {
-        Page<ExcelBoardResponseDto> interimFormStep = excelBoardService.findAllInterimStep(pageable,"중간보고서");
+        Page<ExcelBoardResponseDto> interimFormStep = excelBoardService.findAllStep(pageable,"중간보고서");
 
         int pageNumber = interimFormStep.getPageable().getPageNumber();
         int totalPages = interimFormStep.getTotalPages();
@@ -72,7 +72,7 @@ public class GraduateDetailCheckController {
 
     @GetMapping("/graduate_finalForm")
     public String graduateFinalForm(Pageable pageable, Model model) {
-        Page<ExcelBoardResponseDto> finalFormStep = excelBoardService.findAllFinalStep(pageable,"최종보고서");
+        Page<ExcelBoardResponseDto> finalFormStep = excelBoardService.findAllStep(pageable,"최종보고서");
 
         int pageNumber = finalFormStep.getPageable().getPageNumber();
         int totalPages = finalFormStep.getTotalPages();
@@ -89,7 +89,7 @@ public class GraduateDetailCheckController {
 
     @GetMapping("/graduate_otherForm")
     public String graduateOtherForm(Pageable pageable, Model model) {
-        Page<ExcelBoardResponseDto> otherFormStep = excelBoardService.findAllOtherStep(pageable,"기타자격");
+        Page<ExcelBoardResponseDto> otherFormStep = excelBoardService.findAllStep(pageable,"기타자격");
 
         int pageNumber = otherFormStep.getPageable().getPageNumber();
         int totalPages = otherFormStep.getTotalPages();
@@ -106,7 +106,7 @@ public class GraduateDetailCheckController {
 
     @GetMapping("/graduate_finalPass")
     public String graduateFinalPass(Pageable pageable, Model model) {
-        Page<ExcelBoardResponseDto> finalPassStep = excelBoardService.findAllFinalPassStep(pageable,"최종통과");
+        Page<ExcelBoardResponseDto> finalPassStep = excelBoardService.findAllStep(pageable,"최종통과");
 
         int pageNumber = finalPassStep.getPageable().getPageNumber();
         int totalPages = finalPassStep.getTotalPages();
