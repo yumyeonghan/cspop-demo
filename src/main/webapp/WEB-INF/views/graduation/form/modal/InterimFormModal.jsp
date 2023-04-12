@@ -50,6 +50,7 @@
                 <div class="form-group">
                     <label>중간보고서 파일</label>
                     <div class="card" style="padding: 5px;">
+                        <a id="interimFormDownloadFile" href="#" style="display: block;">연결해주세요.csv</a>
                         <input id="inputFile" type="file" name="interimFormUploadFile" required>
                     </div>
                 </div>
