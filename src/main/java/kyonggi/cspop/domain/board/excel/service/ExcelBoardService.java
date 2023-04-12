@@ -67,4 +67,28 @@ public class ExcelBoardService {
         ExcelBoard excelBoard = excelBoardRepository.findByStudentId(users.getStudentId()).get();
         excelBoard.updateExcelByOtherForm();
     }
+
+    //상태 별 필터링
+    public Page<ExcelBoardResponseDto> findAllSubmitStep(Pageable pageable,String word) {
+        return excelBoardRepository.findAllByStepOrderById(word,pageable).map(ExcelBoardResponseDto::new);
+    }
+
+    public Page<ExcelBoardResponseDto> findAllProposalStep(Pageable pageable,String word) {
+        return excelBoardRepository.findAllByStepOrderById(word,pageable).map(ExcelBoardResponseDto::new);
+    }
+
+    public Page<ExcelBoardResponseDto> findAllInterimStep(Pageable pageable,String word) {
+        return excelBoardRepository.findAllByStepOrderById(word,pageable).map(ExcelBoardResponseDto::new);
+    }
+    public Page<ExcelBoardResponseDto> findAllFinalStep(Pageable pageable,String word) {
+        return excelBoardRepository.findAllByStepOrderById(word,pageable).map(ExcelBoardResponseDto::new);
+    }
+
+    public Page<ExcelBoardResponseDto> findAllOtherStep(Pageable pageable,String word) {
+        return excelBoardRepository.findAllByStepOrderById(word,pageable).map(ExcelBoardResponseDto::new);
+    }
+
+    public Page<ExcelBoardResponseDto> findAllFinalPassStep(Pageable pageable,String word) {
+        return excelBoardRepository.findAllByStepOrderById(word,pageable).map(ExcelBoardResponseDto::new);
+    }
 }
