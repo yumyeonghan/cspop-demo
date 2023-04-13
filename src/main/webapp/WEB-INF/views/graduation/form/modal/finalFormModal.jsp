@@ -74,7 +74,7 @@
                         <div class="form-group">
                             <label>최종보고서 파일</label>
                             <div class="card" style="padding: 5px;">
-                                <a id="finalFormDownloadFile" href="#" style="display: block;">연결해주세요.csv</a>
+                                <a id="finalFormDownloadFile" href="/api/attach/finalForm/${finalForm.id}" style="display: block;">${finalForm.finalFormUploadFile.uploadFileName}</a>
                                 <input id="inputFile" type="file" name="finalFormUploadFile" required>
                             </div>
                         </div>

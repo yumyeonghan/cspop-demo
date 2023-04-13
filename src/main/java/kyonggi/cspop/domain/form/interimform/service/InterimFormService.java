@@ -16,7 +16,9 @@ public class InterimFormService {
     private final InterimFormRepository interimFormRepository;
 
     public InterimForm findInterimForm(Long id) {
-        return interimFormRepository.findById(id).get();
+        InterimForm interimForm = interimFormRepository.findById(id).get();
+        interimForm.getInterimFormUploadFile().getUploadFileName();
+        return interimForm;
     }
 
     @Transactional

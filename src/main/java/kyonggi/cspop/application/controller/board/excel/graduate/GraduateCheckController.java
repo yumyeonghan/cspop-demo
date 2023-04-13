@@ -2,7 +2,6 @@ package kyonggi.cspop.application.controller.board.excel.graduate;
 
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserScheduleDto;
-import kyonggi.cspop.application.controller.form.submitform.SubmitViewDto;
 import kyonggi.cspop.domain.board.excel.ExcelBoard;
 import kyonggi.cspop.domain.board.excel.dto.ExcelBoardResponseDto;
 import kyonggi.cspop.domain.board.excel.dto.ExcelBoardSubmitFormDto;

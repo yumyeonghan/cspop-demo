@@ -17,7 +17,9 @@ public class OtherFormService {
 
     public OtherForm findOtherForm(Long id){
 
-        return otherFormRepository.findById(id).get();
+        OtherForm otherForm = otherFormRepository.findById(id).get();
+        otherForm.getOtherFormUploadFile().getUploadFileName();
+        return otherForm;
     }
     @Transactional
     public Long saveOtherForm(OtherForm otherForm) {

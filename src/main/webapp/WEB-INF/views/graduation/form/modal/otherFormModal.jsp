@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label>기타자격 파일</label>
                     <div class="card" style="padding: 5px;">
-                        <a id="otherFormDownloadFile" href="#" style="display: block;">연결해주세요.csv</a>
+                        <a id="otherFormDownloadFile" href="/api/attach/otherForm/${otherForm.id}" style="display: block;">${otherForm.otherFormUploadFile.uploadFileName}</a>
                         <input id="inputFile" type="file" name="otherFormUploadFile" required>
                     </div>
                 </div>
