@@ -35,6 +35,11 @@
 </head>
 <%@include file="../../common/sessionController.jsp" %>
 <body>
+<c:if test="${errorMessage eq true}">
+    <script>
+        alert("검색 결과가 없습니다.")
+    </script>
+</c:if>
 <%@include file="../../common/header.jsp" %>
 <section class="page-start">
     <!-- pageheader section -->
@@ -62,6 +67,15 @@
                                 <p class="text-white-50 lead">
                                     졸업자 현황
                                 </p>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <form action="/api/graduation/allStep/search?page=0&size=10" method="get">
+                                        <span class="position-absolute ps-3 pt-1 mt-1">
+                                            <i class="fe fe-search"></i>
+                                        </span>
+                                    <input name="word" type="search" class="form-control ps-6 mb-2 border-0"
+                                           placeholder="search"/>
+                                </form>
                             </div>
                         </div>
                     </div>

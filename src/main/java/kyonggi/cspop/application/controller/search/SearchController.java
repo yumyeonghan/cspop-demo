@@ -1,8 +1,6 @@
 package kyonggi.cspop.application.controller.search;
 
-import kyonggi.cspop.domain.board.notice.NoticeBoard;
 import kyonggi.cspop.domain.board.notice.dto.NoticeBoardResponseDto;
-import kyonggi.cspop.domain.board.notice.repository.NoticeBoardRepository;
 import kyonggi.cspop.domain.board.notice.service.NoticeBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,7 +20,6 @@ import java.util.Optional;
 public class SearchController {
 
     private final NoticeBoardService noticeBoardService;
-    private final NoticeBoardRepository noticeBoardRepository;
 
     @GetMapping("/notice/search")
     public String searchNotice(@RequestParam String word, Pageable pageable, Model model) {

@@ -118,6 +118,6 @@ public class GraduateDetailCheckController {
         model.addAttribute("startBlockPage", startBlockPage);
         model.addAttribute("endBlockPage", endBlockPage);
         model.addAttribute("graduator", finalPassStep);
-        return "graduation/graduator/step/finalFormStep_list";
+        return "graduation/graduator/step/finalPassStep_list";
     }
 }
