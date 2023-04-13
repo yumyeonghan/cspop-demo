@@ -1,4 +1,4 @@
-package kyonggi.cspop.application.controller.search;
+package kyonggi.cspop.application.controller.board.excel.graduate;
 
 import kyonggi.cspop.domain.board.excel.dto.ExcelBoardResponseDto;
 import kyonggi.cspop.domain.board.excel.service.ExcelBoardService;
