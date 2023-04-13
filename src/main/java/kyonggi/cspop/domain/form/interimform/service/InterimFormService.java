@@ -31,11 +31,9 @@ public class InterimFormService {
     public void updateUserInterimForm(Long id, InterimFormDto interimFormDto, InterimFormUploadFile file) {
         InterimForm interimForm = interimFormRepository.findById(id).get();
         interimForm.updateInterimForm(interimFormDto.getTitle(), interimFormDto.getDivision(), interimFormDto.getText(), interimFormDto.getPlan());
-
-        if (interimFormDto.getInterimFormUploadFile() != null) {
-            interimForm.updateFile(file);
-        }
+        interimForm.getInterimFormUploadFile().updateFile(file);
     }
+
 
     @Transactional
     public void updateUserInterimState(Long id) {

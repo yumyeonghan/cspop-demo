@@ -28,4 +28,9 @@ public class InterimFormUploadFile {
         this.uploadFileName = uploadFileName;
         this.storeFileName = storeFileName;
     }
+
+    public void updateFile(InterimFormUploadFile interimFormUploadFile) {
+        this.uploadFileName = interimFormUploadFile.getUploadFileName();
+        this.storeFileName = interimFormUploadFile.getStoreFileName();
+    }
 }

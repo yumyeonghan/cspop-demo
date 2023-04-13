@@ -101,10 +101,6 @@ public class FinalForm extends BaseEntity {
         this.pageNumber = pageNumber;
     }
 
-    public void updateFile(FinalFormUploadFile finalFormUploadFile) {
-        this.finalFormUploadFile = finalFormUploadFile;
-    }
-
     public void updateState() {
         this.approval = true;
     }

@@ -78,10 +78,6 @@ public class OtherForm extends BaseEntity {
         this.text = text;
     }
 
-    public void updateFile(OtherFormUploadFile otherFormUploadFile) {
-        this.otherFormUploadFile = otherFormUploadFile;
-    }
-
     public void updateState() {
         this.approval = true;
     }

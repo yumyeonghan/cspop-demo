@@ -28,4 +28,9 @@ public class FinalFormUploadFile {
         this.uploadFileName = uploadFileName;
         this.storeFileName = storeFileName;
     }
+
+    public void updateFile(FinalFormUploadFile finalFormUploadFile) {
+        this.uploadFileName = finalFormUploadFile.getUploadFileName();
+        this.storeFileName = finalFormUploadFile.getStoreFileName();
+    }
 }
