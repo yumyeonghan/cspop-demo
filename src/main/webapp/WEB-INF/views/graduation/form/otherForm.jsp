@@ -110,11 +110,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label>파일 제출</label>
-                                    <input id="inputFile" type="file" name="otherFormUploadFile">
+                                    <input id="inputFile" type="file" name="otherFormUploadFile" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="content">내용</label>
-                                    <textarea type="text" class="form-control" id="content" name="text">입력하세요</textarea>
+                                    <textarea type="text" class="form-control" id="content" name="text" placeholder="입력하세요" required></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-lg btn-primary" style="width: 10%">제출</button>
                             </form>

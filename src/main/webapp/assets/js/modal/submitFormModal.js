@@ -1,18 +1,18 @@
 function clickSubmitFormModify(event, id) {
-    let inputsInSubmitForm = $('#submitFormModal input');
-    for (let i = 0; i < inputsInSubmitForm.length; i++) {
-        if(inputsInSubmitForm[i].attributes.hasOwnProperty('disabled')) {
-            inputsInSubmitForm[i].disabled = false;
-            console.log('찾음');
+    let buttonInSubmitForm = $('#submitFormModal .modal-body button');
+    for (let i = 0; i < buttonInSubmitForm.length; i++) {
+        if(buttonInSubmitForm[i].attributes.hasOwnProperty('disabled')) {
+            buttonInSubmitForm[i].disabled = false;
         }
-        if(inputsInSubmitForm[i].attributes.hasOwnProperty('readonly')) {
-            $(inputsInSubmitForm[i]).attr('readonly',false);
-            console.log('되나');
+        if(buttonInSubmitForm[i].attributes.hasOwnProperty('readonly')) {
+            $(buttonInSubmitForm[i]).attr('readonly',false);
         }
     }
-    console.log(inputsInSubmitForm);
-    event.target.innerHTML = '제출';
-    event.target.setAttribute('onclick',`submitFormModalSubmit(this, ${id})`);
+    console.log(buttonInSubmitForm);
+    buttonInSubmitForm.click(function() {
+        console.log(this,'this');
+        submitFormModalSubmit(this, id);
+    })
     event.preventDefault();
     console.log(event);
 }
@@ -36,11 +36,10 @@ function getSubmitForm(id) {
 
 function submitFormModalSubmit(target, id) {
 
-    if(confirm('제출 하시겠습니까?')){
-        // Get form
-        var form = $('#submitFormModal')[0];
-        // Create an FormData object
-        var data = new FormData(form);
+    if(confirm(`${target.innerHTML}으로 수정 하시겠습니까?`)){
+        var data = new FormData();
+        data.append('qualification',target.innerHTML == '기타자격' ? '기타자격' : '논문');
+        console.log(target.innerHTML);
         $.ajax({
             type: 'post',
             enctype: 'multipart/form-data',
@@ -52,11 +51,11 @@ function submitFormModalSubmit(target, id) {
             success: (data) => {
                 console.log(data);
                 getSubmitForm(id);
-                target.innerHTML='수정'
-                target.setAttribute('onclick',`clickSubmitFormModify(event, ${id})`);
-                // location.reload(); // 새로고침
+                alert(`${target.innerHTML}으로 수정 성공!`)
+                location.reload(); // 새로고침
             },
             error: (error) => {
+                alert(error.responseJSON.errorMessage);
                 console.log("hi",error);
             }
         });

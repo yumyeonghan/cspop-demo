@@ -3,17 +3,18 @@ function clickInterimFormModify(event, id) {
     for (let i = 0; i < inputsInInterimForm.length; i++) {
         if(inputsInInterimForm[i].attributes.hasOwnProperty('disabled')) {
             inputsInInterimForm[i].disabled = false;
-            console.log('찾음');
         }
         if(inputsInInterimForm[i].attributes.hasOwnProperty('readonly')) {
             $(inputsInInterimForm[i]).attr('readonly',false);
-            console.log('되나');
         }
     }
-    console.log(inputsInInterimForm);
+    
+     // 파일 다운로드 태그 숨기기
+     $('#interimFormDownloadFile').hide();
+     // 파일 업로드 input 보여주기
+     $('input[name="interimFormUploadFile"]').show();
     event.target.innerHTML = '제출';
     event.target.setAttribute('onclick',`interimFormModalSubmit(this, ${id})`);
-    event.preventDefault();
     console.log(event);
 }
 
@@ -26,6 +27,8 @@ function getInterimForm(id) {
             console.log(data);
             $('#interimFormModify .modal-body').empty();
             $('#interimFormModify .modal-body').append(data);
+            // 파일 업로드 input 숨기기
+            $('input[name="interimFormUploadFile"]').hide();
 
         },
         error: (error) => {
@@ -57,6 +60,7 @@ function interimFormModalSubmit(target, id) {
                 // location.reload(); // 새로고침
             },
             error: (error) => {
+                alert(error.responseJSON.errorMessage);
                 console.log("hi",error);
             }
         });

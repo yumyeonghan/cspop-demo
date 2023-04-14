@@ -28,4 +28,9 @@ public class OtherFormUploadFile {
         this.uploadFileName = uploadFileName;
         this.storeFileName = storeFileName;
     }
+
+    public void updateFile(OtherFormUploadFile otherFormUploadFile) {
+        this.uploadFileName = otherFormUploadFile.getUploadFileName();
+        this.storeFileName = otherFormUploadFile.getStoreFileName();
+    }
 }

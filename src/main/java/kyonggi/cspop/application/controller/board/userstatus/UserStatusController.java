@@ -36,13 +36,16 @@ import kyonggi.cspop.domain.uploadfile.InterimFormUploadFile;
 import kyonggi.cspop.domain.uploadfile.OtherFormUploadFile;
 import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.service.UsersService;
+import kyonggi.cspop.exception.CsPopErrorCode;
+import kyonggi.cspop.exception.CsPopException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -169,6 +172,7 @@ public class UserStatusController {
 
     @GetMapping("/modifySubmitForm")
     public String SubmitForm(@RequestParam("submitFormId") Long submitFormId, Model model) {
+
         SubmitForm submitForm = submitFormService.findSubmitForm(submitFormId);
         model.addAttribute("submitForm", new SubmitViewDto(submitForm));
         return "graduation/form/modal/submitFormModal";
@@ -176,6 +180,7 @@ public class UserStatusController {
 
     @GetMapping("/modifyProposalForm")
     public String ProposalForm(@RequestParam("proposalFormId") Long proposalFormId, Model model) {
+
         ProposalForm proposalForm = proposalFormService.findProposalForm(proposalFormId);
         model.addAttribute("proposalForm", new ProposalViewDto(proposalForm));
         return "graduation/form/modal/proposalFormModal";
@@ -183,6 +188,7 @@ public class UserStatusController {
 
     @GetMapping("/modifyInterimForm")
     public String InterimForm(@RequestParam("interimFormId") Long interimFormId, Model model) {
+
         InterimForm interimForm = interimFormService.findInterimForm(interimFormId);
         model.addAttribute("interimForm", new InterimViewDto(interimForm));
         return "graduation/form/modal/InterimFormModal";
@@ -190,6 +196,7 @@ public class UserStatusController {
 
     @GetMapping("/modifyOtherForm")
     public String OtherForm(@RequestParam("otherFormId") Long otherFormId, Model model) {
+
         OtherForm otherForm = otherFormService.findOtherForm(otherFormId);
         model.addAttribute("otherForm", new OtherViewDto(otherForm));
         return "graduation/form/modal/otherFormModal";
@@ -204,38 +211,53 @@ public class UserStatusController {
 
     //수정 로직
     @PostMapping("/modifySubmitForm")
-    public ResponseEntity<Void> modifySubmitForm(@RequestParam("submitFormId") Long submitFormId, @Validated @ModelAttribute SubmitFormDto submitFormDto){
+    public ResponseEntity<Void> modifySubmitForm(@RequestParam("submitFormId") Long submitFormId, @Validated @ModelAttribute SubmitFormDto submitFormDto, BindingResult result) {
 
+        if (result.hasFieldErrors()) {
+            throw new CsPopException(CsPopErrorCode.FORM_HAS_NULL_CONTENT);
+        }
         submitFormService.updateUserSubmitForm(submitFormId, submitFormDto);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/modifyProposalForm")
-    public ResponseEntity<Void> modifyProposalForm(@RequestParam("proposalFormId") Long proposalFormId, @Validated @ModelAttribute ProposalFormDto proposalFormDto) {
+    public ResponseEntity<Void> modifyProposalForm(@RequestParam("proposalFormId") Long proposalFormId, @Validated @ModelAttribute ProposalFormDto proposalFormDto, BindingResult result) {
 
+        if (result.hasFieldErrors()) {
+            throw new CsPopException(CsPopErrorCode.FORM_HAS_NULL_CONTENT);
+        }
         proposalFormService.updateUserProposalForm(proposalFormId, proposalFormDto);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/modifyInterimForm")
-    public ResponseEntity<Void> modifyInterimForm(@RequestParam("interimFormId") Long interimFormId, @Validated @ModelAttribute InterimFormDto interimFormDto) throws IOException {
+    public ResponseEntity<Void> modifyInterimForm(@RequestParam("interimFormId") Long interimFormId, @Validated @ModelAttribute InterimFormDto interimFormDto, BindingResult result) throws IOException {
 
+        if (result.hasFieldErrors() || interimFormDto.getInterimFormUploadFile().isEmpty()) {
+            throw new CsPopException(CsPopErrorCode.FORM_HAS_NULL_CONTENT);
+        }
         InterimFormUploadFile interimFormUploadFile = fileStore.storeInterimFile(interimFormDto.getInterimFormUploadFile());
         interimFormService.updateUserInterimForm(interimFormId, interimFormDto, interimFormUploadFile);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/modifyFinalForm")
-    public ResponseEntity<Void> modifyFinalForm(@RequestParam("finalFormId") Long finalFormId, @Validated @ModelAttribute FinalFormDto finalFormDto) throws IOException {
+    public ResponseEntity<Void> modifyFinalForm(@RequestParam("finalFormId") Long finalFormId, @Validated @ModelAttribute FinalFormDto finalFormDto, BindingResult result) throws IOException {
 
+        if (result.hasFieldErrors() || finalFormDto.getFinalFormUploadFile().isEmpty()) {
+            throw new CsPopException(CsPopErrorCode.FORM_HAS_NULL_CONTENT);
+        }
         FinalFormUploadFile finalFormUploadFile = fileStore.storeFinalFile(finalFormDto.getFinalFormUploadFile());
         finalFormService.updateUserFinalForm(finalFormId, finalFormDto, finalFormUploadFile);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/modifyOtherForm")
-    public ResponseEntity<Void> modifyOtherForm(@RequestParam("otherFormId") Long otherFormId, @Validated @ModelAttribute OtherFormDto otherFormDto) throws IOException {
+    public ResponseEntity<Void> modifyOtherForm(@RequestParam("otherFormId") Long otherFormId, @Validated @ModelAttribute OtherFormDto otherFormDto, BindingResult result) throws IOException {
 
+        if (result.hasFieldErrors() || otherFormDto.getOtherFormUploadFile().isEmpty()) {
+            throw new CsPopException(CsPopErrorCode.FORM_HAS_NULL_CONTENT);
+        }
         OtherFormUploadFile otherFormUploadFile = fileStore.storeOtherFile(otherFormDto.getOtherFormUploadFile());
         otherFormService.updateUserOtherForm(otherFormId, otherFormDto, otherFormUploadFile);
         return ResponseEntity.noContent().build();

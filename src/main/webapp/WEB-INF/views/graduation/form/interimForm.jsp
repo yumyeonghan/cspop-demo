@@ -113,13 +113,13 @@
                                 <div class="form-group">
                                     <label><b>파일 제출</b></label>
                                     <div class="card" style="padding: 5px;">
-                                        <input id="inputFile" type="file" name="interimFormUploadFile">
+                                        <input id="inputFile" type="file" name="interimFormUploadFile"required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="content"><b>진행 내용</b></label>
                                     <div class="card" style="padding: 5px;">
-                                        <textarea type="text" class="form-control" id="content" name="text" placeholder="입력하세요"></textarea>
+                                        <textarea type="text" class="form-control" id="content" name="text" placeholder="입력하세요" required></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
