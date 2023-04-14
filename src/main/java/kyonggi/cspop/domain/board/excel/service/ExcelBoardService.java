@@ -30,12 +30,6 @@ public class ExcelBoardService {
         return excelBoardRepository.findAllByOrderById(pageable).map(ExcelBoardResponseDto::new);
     }
 
-    @Transactional
-    public void deleteExcelListAndUploadExcelList(List<ExcelBoard> dataList) {
-        excelBoardRepository.deleteAllInBatch();
-        excelBoardRepository.saveAll(dataList);
-    }
-
     public Optional<ExcelBoard> findExcelByStudentId(String studentId) {
         Optional<ExcelBoard> excelBoard = excelBoardRepository.findByStudentId(studentId);
         return excelBoard;
@@ -59,26 +53,29 @@ public class ExcelBoardService {
     }
 
     @Transactional
-    public void updateExcelByFinalForm(Users users){
+    public void updateExcelByFinalForm(Users users) {
         ExcelBoard excelBoard = excelBoardRepository.findByStudentId(users.getStudentId()).get();
         excelBoard.updateExcelByFinalForm();
     }
+
     @Transactional
-    public void updateExcelByOtherForm(Users users){
+    public void updateExcelByOtherForm(Users users) {
         ExcelBoard excelBoard = excelBoardRepository.findByStudentId(users.getStudentId()).get();
         excelBoard.updateExcelByOtherForm();
     }
 
     //상태 별 필터링
-    public Page<ExcelBoardResponseDto> findAllStep(Pageable pageable,String word) {
-        return excelBoardRepository.findAllByStepOrderById(word,pageable).map(ExcelBoardResponseDto::new);
+    public Page<ExcelBoardResponseDto> findAllStep(Pageable pageable, String word) {
+        return excelBoardRepository.findAllByStepOrderById(word, pageable).map(ExcelBoardResponseDto::new);
     }
 
     public Page<ExcelBoardResponseDto> findSearchName(Pageable pageable, String word) {
         return excelBoardRepository.findByStudentNameContainingOrderById(word, pageable).map(ExcelBoardResponseDto::new);
     }
+
     public Page<ExcelBoardResponseDto> findDetailSearchName(Pageable pageable, String word, String step) {
         return excelBoardRepository.findByStudentNameContainingAndStepOrderById(word, step, pageable).map(ExcelBoardResponseDto::new);
+    }
 
     @Transactional
     public void updateExcelBySubmitForm(Users users, ExcelBoardSubmitFormDto excelBoardSubmitFormDto) {
@@ -92,3 +89,4 @@ public class ExcelBoardService {
         excelBoard.approvalUserForm();
     }
 }
+
