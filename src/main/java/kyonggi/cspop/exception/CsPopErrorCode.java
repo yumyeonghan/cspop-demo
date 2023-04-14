@@ -17,8 +17,12 @@ public enum CsPopErrorCode {
     NO_UPLOAD_FILE_EXTENSION(HttpStatus.NOT_FOUND, "엑셀파일을 업로드 해주세요."),
 
     //NoticeBoard
-    NOTICE_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND, "게시판이 이미 삭제 되었습니다.");
+    NOTICE_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND, "게시판이 이미 삭제 되었습니다."),
 
+    //Form
+    FORM_HAS_NULL_CONTENT(HttpStatus.NOT_FOUND,"비어있는 항목이 있어 제출할 수 없습니다."),
+    SUBMIT_NOT_QUALIFICATION(HttpStatus.BAD_REQUEST,"존재하지 않는 졸업 요건입니다."),
+    FINAL_INVALID_PAGE(HttpStatus.BAD_REQUEST, "페이지는 항상 양수입니다.");
 
     private HttpStatus httpStatus;
     private String errorMessage;

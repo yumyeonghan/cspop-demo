@@ -74,6 +74,7 @@
                         <div class="form-group">
                             <label>최종보고서 파일</label>
                             <div class="card" style="padding: 5px;">
+                                <a id="finalFormDownloadFile" href="/api/attach/finalForm/${finalForm.id}" style="display: block;">${finalForm.finalFormUploadFile.uploadFileName}</a>
                                 <input id="inputFile" type="file" name="finalFormUploadFile" required>
                             </div>
                         </div>

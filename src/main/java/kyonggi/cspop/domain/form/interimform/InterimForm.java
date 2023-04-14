@@ -73,7 +73,7 @@ public class InterimForm extends BaseEntity {
         this.plan = plan;
     }
 
-    public void updateFile(InterimFormUploadFile interimFormUploadFile) {
-        this.interimFormUploadFile = interimFormUploadFile;
+    public void updateState() {
+        this.approval = true;
     }
 }

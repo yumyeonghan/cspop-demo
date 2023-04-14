@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Comment;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +20,7 @@ import javax.persistence.Id;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter @Setter
+@DynamicUpdate
 public class ExcelBoard extends BaseEntity {
 
     @Id
@@ -80,5 +82,22 @@ public class ExcelBoard extends BaseEntity {
     public void updateExcelByOtherForm(){
         this.step = Step.OTHER_QUALIFICATIONS.getStepToString();
         this.state = "미승인";
+    }
+
+    public void updateExcelBySubmitForm(String professorName, String graduationDate, String capstoneCompletion) {
+        this.professorName = professorName;
+        this.graduationDate = graduationDate;
+        this.state = "승인";
+
+        if (capstoneCompletion.equals("option1")) {
+            this.capstoneCompletion = "이수";
+        }
+        else{
+            this.capstoneCompletion = "미이수";
+        }
+    }
+
+    public void approvalUserForm() {
+        this.state = "승인";
     }
 }

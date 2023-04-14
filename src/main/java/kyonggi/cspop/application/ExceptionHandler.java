@@ -3,6 +3,7 @@ package kyonggi.cspop.application;
 import kyonggi.cspop.application.controller.board.excel.certification.CertificationExcelBoardController;
 import kyonggi.cspop.application.controller.board.excel.graduate.GraduateCheckController;
 import kyonggi.cspop.application.controller.board.notice.NoticeBoardController;
+import kyonggi.cspop.application.controller.board.userstatus.UserStatusController;
 import kyonggi.cspop.application.controller.users.UsersController;
 import kyonggi.cspop.exception.CsPopException;
 import kyonggi.cspop.exception.ErrorResponse;
@@ -13,7 +14,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
         UsersController.class,
         GraduateCheckController.class,
         CertificationExcelBoardController.class,
-        NoticeBoardController.class
+        NoticeBoardController.class,
+        UserStatusController.class
 })
 public class ExceptionHandler {
 

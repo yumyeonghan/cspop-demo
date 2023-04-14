@@ -3,6 +3,8 @@ package kyonggi.cspop.domain.form.submitform;
 import kyonggi.cspop.domain.entity.BaseEntity;
 import kyonggi.cspop.domain.form.submitform.enums.GraduationRequirements;
 import kyonggi.cspop.domain.users.Users;
+import kyonggi.cspop.exception.CsPopErrorCode;
+import kyonggi.cspop.exception.CsPopException;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -66,8 +68,15 @@ public class SubmitForm extends BaseEntity {
         if (graduationRequirements.equals("기타자격")) {
             this.graduationRequirements = GraduationRequirements.Other_Qualifications;
         }
-        else{
+        else if(graduationRequirements.equals("논문")){
             this.graduationRequirements = GraduationRequirements.THESIS;
         }
+        else {
+            throw new CsPopException(CsPopErrorCode.SUBMIT_NOT_QUALIFICATION);
+        }
+    }
+
+    public void updateState() {
+        this.approval = true;
     }
 }

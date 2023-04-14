@@ -29,4 +29,10 @@ public class SubmitFormService {
         SubmitForm submitForm = submitFormRepository.findById(id).get();
         submitForm.updateSubmitForm(submitFormDto.getQualification());
     }
+
+    @Transactional
+    public void updateUserSubmitState(Long id) {
+        SubmitForm submitForm = submitFormRepository.findById(id).get();
+        submitForm.updateState();
+    }
 }

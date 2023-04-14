@@ -13,15 +13,19 @@ import kyonggi.cspop.domain.users.Users;
 import kyonggi.cspop.domain.users.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriUtils;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 @Controller
@@ -66,5 +70,19 @@ public class InterimFormController {
         log.info("폼 = {}", interimFormDto);
         //신청 폼 저장 -> 액셀 업데이트 -> 졸업 진행 상황 테이블 업데이트 -> 신청자 리스트 업데이트
         return "redirect:/api/userStatus";
+    }
+
+    @GetMapping("api/attach/interimForm/{interimFormId}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable Long interimFormId) throws MalformedURLException {
+        InterimForm interimForm = interimFormService.findInterimForm(interimFormId);
+        String storeFileName = interimForm.getInterimFormUploadFile().getStoreFileName();
+        String uploadFileName = interimForm.getInterimFormUploadFile().getUploadFileName();
+
+        UrlResource resource = new UrlResource("file:" + fileStore.getFullPath(storeFileName));
+
+        String encodedUploadFileName = UriUtils.encode(uploadFileName, StandardCharsets.UTF_8);
+        String contentDisposition = "attachment; filename=\"" + encodedUploadFileName + "\"";
+
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition).body(resource);
     }
 }
