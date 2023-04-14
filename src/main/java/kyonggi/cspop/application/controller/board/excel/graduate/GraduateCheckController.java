@@ -2,6 +2,11 @@ package kyonggi.cspop.application.controller.board.excel.graduate;
 
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserDetailDto;
 import kyonggi.cspop.application.controller.board.userstatus.dto.UserScheduleDto;
+import kyonggi.cspop.application.controller.form.finalForm.FinalViewDto;
+import kyonggi.cspop.application.controller.form.interimForm.InterimViewDto;
+import kyonggi.cspop.application.controller.form.otherform.OtherViewDto;
+import kyonggi.cspop.application.controller.form.proposalform.ProposalViewDto;
+import kyonggi.cspop.application.controller.form.submitform.SubmitViewDto;
 import kyonggi.cspop.domain.board.excel.ExcelBoard;
 import kyonggi.cspop.domain.board.excel.dto.ExcelBoardResponseDto;
 import kyonggi.cspop.domain.board.excel.dto.ExcelBoardSubmitFormDto;
@@ -93,6 +98,7 @@ public class GraduateCheckController {
         model.addAttribute("userDetail", userDetailDto);
 
 
+
         /**
          * 유저별 진행 상황 테이블 데이터 전송
          */
@@ -145,7 +151,31 @@ public class GraduateCheckController {
         List<String> notApprovalList = new ArrayList<>();
         userSchedules.stream().filter(e -> e.getApprovalStatus().equals("미승인")).forEach(e -> notApprovalList.add(e.getStep()));
         model.addAttribute("notApprovalList", notApprovalList);
-        return "graduation/userstatus/userApprovalStatus";
+
+        //파라미터 넘기는 로직(유저의 폼 별 아이디 정보)
+
+        if (!Objects.isNull(user.getSubmitForm())) {
+            SubmitForm submitForm = submitFormService.findSubmitForm(user.getSubmitForm().getId());
+            model.addAttribute("userSubmitFormInfo", new SubmitViewDto(submitForm));
+        }
+        if (!Objects.isNull(user.getProposalForm())) {
+            ProposalForm proposalForm = proposalFormService.findProposalForm(user.getProposalForm().getId());
+            model.addAttribute("userProposalFormInfo", new ProposalViewDto(proposalForm));
+        }
+        if (!Objects.isNull(user.getInterimForm())) {
+            InterimForm interimForm = interimFormService.findInterimForm(user.getInterimForm().getId());
+            model.addAttribute("userInterimFormInfo", new InterimViewDto(interimForm));
+        }
+        if (!Objects.isNull(user.getOtherForm())) {
+            OtherForm otherForm = otherFormService.findOtherForm(user.getOtherForm().getId());
+            model.addAttribute("userOtherFormInfo", new OtherViewDto(otherForm));
+        }
+        if (!Objects.isNull(user.getFinalForm())) {
+            FinalForm finalFormId = finalFormService.findFinalForm(user.getFinalForm().getId());
+            model.addAttribute("userFinalFormInfo", new FinalViewDto(finalFormId));
+        }
+
+        return "graduation/userstatus/userGraduationStatus";
     }
 
     //신청서 뷰(모달) & 승인 테스트
