@@ -33,14 +33,14 @@
     <script src="../../../../assets/js/ckeditor/ckeditor.js"></script>
     <script src="../../../../assets/js/graduation.js"></script>
 </head>
-<%@include file="../../common/sessionController.jsp" %>
+<%@include file="../../../common/sessionController.jsp" %>
 <body>
 <c:if test="${errorMessage eq true}">
     <script>
         alert("검색 결과가 없습니다.")
     </script>
 </c:if>
-<%@include file="../../common/header.jsp" %>
+<%@include file="../../../common/header.jsp" %>
 <section class="page-start">
     <!-- pageheader section -->
     <div class="bg-shape bg-secondary">
@@ -69,7 +69,7 @@
                                 </p>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
-                                <form action="/api/graduation/allStep/search?page=0&size=10" method="get">
+                                <form action="/api/graduation/submitFormStep/search?page=0&size=10" method="get">
                                         <span class="position-absolute ps-3 pt-1 mt-1">
                                             <i class="fe fe-search"></i>
                                         </span>
@@ -131,7 +131,7 @@
                                             <tr style="text-align: center">
                                                 <td>${count.count}</td>
                                                 <td><c:out value="${data.studentId}"/></td>
-                                                <td><a href="/api/userStatus/approvalUser/${data.studentId}"><c:out value="${data.studentName}"/></a></td>
+                                                <td><c:out value="${data.studentName}"/></td>
                                                 <td><c:out value="${data.professorName}"/></td>
                                                 <td><c:out value="${data.graduationDate}"/></td>
                                                 <td><c:out value="${data.step}"/></td>
@@ -153,10 +153,10 @@
                                     <c:when test="${graduator.first}"></c:when>
                                     <c:otherwise>
                                         <li class="page-item"><a class="page-link"
-                                                                 href="/api/graduation/graduate_management?page=0&size=10">처음</a>
+                                                                 href="/api/graduation/graduate_submitForm?page=0&size=10">처음</a>
                                         </li>
                                         <li class="page-item"><a class="page-link"
-                                                                 href="/api/graduation/graduate_management?page=${graduator.number-1}&size=10">이전</a>
+                                                                 href="/api/graduation/graduate_submitForm?page=${graduator.number-1}&size=10">이전</a>
                                         </li>
                                     </c:otherwise>
                                 </c:choose>
@@ -166,12 +166,12 @@
                                     <c:choose>
                                         <c:when test="${graduator.pageable.pageNumber+1 == i}">
                                             <li class="page-item disabled"><a class="page-link"
-                                                                              href="/api/graduation/graduate_management?page=${i-1}&size=10">${i}</a>
+                                                                              href="/api/graduation/graduate_submitForm?page=${i-1}&size=10">${i}</a>
                                             </li>
                                         </c:when>
                                         <c:otherwise>
                                             <li class="page-item"><a class="page-link"
-                                                                     href="/api/graduation/graduate_management?page=${i-1}&size=10">${i}</a>
+                                                                     href="/api/graduation/graduate_submitForm?page=${i-1}&size=10">${i}</a>
                                             </li>
                                         </c:otherwise>
                                     </c:choose>
@@ -181,10 +181,10 @@
                                     <c:when test="${ulist.last}"></c:when>
                                     <c:otherwise>
                                         <li class="page-item "><a class="page-link"
-                                                                  href="/api/graduation/graduate_management?page=${graduator.number+1}&size=10">다음</a>
+                                                                  href="/api/graduation/graduate_submitForm?page=${graduator.number+1}&size=10">다음</a>
                                         </li>
                                         <li class="page-item "><a class="page-link"
-                                                                  href="/api/graduation/graduate_management?page=${graduator.totalPages-1}&size=10">마지막</a>
+                                                                  href="/api/graduation/graduate_submitForm?page=${graduator.totalPages-1}&size=10">마지막</a>
                                         </li>
                                     </c:otherwise>
                                 </c:choose>
@@ -200,6 +200,6 @@
         </div>
     </div>
 </section>
-<%@include file="../../common/commonJS.jsp" %>
+<%@include file="../../../common/commonJS.jsp" %>
 </body>
 </html>

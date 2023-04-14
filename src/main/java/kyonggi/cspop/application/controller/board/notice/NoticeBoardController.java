@@ -64,6 +64,29 @@ public class NoticeBoardController {
         return "graduation/notice/notice";
     }
 
+    @GetMapping("api/notice/search")
+    public String searchNotice(@RequestParam String word, Pageable pageable, Model model) {
+        Page<NoticeBoardResponseDto> searchNotice = noticeBoardService.findSearchNotice(pageable, word);
+        if (searchNotice.isEmpty()) {
+            model.addAttribute("errorMessage", true);
+            return "graduation/notice/notice";
+        }
+
+
+        int pageNumber = searchNotice.getPageable().getPageNumber(); //현재페이지
+        int totalPages = searchNotice.getTotalPages(); //총 페이지 수
+        int pageBlock = 10;
+        int startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1; //현재 페이지가 7이라면 0*10+1=1
+        int endBlockPage = startBlockPage + pageBlock - 1;
+        endBlockPage = totalPages < endBlockPage ? totalPages : endBlockPage;
+
+        model.addAttribute("startBlockPage", startBlockPage);
+        model.addAttribute("endBlockPage", endBlockPage);
+        model.addAttribute("allNoticeBoard", searchNotice);
+
+        return "graduation/notice/notice";
+    }
+
     @PostMapping("api/graduation/form")
     public String saveNoticeBoard(HttpServletRequest request, @Validated @ModelAttribute NoticeBoardRequestDto noticeBoardRequestDto, BindingResult bindingResult, Model model) throws IOException {
         if (bindingResult.hasErrors()) {

@@ -69,6 +69,17 @@ public class ExcelBoardService {
         excelBoard.updateExcelByOtherForm();
     }
 
+    //상태 별 필터링
+    public Page<ExcelBoardResponseDto> findAllStep(Pageable pageable,String word) {
+        return excelBoardRepository.findAllByStepOrderById(word,pageable).map(ExcelBoardResponseDto::new);
+    }
+
+    public Page<ExcelBoardResponseDto> findSearchName(Pageable pageable, String word) {
+        return excelBoardRepository.findByStudentNameContainingOrderById(word, pageable).map(ExcelBoardResponseDto::new);
+    }
+    public Page<ExcelBoardResponseDto> findDetailSearchName(Pageable pageable, String word, String step) {
+        return excelBoardRepository.findByStudentNameContainingAndStepOrderById(word, step, pageable).map(ExcelBoardResponseDto::new);
+
     @Transactional
     public void updateExcelBySubmitForm(Users users, ExcelBoardSubmitFormDto excelBoardSubmitFormDto) {
         ExcelBoard excelBoard = excelBoardRepository.findByStudentId(users.getStudentId()).get();

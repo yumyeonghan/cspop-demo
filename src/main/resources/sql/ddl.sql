@@ -44,7 +44,7 @@ CREATE TABLE notice_board
     `created_date`       DATETIME(6)  NULL DEFAULT NULL COMMENT '등록일',
     `last_modified_date` DATETIME(6)  NULL DEFAULT NULL COMMENT '수정일',
     `fixed`              BIT(1)       NOT NULL COMMENT '고정 여부',
-    `text`               VARCHAR(255) NOT NULL COMMENT '공지사항 본문',
+    `text`               VARCHAR(15000) NOT NULL COMMENT '공지사항 본문',
     `title`              VARCHAR(255) NOT NULL COMMENT '공지사항 제목',
     `views`              INT          NULL DEFAULT NULL COMMENT '조회수',
     `admins_id`          BIGINT       NULL DEFAULT NULL,
@@ -140,8 +140,8 @@ CREATE TABLE interim_form
     `approval`                    BIT(1)       NOT NULL COMMENT '승인여부',
     `title`                       VARCHAR(255) NOT NULL COMMENT '제목',
     `division`                    VARCHAR(255) NOT NULL COMMENT '구분',
-    `text`                        VARCHAR(255) NOT NULL COMMENT '진행내용',
-    `plan`                        VARCHAR(255) NOT NULL COMMENT '향후계획',
+    `text`                        VARCHAR(5000) NOT NULL COMMENT '진행내용',
+    `plan`                        VARCHAR(5000) NOT NULL COMMENT '향후계획',
     `interim_form_upload_file_id` BIGINT       NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_interim_form_to_interim_form_upload_file`
@@ -176,7 +176,7 @@ CREATE TABLE other_form
     `approval`                  BIT(1)       NOT NULL COMMENT '승인여부',
     `division`                  VARCHAR(255) NOT NULL COMMENT '구분',
     `title`                     VARCHAR(255) NOT NULL COMMENT '제목',
-    `text`                      VARCHAR(255) NOT NULL COMMENT '본문',
+    `text`                      VARCHAR(5000) NOT NULL COMMENT '본문',
     `other_form_upload_file_id` BIGINT       NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_other_form_to_other_form_upload_file`
@@ -217,7 +217,7 @@ CREATE TABLE proposal_form
     `title`              VARCHAR(255) NOT NULL COMMENT '제목',
     `division`           VARCHAR(255) NOT NULL COMMENT '구분',
     `keyword`            VARCHAR(255) NOT NULL COMMENT '키워드',
-    `text`               VARCHAR(255) NOT NULL COMMENT '본문',
+    `text`               VARCHAR(5000) NOT NULL COMMENT '본문',
     PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB
@@ -319,7 +319,7 @@ CREATE TABLE guidance_board
     `id`                 BIGINT       NOT NULL,
     `created_date`       DATETIME(6)  NULL DEFAULT NULL COMMENT '등록일',
     `last_modified_date` DATETIME(6)  NULL DEFAULT NULL COMMENT '수정일',
-    `text`               VARCHAR(255) NULL DEFAULT NULL COMMENT '안내 및 내규 본문',
+    `text`               VARCHAR(15000) NULL DEFAULT NULL COMMENT '안내 및 내규 본문',
     PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB
@@ -333,12 +333,12 @@ CREATE TABLE schedule_board
     `id`                        BIGINT       NOT NULL,
     `created_date`              DATETIME(6)  NULL DEFAULT NULL COMMENT '등록일',
     `last_modified_date`        DATETIME(6)  NULL DEFAULT NULL COMMENT '수정일',
-    `final_pass_text`           VARCHAR(255) NULL DEFAULT NULL COMMENT '최종통과 본문',
-    `final_report_text`         VARCHAR(255) NULL DEFAULT NULL COMMENT '최종보고서 본문',
-    `interim_report_text`       VARCHAR(255) NULL DEFAULT NULL COMMENT '중간보고서 본문',
-    `other_qualifications_text` VARCHAR(255) NULL DEFAULT NULL COMMENT '기타자격 본문',
-    `proposal_text`             VARCHAR(255) NULL DEFAULT NULL COMMENT '제안서 본문',
-    `received_text`             VARCHAR(255) NULL DEFAULT NULL COMMENT '신청접수 본문',
+    `final_pass_text`           VARCHAR(3000) NULL DEFAULT NULL COMMENT '최종통과 본문',
+    `final_report_text`         VARCHAR(2550) NULL DEFAULT NULL COMMENT '최종보고서 본문',
+    `interim_report_text`       VARCHAR(2550) NULL DEFAULT NULL COMMENT '중간보고서 본문',
+    `other_qualifications_text` VARCHAR(2550) NULL DEFAULT NULL COMMENT '기타자격 본문',
+    `proposal_text`             VARCHAR(2550) NULL DEFAULT NULL COMMENT '제안서 본문',
+    `received_text`             VARCHAR(2550) NULL DEFAULT NULL COMMENT '신청접수 본문',
     PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB
@@ -363,7 +363,7 @@ CREATE TABLE certification_board
     `essential`              VARCHAR(255) NULL DEFAULT NULL COMMENT '필수 과목',
     `first_and_last`         VARCHAR(255) NULL DEFAULT NULL COMMENT '선/후수 과목',
     `total`                  VARCHAR(255) NULL DEFAULT NULL COMMENT '총 학점',
-    `special_note`           VARCHAR(255) NULL DEFAULT NULL COMMENT '특이사항',
+    `special_note`           VARCHAR(5000) NULL DEFAULT NULL COMMENT '특이사항',
     PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB

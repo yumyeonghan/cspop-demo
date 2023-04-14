@@ -13,4 +13,9 @@ public interface ExcelBoardRepository extends JpaRepository<ExcelBoard,Long> {
 
     Page<ExcelBoard> findAllByOrderById(Pageable pageable);
     Optional<ExcelBoard> findByStudentId(String studentId);
+
+    Page<ExcelBoard> findAllByStepOrderById(String step, Pageable pageable);
+
+    Page<ExcelBoard> findByStudentNameContainingOrderById(String word, Pageable pageable);
+    Page<ExcelBoard> findByStudentNameContainingAndStepOrderById(String studentName,String step, Pageable pageable);
 }

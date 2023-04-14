@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface NoticeBoardRepository extends JpaRepository<NoticeBoard, Long> {
 
     Page<NoticeBoard> findAllByOrderByFixedDescIdDesc(Pageable pageable);
+    Page<NoticeBoard> findByTitleContainingOrderByFixedDescIdDesc(String title, Pageable pageable);
 }

@@ -87,9 +87,9 @@
                                                 <div class="card-text" style="height: 1300px">${data.text}</div>
                                             </div>
                                         </div>
-                                        <a href="modifyGuide/${data.id}" class="btn btn-primary text-white">수정</a>
                                     </div>
                                 </div>
+                                <a href="modifyGuide/${data.id}" class="btn btn-primary text-white">수정</a>
                             </div>
                         </div>
                     </div>
