@@ -51,7 +51,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-//졸업자 조회 리스트 게시판 컨트롤러
 @Controller
 @RequiredArgsConstructor
 public class GraduateCheckController {
@@ -83,76 +82,21 @@ public class GraduateCheckController {
         return "graduation/graduator/graduation_list";
     }
 
-    //사용자별 뷰로 넘어가는 컨트롤러
     @GetMapping("api/userStatus/approvalUser/{studentId}")
     public String userGraduationStatusForm(@PathVariable String studentId, Model model) {
-
-        /**
-         * 사용자 학번에 해당하는 데이터 전송
-         */
         Users user = usersService.findUserByStudentId(studentId);
         Optional<ExcelBoard> excelByStudentId = excelBoardService.findExcelByStudentId(user.getStudentId());
 
-        String advisor = excelByStudentId.get().getProfessorName();
-        UserDetailDto userDetailDto = new UserDetailDto(user.getStudentId(), user.getStudentName(), user.getDepartment(), advisor != null ? advisor : "없음", excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false, user.getSubmitForm(), excelByStudentId.get().getGraduationDate());
+        UserDetailDto userDetailDto = createUserDetailDto(user, excelByStudentId);
         model.addAttribute("userDetail", userDetailDto);
 
-
-
-        /**
-         * 유저별 진행 상황 테이블 데이터 전송
-         */
-        List<UserScheduleDto> userSchedules = new ArrayList<>();
-        List<Schedules> scheduleList = scheduleService.findScheduleList();
-        for (Schedules schedules : scheduleList) {
-            if (user.getSubmitForm().getGraduationRequirements().equals(GraduationRequirements.Other_Qualifications)) {
-                if (schedules.getStep().equals(Step.INTERIM_REPORT) || schedules.getStep().equals(Step.FINAL_REPORT)) {
-                    continue;
-                }
-            }
-
-            if (user.getSubmitForm().getGraduationRequirements().equals(GraduationRequirements.THESIS)) {
-                if (schedules.getStep().equals(Step.OTHER_QUALIFICATIONS)) {
-                    continue;
-                }
-            }
-
-            if (schedules.getStep().equals(Step.RECEIVED)) {
-                UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(), schedules.getStartDate(), schedules.getEndDate(), Objects.isNull(user.getSubmitForm()) ? "미제출" : "완료", Objects.isNull(user.getSubmitForm()) || !user.getSubmitForm().isApproval() ? "미승인" : "승인");
-                userSchedules.add(userScheduleDto);
-            }
-
-            if (schedules.getStep().equals(Step.PROPOSAL)) {
-                UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(), schedules.getStartDate(), schedules.getEndDate(), Objects.isNull(user.getProposalForm()) ? "미제출" : "완료", Objects.isNull(user.getProposalForm()) || !user.getProposalForm().isApproval() ? "미승인" : "승인");
-                userSchedules.add(userScheduleDto);
-            }
-
-            if (schedules.getStep().equals(Step.INTERIM_REPORT)) {
-                UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(), schedules.getStartDate(), schedules.getEndDate(), Objects.isNull(user.getInterimForm()) ? "미제출" : "완료", Objects.isNull(user.getInterimForm()) || !user.getInterimForm().isApproval() ? "미승인" : "승인");
-                userSchedules.add(userScheduleDto);
-            }
-
-            if (schedules.getStep().equals(Step.FINAL_REPORT)) {
-                UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(), schedules.getStartDate(), schedules.getEndDate(), Objects.isNull(user.getFinalForm()) ? "미제출" : "완료", Objects.isNull(user.getFinalForm()) || !user.getFinalForm().isApproval() ? "미승인" : "승인");
-                userSchedules.add(userScheduleDto);
-            }
-
-            if (schedules.getStep().equals(Step.OTHER_QUALIFICATIONS)) {
-                UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(), schedules.getStartDate(), schedules.getEndDate(), Objects.isNull(user.getOtherForm()) ? "미제출" : "완료", Objects.isNull(user.getOtherForm()) || !user.getOtherForm().isApproval() ? "미승인" : "승인");
-                userSchedules.add(userScheduleDto);
-            }
-        }
+        List<UserScheduleDto> userSchedules = createUserScheduleDto(user);
         model.addAttribute("userSchedules", userSchedules);
 
-        //진행 단계들이 모두 승인 났으면 최종 통과는 true, 아니면 false
         model.addAttribute("finalPass", userSchedules.stream().allMatch(e -> e.getApprovalStatus().equals("승인")));
 
-        //어디까지 승인이 됐는지 뷰에 알려주는 로직 작성
-        List<String> notApprovalList = new ArrayList<>();
-        userSchedules.stream().filter(e -> e.getApprovalStatus().equals("미승인")).forEach(e -> notApprovalList.add(e.getStep()));
+        List<String> notApprovalList = createUnApprovalList(userSchedules);
         model.addAttribute("notApprovalList", notApprovalList);
-
-        //파라미터 넘기는 로직(유저의 폼 별 아이디 정보)
 
         if (!Objects.isNull(user.getSubmitForm())) {
             SubmitForm submitForm = submitFormService.findSubmitForm(user.getSubmitForm().getId());
@@ -174,102 +118,65 @@ public class GraduateCheckController {
             FinalForm finalFormId = finalFormService.findFinalForm(user.getFinalForm().getId());
             model.addAttribute("userFinalFormInfo", new FinalViewDto(finalFormId));
         }
-
         return "graduation/userstatus/userGraduationStatus";
     }
 
-    //신청서 뷰(모달) & 승인 테스트
-    @GetMapping("api/userStatus/approvalUser/{studentId}/update")
-    public String testView(@PathVariable String studentId) {
-        Users user = usersService.findUserByStudentId(studentId);
-        return "graduation/form/submitApprovalForm";
-    }
-    @PostMapping("api/userStatus/approvalUser/{studentId}/update")
-    public String test(@PathVariable String studentId, @Valid ExcelBoardSubmitFormDto excelBoardSubmitFormDto) {
-
-        Users user = usersService.findUserByStudentId(studentId);
-
-        //신청접수 아이디가 있으나 미승인 상태라면 excel 및 submit_form 승인 상태 update
-        // 그외 엑셀과 폼의 승인 상태 update
-        if (!Objects.isNull(user.getSubmitForm())) {
-            SubmitForm submitFormId = submitFormService.findSubmitForm(user.getSubmitForm().getId());
-
-            if (!submitFormId.isApproval()) {
-                excelBoardService.updateExcelBySubmitForm(user, excelBoardSubmitFormDto);
-                submitFormService.updateUserSubmitState(submitFormId.getId());
-            }
-        }
-
-        return "redirect:/api/userStatus/approvalUser/{studentId}";
-    }
-
-    //승인 처리 컨트롤러 - 신청서를 제외한 나머지는 승인버튼을 누를 시 승인 상태만 미승인->승인으로 변경 된다.
     @PostMapping("api/userStatus/approvalUser/{studentId}")
     public ResponseEntity<Void> userApprovalProcess(@PathVariable String studentId, @Valid ExcelBoardSubmitFormDto excelBoardSubmitFormDto) {
         Users user = usersService.findUserByStudentId(studentId);
-
-        //신청접수 아이디가 있으나 미승인 상태라면 excel 및 submit_form 승인 상태 update
-        // 그외 엑셀과 폼의 승인 상태 update
-        if (!Objects.isNull(user.getSubmitForm())) {
-            SubmitForm submitFormId = submitFormService.findSubmitForm(user.getSubmitForm().getId());
-
-            if (!submitFormId.isApproval()) {
-                excelBoardService.updateExcelBySubmitForm(user, excelBoardSubmitFormDto);
-                submitFormService.updateUserSubmitState(submitFormId.getId());
-            }
-        }
-        else if (!Objects.isNull(user.getProposalForm())) {
-            ProposalForm proposalFormId = proposalFormService.findProposalForm(user.getProposalForm().getId());
-
-            if (!proposalFormId.isApproval()) {
-                excelBoardService.updateApprovalState(user);
-                proposalFormService.updateUserProposalState(proposalFormId.getId());
-            }
-        }
-        else if (!Objects.isNull(user.getInterimForm())) {
-            InterimForm interimFormId = interimFormService.findInterimForm(user.getInterimForm().getId());
-            if (!interimFormId.isApproval()) {
-                excelBoardService.updateApprovalState(user);
-                interimFormService.updateUserInterimState(interimFormId.getId());
-            }
-        }
-        else if (!Objects.isNull(user.getFinalForm())) {
-            FinalForm finalFormId = finalFormService.findFinalForm(user.getFinalForm().getId());
-            if (!finalFormId.isApproval()) {
-                excelBoardService.updateApprovalState(user);
-                finalFormService.updateUserFinalState(finalFormId.getId());
-            }
-        }
-        else if (!Objects.isNull(user.getOtherForm())) {
-            OtherForm otherFormId = otherFormService.findOtherForm(user.getOtherForm().getId());
-            if (!otherFormId.isApproval()) {
-                excelBoardService.updateApprovalState(user);
-                otherFormService.updateUserOtherState(otherFormId.getId());
-            }
-        }
-
+        updateExcelAndForms(excelBoardSubmitFormDto, user);
         return ResponseEntity.ok().build();
     }
-
 
     @SneakyThrows
     @GetMapping("api/graduation/graduate_management.download")
     public ResponseEntity<InputStreamResource> downloadExcel(HttpServletResponse response) {
-
         File tmpFile = getTmpFile();
         InputStream excelFile = getExcelFile(tmpFile);
-
-        return ResponseEntity.ok() //
-                .contentLength(tmpFile.length()) //
-                .contentType(MediaType.APPLICATION_OCTET_STREAM) //
-                .header("Content-Disposition", "attachment;filename=graduation.xlsx") //
-                .body(new InputStreamResource(excelFile));
+        return ResponseEntity.ok().contentLength(tmpFile.length()).contentType(MediaType.APPLICATION_OCTET_STREAM).header("Content-Disposition", "attachment;filename=graduation.xlsx").body(new InputStreamResource(excelFile));
     }
 
     /**
      * 프론트 작업자는 이 밑으로 로직 안봐도 됩니다.
      * 위의 public 접근 제어자 메서드만 확인해 주세요.
      */
+
+    private void updateExcelAndForms(ExcelBoardSubmitFormDto excelBoardSubmitFormDto, Users user) {
+        if (!Objects.isNull(user.getSubmitForm())) {
+            SubmitForm submitFormId = submitFormService.findSubmitForm(user.getSubmitForm().getId());
+
+            if (!submitFormId.isApproval()) {
+                excelBoardService.updateExcelBySubmitForm(user, excelBoardSubmitFormDto);
+                submitFormService.updateUserSubmitState(submitFormId.getId());
+            }
+        } else if (!Objects.isNull(user.getProposalForm())) {
+            ProposalForm proposalFormId = proposalFormService.findProposalForm(user.getProposalForm().getId());
+
+            if (!proposalFormId.isApproval()) {
+                excelBoardService.updateApprovalState(user);
+                proposalFormService.updateUserProposalState(proposalFormId.getId());
+            }
+        } else if (!Objects.isNull(user.getInterimForm())) {
+            InterimForm interimFormId = interimFormService.findInterimForm(user.getInterimForm().getId());
+            if (!interimFormId.isApproval()) {
+                excelBoardService.updateApprovalState(user);
+                interimFormService.updateUserInterimState(interimFormId.getId());
+            }
+        } else if (!Objects.isNull(user.getFinalForm())) {
+            FinalForm finalFormId = finalFormService.findFinalForm(user.getFinalForm().getId());
+            if (!finalFormId.isApproval()) {
+                excelBoardService.updateApprovalState(user);
+                finalFormService.updateUserFinalState(finalFormId.getId());
+            }
+        } else if (!Objects.isNull(user.getOtherForm())) {
+            OtherForm otherFormId = otherFormService.findOtherForm(user.getOtherForm().getId());
+            if (!otherFormId.isApproval()) {
+                excelBoardService.updateApprovalState(user);
+                otherFormService.updateUserOtherState(otherFormId.getId());
+            }
+        }
+    }
+
 
     private File getTmpFile() throws IOException {
         Workbook workbook = new XSSFWorkbook();
@@ -353,4 +260,88 @@ public class GraduateCheckController {
         headStyle.setFont(font);
         return headStyle;
     }
+
+    private static List<String> createUnApprovalList(List<UserScheduleDto> userSchedules) {
+        List<String> notApprovalList = new ArrayList<>();
+        userSchedules.stream().filter(e -> e.getApprovalStatus().equals("미승인")).forEach(e -> notApprovalList.add(e.getStep()));
+        return notApprovalList;
+    }
+
+    private List<UserScheduleDto> createUserScheduleDto(Users user) {
+        List<UserScheduleDto> userSchedules = new ArrayList<>();
+        List<Schedules> scheduleList = scheduleService.findScheduleList();
+        for (Schedules schedules : scheduleList) {
+            if (user.getSubmitForm().getGraduationRequirements().equals(GraduationRequirements.Other_Qualifications)) {
+                if (schedules.getStep().equals(Step.INTERIM_REPORT) || schedules.getStep().equals(Step.FINAL_REPORT)) {
+                    continue;
+                }
+            }
+
+            if (user.getSubmitForm().getGraduationRequirements().equals(GraduationRequirements.THESIS)) {
+                if (schedules.getStep().equals(Step.OTHER_QUALIFICATIONS)) {
+                    continue;
+                }
+            }
+
+            if (schedules.getStep().equals(Step.RECEIVED)) {
+                UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(), schedules.getStartDate(), schedules.getEndDate(), Objects.isNull(user.getSubmitForm()) ? "미제출" : "완료", Objects.isNull(user.getSubmitForm()) || !user.getSubmitForm().isApproval() ? "미승인" : "승인");
+                userSchedules.add(userScheduleDto);
+            }
+
+            if (schedules.getStep().equals(Step.PROPOSAL)) {
+                UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(), schedules.getStartDate(), schedules.getEndDate(), Objects.isNull(user.getProposalForm()) ? "미제출" : "완료", Objects.isNull(user.getProposalForm()) || !user.getProposalForm().isApproval() ? "미승인" : "승인");
+                userSchedules.add(userScheduleDto);
+            }
+
+            if (schedules.getStep().equals(Step.INTERIM_REPORT)) {
+                UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(), schedules.getStartDate(), schedules.getEndDate(), Objects.isNull(user.getInterimForm()) ? "미제출" : "완료", Objects.isNull(user.getInterimForm()) || !user.getInterimForm().isApproval() ? "미승인" : "승인");
+                userSchedules.add(userScheduleDto);
+            }
+
+            if (schedules.getStep().equals(Step.FINAL_REPORT)) {
+                UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(), schedules.getStartDate(), schedules.getEndDate(), Objects.isNull(user.getFinalForm()) ? "미제출" : "완료", Objects.isNull(user.getFinalForm()) || !user.getFinalForm().isApproval() ? "미승인" : "승인");
+                userSchedules.add(userScheduleDto);
+            }
+
+            if (schedules.getStep().equals(Step.OTHER_QUALIFICATIONS)) {
+                UserScheduleDto userScheduleDto = new UserScheduleDto(schedules.getStep().getStepToString(), schedules.getStartDate(), schedules.getEndDate(), Objects.isNull(user.getOtherForm()) ? "미제출" : "완료", Objects.isNull(user.getOtherForm()) || !user.getOtherForm().isApproval() ? "미승인" : "승인");
+                userSchedules.add(userScheduleDto);
+            }
+        }
+        return userSchedules;
+    }
+
+    private static UserDetailDto createUserDetailDto(Users user, Optional<ExcelBoard> excelByStudentId) {
+        String advisor = excelByStudentId.get().getProfessorName();
+        UserDetailDto userDetailDto = new UserDetailDto(user.getStudentId(), user.getStudentName(), user.getDepartment(), advisor != null ? advisor : "없음", excelByStudentId.get().getCapstoneCompletion().equals("이수") ? true : false, user.getSubmitForm(), excelByStudentId.get().getGraduationDate());
+        return userDetailDto;
+    }
+
+    /**
+     * 작업 후 삭제될 테스트 컨트롤러
+     */
+
+    @GetMapping("api/userStatus/approvalUser/{studentId}/update")
+    public String testView(@PathVariable String studentId) {
+        Users user = usersService.findUserByStudentId(studentId);
+        return "graduation/form/submitApprovalForm";
+    }
+
+    @PostMapping("api/userStatus/approvalUser/{studentId}/update")
+    public String test(@PathVariable String studentId, @Valid ExcelBoardSubmitFormDto excelBoardSubmitFormDto) {
+
+        Users user = usersService.findUserByStudentId(studentId);
+
+        if (!Objects.isNull(user.getSubmitForm())) {
+            SubmitForm submitFormId = submitFormService.findSubmitForm(user.getSubmitForm().getId());
+
+            if (!submitFormId.isApproval()) {
+                excelBoardService.updateExcelBySubmitForm(user, excelBoardSubmitFormDto);
+                submitFormService.updateUserSubmitState(submitFormId.getId());
+            }
+        }
+
+        return "redirect:/api/userStatus/approvalUser/{studentId}";
+    }
+
 }
